@@ -1,11 +1,12 @@
 import styles from "@/styles/Home.module.css";
 import Image, {StaticImageData} from "next/image";
+import Link from "next/link";
 
 type props = {
     data:{
         image:string | StaticImageData,
         title:string,
-        description:string
+        description:string,
     }
 }
 
@@ -17,7 +18,7 @@ export function MainShow({data}:props) {
                 <small>{data.description}</small>
             </p>
             <div className={styles.actions}>
-                <small role="button" className={"contrast"}>More Info</small>
+                <Link href={"#"} role="button" className={"contrast"}>More Info</Link>
             </div>
         </div>
         <Image src={data.image} alt={"main show poster"}/>
