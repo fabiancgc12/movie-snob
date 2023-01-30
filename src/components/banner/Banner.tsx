@@ -10,7 +10,7 @@ type props = {
     }
 }
 
-export function MainShow({data}:props) {
+export function Banner({data}:props) {
     return <div className={styles.mainShow}>
         <div className={styles.info}>
             <h2>{data.title}</h2>
@@ -21,6 +21,8 @@ export function MainShow({data}:props) {
                 <Link href={"#"} role="button" className={"contrast"}>More Info</Link>
             </div>
         </div>
-        <Image src={data.image} alt={"main show poster"}/>
+        <div className={styles.bannerWrapper}>
+            <Image src={data.image} alt={"main show poster"} height={700}/>
+        </div>
     </div>;
 }
