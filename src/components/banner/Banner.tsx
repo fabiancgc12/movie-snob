@@ -1,4 +1,4 @@
-import styles from "@/styles/Home.module.css";
+import styles from "./banner.module.css";
 import Image, {StaticImageData} from "next/image";
 import Link from "next/link";
 
