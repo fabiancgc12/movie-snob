@@ -4,19 +4,25 @@
 /*  margin: 0;*/
 }
 
-/*html,*/
-/*body {*/
-/*  max-width: 100vw;*/
-/*  overflow-x: hidden;*/
-/*  --fontColor:#F3F1EF;*/
-/*  background: #010103;*/
-/*  color:var(--fontColor)*/
-/*}*/
 
-/*a {*/
-/*  color: inherit;*/
-/*  text-decoration: none;*/
-/*}*/
+:is(*,*::before,*::after)::-webkit-scrollbar {
+  /*display: none;*/
+  --size:.35em;
+  height: var(--size);
+  width: var(--size);
+  /*width: ;*/
+  background: gray;
+}
+
+:is(*,*::before,*::after)::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+:is(*,*::before,*::after)::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+  border-radius: 15px;
+}
 
 h1,h2,h3,h4,h5,h6{
   margin: 0;

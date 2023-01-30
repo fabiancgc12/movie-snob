@@ -1,6 +1,7 @@
 import { Banner } from "@/components/banner/Banner";
 import { Inter } from '@next/font/google'
-import mainShowImg from "../../public/main_show.jpg"
+import mainShowImg from "./main_show.jpg"
+import {CardList} from "@/components/movieCard/cardList";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -16,6 +17,7 @@ export default function Home() {
   return (
     <main>
         <Banner data={show}/>
+        <CardList/>
     </main>
   )
 }
