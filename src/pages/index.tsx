@@ -17,7 +17,7 @@ export default function Home() {
   return (
     <main>
         <Banner data={show}/>
-        <CardList/>
+        <CardList title={"Currently watching"}/>
     </main>
   )
 }
