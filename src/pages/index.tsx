@@ -18,6 +18,9 @@ export default function Home() {
     <main>
         <Banner data={show}/>
         <CardList title={"Currently watching"}/>
+        <CardList title={"Most watched"}/>
+        <CardList title={"Comedy"}/>
+        <CardList title={"Dramas"}/>
     </main>
   )
 }

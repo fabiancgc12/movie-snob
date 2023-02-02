@@ -18,7 +18,7 @@ export function Banner({data}:props) {
                 <small>{data.description}</small>
             </p>
             <div className={styles.actions}>
-                <Link href={"#"} role="button" className={"contrast"}>More Info</Link>
+                <Link href={"/movie/1"} role="button" className={"contrast"}>More Info</Link>
             </div>
         </div>
         <div className={styles.bannerWrapper}>
