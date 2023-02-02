@@ -4,6 +4,7 @@
     margin: 0;
     cursor: pointer;
     isolation: isolate;
+    overflow: hidden;
 }
 
 .info{
