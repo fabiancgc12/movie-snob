@@ -1,0 +1,35 @@
+.average{
+    display: inline-grid;
+    place-items: center;
+    position: relative;
+    font-size: 10px;
+    padding: 1em;
+    background: var(--black);
+    border-radius: 100%;
+    aspect-ratio: 1 / 1;
+    isolation: isolate;
+}
+
+.average::before,
+.average::after{
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    border-radius: 100%;
+    aspect-ratio: 1/1;
+}
+
+.average::before{
+    background: conic-gradient(
+            var(--blue) var(--degree,0), transparent var(--degree,0));
+    width: calc(100% - 8px);
+    z-index: -2;
+}
+
+.average::after{
+    background: var(--black);
+    z-index: -1;
+    width: calc(100% - 14px);
+}
