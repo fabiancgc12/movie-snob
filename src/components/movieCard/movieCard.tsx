@@ -17,8 +17,8 @@ export function MovieCard({data}:props){
             <Image src={data.poster} alt={"title poster"} width={150}/>
             <div className={styles.info}>
                 <Average value={data.vote_average}/>
-                <small>{data.popularity}</small>
             </div>
         </article>
+
     )
 }
