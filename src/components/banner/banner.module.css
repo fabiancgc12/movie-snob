@@ -1,6 +1,6 @@
 .mainShow{
+    display: none;
     position: relative;
-    display: flex;
     justify-content: flex-end;
     align-items: center;
     isolation: isolate;
@@ -45,9 +45,14 @@
 }
 
 @media (min-width: 579px) {
+    .mainShow{
+        display: flex;
+    }
+    
     .info{
         width: 60%;
         bottom: unset;
+        display: revert;
     }
 
     .bannerWrapper {
