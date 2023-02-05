@@ -11,10 +11,15 @@
     position: absolute;
     bottom: 0;
     padding: 3px;
-    transform: translateY(100%);
     transition: transform .2s;
 }
 
-.movieCard:hover .info{
-    transform: translateY(0%);
+@media (min-width: 579px) {
+    .info{
+        transform: translateY(100%);
+    }
+
+    .movieCard:hover .info{
+        transform: translateY(0%);
+    }
 }
