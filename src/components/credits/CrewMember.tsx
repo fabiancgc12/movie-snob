@@ -22,8 +22,8 @@ export function CrewMember({people,type}:props){
                     fill
                 />}
             </div>
-            <span className={styles.name}>{people.name}</span>
-            <span className={styles.job}>{job}</span>
+            <h3 className={styles.name}>{people.name}</h3>
+            <h4 className={styles.job}>{job}</h4>
         </div>
     )
 }
