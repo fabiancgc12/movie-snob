@@ -9,6 +9,7 @@ import {MovieInterface} from "@/utils/models/Movies/Movie.interface";
 import {CreditsInterface} from "@/utils/models/Movies/Credits.interface";
 import {generateImageUrl} from "@/utils/functions/generateImageUrl";
 import {calculateRunTime} from "@/utils/functions/calculateRunTime";
+import {CrewMember} from "@/components/credits/CrewMember";
 
 
 type props = {
@@ -16,9 +17,10 @@ type props = {
     credits:CreditsInterface
 }
 
-export default function Movie({movie}:props){
+export default function Movie({movie,credits}:props){
     const posterPath = generateImageUrl(movie.poster_path)
     const backgroundPath = generateImageUrl(movie.backdrop_path)
+    const director = credits.crew?.find(c => c.job.toLowerCase() == "director")
     return (
         <main>
             <div className={styles.banner}>
@@ -49,6 +51,13 @@ export default function Movie({movie}:props){
                 <div>
                     <h2>Plot</h2>
                     <p>{movie.overview}</p>
+                </div>
+                <div>
+                    <h2>Credits</h2>
+                    <div className={styles.credits}>
+                        {director && <CrewMember people={director} type={"crew"}/>}
+                        {credits.cast && credits.cast.slice(0,9).map(c => <CrewMember key={`cast-${c.id}`} people={c} type={"cast"}/>)}
+                    </div>
                 </div>
             </div>
         </main>

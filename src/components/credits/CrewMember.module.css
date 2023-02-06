@@ -1,0 +1,30 @@
+.wrapper {
+    display: grid;
+    grid-template-areas: "profile name"
+                        "profile job";
+    grid-template-columns: 80px 1fr;
+    gap: 0 5px;
+    max-width: 230px;
+}
+
+.profile{
+    position: relative;
+    grid-area: profile;
+    aspect-ratio: 1 / 1;
+}
+
+.profile img {
+    border-radius: 100%;
+}
+
+.name{
+    grid-area: name;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.job{
+    grid-area: job;
+    font-size: 16px;
+    font-weight: lighter;
+}
