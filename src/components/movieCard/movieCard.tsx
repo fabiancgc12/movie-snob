@@ -16,7 +16,7 @@ export function MovieCard({data}:props){
         <article className={styles.movieCard}>
             <Image src={data.poster} alt={"title poster"} width={150}/>
             <div className={styles.info}>
-                <Average value={data.vote_average}/>
+                <Average value={data.vote_average} size={"sm"}/>
             </div>
         </article>
 
