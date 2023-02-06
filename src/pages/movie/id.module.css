@@ -1,0 +1,57 @@
+.wrapper{
+    padding: 0 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.banner{
+    position: absolute;
+    height: 60vh;
+    width: 100%;
+    z-index: -1;
+}
+
+.banner img{
+    object-fit: cover;
+    filter: blur(10px);
+    mask-image: linear-gradient(
+            to top,
+            transparent 0%,
+            black 40%,
+            rgba(0,0,0,1) 100%
+    );
+}
+
+.poster{
+    position: relative;
+    display: grid;
+    place-items: center;
+    padding-top: 15px;
+}
+
+.poster img {
+    border-radius: .5em;
+}
+
+.title{
+    text-align: center;
+}
+
+.title small{
+    font-size: 20px;
+}
+
+.extraInfo{
+    margin-top: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.genres{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}

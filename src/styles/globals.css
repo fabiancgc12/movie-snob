@@ -41,3 +41,9 @@ body,*::after,*::before{
 h1,h2,h3,h4,h5,h6{
   margin: 0;
 }
+
+.badge{
+  background: rgba(var(--grayValues),.5);
+  padding: .15em .35em;
+  border-radius: .45em;
+}
