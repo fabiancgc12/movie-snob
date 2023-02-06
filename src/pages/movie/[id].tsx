@@ -2,6 +2,8 @@ import { Average } from "@/components/common/Average";
 import {GetStaticPaths, GetStaticProps} from "next";
 import Image from "next/image";
 import styles from "./id.module.css";
+import {BookmarkButton} from "@/components/common/ActionButton/chechMarkButton";
+import {ShareButton} from "@/components/common/ActionButton/ShareButton";
 
 const dummyData = {"adult":true,"backdrop_path":"/hZkgoQYus5vegHoetLkCJzb17zJ.jpg","belongs_to_collection":null,"budget":63000000,"genres":[{"id":18,"name":"Drama"},{"id":53,"name":"Thriller"},{"id":35,"name":"Comedy"}],"homepage":"http://www.foxmovies.com/movies/fight-club","id":550,"imdb_id":"tt0137523","original_language":"en","original_title":"Fight Club","overview":"A ticking-time-bomb insomniac and a slippery soap salesman channel primal male aggression into a shocking new form of therapy. Their concept catches on, with underground \"fight clubs\" forming in every town, until an eccentric gets in the way and ignites an out-of-control spiral toward oblivion.","popularity":72.65,
     "poster_path":"/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg",
@@ -39,7 +41,7 @@ export default function Movie({data}:props){
                         height={350}
                     />
                 </div>
-                <h1 className={styles.title}>{data.title}</h1>
+                <h1 className={styles.title}>{data.title} <small>({data.release_date.slice(0,4)})</small></h1>
                 <div className={styles.extraInfo}>
                     <div className={styles.genres}>
                         {data.genres.slice(0,3).map(g => <span className={"badge"} key={`genre-${g.id}`}>{g.name}</span>)}
@@ -48,9 +50,8 @@ export default function Movie({data}:props){
                 </div>
                 <div className={styles.extraInfo}>
                     <Average value={data.vote_average}/>
-                    <small>{data.release_date.slice(0,4)}</small>
-                    <small>share</small>
-                    <small>checkmark</small>
+                    <ShareButton/>
+                    <BookmarkButton/>
                 </div>
                 <div>
                     <h2>Plot</h2>
