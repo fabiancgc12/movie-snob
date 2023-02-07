@@ -6,7 +6,7 @@ import {BookmarkButton} from "@/components/common/ActionButton/chechMarkButton";
 import {ShareButton} from "@/components/common/ActionButton/ShareButton";
 import {getMovie} from "@/services/movies/getMovie";
 import {MovieInterface} from "@/utils/models/Movies/Movie.interface";
-import {CreditsInterface} from "@/utils/models/Movies/Credits.interface";
+import {CastEntity, CreditsInterface, CrewEntity} from "@/utils/models/Movies/Credits.interface";
 import {generateImageUrl} from "@/utils/functions/generateImageUrl";
 import {calculateRunTime} from "@/utils/functions/calculateRunTime";
 import {CrewMember} from "@/components/credits/CrewMember";
@@ -53,14 +53,39 @@ export default function Movie({movie,credits}:props){
                     <p>{movie.overview}</p>
                 </div>
                 <div>
-                    <h2>Credits</h2>
-                    <div className={styles.credits}>
-                        {director && <CrewMember people={director} type={"crew"}/>}
-                        {credits.cast && credits.cast.slice(0,9).map(c => <CrewMember key={`cast-${c.id}`} people={c} type={"cast"}/>)}
-                    </div>
+                    <Director director={director}/>
+                    <Cast cast={credits.cast}/>
                 </div>
             </div>
         </main>
+    )
+}
+
+type directorProps = {
+    director?:CrewEntity
+}
+function Director({director}:directorProps){
+    if (!director) return null;
+    return (
+        <div>
+            <h2>Director</h2>
+            <CrewMember people={director} type={"crew"}/>
+        </div>
+    )
+}
+
+type castProps = {
+    cast?:CastEntity[] | null
+}
+function Cast({cast}:castProps){
+    if (!cast) return null;
+    return (
+        <div>
+            <h2>Cast</h2>
+            <div className={styles.credits}>
+                {cast.slice(0,9).map(c => <CrewMember key={`cast-${c.id}`} people={c} type={"cast"}/>)}
+            </div>
+        </div>
     )
 }
 
