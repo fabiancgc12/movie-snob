@@ -82,9 +82,9 @@ function Cast({cast}:castProps){
     return (
         <div>
             <h2>Cast</h2>
-            <div className={styles.credits}>
+            <figure className={styles.cast}>
                 {cast.slice(0,9).map(c => <CrewMember key={`cast-${c.id}`} people={c} type={"cast"}/>)}
-            </div>
+            </figure>
         </div>
     )
 }
