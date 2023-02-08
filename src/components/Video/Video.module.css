@@ -1,0 +1,61 @@
+.media{
+    display: inline-block;
+    isolation: isolate;
+}
+
+.video {
+    display: none;
+    place-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(var(--blackValues),.75);
+    z-index: 1000;
+}
+
+.video.show{
+    display: grid;
+}
+
+.video iframe{
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    max-width: 720px;
+}
+
+.thumbnail{
+    position: relative;
+    height: 120px;
+    aspect-ratio: 16 / 9;
+}
+
+.thumbnail .video{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: black;
+    z-index: 1000;
+}
+
+.overlay{
+    position: absolute;
+    display: inline-grid;
+    place-items: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    cursor: pointer;
+}
+
+.thumbnail:hover{
+    filter: brightness(75%);
+}
+
+.overlay svg{
+    width: 50%;
+    height: 50%;
+}

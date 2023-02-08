@@ -10,14 +10,17 @@ import {CastEntity, CreditsInterface, CrewEntity} from "@/utils/models/Movies/Cr
 import {generateImageUrl} from "@/utils/functions/generateImageUrl";
 import {calculateRunTime} from "@/utils/functions/calculateRunTime";
 import {CrewMember} from "@/components/credits/CrewMember";
+import {Video} from "@/components/Video/Video";
+import {VideoTrailerInterface} from "@/utils/models/Movies/VideoMedia.interface";
 
 
 type props = {
     movie:MovieInterface,
-    credits:CreditsInterface
+    credits:CreditsInterface,
+    trailer:VideoTrailerInterface | undefined
 }
 
-export default function Movie({movie,credits}:props){
+export default function Movie({movie,credits,trailer}:props){
     const posterPath = generateImageUrl(movie.poster_path)
     const backgroundPath = generateImageUrl(movie.backdrop_path)
     const director = credits.crew?.find(c => c.job.toLowerCase() == "director")
@@ -55,6 +58,12 @@ export default function Movie({movie,credits}:props){
                 <div>
                     <Director director={director}/>
                     <Cast cast={credits.cast}/>
+                </div>
+                <div>
+                    <h2>Media</h2>
+                    <figure>
+                        {trailer && <Video video={trailer}/>}
+                    </figure>
                 </div>
             </div>
         </main>
@@ -97,11 +106,12 @@ export const getStaticPaths:GetStaticPaths = () => {
 }
 
 export const getStaticProps:GetStaticProps = async () => {
-    const {movie,credits} = await getMovie(550)
+    const {movie,credits,trailer} = await getMovie(550)
     return {
         props: {
             movie,
-            credits
+            credits,
+            trailer:trailer
         }
     }
 }
