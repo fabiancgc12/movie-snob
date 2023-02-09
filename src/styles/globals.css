@@ -13,6 +13,10 @@ body,*::after,*::before{
   --secondaryDark:#002171;
 }
 
+body{
+  background: var(--primaryColor);
+}
+
 :is(*,*::before,*::after)::-webkit-scrollbar {
   /*display: none;*/
   --size:.35em;
