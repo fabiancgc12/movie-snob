@@ -13,6 +13,7 @@ import {CrewMember} from "@/components/credits/CrewMember";
 import {VideoTrailerInterface} from "@/utils/models/Movies/VideoMedia.interface";
 import {ImageMediaInterface} from "@/utils/models/Movies/ImageMedia.interface";
 import {Media} from "@/components/media/Media";
+import { Cast } from "@/components/CastList/CastList";
 
 
 type props = {
@@ -54,7 +55,7 @@ export default function Movie({movie,credits,trailer,images}:props){
                     <BookmarkButton/>
                 </div>
                 <div>
-                    <h2>Plot</h2>
+                    <h2>Overview</h2>
                     <p>{movie.overview}</p>
                 </div>
                 <div>
@@ -76,21 +77,6 @@ function Director({director}:directorProps){
         <div>
             <h2>Director</h2>
             <CrewMember people={director} type={"crew"}/>
-        </div>
-    )
-}
-
-type castProps = {
-    cast?:CastEntity[] | null
-}
-function Cast({cast}:castProps){
-    if (!cast) return null;
-    return (
-        <div>
-            <h2>Cast</h2>
-            <figure className={styles.cast}>
-                {cast.slice(0,9).map(c => <CrewMember key={`cast-${c.id}`} people={c} type={"cast"}/>)}
-            </figure>
         </div>
     )
 }
