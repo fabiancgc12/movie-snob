@@ -30,19 +30,22 @@ export default function Movie({movie,credits,trailer,images}:props){
     const director = credits.crew?.find(c => c.job.toLowerCase() == "director")
     return (
         <main>
-            <div className={styles.banner}>
-                <Image src={backgroundPath} alt={`${movie.title} backdrop`} className={styles.backdrop} fill/>
-            </div>
-            <div className={styles.wrapper}>
+            <header className={styles.header}>
                 <div className={styles.poster}>
-                    <Image
-                        src={posterPath}
-                        alt={`${movie.title} poster`}
-                        priority
-                        width={200}
-                        height={350}
-                    />
+                    <div>
+                        <Image
+                            src={posterPath}
+                            alt={`${movie.title} poster`}
+                            priority
+                            fill
+                        />
+                    </div>
                 </div>
+                <div className={styles.banner}>
+                    <Image src={backgroundPath} alt={`${movie.title} backdrop`} className={styles.backdrop} fill/>
+                </div>
+            </header>
+            <div className={styles.wrapper}>
                 <h1 className={styles.title}>{movie.title} <small>({movie.release_date.slice(0,4)})</small></h1>
                 <div className={styles.extraInfo}>
                     <div className={styles.genres}>

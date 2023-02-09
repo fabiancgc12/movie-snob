@@ -1,25 +1,37 @@
-.thumbnail{
+.wrapper{
     padding: 0 1em;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+}
+
+.header{
+    display: grid;
+    grid-template-columns: 25vw 2fr;
+}
+
+.poster{
+    padding: 1em;
+}
+
+.poster > div{
+    position: relative;
+    left: 20%;
+    display: grid;
+    aspect-ratio: 9 / 14;
+}
+
+.poster img {
+    border-radius: .5em;
 }
 
 .banner{
-    position: absolute;
-    height: 60vh;
-    width: 100%;
-    z-index: -1;
+    position: relative;
 }
 
 .banner img{
-    object-fit: cover;
-    filter: blur(10px);
     mask-image: linear-gradient(
-            to top,
+            to right,
             transparent 0%,
-            black 40%,
-            rgba(0,0,0,1) 100%
+            var(--primaryColor) 25%,
+            var(--primaryColor) 100%
     );
 }
 
@@ -27,17 +39,6 @@
     display: flex;
     flex-direction: row;
     gap: 5px;
-}
-
-.poster{
-    position: relative;
-    display: grid;
-    place-items: center;
-    padding-top: 15px;
-}
-
-.poster img {
-    border-radius: .5em;
 }
 
 .title{
@@ -70,3 +71,4 @@
 /*    max-height: 300px;*/
 /*    overflow: auto;*/
 /*}*/
+
