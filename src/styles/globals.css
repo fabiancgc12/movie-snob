@@ -5,18 +5,12 @@
 }
 
 body,*::after,*::before{
-  --blackValues:1, 1, 3;
-  --black:rgba(var(--blackValues));
-  --whiteValues:243, 241, 239;
-  --white:rgba(var(--whiteValues));
-  --grayValues:190, 178, 163;
-  --gray:rgba(var(--grayValues));
-  --redValues:162, 1, 11;
-  --red:rgba(var(--redValues));
-  --blueValues:15, 96, 146;
-  --blue:rgba(var(--blueValues));
-  --orangeValues:232, 132, 63;
-  --orange:rgba(var(--orangeValues));
+  --primaryColor:#212121;
+  --primaryLight:#484848;
+  --primaryDark:#000000;
+  --secondaryColor: #0d47a1;
+  --secondaryLight:#5472d3;
+  --secondaryDark:#002171;
 }
 
 :is(*,*::before,*::after)::-webkit-scrollbar {
@@ -43,7 +37,7 @@ p,h1,h2,h3,h4,h5,h6{
 }
 
 .badge{
-  background: rgba(var(--grayValues),.5);
+  background: var(--primaryLight);
   padding: .15em .35em;
   border-radius: .45em;
 }

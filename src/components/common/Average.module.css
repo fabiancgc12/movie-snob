@@ -4,7 +4,7 @@
     position: relative;
     font-size: 14px;
     padding: 1em;
-    background: var(--black);
+    background: var(--primaryDark);
     border-radius: 100%;
     aspect-ratio: 1 / 1;
     isolation: isolate;
@@ -27,13 +27,13 @@
 
 .average::before{
     background: conic-gradient(
-            var(--blue) var(--degree,0), transparent var(--degree,0));
+            var(--secondaryDark) var(--degree,0), transparent var(--degree,0));
     width: calc(100% - 8px);
     z-index: -2;
 }
 
 .average::after{
-    background: var(--black);
+    background: inherit;
     z-index: -1;
     width: calc(100% - 14px);
 }
