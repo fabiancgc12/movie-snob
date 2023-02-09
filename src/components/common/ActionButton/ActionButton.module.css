@@ -1,8 +1,9 @@
 .button{
     display: inline-block;
-    width: 64px;
     padding: 14px;
     border-radius: 100%;
+    font-size: 14px;
+    width: 4em;
     aspect-ratio: 1 / 1;
     margin-bottom: 0;
 }

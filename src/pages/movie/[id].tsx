@@ -15,6 +15,7 @@ import {ImageMediaInterface} from "@/utils/models/Movies/ImageMedia.interface";
 import {Media} from "@/components/media/Media";
 import { Cast } from "@/components/CastList/CastList";
 import {CardList} from "@/components/movieCard/cardList";
+import {LikeButton} from "@/components/common/ActionButton/LikeButton";
 
 
 type props = {
@@ -55,8 +56,9 @@ export default function Movie({movie,credits,trailer,images}:props){
                 <h1 className={styles.title}>{movie.title} <small>({movie.release_date.slice(0,4)})</small></h1>
                 <div className={styles.extraInfo}>
                     <Average value={movie.vote_average}/>
-                    <ShareButton/>
                     <BookmarkButton/>
+                    <LikeButton/>
+                    <ShareButton/>
                 </div>
                 <div>
                     <h2>Overview</h2>

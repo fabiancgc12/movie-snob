@@ -14,7 +14,7 @@ export function Average({value,size = "md"}:props) {
     const sizeStyle = size == "sm" ? styles.small : ""
     return (
         <div className={`${styles.average} ${sizeStyle}`} style={properties}>
-            <span>{average.toFixed(1)}%</span>
+            <span>{Math.trunc(average)}%</span>
         </div>
     )
 }

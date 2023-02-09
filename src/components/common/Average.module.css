@@ -3,6 +3,7 @@
     place-items: center;
     position: relative;
     font-size: 14px;
+    width: 4em;
     padding: 1em;
     background: var(--primaryDark);
     border-radius: 100%;
