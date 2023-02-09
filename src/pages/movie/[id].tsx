@@ -46,13 +46,13 @@ export default function Movie({movie,credits,trailer,images}:props){
                 </div>
             </header>
             <div className={styles.wrapper}>
-                <h1 className={styles.title}>{movie.title} <small>({movie.release_date.slice(0,4)})</small></h1>
                 <div className={styles.extraInfo}>
                     <div className={styles.genres}>
-                        {movie.genres?.slice(0,3).map(g => <span className={"badge"} key={`genre-${g.id}`}>{g.name}</span>)}
+                        {movie.genres?.slice(0,3).map(g => <small className={"badge"} key={`genre-${g.id}`}>{g.name}</small>)}
                     </div>
                     <div>{calculateRunTime(movie.runtime)}</div>
                 </div>
+                <h1 className={styles.title}>{movie.title} <small>({movie.release_date.slice(0,4)})</small></h1>
                 <div className={styles.extraInfo}>
                     <Average value={movie.vote_average}/>
                     <ShareButton/>
