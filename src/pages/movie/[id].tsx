@@ -6,7 +6,7 @@ import {BookmarkButton} from "@/components/common/ActionButton/chechMarkButton";
 import {ShareButton} from "@/components/common/ActionButton/ShareButton";
 import {getMovie} from "@/services/movies/getMovie";
 import {MovieInterface} from "@/utils/models/Movies/Movie.interface";
-import {CastEntity, CreditsInterface, CrewEntity} from "@/utils/models/Movies/Credits.interface";
+import {CreditsInterface, CrewEntity} from "@/utils/models/Movies/Credits.interface";
 import {generateImageUrl} from "@/utils/functions/generateImageUrl";
 import {calculateRunTime} from "@/utils/functions/calculateRunTime";
 import {CrewMember} from "@/components/credits/CrewMember";
@@ -14,6 +14,7 @@ import {VideoTrailerInterface} from "@/utils/models/Movies/VideoMedia.interface"
 import {ImageMediaInterface} from "@/utils/models/Movies/ImageMedia.interface";
 import {Media} from "@/components/media/Media";
 import { Cast } from "@/components/CastList/CastList";
+import {CardList} from "@/components/movieCard/cardList";
 
 
 type props = {
@@ -63,6 +64,7 @@ export default function Movie({movie,credits,trailer,images}:props){
                     <Cast cast={credits.cast}/>
                 </div>
                 <Media trailer={trailer} images={images}/>
+                {movie.genres?.map(g => <CardList title={g.name} key={`movie genre ${g.name}`}/>)}
             </div>
         </main>
     )
