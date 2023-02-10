@@ -9,7 +9,7 @@
 
 .header{
     display: grid;
-    grid-template-columns: 25vw 2fr;
+    grid-template-columns: minmax(125px,1fr) 2fr;
 }
 
 .poster{
@@ -38,6 +38,7 @@
             var(--primaryColor) 25%,
             var(--primaryColor) 100%
     );
+    object-fit: cover;
 }
 
 .genres{
@@ -67,3 +68,6 @@
     align-items: center;
 }
 
+@media screen and (min-width: 580px){
+
+}
