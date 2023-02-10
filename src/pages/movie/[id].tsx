@@ -54,37 +54,28 @@ export default function Movie({movie,credits,trailer,images}:props){
                     <div>{calculateRunTime(movie.runtime)}</div>
                 </div>
                 <h1 className={styles.title}>{movie.title} <small>({movie.release_date.slice(0,4)})</small></h1>
-                <div className={styles.extraInfo}>
+                <div className={styles.overview}>
+                    <h2>Overview</h2>
+                    <p>{movie.overview}</p>
+                </div>
+                <div className={`${styles.extraInfo}`}>
                     <Average value={movie.vote_average}/>
                     <BookmarkButton/>
                     <LikeButton/>
                     <ShareButton/>
                 </div>
                 <div>
-                    <h2>Overview</h2>
-                    <p>{movie.overview}</p>
+                    {director && <CrewMember people={director} type={"crew"}/>}
                 </div>
+            </div>
+            <div data-theme="light">
                 <div>
-                    <Director director={director}/>
                     <Cast cast={credits.cast}/>
                 </div>
                 <Media trailer={trailer} images={images}/>
                 {movie.genres?.map(g => <CardList title={g.name} key={`movie genre ${g.name}`}/>)}
             </div>
         </main>
-    )
-}
-
-type directorProps = {
-    director?:CrewEntity
-}
-function Director({director}:directorProps){
-    if (!director) return null;
-    return (
-        <div>
-            <h2>Director</h2>
-            <CrewMember people={director} type={"crew"}/>
-        </div>
     )
 }
 

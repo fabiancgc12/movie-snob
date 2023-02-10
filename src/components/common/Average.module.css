@@ -5,7 +5,7 @@
     font-size: 14px;
     width: 4em;
     padding: 1em;
-    background: var(--primaryDark);
+    background: var(--dark);
     border-radius: 100%;
     aspect-ratio: 1 / 1;
     isolation: isolate;

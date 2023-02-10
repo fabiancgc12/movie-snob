@@ -7,7 +7,8 @@
 body,*::after,*::before{
   --primaryColor:#212121;
   --primaryLight:#484848;
-  --primaryDark:#000000;
+  --primaryDark:#121212;
+  --dark:#000000;
   --secondaryColor: #0d47a1;
   --secondaryLight:#5472d3;
   --secondaryDark:#002171;
@@ -15,6 +16,10 @@ body,*::after,*::before{
 
 body{
   background: var(--primaryColor);
+}
+
+div[data-theme="light"]{
+  background: whitesmoke;
 }
 
 :is(*,*::before,*::after)::-webkit-scrollbar {

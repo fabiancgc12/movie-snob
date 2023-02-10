@@ -2,6 +2,11 @@
     padding: 0 1em;
 }
 
+.wrapper > *:not(:first-child){
+    padding: .25em 0;
+    border-bottom: 1px solid var(--primaryLight);
+}
+
 .header{
     display: grid;
     grid-template-columns: 25vw 2fr;
@@ -13,7 +18,7 @@
 
 .poster > div{
     position: relative;
-    left: 20%;
+    left: 10%;
     display: grid;
     aspect-ratio: 9 / 14;
 }
@@ -47,6 +52,11 @@
 
 .title small{
     font-size: 20px;
+}
+
+.overview{
+    /*background: var(--primaryDark);*/
+    text-align: justify;
 }
 
 .extraInfo{
