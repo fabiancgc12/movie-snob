@@ -50,3 +50,10 @@ section,p,h1,h2,h3,h4,h5,h6{
   padding: .15em .35em;
   border-radius: .45em;
 }
+
+@media screen and (min-width: 768px){
+  .badge{
+    font-size: .75em;
+  }
+
+}
