@@ -1,5 +1,5 @@
 import {CastEntity} from "@/utils/models/Movies/Credits.interface";
-import styles from "@/pages/movie/id.module.css";
+import styles from "./CastList.module.css";
 import {CrewMember} from "@/components/credits/CrewMember";
 
 type props = {
