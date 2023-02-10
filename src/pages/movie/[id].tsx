@@ -28,7 +28,7 @@ type props = {
 export default function Movie({movie,credits,trailer,images}:props){
     const posterPath = generateImageUrl(movie.poster_path)
     const backgroundPath = generateImageUrl(movie.backdrop_path)
-    const director = credits.crew?.find(c => c.job.toLowerCase() == "director")
+    const crew = credits.crew?.filter(c => c.job.toLowerCase() == "director" || c.job.toLowerCase() == "screenplay")
     return (
         <main>
             <section className={styles.header}>
@@ -46,7 +46,7 @@ export default function Movie({movie,credits,trailer,images}:props){
                     <Image src={backgroundPath} alt={`${movie.title} backdrop`} className={styles.backdrop} fill/>
                 </div>
                 <div className={styles.generalInfo}>
-                    <div className={styles.extraInfo}>
+                    <div className={styles.flex}>
                         <div className={styles.genres}>
                             {movie.genres?.slice(0,3).map(g => <small className={"badge"} key={`genre-${g.id}`}>{g.name}</small>)}
                         </div>
@@ -54,17 +54,17 @@ export default function Movie({movie,credits,trailer,images}:props){
                     </div>
                     <h1 className={styles.title}>{movie.title} <small>({movie.release_date.slice(0,4)})</small></h1>
                     <div className={styles.overview}>
-                        <h2>Overview</h2>
+                        <h4>Overview</h4>
                         <p>{movie.overview}</p>
                     </div>
-                    <div className={`${styles.extraInfo}`}>
+                    <div className={`${styles.flex}`}>
                         <Average value={movie.vote_average}/>
                         <BookmarkButton/>
                         <LikeButton/>
                         <ShareButton/>
                     </div>
-                    <div>
-                        {director && <CrewMember people={director} type={"crew"}/>}
+                    <div className={`${styles.flex} ${styles.crew}`}>
+                        {crew && crew.map(c => <CrewMember key={`crew-${c.id}`} people={c} type={"crew"}/>)}
                     </div>
                 </div>
             </section>
