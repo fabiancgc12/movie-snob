@@ -4,16 +4,20 @@ import Image from "next/image";
 import {generateImageUrl} from "@/utils/functions/generateImageUrl";
 
 type props = {
-    people:CrewEntity,
-    type:"crew"
-} | {
-    people:CastEntity,
-    type:"cast"
-}
-export function CrewMember({people,type}:props){
-    let job = type == "crew" ? people.job : people.character
+    size:"sm" | "md"
+    }
+    & ({
+        people:CrewEntity,
+        type:"crew"
+    } | {
+        people:CastEntity,
+        type:"cast"
+    })
+export function CrewMember({people,type,size = "md"}:props){
+    let job = type == "crew" ? people.job : people.character;
+    let sizeStyle = size == "sm" ? styles.small : styles.medium
     return (
-        <div className={styles.wrapper}>
+        <div className={`${styles.wrapper} ${sizeStyle}`}>
             <div className={styles.profile}>
                 {people.profile_path &&
                     <Image
