@@ -68,7 +68,7 @@ export default function Movie({movie,credits,trailer,images}:props){
                         <ShareButton/>
                     </div>
                     <div className={`${styles.flex} ${styles.crew}`}>
-                        {crew && crew.map(c => <CrewMemberCard key={`crew-${c.id}`} size={"sm"} people={c} type={"crew"}/>)}
+                        {crew && crew.map(c => <CrewMemberCard key={`crew-${c.id}`} size={"sm"} people={c} type={"crew"} shadow={false}/>)}
                     </div>
                 </div>
             </section>

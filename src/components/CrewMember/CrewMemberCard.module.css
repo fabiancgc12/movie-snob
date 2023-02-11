@@ -1,6 +1,6 @@
 .wrapper {
     display: inline-grid;
-    width: fit-content;
+    width: 100%;
     gap: 0 5px;
     align-items: center;
 }
@@ -9,11 +9,6 @@
     position: relative;
     grid-area: profile;
     aspect-ratio: 1 / 1.25;
-}
-
-.profile img {
-    /*border-radius: .5em 0 0 .5em;*/
-    border-radius: .5em;
 }
 
 .name{
@@ -30,6 +25,14 @@
                         "profile job";
 }
 
+.small img {
+    border-radius: .5em;
+}
+
+.medium img {
+    border-radius: .5em .5em 0 0;
+}
+
 .medium{
     grid-template-columns: minmax(150px,250px);
     grid-template-areas: "profile"
@@ -37,13 +40,12 @@
                         "job";
 }
 
-.medium img {
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
+.name,.job{
+    padding: 0 .5em;
 }
 
-.medium .name,.medium .job{
-    padding: 0 .5em;
+.noShadow{
+    box-shadow: unset;
 }
 
 @media screen and (min-width: 768px){
@@ -53,8 +55,10 @@
                         "profile job";
     }
 
-    .name,.job{
-        white-space: nowrap;
+
+
+    .medium img {
+        border-radius: 0.5em 0 0 .5em;
     }
 
 }

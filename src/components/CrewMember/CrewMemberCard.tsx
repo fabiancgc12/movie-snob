@@ -4,7 +4,8 @@ import Image from "next/image";
 import {generateImageUrl} from "@/utils/functions/generateImageUrl";
 
 type props = {
-    size:"sm" | "md"
+    size:"sm" | "md",
+    shadow?:boolean
     }
     & ({
         people:CrewEntity,
@@ -13,11 +14,12 @@ type props = {
         people:CastEntity,
         type:"cast"
     })
-export function CrewMemberCard({people,type,size}:props){
+export function CrewMemberCard({people,type,size,shadow = true}:props){
     let job = type == "crew" ? people.job : people.character;
-    let sizeStyle = size == "sm" ? styles.small : styles.medium
+    let sizeStyle = size == "sm" ? styles.small : styles.medium;
+    let shadowStyle = !shadow ? styles.noShadow : ""
     return (
-        <article className={`${styles.wrapper} ${sizeStyle}`}>
+        <article className={`${styles.wrapper} ${sizeStyle} ${shadowStyle}`}>
             <div className={styles.profile}>
                 {people.profile_path &&
                     <Image
