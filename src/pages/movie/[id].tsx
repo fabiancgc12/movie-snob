@@ -16,6 +16,7 @@ import {Media} from "@/components/media/Media";
 import { Cast } from "@/components/CastList/CastList";
 import {CardList} from "@/components/movieCard/cardList";
 import {LikeButton} from "@/components/common/ActionButton/LikeButton";
+import { Video } from "@/components/Video/Video";
 
 
 type props = {
@@ -52,7 +53,10 @@ export default function Movie({movie,credits,trailer,images}:props){
                         </div>
                         <div>{calculateRunTime(movie.runtime)}</div>
                     </div>
-                    <h1 className={styles.title}>{movie.title} <small>({movie.release_date.slice(0,4)})</small></h1>
+                    <div className={`${styles.flex} ${styles.titleWrapper}`}>
+                        <h1 className={styles.title}>{movie.title} <small>({movie.release_date.slice(0,4)})</small></h1>
+                        {trailer && <Video video={trailer}><a href={"#"}>Watch trailer</a></Video>}
+                    </div>
                     <div className={styles.overview}>
                         <h4>Overview</h4>
                         <p>{movie.overview}</p>

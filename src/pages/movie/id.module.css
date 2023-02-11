@@ -44,7 +44,7 @@
 }
 
 .generalInfo > *:not(:first-child,:last-child){
-    padding: .25em 0;
+    padding-bottom: .25em;
     border-bottom: 1px solid var(--primaryLight);
 }
 
@@ -129,11 +129,7 @@
         text-align: start;
     }
 
-    /*.generalInfo > *:not(:first-child){*/
-    /*    border-bottom: unset;*/
-    /*}*/
-
-    .flex{
+    .flex:not(.titleWrapper){
         justify-content: start;
         gap: 2em;
     }
