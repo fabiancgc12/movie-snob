@@ -1,0 +1,25 @@
+.wrapper{
+    padding: 1rem;
+}
+
+.title{
+    position: relative;
+    padding-left: 2rem;
+    text-transform: capitalize;
+}
+
+.title::before{
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    height: 70%;
+    width: 5px;
+    background: #8B0000;
+    transform: translateY(-50%);
+    border-radius: 5px;
+}
+
+.title.small{
+    font-size: 1.25em;
+}

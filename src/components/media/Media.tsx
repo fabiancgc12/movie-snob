@@ -1,10 +1,10 @@
-import {Video} from "@/components/Video/Video";
 import Image from "next/image";
 import {generateImageUrl} from "@/utils/functions/generateImageUrl";
 import {VideoTrailerInterface} from "@/utils/models/Movies/VideoMedia.interface";
 import {ImageMediaInterface} from "@/utils/models/Movies/ImageMedia.interface";
 import styles from "./Media.module.css"
 import {VideoThumbnail} from "@/components/Video/VideoThumbnail";
+import {Section} from "@/components/common/Section/Section";
 
 type props = {
 
@@ -14,8 +14,7 @@ type props = {
 export function Media({trailer,images}:props){
     const backdrops = images.backdrops.slice(0,9)
     return (
-        <div className={styles.wrapper}>
-            <h2>Media</h2>
+        <Section className={styles.wrapper} title={"Media"}>
             <figure>
                 {trailer && <VideoThumbnail video={trailer}/>}
                 {backdrops
@@ -33,6 +32,6 @@ export function Media({trailer,images}:props){
                     )
                     )}
             </figure>
-        </div>
+        </Section>
     )
 }
