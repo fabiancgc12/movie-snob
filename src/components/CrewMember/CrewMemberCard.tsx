@@ -1,5 +1,5 @@
 import {CastEntity, CrewEntity} from "@/utils/models/Movies/Credits.interface";
-import styles from "./CrewMember.module.css";
+import styles from "./CrewMemberCard.module.css";
 import Image from "next/image";
 import {generateImageUrl} from "@/utils/functions/generateImageUrl";
 
@@ -13,11 +13,11 @@ type props = {
         people:CastEntity,
         type:"cast"
     })
-export function CrewMember({people,type,size = "md"}:props){
+export function CrewMemberCard({people,type,size}:props){
     let job = type == "crew" ? people.job : people.character;
     let sizeStyle = size == "sm" ? styles.small : styles.medium
     return (
-        <div className={`${styles.wrapper} ${sizeStyle}`}>
+        <article className={`${styles.wrapper} ${sizeStyle}`}>
             <div className={styles.profile}>
                 {people.profile_path &&
                     <Image
@@ -28,6 +28,6 @@ export function CrewMember({people,type,size = "md"}:props){
             </div>
             <h6 className={styles.name}>{people.name}</h6>
             <h6 className={styles.job}>{job}</h6>
-        </div>
+        </article>
     )
 }

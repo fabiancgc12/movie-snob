@@ -1,0 +1,60 @@
+.wrapper {
+    display: inline-grid;
+    width: fit-content;
+    gap: 0 5px;
+    align-items: center;
+}
+
+.profile{
+    position: relative;
+    grid-area: profile;
+    aspect-ratio: 1 / 1.25;
+}
+
+.profile img {
+    /*border-radius: .5em 0 0 .5em;*/
+    border-radius: .5em;
+}
+
+.name{
+    font-weight: bold;
+}
+
+.job{
+    font-weight: lighter;
+}
+
+.small{
+    grid-template-columns: minmax(60px, 25%) 1fr;
+    grid-template-areas: "profile name"
+                        "profile job";
+}
+
+.medium{
+    grid-template-columns: minmax(150px,250px);
+    grid-template-areas: "profile"
+                        "name"
+                        "job";
+}
+
+.medium img {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.medium .name,.medium .job{
+    padding: 0 .5em;
+}
+
+@media screen and (min-width: 768px){
+    .medium {
+        grid-template-columns: minmax(100px, 25%) 1fr;
+        grid-template-areas: "profile name"
+                        "profile job";
+    }
+
+    .name,.job{
+        white-space: nowrap;
+    }
+
+}

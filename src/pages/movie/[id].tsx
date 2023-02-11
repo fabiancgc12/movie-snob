@@ -9,7 +9,7 @@ import {MovieInterface} from "@/utils/models/Movies/Movie.interface";
 import {CreditsInterface} from "@/utils/models/Movies/Credits.interface";
 import {generateImageUrl} from "@/utils/functions/generateImageUrl";
 import {calculateRunTime} from "@/utils/functions/calculateRunTime";
-import {CrewMember} from "@/components/credits/CrewMember";
+import {CrewMemberCard} from "@/components/CrewMember/CrewMemberCard";
 import {VideoTrailerInterface} from "@/utils/models/Movies/VideoMedia.interface";
 import {ImageMediaInterface} from "@/utils/models/Movies/ImageMedia.interface";
 import {Media} from "@/components/media/Media";
@@ -68,14 +68,12 @@ export default function Movie({movie,credits,trailer,images}:props){
                         <ShareButton/>
                     </div>
                     <div className={`${styles.flex} ${styles.crew}`}>
-                        {crew && crew.map(c => <CrewMember key={`crew-${c.id}`} size={"sm"} people={c} type={"crew"}/>)}
+                        {crew && crew.map(c => <CrewMemberCard key={`crew-${c.id}`} size={"sm"} people={c} type={"crew"}/>)}
                     </div>
                 </div>
             </section>
             <div data-theme="light">
-                <div>
-                    <Cast cast={credits.cast}/>
-                </div>
+                <Cast cast={credits.cast}/>
                 <Media trailer={trailer} images={images}/>
                 {movie.genres?.map(g => <CardList title={g.name} key={`movie genre ${g.name}`}/>)}
             </div>

@@ -1,6 +1,6 @@
 import {CastEntity} from "@/utils/models/Movies/Credits.interface";
 import styles from "./CastList.module.css";
-import {CrewMember} from "@/components/credits/CrewMember";
+import {CrewMemberCard} from "@/components/CrewMember/CrewMemberCard";
 
 type props = {
     cast?:CastEntity[] | null
@@ -8,11 +8,11 @@ type props = {
 export function Cast({cast}:props){
     if (!cast) return null;
     return (
-        <div>
+        <section>
             <h2>Cast</h2>
             <figure className={styles.cast}>
-                {cast.slice(0,9).map(c => <CrewMember key={`cast-${c.id}`} people={c} type={"cast"}/>)}
+                {cast.slice(0,12).map(c => <CrewMemberCard key={`cast-${c.id}`} size={"md"} people={c} type={"cast"}/>)}
             </figure>
-        </div>
+        </section>
     )
 }
