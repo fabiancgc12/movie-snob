@@ -134,4 +134,12 @@
         gap: 2em;
     }
 
+    .content{
+        display: grid;
+        grid-template-columns: 72% 1fr;
+    }
+
+    .content >*:nth-child(n + 3){
+        grid-column: 1 / -1;
+    }
 }

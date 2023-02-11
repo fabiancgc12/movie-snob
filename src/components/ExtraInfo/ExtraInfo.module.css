@@ -1,0 +1,25 @@
+.wrapper{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.info > *:first-child{
+    text-transform: capitalize;
+    font-size: .85em;
+}
+
+.providers{
+    display: flex;
+    flex-direction: row;
+    gap: 2.5%;
+}
+
+.providers img{
+    border-radius: .5em;
+}
+
+@media screen and (min-width: 768px){
+    .wrapper{
+        display: unset;
+    }
+}

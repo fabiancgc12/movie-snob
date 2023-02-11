@@ -17,16 +17,20 @@ import { Cast } from "@/components/CastList/CastList";
 import {CardList} from "@/components/movieCard/cardList";
 import {LikeButton} from "@/components/common/ActionButton/LikeButton";
 import { Video } from "@/components/Video/Video";
+import {ExtraInfo} from "@/components/ExtraInfo/ExtraInfo";
+import { Section } from "@/components/common/Section/Section";
+import {ProvidersResultInterface} from "@/utils/models/Movies/Providers.interface";
 
 
 type props = {
     movie:MovieInterface,
     credits:CreditsInterface,
     trailer:VideoTrailerInterface | undefined,
-    images:ImageMediaInterface
+    images:ImageMediaInterface,
+    providers:ProvidersResultInterface
 }
 
-export default function Movie({movie,credits,trailer,images}:props){
+export default function Movie({movie,credits,trailer,images,providers}:props){
     const posterPath = generateImageUrl(movie.poster_path)
     const backgroundPath = generateImageUrl(movie.backdrop_path)
     const crew = credits.crew?.filter(c => c.job.toLowerCase() == "director" || c.job.toLowerCase() == "screenplay")
@@ -72,11 +76,14 @@ export default function Movie({movie,credits,trailer,images}:props){
                     </div>
                 </div>
             </section>
-            <div data-theme="light">
+            <div data-theme="light" className={styles.content}>
                 <Cast cast={credits.cast}/>
+                <ExtraInfo movie={movie} providers={providers}/>
                 <Media trailer={trailer} images={images}/>
-                {movie.genres?.map(g => <CardList title={g.name} key={`movie genre ${g.name}`}/>)}
             </div>
+            <Section title={"Recomendations"}>
+                {movie.genres?.map(g => <CardList title={g.name} key={`movie genre ${g.name}`}/>)}
+            </Section>
         </main>
     )
 }
@@ -89,13 +96,14 @@ export const getStaticPaths:GetStaticPaths = () => {
 }
 
 export const getStaticProps:GetStaticProps = async () => {
-    const {movie,credits,trailer,images} = await getMovie(550)
+    const {movie,credits,trailer,images,providers} = await getMovie(550)
     return {
         props: {
             movie,
             credits,
             trailer,
-            images
+            images,
+            providers
         }
     }
 }
