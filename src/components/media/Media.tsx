@@ -4,6 +4,7 @@ import {generateImageUrl} from "@/utils/functions/generateImageUrl";
 import {VideoTrailerInterface} from "@/utils/models/Movies/VideoMedia.interface";
 import {ImageMediaInterface} from "@/utils/models/Movies/ImageMedia.interface";
 import styles from "./Media.module.css"
+import {VideoThumbnail} from "@/components/Video/VideoThumbnail";
 
 type props = {
 
@@ -16,7 +17,7 @@ export function Media({trailer,images}:props){
         <div className={styles.wrapper}>
             <h2>Media</h2>
             <figure>
-                {trailer && <Video video={trailer}/>}
+                {trailer && <VideoThumbnail video={trailer}/>}
                 {backdrops
                     .map((b,i) => (
                         <div

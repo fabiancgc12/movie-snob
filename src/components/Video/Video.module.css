@@ -31,14 +31,6 @@
     aspect-ratio: 16 / 9;
 }
 
-.thumbnail .video{
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: black;
-    z-index: 1000;
-}
-
 .overlay{
     position: absolute;
     display: inline-grid;
