@@ -35,7 +35,7 @@
 }
 
 .medium{
-    grid-template-columns: minmax(80px,250px);
+    grid-template-columns: minmax(150px,250px);
     grid-template-areas: "profile"
                         "name"
                         "job";

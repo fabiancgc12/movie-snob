@@ -1,54 +1,63 @@
-import Slick from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import styles from "./Slider.module.css"
-import {ReactNode} from "react";
+import {ReactNode, useCallback, useRef} from "react";
 
 type props = {
     className?:string,
     children:ReactNode,
-    settings?:Slick["props"],
-    withGap?:boolean
+    arrowsInContent?:boolean,
 }
 
-export function Slider({className = "",children,withGap = false,settings = {}}:props){
-    const gapStyle = withGap ? styles.withGap : ""
+export function Slider({className = "",children,arrowsInContent = false}:props){
+    const sliderRef = useRef<HTMLElement>(null)
+
+    const moveSlider = useCallback(
+    (scrollValue:number) => {
+        if (sliderRef.current)
+            sliderRef.current.scrollLeft+=scrollValue
+        },
+    [],
+    );
+
+    const arrowsInContentStyle = arrowsInContent ? styles.arrowsInContent : ""
+
     return (
-        <Slick
-            className={`${className} ${styles.slider} ${gapStyle}`}
-            prevArrow=<PrevArrow/>
-            nextArrow=<NextArrow/>
-            {...settings}
-        >
-            {children}
-        </Slick>
+        <div className={`${className} ${styles.slider}`}>
+            <PrevArrow className={arrowsInContentStyle} onClick={() => moveSlider(-300)}/>
+            <figure className={styles.track} ref={sliderRef}>
+                {children}
+            </figure>
+            <NextArrow className={arrowsInContentStyle} onClick={() => moveSlider(300)}/>
+        </div>
     )
 }
 
-const NextArrow = (props:any) => {
-    const { className,onClick } = props;
+type ArrowProps = {
+    onClick: () => void,
+    className?:string
+}
+
+const NextArrow = ({onClick,className = ""}:ArrowProps) => {
     return (
-        <div
-            className={`${className} ${styles.nextArrow}`}
+        <button
+            className={`${styles.nextArrow} ${className}`}
             onClick={onClick}
         >
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
             </svg>
-        </div>
+        </button>
     );
 }
 
-function PrevArrow(props:any) {
-    const { className,onClick } = props;
+function PrevArrow({onClick,className = ""}:ArrowProps) {
     return (
-        <div
-            className={`${className} ${styles.prevArrow}`}
+        <button
+            className={`${styles.prevArrow} ${className}`}
             onClick={onClick}
         >
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
             </svg>
-        </div>
+        </button>
     );
 }

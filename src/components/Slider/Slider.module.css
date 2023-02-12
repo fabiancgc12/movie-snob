@@ -4,22 +4,20 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 1.25em 1em;
-    z-index: 1;
+    padding: .5em .25em;
     background: var(--primaryColor-60);
     border-radius: 5px;
-    border:1px solid whitesmoke
+    border:1px solid whitesmoke;
+    margin: 0;
+    z-index: 1;
 }
 
 .prevArrow:hover,.nextArrow:hover{
     background: var(--primaryColor-60);
 }
 
-.prevArrow::before,.nextArrow::before{
-    content: none;
-}
-
 .prevArrow svg,.nextArrow svg{
+    width: 100%;
     color:whitesmoke;
 }
 
@@ -47,9 +45,21 @@
 }
 
 .slider{
-    padding: .5em 0;
+    position: relative;
+    display: flex;
+    align-items: center;
 }
 
-.slider :global(.slick-slide) > div {
-    padding: .25em 0;
+.track{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    padding: .5em 0;
+    gap:10px;
+    scroll-behavior: smooth;
+}
+
+.arrowsInContent{
+    position: absolute;
 }

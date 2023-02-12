@@ -103,7 +103,7 @@ const list = [
 export function CardList({title}:props){
     return (
         <Section className={styles.section} title={title} size={"sm"}>
-            <figure className={styles.cardList}>
+            <figure className={styles.cardList} >
                 {list.map((e,i) => <MovieCard data={e} key={`card-${i}`}/>)}
             </figure>
         </Section>

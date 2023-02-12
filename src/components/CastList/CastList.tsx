@@ -11,16 +11,10 @@ type props = {
 export function Cast({cast}:props){
     const matchBigScreen = useMediaQuery("(min-width: 768px)")
     if (!cast) return null;
-    let settings = {
-        speed: 500,
-        slidesToShow: 2.2,
-        slidesToScroll: 2,
-        centerMode:true
-    };
     if (!matchBigScreen)
         return (
             <Section title={"Cast"}>
-                <Slider settings={settings} withGap={true}>
+                <Slider arrowsInContent={true}>
                     {cast.slice(0,12).map(c => <CrewMemberCard key={`cast-${c.id}`} size={"md"} people={c} type={"cast"}/>)}
                 </Slider>
             </Section>
