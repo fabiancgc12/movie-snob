@@ -17,6 +17,7 @@
 
 .job{
     font-weight: lighter;
+    font-size: .8em;
 }
 
 .small{
@@ -41,6 +42,7 @@
 }
 
 .name,.job{
+    text-align: center;
     padding: 0 .5em;
 }
 
