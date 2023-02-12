@@ -1,0 +1,36 @@
+.prevArrow,.nextArrow{
+    height: 60px;
+    width: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.25em 1em;
+    z-index: 1;
+    background: var(--primaryColor-60);
+    border-radius: 5px;
+    border:1px solid whitesmoke
+}
+
+.prevArrow:hover,.nextArrow:hover{
+    background: var(--primaryColor-60);
+}
+
+.prevArrow::before,.nextArrow::before{
+    content: none;
+}
+
+.prevArrow svg,.nextArrow svg{
+    color:whitesmoke;
+}
+
+.prevArrow:hover svg,.nextArrow:hover svg{
+    color: var(--primaryLight);
+}
+
+.prevArrow{
+    left: 0;
+}
+
+.nextArrow{
+    right: 0;
+}

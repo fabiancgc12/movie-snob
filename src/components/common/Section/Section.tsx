@@ -13,9 +13,7 @@ export function Section({title,children,className = "",size = "md"}:props){
     return (
         <section className={`${styles.wrapper} ${className}`}>
             <h2 className={`${styles.title} ${sizeStyle}`}>{title}</h2>
-            <div>
-                {children}
-            </div>
+            {children}
         </section>
     )
 }

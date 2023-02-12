@@ -5,6 +5,7 @@
 }
 
 body,*::after,*::before{
+  --primaryColor-60:rgba(33, 33, 33, .6);
   --primaryColor:#212121;
   --primaryLight:#484848;
   --primaryDark:#121212;
