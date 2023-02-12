@@ -34,7 +34,7 @@
 }
 
 .medium{
-    grid-template-columns: minmax(150px,250px);
+    grid-template-columns: minmax(80px,250px);
     grid-template-areas: "profile"
                         "name"
                         "job";
@@ -54,8 +54,6 @@
         grid-template-areas: "profile name"
                         "profile job";
     }
-
-
 
     .medium img {
         border-radius: 0.5em 0 0 .5em;

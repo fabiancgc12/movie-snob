@@ -7,13 +7,15 @@ import {ReactNode} from "react";
 type props = {
     className?:string,
     children:ReactNode,
-    settings?:Slick["props"]
+    settings?:Slick["props"],
+    withGap?:boolean
 }
 
-export function Slider({className,children,settings = {}}:props){
+export function Slider({className = "",children,withGap = false,settings = {}}:props){
+    const gapStyle = withGap ? styles.withGap : ""
     return (
         <Slick
-            className={className}
+            className={`${className} ${styles.slider} ${gapStyle}`}
             prevArrow=<PrevArrow/>
             nextArrow=<NextArrow/>
             {...settings}

@@ -34,3 +34,22 @@
 .nextArrow{
     right: 0;
 }
+
+.withGap :global(.slick-track){
+    display: flex;
+    gap: 10px;
+    /*align-items: stretch;*/
+}
+
+.withGap :global(.slick-track) > *{
+    /*width: 100%;*/
+    /*margin-left: 10px;*/
+}
+
+.slider{
+    padding: .5em 0;
+}
+
+.slider :global(.slick-slide) > div {
+    padding: .25em 0;
+}
