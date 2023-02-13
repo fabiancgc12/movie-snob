@@ -33,17 +33,6 @@
     right: 0;
 }
 
-.withGap :global(.slick-track){
-    display: flex;
-    gap: 10px;
-    /*align-items: stretch;*/
-}
-
-.withGap :global(.slick-track) > *{
-    /*width: 100%;*/
-    /*margin-left: 10px;*/
-}
-
 .slider{
     position: relative;
     display: flex;
@@ -62,4 +51,35 @@
 
 .arrowsInContent{
     position: absolute;
+}
+
+.fadeIn{
+    animation: fadeIn .35s forwards;
+}
+
+.fadeOut{
+    animation: fadeOut .35s forwards;
+
+}
+
+@keyframes fadeIn {
+    from{
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+@keyframes fadeOut {
+    from{
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
 }

@@ -1,5 +1,5 @@
 import styles from "./Slider.module.css"
-import {ReactNode, useCallback, useRef} from "react";
+import {ReactNode, useCallback, useRef, useState} from "react";
 
 type props = {
     className?:string,
@@ -9,24 +9,45 @@ type props = {
 
 export function Slider({className = "",children,arrowsInContent = false}:props){
     const sliderRef = useRef<HTMLElement>(null)
+    const [showPrevArrow, setShowPrevArrow] = useState(true);
+    const [showNextArrow, setShowNextArrow] = useState(true);
+
+    const onScroll = useCallback(
+        () => {
+            if (sliderRef?.current){
+                //if scrollLeft is 0 then hide the left arrow
+                setShowPrevArrow(!!sliderRef.current.scrollLeft)
+                let {scrollWidth,offsetWidth} = sliderRef.current;
+
+                // calculating if scroll has reached the end
+                //the -10 is to give it a margin of error
+                setShowNextArrow(sliderRef.current.scrollLeft < (scrollWidth - offsetWidth - 10))
+            }
+        },
+        [],
+    );
+
 
     const moveSlider = useCallback(
     (scrollValue:number) => {
-        if (sliderRef.current)
+        if (sliderRef?.current){
             sliderRef.current.scrollLeft+=scrollValue
+            onScroll()
+            }
         },
-    [],
+    [onScroll],
     );
 
     const arrowsInContentStyle = arrowsInContent ? styles.arrowsInContent : ""
-
+    const fadeLeftArrow = showPrevArrow ? styles.fadeIn : styles.fadeOut
+    const fadeRightArrow = showNextArrow ? styles.fadeIn : styles.fadeOut
     return (
         <div className={`${className} ${styles.slider}`}>
-            <PrevArrow className={arrowsInContentStyle} onClick={() => moveSlider(-300)}/>
-            <figure className={styles.track} ref={sliderRef}>
+            <PrevArrow className={`${arrowsInContentStyle} ${fadeLeftArrow}`} onClick={() => moveSlider(-300)}/>
+            <figure className={styles.track} ref={sliderRef} onScroll={onScroll}>
                 {children}
             </figure>
-            <NextArrow className={arrowsInContentStyle} onClick={() => moveSlider(300)}/>
+            <NextArrow className={`${arrowsInContentStyle} ${fadeRightArrow}`} onClick={() => moveSlider(300)}/>
         </div>
     )
 }
