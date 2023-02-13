@@ -20,7 +20,7 @@
 }
 
 .small{
-    grid-template-columns: minmax(60px, 25%) 1fr;
+    grid-template-columns: minmax(60px, 20%) 1fr;
     grid-template-areas: "profile name"
                         "profile job";
 }
