@@ -1,5 +1,5 @@
 import styles from "./Slider.module.css"
-import {ReactNode, useCallback, useRef, useState} from "react";
+import {ReactNode, useCallback, useEffect, useRef, useState} from "react";
 
 type props = {
     className?:string,
@@ -38,6 +38,14 @@ export function Slider({className = "",children,arrowsInContent = false,speed}:p
         },
     [onScroll],
     );
+
+    useEffect(() => {
+        onScroll()
+        window.addEventListener('resize', onScroll);
+        return () => {
+            window.removeEventListener('resize', onScroll);
+        };
+    },[])
 
     const arrowsInContentStyle = arrowsInContent ? styles.arrowsInContent : ""
     const fadeLeftArrow = showPrevArrow ? styles.fadeIn : styles.fadeOut
