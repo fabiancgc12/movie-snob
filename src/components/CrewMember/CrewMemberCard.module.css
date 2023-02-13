@@ -17,7 +17,6 @@
 
 .job{
     font-weight: lighter;
-    font-size: .8em;
 }
 
 .small{
@@ -49,6 +48,10 @@
     text-align: center;
 }
 
+.medium .job{
+    font-size: .8em;
+}
+
 .noShadow{
     box-shadow: unset;
 }
@@ -66,5 +69,8 @@
 
     .medium .name,.medium .job{
         text-align: start;
+    }
+    .medium .job{
+        font-size: 1em;
     }
 }
