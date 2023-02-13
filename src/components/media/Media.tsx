@@ -21,19 +21,19 @@ export function Media({videos,images}:props){
                 </Slider>
             </Section>
             <Section className={styles.wrapper} title={"Images"}>
-                <Slider arrowsInContent={true} speed={300}>
+                <Slider arrowsInContent={true} speed={400}>
                     {backdrops
                         .map((b,i) => (
-                                <div
-                                    className={styles.backdrop}
-                                    key={`backdrop-${i}`}
-                                >
+                            <div key={`backdrop-${i}`}>
+                                <div className={styles.backdrop} key={`backdrop-${i}`}>
                                     <Image
                                         src={generateImageUrl(b.file_path)}
                                         alt={`movie backdrop ${i}`}
                                         fill
                                     />
                                 </div>
+                            </div>
+
                             )
                         )}
                 </Slider>
