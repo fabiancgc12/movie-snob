@@ -27,7 +27,8 @@
 
 .thumbnail{
     position: relative;
-    height: 120px;
+    width: 80vw;
+    max-width: 450px;
     aspect-ratio: 16 / 9;
 }
 
