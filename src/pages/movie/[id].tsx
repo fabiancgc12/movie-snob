@@ -25,12 +25,12 @@ import {ProvidersResultInterface} from "@/utils/models/Movies/Providers.interfac
 type props = {
     movie:MovieInterface,
     credits:CreditsInterface,
-    trailer:VideoTrailerInterface | undefined,
+    videos:VideoTrailerInterface[],
     images:ImageMediaInterface,
     providers:ProvidersResultInterface
 }
 
-export default function Movie({movie,credits,trailer,images,providers}:props){
+export default function Movie({movie,credits,videos,images,providers}:props){
     const posterPath = generateImageUrl(movie.poster_path)
     const backgroundPath = generateImageUrl(movie.backdrop_path)
     const crew = credits.crew?.filter(c => c.job.toLowerCase() == "director" || c.job.toLowerCase() == "screenplay")
@@ -59,7 +59,7 @@ export default function Movie({movie,credits,trailer,images,providers}:props){
                     </div>
                     <div className={`${styles.flex} ${styles.titleWrapper}`}>
                         <h1 className={styles.title}>{movie.title} <small>({movie.release_date.slice(0,4)})</small></h1>
-                        {trailer && <Video video={trailer}><a href={"#"}>Watch trailer</a></Video>}
+                        {videos && <Video video={videos[0]}><a href={"#"}>Watch trailer</a></Video>}
                     </div>
                     <div className={styles.overview}>
                         <h4>Overview</h4>
@@ -79,7 +79,7 @@ export default function Movie({movie,credits,trailer,images,providers}:props){
             <div data-theme="light" className={styles.content}>
                 <Cast cast={credits.cast}/>
                 <ExtraInfo movie={movie} providers={providers}/>
-                <Media trailer={trailer} images={images}/>
+                <Media videos={videos} images={images}/>
             </div>
             <Section title={"Recomendations"}>
                 {movie.genres?.map(g => <CardList title={g.name} key={`movie genre ${g.name}`}/>)}
@@ -96,12 +96,12 @@ export const getStaticPaths:GetStaticPaths = () => {
 }
 
 export const getStaticProps:GetStaticProps = async () => {
-    const {movie,credits,trailer,images,providers} = await getMovie(550)
+    const {movie,credits,videos,images,providers} = await getMovie(550)
     return {
         props: {
             movie,
             credits,
-            trailer,
+            videos,
             images,
             providers
         }

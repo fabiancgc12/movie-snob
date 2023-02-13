@@ -20,17 +20,20 @@ export async function getMovie(id:number):Promise<
     {
         movie:MovieInterface,
         credits:CreditsInterface,
-        trailer?:VideoTrailerInterface,
+        videos:VideoTrailerInterface[],
         images:ImageMediaInterface,
         providers:ProvidersResultInterface
     }
 >{
-    const mainTrailer = dummyVideos.results.find(t => t.site == "YouTube" && t.official)
+    const videos = dummyVideos.results.filter(t => t.site == "YouTube").slice(0,9) || []
+    const images = {...dummyImages}
+    images.backdrops = images.backdrops.slice(0,9);
+    images.backdrops = images.backdrops.slice(0,9);
     return {
         movie:dummymovie,
         credits:dummyCredits,
-        trailer:mainTrailer,
-        images:dummyImages,
+        videos:videos,
+        images:images,
         providers:dummyProviders
     }
 }
