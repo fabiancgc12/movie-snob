@@ -1,8 +1,9 @@
 .average{
+    --fontSize:14px;
     display: inline-grid;
     place-items: center;
     position: relative;
-    font-size: 14px;
+    font-size: var(--fontSize);
     width: 4em;
     padding: 1em;
     background: var(--dark);
@@ -12,7 +13,11 @@
 }
 
 .small{
-    font-size: 12px;
+    --fontSize: 12px;
+}
+
+.bg{
+    --fontSize: 18px;
 }
 
 .average::before,
@@ -29,12 +34,22 @@
 .average::before{
     background: conic-gradient(
             var(--secondaryDark) var(--degree,0), transparent var(--degree,0));
-    width: calc(100% - 8px);
+    width: calc(100% - var(--fontSize)/2);
     z-index: -2;
 }
 
 .average::after{
     background: inherit;
     z-index: -1;
-    width: calc(100% - 14px);
+    width: calc(100% - var(--fontSize));
+}
+
+.average span{
+    font-weight: bold;
+}
+
+@media screen and (max-width: 768px) {
+    .bg{
+        font-size: 16px;
+    }
 }

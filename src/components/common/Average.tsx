@@ -3,7 +3,7 @@ import styles from "./average.module.css";
 
 type props = {
     value:number,
-    size?:"sm" | "md"
+    size?:"sm" | "md" | "bg"
 }
 
 export function Average({value,size = "md"}:props) {
@@ -11,7 +11,11 @@ export function Average({value,size = "md"}:props) {
         "--degree":(value*360/10).toString() + "deg"
     } as CSSProperties), [value]);
     const average = value*10
-    const sizeStyle = size == "sm" ? styles.small : ""
+    let sizeStyle = "";
+    if (size == "sm")
+        sizeStyle = styles.small
+    else if (size == "bg")
+        sizeStyle = styles.bg
     return (
         <div className={`${styles.average} ${sizeStyle}`} style={properties}>
             <span>{Math.trunc(average)}%</span>
