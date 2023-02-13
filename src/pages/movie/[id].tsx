@@ -31,8 +31,9 @@ type props = {
 }
 
 export default function Movie({movie,credits,videos,images,providers}:props){
-    const posterPath = generateImageUrl(movie.poster_path)
-    const backgroundPath = generateImageUrl(movie.backdrop_path)
+    const posterPath = generateImageUrl(movie.poster_path);
+    const backgroundPath = generateImageUrl(movie.backdrop_path);
+    const titleSize = movie.title.length > 20 ? styles.titleSmall : ""
     const crew = credits.crew?.filter(c => c.job.toLowerCase() == "director" || c.job.toLowerCase() == "screenplay")
     return (
         <main>
@@ -58,7 +59,7 @@ export default function Movie({movie,credits,videos,images,providers}:props){
                         <div>{calculateRunTime(movie.runtime)}</div>
                     </div>
                     <div className={`${styles.flex} ${styles.titleWrapper}`}>
-                        <h1 className={styles.title}>{movie.title} <small>({movie.release_date.slice(0,4)})</small></h1>
+                        <h1 className={`${styles.title} ${titleSize}`}>{movie.title} <small className={styles.year}>({movie.release_date.slice(0,4)})</small></h1>
                         {videos && <Video video={videos[0]}><a href={"#"}>Watch trailer</a></Video>}
                     </div>
                     <div className={styles.overview}>

@@ -58,7 +58,7 @@
     text-align: center;
 }
 
-.title small{
+.title .year{
     font-size: 20px;
     font-weight: lighter;
 }
@@ -141,5 +141,15 @@
 
     .content >*:nth-child(n + 3){
         grid-column: 1 / -1;
+    }
+}
+
+@media screen and (max-width: 768px){
+    .titleSmall{
+        font-size: 20px;
+    }
+
+    .titleSmall .year{
+        font-size: 16px;
     }
 }
