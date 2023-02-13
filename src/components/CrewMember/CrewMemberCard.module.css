@@ -42,8 +42,11 @@
 }
 
 .name,.job{
-    text-align: center;
     padding: 0 .5em;
+}
+
+.medium .name,.medium .job{
+    text-align: center;
 }
 
 .noShadow{
@@ -61,4 +64,7 @@
         border-radius: 0.5em 0 0 .5em;
     }
 
+    .medium .name,.medium .job{
+        text-align: start;
+    }
 }
