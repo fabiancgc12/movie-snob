@@ -9,7 +9,7 @@ type props = {
 
 export function Slider({className = "",children,arrowsInContent = false}:props){
     const sliderRef = useRef<HTMLElement>(null)
-    const [showPrevArrow, setShowPrevArrow] = useState(true);
+    const [showPrevArrow, setShowPrevArrow] = useState(false);
     const [showNextArrow, setShowNextArrow] = useState(true);
 
     const onScroll = useCallback(
