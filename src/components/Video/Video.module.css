@@ -34,8 +34,8 @@
 .overlay{
     position: absolute;
     display: inline-flex;
-    justify-content: start;
-    align-items: end;
+    justify-content: flex-start;
+    align-items: flex-end;
     gap: 5px;
     top: 0;
     left: 0;
