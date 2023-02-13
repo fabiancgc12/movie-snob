@@ -29,11 +29,15 @@ export async function getMovie(id:number):Promise<
     const images = {...dummyImages}
     images.backdrops = images.backdrops.slice(0,9);
     images.backdrops = images.backdrops.slice(0,9);
+    const providers:ProvidersResultInterface = {
+        id:dummyProviders.id,
+        results: {US:dummyProviders.results.US}
+    }
     return {
         movie:dummymovie,
         credits:dummyCredits,
         videos:videos,
         images:images,
-        providers:dummyProviders
+        providers:providers
     }
 }
