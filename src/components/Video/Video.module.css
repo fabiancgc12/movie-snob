@@ -34,8 +34,10 @@
 
 .overlay{
     position: absolute;
-    display: inline-grid;
-    place-items: center;
+    display: inline-flex;
+    justify-content: start;
+    align-items: end;
+    gap: 5px;
     top: 0;
     left: 0;
     width: 100%;
@@ -44,11 +46,22 @@
     cursor: pointer;
 }
 
-.thumbnail:hover{
-    filter: brightness(75%);
+.thumbnail:hover img{
+    filter: brightness(50%);
+}
+
+.overlay:hover,.overlay:focus{
+    color: whitesmoke;
 }
 
 .overlay svg{
-    width: 50%;
-    height: 50%;
+    width: 20%;
+    height: 20%;
+    transition: color .35s;
+}
+
+.title{
+    width: 100%;
+    font-weight: bold;
+    transition: color .35s;
 }
