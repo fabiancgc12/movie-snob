@@ -5,9 +5,10 @@ type props = {
     className?:string,
     children:ReactNode,
     arrowsInContent?:boolean,
+    speed:number
 }
 
-export function Slider({className = "",children,arrowsInContent = false}:props){
+export function Slider({className = "",children,arrowsInContent = false,speed}:props){
     const sliderRef = useRef<HTMLElement>(null)
     const [showPrevArrow, setShowPrevArrow] = useState(false);
     const [showNextArrow, setShowNextArrow] = useState(true);
@@ -43,11 +44,11 @@ export function Slider({className = "",children,arrowsInContent = false}:props){
     const fadeRightArrow = showNextArrow ? styles.fadeIn : styles.fadeOut
     return (
         <div className={`${className} ${styles.slider}`}>
-            <PrevArrow className={`${arrowsInContentStyle} ${fadeLeftArrow}`} onClick={() => moveSlider(-300)}/>
+            <PrevArrow className={`${arrowsInContentStyle} ${fadeLeftArrow}`} onClick={() => moveSlider(speed*(-1))}/>
             <figure className={styles.track} ref={sliderRef} onScroll={onScroll}>
                 {children}
             </figure>
-            <NextArrow className={`${arrowsInContentStyle} ${fadeRightArrow}`} onClick={() => moveSlider(300)}/>
+            <NextArrow className={`${arrowsInContentStyle} ${fadeRightArrow}`} onClick={() => moveSlider(speed)}/>
         </div>
     )
 }

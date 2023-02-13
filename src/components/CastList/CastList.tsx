@@ -14,7 +14,7 @@ export function Cast({cast}:props){
     if (!matchBigScreen)
         return (
             <Section title={"Cast"}>
-                <Slider arrowsInContent={true}>
+                <Slider arrowsInContent={true} speed={250}>
                     {cast.slice(0,12).map(c => <CrewMemberCard key={`cast-${c.id}`} size={"md"} people={c} type={"cast"}/>)}
                 </Slider>
             </Section>
