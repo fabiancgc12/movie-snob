@@ -49,6 +49,10 @@
     scroll-behavior: smooth;
 }
 
+.track > * {
+    flex-shrink: 0;
+}
+
 .arrowsInContent{
     position: absolute;
 }

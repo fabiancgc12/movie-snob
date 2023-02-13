@@ -18,8 +18,8 @@ import {CardList} from "@/components/movieCard/cardList";
 import {LikeButton} from "@/components/common/ActionButton/LikeButton";
 import { Video } from "@/components/Video/Video";
 import {ExtraInfo} from "@/components/ExtraInfo/ExtraInfo";
-import { Section } from "@/components/common/Section/Section";
 import {ProvidersResultInterface} from "@/utils/models/Movies/Providers.interface";
+import {RecommendationInterface} from "@/utils/models/Movies/RecomendationResult.interface";
 
 
 type props = {
@@ -27,10 +27,11 @@ type props = {
     credits:CreditsInterface,
     videos:VideoTrailerInterface[],
     images:ImageMediaInterface,
-    providers:ProvidersResultInterface
+    providers:ProvidersResultInterface,
+    recommendations:RecommendationInterface[]
 }
 
-export default function Movie({movie,credits,videos,images,providers}:props){
+export default function Movie({movie,credits,videos,images,providers,recommendations}:props){
     const posterPath = generateImageUrl(movie.poster_path);
     const backgroundPath = generateImageUrl(movie.backdrop_path);
     const titleSize = movie.title.length > 20 ? styles.titleSmall : ""
@@ -82,9 +83,7 @@ export default function Movie({movie,credits,videos,images,providers}:props){
                 <ExtraInfo movie={movie} providers={providers}/>
                 <Media videos={videos} images={images}/>
             </div>
-            <Section title={"Recomendations"}>
-                {movie.genres?.map(g => <CardList title={g.name} key={`movie genre ${g.name}`}/>)}
-            </Section>
+            <CardList title={"Recomendations"} movies={recommendations}/>
         </main>
     )
 }
@@ -97,14 +96,15 @@ export const getStaticPaths:GetStaticPaths = () => {
 }
 
 export const getStaticProps:GetStaticProps = async () => {
-    const {movie,credits,videos,images,providers} = await getMovie(550)
+    const {movie,credits,videos,images,providers,recommendations} = await getMovie(550)
     return {
         props: {
             movie,
             credits,
             videos,
             images,
-            providers
+            providers,
+            recommendations
         }
     }
 }

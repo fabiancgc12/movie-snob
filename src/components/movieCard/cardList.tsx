@@ -1,111 +1,21 @@
 import styles from "@/components/movieCard/cardList.module.css";
 import {MovieCard} from "@/components/movieCard/movieCard";
-import poster from "@/pages/poster.jpg";
 import {Section} from "@/components/common/Section/Section";
+import {MovieInterface} from "@/utils/models/Movies/Movie.interface";
+import {RecommendationInterface} from "@/utils/models/Movies/RecomendationResult.interface";
+import {Slider} from "@/components/Slider/Slider";
 
 type props = {
-    title:string
+    title:string,
+    movies:(MovieInterface | RecommendationInterface)[]
 }
 
-const list = [
-    {
-        title:"the last of us",
-        poster:poster,
-        vote_average:8.432,
-        popularity:95.992
-    },
-    {
-        title:"the last of us the last of us the last of us the last of us the last of us",
-        poster:poster,
-        vote_average:8.432,
-        popularity:95.992
-    },
-    {
-        title:"the last of us",
-        poster:poster,
-        vote_average:8.432,
-        popularity:95.992
-    },
-    {
-        title:"the last of us",
-        poster:poster,
-        vote_average:8.432,
-        popularity:95.992
-    },
-    {
-        title:"the last of us",
-        poster:poster,
-        vote_average:8.432,
-        popularity:95.992
-    },
-    {
-        title:"the last of us",
-        poster:poster,
-        vote_average:8.432,
-        popularity:95.992
-    },
-    {
-        title:"the last of us",
-        poster:poster,
-        vote_average:8.432,
-        popularity:95.992
-    },
-    {
-        title:"the last of us",
-        poster:poster,
-        vote_average:8.432,
-        popularity:95.992
-    },
-    {
-        title:"the last of us",
-        poster:poster,
-        vote_average:8.432,
-        popularity:95.992
-    },
-    {
-        title:"the last of us",
-        poster:poster,
-        vote_average:8.432,
-        popularity:95.992
-    },
-    {
-        title:"the last of us",
-        poster:poster,
-        vote_average:8.432,
-        popularity:95.992
-    },
-    {
-        title:"the last of us",
-        poster:poster,
-        vote_average:8.432,
-        popularity:95.992
-    },
-    {
-        title:"the last of us",
-        poster:poster,
-        vote_average:8.432,
-        popularity:95.992
-    },
-    {
-        title:"the last of us",
-        poster:poster,
-        vote_average:8.432,
-        popularity:95.992
-    },
-    {
-        title:"the last of us",
-        poster:poster,
-        vote_average:8.432,
-        popularity:95.992
-    },
-]
-
-export function CardList({title}:props){
+export function CardList({title,movies}:props){
     return (
-        <Section className={styles.section} title={title} size={"sm"}>
-            <figure className={styles.cardList} >
-                {list.map((e,i) => <MovieCard data={e} key={`card-${i}`}/>)}
-            </figure>
+        <Section className={styles.section} title={title}>
+            <Slider speed={300} arrowsInContent={true}>
+                {movies?.map((e,i) => <MovieCard data={e} key={`card-${i}`}/>)}
+            </Slider>
         </Section>
 
     )
