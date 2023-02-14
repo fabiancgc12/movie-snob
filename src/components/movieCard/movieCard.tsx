@@ -16,7 +16,7 @@ export function MovieCard({data}:props){
     const poster = generateImageUrl(data.poster_path)
     return (
         <article className={styles.movieCard}>
-            <Image src={poster} alt={"title poster"} width={200} height={350}/>
+            <Image src={poster} alt={"title poster"} width={200} height={300}/>
             <div className={styles.info}>
                 <Average value={data.vote_average} size={"bg"}/>
             </div>
