@@ -15,7 +15,7 @@ export function Media({videos,images}:props){
     const backdrops = images.backdrops.slice(0,9)
     return (
         <>
-            <Section title={"trailer"}>
+            <Section title={"Videos"}>
                 <Slider arrowsInContent={true} speed={300}>
                     {videos && videos.map(v => <VideoThumbnail video={v} key={`video-${v.key}`}/>)}
                 </Slider>
