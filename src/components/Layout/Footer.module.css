@@ -1,0 +1,28 @@
+.footer{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: space-between;
+    justify-items: center;
+    background: var(--primaryDark);
+    padding: 1em;
+}
+
+.footer > * {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.tmdbLogo{
+    align-items: center;
+}
+
+@media screen and (min-width: 768px) {
+    .footer{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        justify-content: start;
+        background: var(--primaryDark);
+        padding: 1em;
+    }
+}
