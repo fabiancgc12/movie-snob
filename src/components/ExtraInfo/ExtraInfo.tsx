@@ -36,6 +36,7 @@ export function ExtraInfo({movie,providers}:props){
                             width={50}
                             height={50}
                         />)}
+                        <small>You can visit <a href={"https://www.justwatch.com/"}>JustWatch</a> for more information</small>
                     </div>
                 </div>
             </div>
