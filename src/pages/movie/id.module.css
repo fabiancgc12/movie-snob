@@ -77,8 +77,11 @@
 }
 
 .crew{
-    gap: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     justify-content: start;
+    gap: 10px;
+    padding: .25em 0;
 }
 
 @media screen and (min-width: 768px){
@@ -141,6 +144,10 @@
 
     .content >*:nth-child(n + 3){
         grid-column: 1 / -1;
+    }
+
+    .crew{
+        justify-content: space-between;
     }
 }
 

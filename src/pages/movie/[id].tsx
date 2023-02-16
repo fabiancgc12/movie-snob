@@ -73,7 +73,7 @@ export default function Movie({movie,credits,videos,images,providers,recommendat
                         <LikeButton/>
                         <ShareButton/>
                     </div>
-                    <div className={`${styles.flex} ${styles.crew}`}>
+                    <div className={styles.crew}>
                         {crew && crew.map(c => <CrewMemberCard key={`crew-${c.id}`} size={"sm"} people={c} type={"crew"} shadow={false}/>)}
                     </div>
                 </div>

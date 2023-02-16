@@ -73,20 +73,28 @@ export async function getMovie(id:number):Promise<
         `append_to_response=videos,images,credits,watch/providers,recommendations`
     );
     const data:ApiResponse = await response.json()
-    const videos = data.videos.results.filter(t => t.site == "YouTube").slice(0,9) || []
-    const images = {...data.images}
+    // i destructure all the data to their separate parts to handle them independently from each other
+    let {credits,videos: videoResponse,images,"watch/providers": providers,recommendations:recomResponse,...movie} = data
+    // returning only the first 10 videos
+    const videos = videoResponse.results.filter(t => t.site == "YouTube").slice(0,9) || []
+    // returning only the first 10 backdrops for now
     images.backdrops = images.backdrops.slice(0,9);
     images.posters = [];
     images.logos = [];
-    const providers:ProvidersResponseInterface = {
-        results: {US:data["watch/providers"].results.US}
+    // just returning the us providers
+    providers = {
+        results: {US:providers.results.US ?? []}
     }
-    const credits = {...data.credits}
+    //just returning the first 13 member of the main cast and
+    // the director or screenplay members of the crew
     credits.cast = credits.cast?.slice(0,12)
-    credits.crew = credits.crew?.filter(c => c.job.toLowerCase() == "director" || c.job.toLowerCase() == "screenplay")
-    const recommendations = data.recommendations.results.slice(0,12)
+    credits.crew = credits.crew
+        ?.filter(c => c.job.toLowerCase() == "director" || c.job.toLowerCase() == "screenplay")
+        .slice(0,1)
+    //just returning the first 13 recommendation
+    const recommendations = recomResponse.results.slice(0,13)
     return {
-        movie:data,
+        movie:movie,
         credits:credits,
         videos:videos,
         images:images,
