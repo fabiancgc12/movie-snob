@@ -3,12 +3,12 @@ import {Section} from "@/components/common/Section/Section";
 import styles from "./ExtraInfo.module.css"
 import {formatDate} from "@/utils/functions/formatDate";
 import {formatCurrency} from "@/utils/functions/formatCurrency";
-import {ProvidersResultInterface} from "@/utils/models/Movies/Providers.interface";
+import {ProvidersResponseInterface} from "@/utils/models/Movies/Providers.interface";
 import Image from "next/image";
 import {generateImageUrl} from "@/utils/functions/generateImageUrl";
 type props = {
     movie:MovieInterface,
-    providers:ProvidersResultInterface
+    providers:ProvidersResponseInterface
 }
 
 export function ExtraInfo({movie,providers}:props){

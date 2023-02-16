@@ -1,9 +1,12 @@
-import {CreditsInterface} from "@/utils/models/Movies/Credits.interface";
+import {CreditsResponseInterface} from "@/utils/models/Movies/CreditsResponse.interface";
 import {MovieInterface} from "@/utils/models/Movies/Movie.interface";
-import {VideoTrailerInterface} from "@/utils/models/Movies/VideoMedia.interface";
-import {ImageMediaInterface} from "@/utils/models/Movies/ImageMedia.interface";
-import {ProvidersResultInterface} from "@/utils/models/Movies/Providers.interface";
-import {RecommendationInterface} from "@/utils/models/Movies/RecomendationResult.interface";
+import {VideoMediaResponse, VideoTrailerInterface} from "@/utils/models/Movies/VideoMedia.interface";
+import {ImageMediaResponse} from "@/utils/models/Movies/ImageMedia.interface";
+import {ProvidersResponseInterface} from "@/utils/models/Movies/Providers.interface";
+import {
+    RecommendationInterface,
+    RecommendationResponseInterface
+} from "@/utils/models/Movies/RecomendationResponse.interface";
 
 const dummymovie = {"adult":true,"backdrop_path":"/hZkgoQYus5vegHoetLkCJzb17zJ.jpg","belongs_to_collection":null,"budget":63000000,"genres":[{"id":18,"name":"Drama"},{"id":53,"name":"Thriller"},{"id":35,"name":"Comedy"}],"homepage":"http://www.foxmovies.com/movies/fight-club","id":550,"imdb_id":"tt0137523","original_language":"en","original_title":"Fight Club","overview":"A ticking-time-bomb insomniac and a slippery soap salesman channel primal male aggression into a shocking new form of therapy. Their concept catches on, with underground \"fight clubs\" forming in every town, until an eccentric gets in the way and ignites an out-of-control spiral toward oblivion.","popularity":72.65,
     "poster_path":"/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg",
@@ -19,30 +22,75 @@ const dummyProviders = {"id":545611,"results":{"AE":{"link":"https://www.themovi
 
 export const dummyRecommendations = {"page":1,"results":[{"adult":false,"backdrop_path":"/suaEOtk1N1sgg2MTM7oZd2cfVp3.jpg","id":680,"title":"Pulp Fiction","original_language":"en","original_title":"Pulp Fiction","overview":"A burger-loving hit man, his philosophical partner, a drug-addled gangster's moll and a washed-up boxer converge in this sprawling, comedic crime caper. Their adventures unfurl in three stories that ingeniously trip back and forth in time.","poster_path":"/fIE3lAGcZDV1G6XM5KmuWnNsPp1.jpg","media_type":"movie","genre_ids":[53,80],"popularity":66.399,"release_date":"1994-09-10","video":false,"vote_average":8.49,"vote_count":24650},{"adult":false,"backdrop_path":"/hh28CTWLdxTXA5yJgefZ6gUnFDo.jpg","id":807,"title":"Se7en","original_language":"en","original_title":"Se7en","overview":"Two homicide detectives are on a desperate hunt for a serial killer whose crimes are based on the \"seven deadly sins\" in this dark and haunting film that takes viewers from the tortured remains of one victim to the next. The seasoned Det. Sommerset researches each sin in an effort to get inside the killer's mind, while his novice partner, Mills, scoffs at his efforts to unravel the case.","poster_path":"/69Sns8WoET6CfaYlIkHbla4l7nC.jpg","media_type":"movie","genre_ids":[80,9648,53],"popularity":57.235,"release_date":"1995-09-22","video":false,"vote_average":8.362,"vote_count":18349},{"adult":false,"backdrop_path":"/8ZTVqvKDQ8emSGUEMjsS4yHAwrp.jpg","id":27205,"title":"Inception","original_language":"en","original_title":"Inception","overview":"Cobb, a skilled thief who commits corporate espionage by infiltrating the subconscious of his targets is offered a chance to regain his old life as payment for a task considered to be impossible: \"inception\", the implantation of another person's idea into a target's subconscious.","poster_path":"/edv5CZvWj09upOsy2Y6IwDhK8bt.jpg","media_type":"movie","genre_ids":[28,878,12],"popularity":103.95,"release_date":"2010-07-15","video":false,"vote_average":8.362,"vote_count":33161},{"adult":false,"backdrop_path":null,"id":101638,"title":"Waardenberg \u0026 de Jong: de Gekkengalerij","original_language":"nl","original_title":"Waardenberg \u0026 de Jong: de Gekkengalerij","overview":"In their second show, Waardenberg \u0026 de Jong attack each other with yoghurt, paint, water and wood glue. They end as sea lions, diving in a pool from a water slide.","poster_path":"/81L32W9qCZqbwMvj1Q1w8B0Jith.jpg","media_type":"movie","genre_ids":[35],"popularity":0.6,"release_date":"1988-09-21","video":false,"vote_average":4.5,"vote_count":1},{"adult":false,"backdrop_path":"/3h1JZGDhZ8nzxdgvkxha0qBqi05.jpg","id":13,"title":"Forrest Gump","original_language":"en","original_title":"Forrest Gump","overview":"A man with a low IQ has accomplished great things in his life and been present during significant historic events—in each case, far exceeding what anyone imagined he could do. But despite all he has achieved, his one true love eludes him.","poster_path":"/arw2vcBveWOVZr6pxd9XTd1TdQa.jpg","media_type":"movie","genre_ids":[35,18,10749],"popularity":68.41,"release_date":"1994-06-23","video":false,"vote_average":8.48,"vote_count":24133},{"adult":false,"backdrop_path":"/waCRuAW5ocONRehP556vPexVXA9.jpg","id":603,"title":"The Matrix","original_language":"en","original_title":"The Matrix","overview":"Set in the 22nd century, The Matrix tells the story of a computer hacker who joins a group of underground insurgents fighting the vast and powerful computers who now rule the earth.","poster_path":"/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg","media_type":"movie","genre_ids":[28,878],"popularity":88.808,"release_date":"1999-03-30","video":false,"vote_average":8.2,"vote_count":22791},{"adult":false,"backdrop_path":"/pbEkjhdfP7yuDcMB78YEZwgD4IN.jpg","id":155,"title":"The Dark Knight","original_language":"en","original_title":"The Dark Knight","overview":"Batman raises the stakes in his war on crime. With the help of Lt. Jim Gordon and District Attorney Harvey Dent, Batman sets out to dismantle the remaining criminal organizations that plague the streets. The partnership proves to be effective, but they soon find themselves prey to a reign of chaos unleashed by a rising criminal mastermind known to the terrified citizens of Gotham as the Joker.","poster_path":"/qJ2tW6WMUDux911r6m7haRef0WH.jpg","media_type":"movie","genre_ids":[18,28,80,53],"popularity":84.583,"release_date":"2008-07-14","video":false,"vote_average":8.5,"vote_count":29167},{"adult":false,"backdrop_path":"/1Jpkm9qZcsT0mSyVXgs4VlGjPNI.jpg","id":16869,"title":"Inglourious Basterds","original_language":"en","original_title":"Inglourious Basterds","overview":"In Nazi-occupied France during World War II, a group of Jewish-American soldiers known as \"The Basterds\" are chosen specifically to spread fear throughout the Third Reich by scalping and brutally killing Nazis. The Basterds, lead by Lt. Aldo Raine soon cross paths with a French-Jewish teenage girl who runs a movie theater in Paris which is targeted by the soldiers.","poster_path":"/7sfbEnaARXDDhKm0CZ7D7uc2sbo.jpg","media_type":"movie","genre_ids":[18,28,53,10752],"popularity":68.797,"release_date":"2009-08-19","video":false,"vote_average":8.211,"vote_count":19791},{"adult":false,"backdrop_path":"/wPU78OPN4BYEgWYdXyg0phMee64.jpg","id":278,"title":"The Shawshank Redemption","original_language":"en","original_title":"The Shawshank Redemption","overview":"Framed in the 1940s for the double murder of his wife and her lover, upstanding banker Andy Dufresne begins a new life at the Shawshank prison, where he puts his accounting skills to work for an amoral warden. During his long stretch in prison, Dufresne comes to be admired by the other inmates -- including an older prisoner named Red -- for his integrity and unquenchable sense of hope.","poster_path":"/hBcY0fE9pfXzvVaY4GKarweriG2.jpg","media_type":"movie","genre_ids":[18,80],"popularity":93.465,"release_date":"1994-09-23","video":false,"vote_average":8.702,"vote_count":23270},{"adult":false,"backdrop_path":"/2nqsOT2AqPkTW81bWaLRtjgjqVM.jpg","id":11324,"title":"Shutter Island","original_language":"en","original_title":"Shutter Island","overview":"World War II soldier-turned-U.S. Marshal Teddy Daniels investigates the disappearance of a patient from a hospital for the criminally insane, but his efforts are compromised by troubling visions and a mysterious doctor.","poster_path":"/kve20tXwUZpu4GUX8l6X7Z4jmL6.jpg","media_type":"movie","genre_ids":[18,53,9648],"popularity":65.599,"release_date":"2010-02-14","video":false,"vote_average":8.193,"vote_count":21216},{"adult":false,"backdrop_path":"/2oZklIzUbvZXXzIFzv7Hi68d6xf.jpg","id":68718,"title":"Django Unchained","original_language":"en","original_title":"Django Unchained","overview":"With the help of a German bounty hunter, a freed slave sets out to rescue his wife from a brutal Mississippi plantation owner.","poster_path":"/7oWY8VDWW7thTzWh3OKYRkWUlD5.jpg","media_type":"movie","genre_ids":[18,37],"popularity":58.425,"release_date":"2012-12-25","video":false,"vote_average":8.16,"vote_count":23666},{"adult":false,"backdrop_path":"/q2CtXYjp9IlnfBcPktNkBPsuAEO.jpg","id":77,"title":"Memento","original_language":"en","original_title":"Memento","overview":"Leonard Shelby is tracking down the man who raped and murdered his wife. The difficulty of locating his wife's killer, however, is compounded by the fact that he suffers from a rare, untreatable form of short-term memory loss. Although he can recall details of life before his accident, Leonard cannot remember what happened fifteen minutes ago, where he's going, or why.","poster_path":"/yuNs09hvpHVU1cBTCAk9zxsL2oW.jpg","media_type":"movie","genre_ids":[9648,53],"popularity":33.724,"release_date":"2000-10-11","video":false,"vote_average":8.2,"vote_count":13039},{"adult":false,"backdrop_path":"/jqFjgNnxpXIXWuPsyfqmcLXRo9p.jpg","id":500,"title":"Reservoir Dogs","original_language":"en","original_title":"Reservoir Dogs","overview":"A botched robbery indicates a police informant, and the pressure mounts in the aftermath at a warehouse. Crime begets violence as the survivors -- veteran Mr. White, newcomer Mr. Orange, psychopathic parolee Mr. Blonde, bickering weasel Mr. Pink and Nice Guy Eddie -- unravel.","poster_path":"/xi8Iu6qyTfyZVDVy60raIOYJJmk.jpg","media_type":"movie","genre_ids":[80,53],"popularity":34.038,"release_date":"1992-09-02","video":false,"vote_average":8.141,"vote_count":12668},{"adult":false,"backdrop_path":"/9LSsSPbP715XT9B7acIZzantPyX.jpg","id":73,"title":"American History X","original_language":"en","original_title":"American History X","overview":"Derek Vineyard is paroled after serving 3 years in prison for killing two African-American men. Through his brother, Danny Vineyard's narration, we learn that before going to prison, Derek was a skinhead and the leader of a violent white supremacist gang that committed acts of racial crime throughout L.A. and his actions greatly influenced Danny. Reformed and fresh out of prison, Derek severs contact with the gang and becomes determined to keep Danny from going down the same violent path as he did.","poster_path":"/c2gsmSQ2Cqv8zosqKOCwRS0GFBS.jpg","media_type":"movie","genre_ids":[18],"popularity":38.356,"release_date":"1998-07-01","video":false,"vote_average":8.359,"vote_count":10187},{"adult":false,"backdrop_path":"/tmU7GeKVybMWFButWEGl2M4GeiP.jpg","id":238,"title":"The Godfather","original_language":"en","original_title":"The Godfather","overview":"Spanning the years 1945 to 1955, a chronicle of the fictional Italian-American Corleone crime family. When organized crime family patriarch, Vito Corleone barely survives an attempt on his life, his youngest son, Michael steps in to take care of the would-be killers, launching a campaign of bloody revenge.","poster_path":"/3bhkrj58Vtu7enYsRolD1fZdja1.jpg","media_type":"movie","genre_ids":[18,80],"popularity":102.613,"release_date":"1972-03-14","video":false,"vote_average":8.714,"vote_count":17457},{"adult":false,"backdrop_path":"/tdmlSbLl84hfHx635AqHLB8Qh8M.jpg","id":120,"title":"The Lord of the Rings: The Fellowship of the Ring","original_language":"en","original_title":"The Lord of the Rings: The Fellowship of the Ring","overview":"Young hobbit Frodo Baggins, after inheriting a mysterious ring from his uncle Bilbo, must leave his home in order to keep it from falling into the hands of its evil creator. Along the way, a fellowship is formed to protect the ringbearer and make sure that the ring arrives at its final destination: Mt. Doom, the only place where it can be destroyed.","poster_path":"/6oom5QYQ2yQTMJIbnvbkBL9cHo6.jpg","media_type":"movie","genre_ids":[12,14,28],"popularity":104.635,"release_date":"2001-12-18","video":false,"vote_average":8.394,"vote_count":22245},{"adult":false,"backdrop_path":"/lVy5Zqcty2NfemqKYbVJfdg44rK.jpg","id":24,"title":"Kill Bill: Vol. 1","original_language":"en","original_title":"Kill Bill: Vol. 1","overview":"An assassin is shot by her ruthless employer, Bill, and other members of their assassination circle – but she lives to plot her vengeance.","poster_path":"/v7TaX8kXMXs5yFFGR41guUDNcnB.jpg","media_type":"movie","genre_ids":[28,80],"popularity":39.189,"release_date":"2003-10-10","video":false,"vote_average":7.97,"vote_count":15472},{"adult":false,"backdrop_path":"/kWYfW2Re0rUDE6IHhy4CRuKWeFr.jpg","id":121,"title":"The Lord of the Rings: The Two Towers","original_language":"en","original_title":"The Lord of the Rings: The Two Towers","overview":"Frodo and Sam are trekking to Mordor to destroy the One Ring of Power while Gimli, Legolas and Aragorn search for the orc-captured Merry and Pippin. All along, nefarious wizard Saruman awaits the Fellowship members at the Orthanc Tower in Isengard.","poster_path":"/5VTN0pR8gcqV3EPUHHfMGnJYN9L.jpg","media_type":"movie","genre_ids":[12,14,28],"popularity":95.78,"release_date":"2002-12-18","video":false,"vote_average":8.375,"vote_count":19335},{"adult":false,"backdrop_path":"/aYcnDyLMnpKce1FOYUpZrXtgUye.jpg","id":274,"title":"The Silence of the Lambs","original_language":"en","original_title":"The Silence of the Lambs","overview":"Clarice Starling is a top student at the FBI's training academy.  Jack Crawford wants Clarice to interview Dr. Hannibal Lecter, a brilliant psychiatrist who is also a violent psychopath, serving life behind bars for various acts of murder and cannibalism.  Crawford believes that Lecter may have insight into a case and that Starling, as an attractive young woman, may be just the bait to draw him out.","poster_path":"/rplLJ2hPcOQmkFhTqUte0MkEaO2.jpg","media_type":"movie","genre_ids":[80,18,53],"popularity":11.741,"release_date":"1991-02-14","video":false,"vote_average":8.343,"vote_count":14228},{"adult":false,"backdrop_path":"/lXhgCODAbBXL5buk9yEmTpOoOgR.jpg","id":122,"title":"The Lord of the Rings: The Return of the King","original_language":"en","original_title":"The Lord of the Rings: The Return of the King","overview":"Aragorn is revealed as the heir to the ancient kings as he, Gandalf and the other members of the broken fellowship struggle to save Gondor from Sauron's forces. Meanwhile, Frodo and Sam take the ring closer to the heart of Mordor, the dark lord's realm.","poster_path":"/rCzpDGLbOoPwLjy3OAm5NUPOTrC.jpg","media_type":"movie","genre_ids":[12,14,28],"popularity":98.375,"release_date":"2003-12-01","video":false,"vote_average":8.473,"vote_count":21133},{"adult":false,"backdrop_path":"/l6hQWH9eDksNJNiXWYRkWqikOdu.jpg","id":497,"title":"The Green Mile","original_language":"en","original_title":"The Green Mile","overview":"A supernatural tale set on death row in a Southern prison, where gentle giant John Coffey possesses the mysterious power to heal people's ailments. When the cell block's head guard, Paul Edgecomb, recognizes Coffey's miraculous gift, he tries desperately to help stave off the condemned man's execution.","poster_path":"/velWPhVMQeQKcxggNEU8YmIo52R.jpg","media_type":"movie","genre_ids":[14,18,80],"popularity":88.961,"release_date":"1999-12-10","video":false,"vote_average":8.508,"vote_count":15034}],"total_pages":2,"total_results":40}
 
+// export async function getMovie(id:number):Promise<
+//     {
+//         movie:MovieInterface,
+//         credits:CreditsInterface,
+//         videos:VideoTrailerInterface[],
+//         images:ImageMediaInterface,
+//         providers:ProvidersResultInterface,
+//         recommendations:RecommendationInterface[]
+//     }
+// >{
+//     const videos = dummyVideos.results.filter(t => t.site == "YouTube").slice(0,9) || []
+//     const images = {...dummyImages}
+//     images.backdrops = images.backdrops.slice(0,9);
+//     images.backdrops = images.backdrops.slice(0,9);
+//     const providers:ProvidersResultInterface = {
+//         id:dummyProviders.id,
+//         results: {US:dummyProviders.results.US}
+//     }
+//     return {
+//         movie:dummymovie,
+//         credits:dummyCredits,
+//         videos:videos,
+//         images:images,
+//         providers:providers,
+//         recommendations:dummyRecommendations.results
+//     }
+// }
+
+
+type ApiResponse = MovieInterface & {
+    videos:VideoMediaResponse,
+    images:ImageMediaResponse,
+    credits:CreditsResponseInterface,
+    recommendations:RecommendationResponseInterface,
+    ["watch/providers"]:ProvidersResponseInterface
+}
 export async function getMovie(id:number):Promise<
     {
         movie:MovieInterface,
-        credits:CreditsInterface,
+        credits:CreditsResponseInterface,
         videos:VideoTrailerInterface[],
-        images:ImageMediaInterface,
-        providers:ProvidersResultInterface,
+        images:ImageMediaResponse,
+        providers:ProvidersResponseInterface,
         recommendations:RecommendationInterface[]
     }
 >{
-    const videos = dummyVideos.results.filter(t => t.site == "YouTube").slice(0,9) || []
-    const images = {...dummyImages}
+    const response = await fetch(
+        `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.TMDB_KEY}&`+
+        `append_to_response=videos,images,credits,watch/providers,recommendations`
+    );
+    const data:ApiResponse = await response.json()
+    const videos = data.videos.results.filter(t => t.site == "YouTube").slice(0,9) || []
+    const images = {...data.images}
     images.backdrops = images.backdrops.slice(0,9);
-    images.backdrops = images.backdrops.slice(0,9);
-    const providers:ProvidersResultInterface = {
-        id:dummyProviders.id,
-        results: {US:dummyProviders.results.US}
+    images.posters = [];
+    images.logos = [];
+    const providers:ProvidersResponseInterface = {
+        results: {US:data["watch/providers"].results.US}
     }
+    const credits = {...data.credits}
+    credits.cast = credits.cast?.slice(0,12)
+    credits.crew = credits.crew?.filter(c => c.job.toLowerCase() == "director" || c.job.toLowerCase() == "screenplay")
+    const recommendations = data.recommendations.results.slice(0,12)
     return {
-        movie:dummymovie,
-        credits:dummyCredits,
+        movie:data,
+        credits:credits,
         videos:videos,
         images:images,
         providers:providers,
-        recommendations:dummyRecommendations.results
+        recommendations:recommendations
     }
 }

@@ -1,5 +1,4 @@
-export interface ProvidersResultInterface {
-    id:      number;
+export interface ProvidersResponseInterface {
     results: ProvidersLanguage;
 }
 

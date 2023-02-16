@@ -1,4 +1,4 @@
-import {CastEntity} from "@/utils/models/Movies/Credits.interface";
+import {CastEntity} from "@/utils/models/Movies/CreditsResponse.interface";
 import styles from "./CastList.module.css";
 import {CrewMemberCard} from "@/components/CrewMember/CrewMemberCard";
 import {Section} from "@/components/common/Section/Section";

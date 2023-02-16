@@ -1,4 +1,4 @@
-import {CastEntity, CrewEntity} from "@/utils/models/Movies/Credits.interface";
+import {CastEntity, CrewEntity} from "@/utils/models/Movies/CreditsResponse.interface";
 import styles from "./CrewMemberCard.module.css";
 import Image from "next/image";
 import {generateImageUrl} from "@/utils/functions/generateImageUrl";

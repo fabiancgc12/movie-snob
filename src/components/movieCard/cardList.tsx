@@ -2,7 +2,7 @@ import styles from "@/components/movieCard/cardList.module.css";
 import {MovieCard} from "@/components/movieCard/movieCard";
 import {Section} from "@/components/common/Section/Section";
 import {MovieInterface} from "@/utils/models/Movies/Movie.interface";
-import {RecommendationInterface} from "@/utils/models/Movies/RecomendationResult.interface";
+import {RecommendationInterface} from "@/utils/models/Movies/RecomendationResponse.interface";
 import {Slider} from "@/components/Slider/Slider";
 
 type props = {

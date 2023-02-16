@@ -1,4 +1,4 @@
-export interface RecommendationResultInterface {
+export interface RecommendationResponseInterface {
     page:          number;
     results:       RecommendationInterface[];
     total_pages:   number;

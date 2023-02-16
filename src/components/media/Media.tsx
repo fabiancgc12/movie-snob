@@ -1,7 +1,7 @@
 import Image from "next/image";
 import {generateImageUrl} from "@/utils/functions/generateImageUrl";
 import {VideoTrailerInterface} from "@/utils/models/Movies/VideoMedia.interface";
-import {ImageMediaInterface} from "@/utils/models/Movies/ImageMedia.interface";
+import {ImageMediaResponse} from "@/utils/models/Movies/ImageMedia.interface";
 import styles from "./Media.module.css"
 import {VideoThumbnail} from "@/components/Video/VideoThumbnail";
 import {Section} from "@/components/common/Section/Section";
@@ -9,7 +9,7 @@ import {Slider} from "@/components/Slider/Slider";
 
 type props = {
     videos:VideoTrailerInterface[],
-    images:ImageMediaInterface
+    images:ImageMediaResponse
 }
 export function Media({videos,images}:props){
     const backdrops = images.backdrops.slice(0,9)

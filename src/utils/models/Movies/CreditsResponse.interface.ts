@@ -1,4 +1,4 @@
-export interface CreditsInterface {
+export interface CreditsResponseInterface {
     id: number;
     cast?: (CastEntity)[] | null;
     crew?: (CrewEntity)[] | null;

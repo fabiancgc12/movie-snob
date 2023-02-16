@@ -1,4 +1,4 @@
-export interface VideoMedia {
+export interface VideoMediaResponse {
     id:      number;
     results: VideoTrailerInterface[];
 }

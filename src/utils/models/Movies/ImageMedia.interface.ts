@@ -1,4 +1,4 @@
-export interface ImageMediaInterface {
+export interface ImageMediaResponse {
     backdrops: ImagePoster[];
     id:        number;
     logos:     ImagePoster[];

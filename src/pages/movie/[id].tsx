@@ -6,28 +6,28 @@ import {BookmarkButton} from "@/components/common/ActionButton/chechMarkButton";
 import {ShareButton} from "@/components/common/ActionButton/ShareButton";
 import {getMovie} from "@/services/movies/getMovie";
 import {MovieInterface} from "@/utils/models/Movies/Movie.interface";
-import {CreditsInterface} from "@/utils/models/Movies/Credits.interface";
+import {CreditsResponseInterface} from "@/utils/models/Movies/CreditsResponse.interface";
 import {generateImageUrl} from "@/utils/functions/generateImageUrl";
 import {calculateRunTime} from "@/utils/functions/calculateRunTime";
 import {CrewMemberCard} from "@/components/CrewMember/CrewMemberCard";
 import {VideoTrailerInterface} from "@/utils/models/Movies/VideoMedia.interface";
-import {ImageMediaInterface} from "@/utils/models/Movies/ImageMedia.interface";
+import {ImageMediaResponse} from "@/utils/models/Movies/ImageMedia.interface";
 import {Media} from "@/components/media/Media";
 import { Cast } from "@/components/CastList/CastList";
 import {CardList} from "@/components/movieCard/cardList";
 import {LikeButton} from "@/components/common/ActionButton/LikeButton";
 import { Video } from "@/components/Video/Video";
 import {ExtraInfo} from "@/components/ExtraInfo/ExtraInfo";
-import {ProvidersResultInterface} from "@/utils/models/Movies/Providers.interface";
-import {RecommendationInterface} from "@/utils/models/Movies/RecomendationResult.interface";
+import {ProvidersResponseInterface} from "@/utils/models/Movies/Providers.interface";
+import {RecommendationInterface} from "@/utils/models/Movies/RecomendationResponse.interface";
 
 
 type props = {
     movie:MovieInterface,
-    credits:CreditsInterface,
+    credits:CreditsResponseInterface,
     videos:VideoTrailerInterface[],
-    images:ImageMediaInterface,
-    providers:ProvidersResultInterface,
+    images:ImageMediaResponse,
+    providers:ProvidersResponseInterface,
     recommendations:RecommendationInterface[]
 }
 
@@ -35,7 +35,7 @@ export default function Movie({movie,credits,videos,images,providers,recommendat
     const posterPath = generateImageUrl(movie.poster_path);
     const backgroundPath = generateImageUrl(movie.backdrop_path);
     const titleSize = movie.title.length > 20 ? styles.titleSmall : ""
-    const crew = credits.crew?.filter(c => c.job.toLowerCase() == "director" || c.job.toLowerCase() == "screenplay")
+    const crew = credits.crew
     return (
         <main>
             <section className={styles.header}>
@@ -95,8 +95,9 @@ export const getStaticPaths:GetStaticPaths = () => {
     }
 }
 
-export const getStaticProps:GetStaticProps = async () => {
-    const {movie,credits,videos,images,providers,recommendations} = await getMovie(550)
+export const getStaticProps:GetStaticProps = async (context) => {
+    const id = Number(context.params?.id);
+    const {movie,credits,videos,images,providers,recommendations} = await getMovie(id)
     return {
         props: {
             movie,
