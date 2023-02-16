@@ -74,7 +74,7 @@ export default function Movie({movie,credits,videos,images,providers,recommendat
                         <ShareButton/>
                     </div>
                     <div className={styles.crew}>
-                        {crew && crew.map(c => <CrewMemberCard key={`crew-${c.id}`} size={"sm"} people={c} type={"crew"} shadow={false}/>)}
+                        {crew && crew.map(c => <CrewMemberCard key={`crew-${c.id}-${c.job}`} size={"sm"} people={c} type={"crew"} shadow={false}/>)}
                     </div>
                 </div>
             </section>

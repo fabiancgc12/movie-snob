@@ -1,4 +1,4 @@
-import {CreditsResponseInterface} from "@/utils/models/Movies/CreditsResponse.interface";
+import {CreditsResponseInterface, CrewEntity} from "@/utils/models/Movies/CreditsResponse.interface";
 import {MovieInterface} from "@/utils/models/Movies/Movie.interface";
 import {VideoMediaResponse, VideoTrailerInterface} from "@/utils/models/Movies/VideoMedia.interface";
 import {ImageMediaResponse} from "@/utils/models/Movies/ImageMedia.interface";
@@ -74,7 +74,7 @@ export async function getMovie(id:number):Promise<
     );
     const data:ApiResponse = await response.json()
     // i destructure all the data to their separate parts to handle them independently from each other
-    let {credits,videos: videoResponse,images,"watch/providers": providers,recommendations:recomResponse,...movie} = data
+    let {credits,videos: videoResponse,images,"watch/providers": providers,recommendations:recommendationResponseInterface,...movie} = data
     // returning only the first 10 videos
     const videos = videoResponse.results.filter(t => t.site == "YouTube").slice(0,9) || []
     // returning only the first 10 backdrops for now
@@ -87,12 +87,13 @@ export async function getMovie(id:number):Promise<
     }
     //just returning the first 13 member of the main cast and
     // the director or screenplay members of the crew
-    credits.cast = credits.cast?.slice(0,12)
+    credits.cast = credits.cast?.slice(0,12);
+    const groupOfCrew =
     credits.crew = credits.crew
         ?.filter(c => c.job.toLowerCase() == "director" || c.job.toLowerCase() == "screenplay")
         .slice(0,1)
     //just returning the first 13 recommendation
-    const recommendations = recomResponse.results.slice(0,13)
+    const recommendations = recommendationResponseInterface.results.slice(0,13)
     return {
         movie:movie,
         credits:credits,
