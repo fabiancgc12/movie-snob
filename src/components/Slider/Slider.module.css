@@ -1,6 +1,27 @@
+.slider{
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.track{
+    font-size: 20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    padding: .5em 0;
+    gap:10px;
+    scroll-behavior: smooth;
+}
+
+.track > * {
+    flex-shrink: 0;
+}
+
 .prevArrow,.nextArrow{
-    height: 60px;
-    width: 45px;
+    height: 4em;
+    width: 3em;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -31,26 +52,6 @@
 
 .nextArrow{
     right: 0;
-}
-
-.slider{
-    position: relative;
-    display: flex;
-    align-items: center;
-}
-
-.track{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    align-items: stretch;
-    padding: .5em 0;
-    gap:10px;
-    scroll-behavior: smooth;
-}
-
-.track > * {
-    flex-shrink: 0;
 }
 
 .arrowsInContent{
