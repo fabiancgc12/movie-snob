@@ -34,6 +34,7 @@
 }
 
 .medium{
+    width: fit-content;
     grid-template-columns: minmax(100px,175px);
     grid-template-areas: "profile"
                         "name"
@@ -58,6 +59,7 @@
 
 @media screen and (min-width: 768px){
     .medium {
+        width: unset;
         grid-template-columns: minmax(100px, 25%) 1fr;
         grid-template-areas: "profile name"
                         "profile job";

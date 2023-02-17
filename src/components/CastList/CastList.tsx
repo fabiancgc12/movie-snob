@@ -13,9 +13,7 @@ export function Cast({cast}:props){
         <Section title={"Cast"}>
             <Slider className={styles.castSm} arrowsInContent={true} speed={250}>
                 {cast.slice(0,12).map(c =>
-                    <div key={`cast-${c.id}`}>
-                        <CrewMemberCard size={"md"} people={c} type={"cast"}/>
-                    </div>
+                    <CrewMemberCard size={"md"} people={c} type={"cast"} key={`cast-${c.id}`}/>
                 )}
             </Slider>
             <div className={styles.castMd}>
