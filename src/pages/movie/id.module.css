@@ -149,6 +149,14 @@
     .crew{
         justify-content: space-between;
     }
+
+    .titleSmall{
+        font-size: 26px;
+    }
+
+    .titleSmall .year{
+        font-size: 20px;
+    }
 }
 
 @media screen and (max-width: 768px){
