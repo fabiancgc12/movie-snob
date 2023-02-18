@@ -21,7 +21,6 @@ import {ExtraInfo} from "@/components/ExtraInfo/ExtraInfo";
 import {ProvidersResponseInterface} from "@/utils/models/Movies/Providers.interface";
 import {RecommendationInterface} from "@/utils/models/Movies/RecomendationResponse.interface";
 
-
 type props = {
     movie:MovieInterface,
     credits:CreditsResponseInterface,
@@ -69,8 +68,8 @@ export default function Movie({movie,credits,videos,images,providers,recommendat
                     </div>
                     <div className={`${styles.flex}`}>
                         <Average value={movie.vote_average}/>
-                        <BookmarkButton/>
-                        <LikeButton/>
+                        <BookmarkButton media="movie" id={movie.id}/>
+                        <LikeButton media="movie" id={movie.id}/>
                         <ShareButton/>
                     </div>
                     <div className={styles.crew}>

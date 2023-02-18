@@ -1,15 +1,18 @@
 import styles from "./checkMark.module.css"
-import {useState} from "react";
 import {ActionButton} from "@/components/common/ActionButton/ActionButton";
+import {useCheckedButton} from "@/components/common/ActionButton/useCheckedButton";
 
 type props = {
-
+    media:"movie" | "tv",
+    id:number
 }
 
-export function BookmarkButton({}:props){
-    const [checked,setChecked] = useState(false)
+
+export function BookmarkButton({media,id}:props){
+    const [checked,onClick] = useCheckedButton("checked",media,id)
+
     return (
-        <ActionButton className={`${styles.checkmark} secondary`} onClick={() => setChecked(!checked)}>
+        <ActionButton className={`${styles.checkmark} secondary`} onClick={onClick}>
             {
                 checked
                     ? <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
