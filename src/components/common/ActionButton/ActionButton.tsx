@@ -7,7 +7,6 @@ type props = {
     children:ReactNode
 }
 
-//TODO add functionality to bookmark
 export function ActionButton({onClick,className = "",children}:props) {
     return (
         <button className={`${styles.button} ${className}`} onClick={onClick}>

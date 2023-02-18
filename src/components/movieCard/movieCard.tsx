@@ -17,7 +17,7 @@ export function MovieCard({data}:props){
             <Link href={`/movie/${data.id}`}>
                 <Image src={poster} alt={"title poster"} width={200} height={300}/>
                 <div className={styles.info}>
-                    <Average value={data.vote_average} size={"bg"}/>
+                    <Average value={data.vote_average} />
                 </div>
             </Link>
         </article>

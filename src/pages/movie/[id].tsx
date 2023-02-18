@@ -34,7 +34,9 @@ export default function Movie({movie,credits,videos,images,providers,recommendat
     const posterPath = generateImageUrl(movie.poster_path);
     const backgroundPath = generateImageUrl(movie.backdrop_path);
     const titleSize = movie.title.length > 20 ? styles.titleSmall : ""
-    const crew = credits.crew
+    //sorting so the director is always first
+    const crew = credits.crew?.sort((a,b) => a.job.toLowerCase() === "screenplay" ? 1 : -1)
+
     return (
         <main>
             <section className={styles.header}>

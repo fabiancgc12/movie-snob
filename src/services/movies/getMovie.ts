@@ -91,7 +91,7 @@ export async function getMovie(id:number):Promise<
     const groupOfCrew =
     credits.crew = credits.crew
         ?.filter(c => c.job.toLowerCase() == "director" || c.job.toLowerCase() == "screenplay")
-        .slice(0,1)
+        .slice(0,2)
     //just returning the first 13 recommendation
     const recommendations = recommendationResponseInterface.results.slice(0,13)
     return {
