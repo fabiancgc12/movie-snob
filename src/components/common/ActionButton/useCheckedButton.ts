@@ -12,11 +12,12 @@ export function useCheckedButton(key:string,media:"movie" | "tv",id:number){
             const index = list.indexOf(id)
             if (index >= 0){
                 list.splice(index,1)
+                setChecked(false)
             } else {
                 list.push(id)
+                setChecked(true)
             }
             localStorage.setItem(key,JSON.stringify(parsedStore))
-            setChecked(parsedStore[media].includes(id))
         }
     }
 

@@ -7,7 +7,11 @@ type props = {
     id:number
 }
 
-export function LikeButton({media,id}:props){
+export function LikeButton(props:props){
+    return <Button key={`${props.media}-${props.id}`} {...props}/>
+}
+
+export function Button({media,id}:props){
     const [checked,onClick] = useCheckedButton("liked",media,id)
 
     return (

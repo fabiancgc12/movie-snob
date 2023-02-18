@@ -7,8 +7,11 @@ type props = {
     id:number
 }
 
+export function BookmarkButton(props:props){
+    return <Button key={`${props.media}-${props.id}`} {...props}/>
+}
 
-export function BookmarkButton({media,id}:props){
+function Button({media,id}:props){
     const [checked,onClick] = useCheckedButton("checked",media,id)
 
     return (
