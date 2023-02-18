@@ -58,6 +58,11 @@ article{
   border-radius: .45em;
 }
 
+.placeholderImage{
+  background: var(--primaryLight);
+  padding: .5em;
+}
+
 @media screen and (min-width: 768px){
   .badge{
     font-size: .75em;

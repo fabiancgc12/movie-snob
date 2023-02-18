@@ -2,6 +2,7 @@ import {CastEntity, CrewEntity} from "@/utils/models/Movies/CreditsResponse.inte
 import styles from "./CrewMemberCard.module.css";
 import Image from "next/image";
 import {generateImageUrl} from "@/utils/functions/generateImageUrl";
+import placeholder from "../../../public/noPhotographyPlaceholder.svg"
 
 type props = {
     size:"sm" | "md",
@@ -17,16 +18,17 @@ type props = {
 export function CrewMemberCard({people,type,size,shadow = true}:props){
     let job = type == "crew" ? people.job : people.character;
     let sizeStyle = size == "sm" ? styles.small : styles.medium;
-    let shadowStyle = !shadow ? styles.noShadow : ""
+    let shadowStyle = !shadow ? styles.noShadow : "";
+    const image = people.profile_path ? generateImageUrl(people.profile_path) : placeholder
     return (
         <article className={`${styles.wrapper} ${sizeStyle} ${shadowStyle}`}>
             <div className={styles.profile}>
-                {people.profile_path &&
-                    <Image
-                    src={generateImageUrl(people.profile_path)}
+                <Image
+                    src={image}
                     alt={`${people.name} profile`}
                     fill
-                />}
+                    className={people.profile_path ? "" : "placeholderImage"}
+                />
             </div>
             <h6 className={styles.name}>{people.name}</h6>
             <h6 className={styles.job}>{job}</h6>
