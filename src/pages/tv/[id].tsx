@@ -1,4 +1,3 @@
-import {CreditsResponseInterface} from "@/utils/models/Movies/CreditsResponse.interface";
 import {VideoTrailerInterface} from "@/utils/models/Movies/VideoMedia.interface";
 import {GetStaticPaths, GetStaticProps} from "next";
 import {getTvShow} from "@/services/tv/getTv";
@@ -7,15 +6,16 @@ import {MediaBanner} from "@/components/ProductBanner/ProductBanner";
 import {CardList} from "@/components/movieCard/cardList";
 import { RecommendationInterface } from "@/utils/models/Movies/RecomendationResponse.interface";
 import styles from "@/pages/movie/id.module.css";
-import {Cast} from "@/components/CastList/CastList";
+import {TvCast} from "@/components/CastList/CastList";
 import {Media} from "@/components/media/Media";
 import {ImageMediaResponse} from "@/utils/models/Movies/ImageMedia.interface";
 import {ProvidersResponseInterface} from "@/utils/models/Movies/Providers.interface";
 import { TvExtraInfo } from "@/components/ExtraInfo/TvExtraInfo";
+import {AgregateCastResponse} from "@/utils/models/tv/TvCast.interface";
 
 type props = {
     show:TvShowInterface,
-    credits:CreditsResponseInterface,
+    credits:AgregateCastResponse,
     videos:VideoTrailerInterface[],
     images:ImageMediaResponse,
     providers:ProvidersResponseInterface,
@@ -33,7 +33,7 @@ export default function Tv({show,credits,videos,recommendations,images,providers
         <main>
             <MediaBanner product={show} trailer={videos[0]} credits={createdBy} type={"tv"}/>
             <div data-theme="light" className={styles.content}>
-                <Cast cast={credits.cast}/>
+                <TvCast cast={credits.cast}/>
                 <TvExtraInfo show={show} providers={providers}/>
                 <Media videos={videos} images={images}/>
             </div>

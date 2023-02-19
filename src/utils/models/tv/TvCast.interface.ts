@@ -1,9 +1,9 @@
 export interface AgregateCastResponse {
-    cast?: (TvCastEntity)[] | null;
-    crew?: (CrewEntity)[] | null;
+    cast?: (AggregateCastEntity)[] | null;
+    crew?: (TvCrewEntity)[] | null;
     id: number;
 }
-export interface TvCastEntity {
+export interface AggregateCastEntity {
     adult: boolean;
     gender: number;
     id: number;
@@ -21,7 +21,7 @@ export interface RolesEntity {
     character: string;
     episode_count: number;
 }
-export interface CrewEntity {
+export interface TvCrewEntity {
     adult: boolean;
     gender: number;
     id: number;

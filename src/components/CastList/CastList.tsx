@@ -1,24 +1,56 @@
 import {CastEntity} from "@/utils/models/Movies/CreditsResponse.interface";
 import styles from "./CastList.module.css";
-import {CrewMemberCard} from "@/components/CrewMember/CrewMemberCard";
+import {
+    MovieCastMemberCard,
+    TvMemberCard
+} from "@/components/CrewMember/CrewMemberCard";
 import {Section} from "@/components/common/Section/Section";
 import {Slider} from "@/components/Slider/Slider";
+import {AggregateCastEntity} from "@/utils/models/tv/TvCast.interface";
+import {ReactNode} from "react";
 
 type props = {
-    cast?:(CastEntity)[] | null
+    children:ReactNode
 }
-export function Cast({cast}:props){
-    if (!cast) return null;
+export function Cast({children}:props){
     return (
         <Section title={"Cast"}>
             <Slider className={styles.castSm} arrowsInContent={true} speed={250}>
-                {cast.slice(0,12).map(c =>
-                    <CrewMemberCard size={"md"} people={c} type={"cast"} key={`cast-${c.id}`}/>
-                )}
+                {children}
             </Slider>
             <div className={styles.castMd}>
-                {cast.slice(0,12).map(c => <CrewMemberCard key={`cast-${c.id}`} size={"md"} people={c} type={"cast"}/>)}
+                {children}
             </div>
         </Section>
+    )
+}
+
+type movieProps = {
+    cast?:(CastEntity)[] | null,
+}
+
+export function MovieCast({cast}:movieProps){
+    if (!cast) return null;
+    return (
+        <Cast>
+            {cast.slice(0,12).map(c =>
+                <MovieCastMemberCard size={"md"} actor={c} key={`cast-${c.id}`}/>
+            )}
+        </Cast>
+    )
+}
+
+type tvProps = {
+    cast?:(AggregateCastEntity)[] | null,
+}
+
+export function TvCast({cast}:tvProps){
+    if (!cast) return null;
+    return (
+        <Cast>
+            {cast.slice(0,12).map(c =>
+                <TvMemberCard size={"md"} actor={c} key={`cast-${c.id}`}/>
+            )}
+        </Cast>
     )
 }
