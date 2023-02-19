@@ -1,4 +1,4 @@
-import {CastEntity, CrewEntity} from "@/utils/models/Movies/CreditsResponse.interface";
+import {CastEntity, CrewDto} from "@/utils/models/Movies/CreditsResponse.interface";
 import styles from "./CrewMemberCard.module.css";
 import Image from "next/image";
 import {generateImageUrl} from "@/utils/functions/generateImageUrl";
@@ -9,7 +9,7 @@ type props = {
     shadow?:boolean
     }
     & ({
-        people:CrewEntity,
+        people:CrewDto,
         type:"crew"
     } | {
         people:CastEntity,

@@ -30,3 +30,5 @@ export interface CrewEntity {
     department: string;
     job: string;
 }
+
+export type CrewDto = Pick<CrewEntity, "id" | "job" | "name" | "profile_path">

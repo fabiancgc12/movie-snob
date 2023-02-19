@@ -23,10 +23,9 @@ type props = {
 }
 
 export default function Movie({movie,credits,videos,images,providers,recommendations}:props){
-
     return (
         <main>
-            <MediaBanner movie={movie} trailer={videos[0]} credits={credits}/>
+            <MediaBanner product={movie} trailer={videos[0]} credits={credits.crew} type={"movie"}/>
             <div data-theme="light" className={styles.content}>
                 <Cast cast={credits.cast}/>
                 <ExtraInfo movie={movie} providers={providers}/>

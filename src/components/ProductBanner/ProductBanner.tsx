@@ -10,20 +10,28 @@ import {ShareButton} from "@/components/common/ActionButton/ShareButton";
 import {CrewMemberCard} from "@/components/CrewMember/CrewMemberCard";
 import {MovieInterface} from "@/utils/models/Movies/Movie.interface";
 import {VideoTrailerInterface} from "@/utils/models/Movies/VideoMedia.interface";
-import {CreditsResponseInterface} from "@/utils/models/Movies/CreditsResponse.interface";
+import { CrewDto} from "@/utils/models/Movies/CreditsResponse.interface";
+import {TvShowInterface} from "@/utils/models/tv/TvShow.interface";
 
 type props = {
-    movie:MovieInterface,
     trailer?:VideoTrailerInterface,
-    credits:CreditsResponseInterface,
-}
+    credits?:(CrewDto)[] | null;
+} & ({
+    product:MovieInterface,
+    type:"movie"
+    }
+    | {
+    product:TvShowInterface,
+    type:"tv"
+})
 
-export function MediaBanner({movie,trailer,credits}:props){
-    const posterPath = generateImageUrl(movie.poster_path);
-    const backgroundPath = generateImageUrl(movie.backdrop_path);
-    const titleSize = movie.title.length > 20 ? styles.titleSmall : ""
+export function MediaBanner({product,trailer,credits,type}:props){
+    const posterPath = generateImageUrl(product.poster_path);
+    const backgroundPath = generateImageUrl(product.backdrop_path);
+    const title = type == "movie" ? product.title : product.name
+    const titleSize = title.length > 20 ? styles.titleSmall : ""
     //sorting so the director is always first
-    const crew = credits.crew?.sort((a,b) => a.job.toLowerCase() === "screenplay" ? 1 : -1)
+    const crew = credits?.sort((a,b) => a.job.toLowerCase() === "screenplay" ? 1 : -1)
 
     return (
         <section className={styles.header}>
@@ -31,34 +39,37 @@ export function MediaBanner({movie,trailer,credits}:props){
                 <div>
                     <Image
                         src={posterPath}
-                        alt={`${movie.title} poster`}
+                        alt={`${title} poster`}
                         priority
                         fill
                     />
                 </div>
             </div>
             <div className={styles.banner}>
-                <Image src={backgroundPath} alt={`${movie.title} backdrop`} className={styles.backdrop} fill/>
+                <Image src={backgroundPath} alt={`${title} backdrop`} className={styles.backdrop} fill/>
             </div>
             <div className={styles.generalInfo}>
                 <div className={styles.flex}>
                     <div className={styles.genres}>
-                        {movie.genres?.slice(0,3).map(g => <small className={"badge"} key={`genre-${g.id}`}>{g.name}</small>)}
+                        {product.genres?.slice(0,3).map(g => <small className={"badge"} key={`genre-${g.id}`}>{g.name}</small>)}
                     </div>
-                    <div>{calculateRunTime(movie.runtime)}</div>
+                    {type == "movie" && <div>{calculateRunTime(product.runtime)}</div>}
                 </div>
                 <div className={`${styles.flex} ${styles.titleWrapper}`}>
-                    <h1 className={`${styles.title} ${titleSize}`}>{movie.title} <small className={styles.year}>({movie.release_date.slice(0,4)})</small></h1>
+                    <h1 className={`${styles.title} ${titleSize}`}>
+                        {title}
+                        {type === "movie" && <small className={styles.year}>({product.release_date.slice(0, 4)})</small>}
+                    </h1>
                     {trailer && <Video video={trailer}><a href={"#"}>Watch trailer</a></Video>}
                 </div>
                 <div className={styles.overview}>
                     <h4>Overview</h4>
-                    <p>{movie.overview}</p>
+                    <p>{product.overview}</p>
                 </div>
                 <div className={`${styles.flex}`}>
-                    <Average value={movie.vote_average}/>
-                    <BookmarkButton media="movie" id={movie.id}/>
-                    <LikeButton media="movie" id={movie.id}/>
+                    <Average value={product.vote_average}/>
+                    <BookmarkButton media="movie" id={product.id}/>
+                    <LikeButton media="movie" id={product.id}/>
                     <ShareButton/>
                 </div>
                 <div className={styles.crew}>

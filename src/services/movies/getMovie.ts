@@ -75,7 +75,7 @@ export async function getMovie(id:number):Promise<
     const data:ApiResponse = await response.json()
     // i destructure all the data to their separate parts to handle them independently from each other
     let {credits,videos: videoResponse,images,"watch/providers": providers,recommendations:recommendationResponseInterface,...movie} = data
-    // returning only the first 10 videos
+    // returning only the first 9 youtube videos
     const videos = videoResponse.results.filter(t => t.site == "YouTube").slice(0,9) || []
     // returning only the first 10 backdrops for now
     images.backdrops = images.backdrops.slice(0,9);
