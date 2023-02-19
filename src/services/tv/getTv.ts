@@ -13,7 +13,7 @@ type ApiResponse = TvShowInterface & {
     images:ImageMediaResponse,
     credits:CreditsResponseInterface,
     recommendations:RecommendationResponseInterface,
-    // ["watch/providers"]:ProvidersResponseInterface
+    ["watch/providers"]:ProvidersResponseInterface
 }
 
 export async function getTvShow(id:number):Promise<{
@@ -21,24 +21,29 @@ export async function getTvShow(id:number):Promise<{
     credits:CreditsResponseInterface,
     videos:VideoTrailerInterface[],
     images:ImageMediaResponse,
-    recommendations:RecommendationInterface[]
+    recommendations:RecommendationInterface[],
+    providers:ProvidersResponseInterface
 }>{
     const response = await fetch(
         `https://api.themoviedb.org/3/tv/${id}?api_key=${process.env.TMDB_KEY}&`+
-        `append_to_response=videos,recommendations,credits,images`
+        `append_to_response=videos,recommendations,credits,images,watch/providers`
     );
     const data:ApiResponse = await response.json()
-    const {videos:videoResponse,recommendations:recommendationResponse,credits,images,...show} = data;
+    let {videos:videoResponse,recommendations:recommendationResponse,credits,images,"watch/providers": providers,...show} = data;
     // returning only the first 10 videos
     const videos = videoResponse.results.filter(t => t.site == "YouTube").slice(0,9) || []
     //just returning the first 12 member of the main cast and
-    credits.cast = credits.cast;
+    credits.cast = credits.cast?.slice(0,12);
     credits.crew = []
     console.log(credits)
     // returning only the first 10 backdrops for now
     images.backdrops = images.backdrops.slice(0,9);
     images.posters = [];
     images.logos = [];
+
+    providers = {
+        results: {US:providers.results.US ?? []}
+    }
     //just returning the first 13 recommendation
     const recommendations = recommendationResponse.results.slice(0,13)
     return {
@@ -46,6 +51,7 @@ export async function getTvShow(id:number):Promise<{
         videos,
         recommendations,
         credits,
-        images
+        images,
+        providers
     }
 }

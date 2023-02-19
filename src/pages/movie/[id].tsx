@@ -8,7 +8,7 @@ import {ImageMediaResponse} from "@/utils/models/Movies/ImageMedia.interface";
 import {Media} from "@/components/media/Media";
 import { Cast } from "@/components/CastList/CastList";
 import {CardList} from "@/components/movieCard/cardList";
-import {ExtraInfo} from "@/components/ExtraInfo/ExtraInfo";
+import {MovieExtraInfo} from "@/components/ExtraInfo/MovieExtraInfo";
 import {ProvidersResponseInterface} from "@/utils/models/Movies/Providers.interface";
 import {RecommendationInterface} from "@/utils/models/Movies/RecomendationResponse.interface";
 import { MediaBanner } from "@/components/ProductBanner/ProductBanner";
@@ -23,13 +23,13 @@ type props = {
 }
 
 export default function Movie({movie,credits,videos,images,providers,recommendations}:props){
-    const crew = credits.crew?.sort((a,b) => a.job.toLowerCase() === "screenplay" ? 1 : -1)
+    const crew = credits.crew?.sort((a) => a.job.toLowerCase() === "screenplay" ? 1 : -1)
     return (
         <main>
             <MediaBanner product={movie} trailer={videos[0]} credits={crew} type={"movie"}/>
             <div data-theme="light" className={styles.content}>
                 <Cast cast={credits.cast}/>
-                <ExtraInfo movie={movie} providers={providers}/>
+                <MovieExtraInfo movie={movie} providers={providers}/>
                 <Media videos={videos} images={images}/>
             </div>
             <CardList title={"Recomendations"} movies={recommendations}/>
