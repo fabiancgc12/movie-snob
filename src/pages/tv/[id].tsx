@@ -8,10 +8,10 @@ import {CardList} from "@/components/movieCard/cardList";
 import { RecommendationInterface } from "@/utils/models/Movies/RecomendationResponse.interface";
 import styles from "@/pages/movie/id.module.css";
 import {Cast} from "@/components/CastList/CastList";
-import {TvExtraInfo} from "@/components/ExtraInfo/MovieExtraInfo";
 import {Media} from "@/components/media/Media";
 import {ImageMediaResponse} from "@/utils/models/Movies/ImageMedia.interface";
 import {ProvidersResponseInterface} from "@/utils/models/Movies/Providers.interface";
+import { TvExtraInfo } from "@/components/ExtraInfo/TvExtraInfo";
 
 type props = {
     show:TvShowInterface,

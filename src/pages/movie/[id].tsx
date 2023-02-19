@@ -8,10 +8,10 @@ import {ImageMediaResponse} from "@/utils/models/Movies/ImageMedia.interface";
 import {Media} from "@/components/media/Media";
 import { Cast } from "@/components/CastList/CastList";
 import {CardList} from "@/components/movieCard/cardList";
-import {MovieExtraInfo} from "@/components/ExtraInfo/MovieExtraInfo";
 import {ProvidersResponseInterface} from "@/utils/models/Movies/Providers.interface";
 import {RecommendationInterface} from "@/utils/models/Movies/RecomendationResponse.interface";
 import { MediaBanner } from "@/components/ProductBanner/ProductBanner";
+import {MovieExtraInfo} from "@/components/ExtraInfo/MovieExtraInfo";
 
 type props = {
     movie:MovieInterface,
