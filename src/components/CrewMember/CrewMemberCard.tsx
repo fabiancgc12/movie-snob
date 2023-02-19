@@ -35,3 +35,5 @@ export function CrewMemberCard({people,type,size,shadow = true}:props){
         </article>
     )
 }
+
+

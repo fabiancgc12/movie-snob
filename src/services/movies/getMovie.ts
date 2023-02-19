@@ -85,11 +85,10 @@ export async function getMovie(id:number):Promise<
     providers = {
         results: {US:providers.results.US ?? []}
     }
-    //just returning the first 13 member of the main cast and
+    //just returning the first 12 member of the main cast and
     // the director or screenplay members of the crew
     credits.cast = credits.cast?.slice(0,12);
-    const groupOfCrew =
-    credits.crew = credits.crew
+    const groupOfCrew = credits.crew = credits.crew
         ?.filter(c => c.job.toLowerCase() == "director" || c.job.toLowerCase() == "screenplay")
         .slice(0,2)
     //just returning the first 13 recommendation

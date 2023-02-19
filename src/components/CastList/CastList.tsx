@@ -5,7 +5,7 @@ import {Section} from "@/components/common/Section/Section";
 import {Slider} from "@/components/Slider/Slider";
 
 type props = {
-    cast?:CastEntity[] | null
+    cast?:(CastEntity)[] | null
 }
 export function Cast({cast}:props){
     if (!cast) return null;
