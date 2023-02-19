@@ -31,7 +31,6 @@ export function MediaBanner({product,trailer,credits,type}:props){
     const title = type == "movie" ? product.title : product.name
     const titleSize = title.length > 20 ? styles.titleSmall : ""
     //sorting so the director is always first
-    const crew = credits?.sort((a,b) => a.job.toLowerCase() === "screenplay" ? 1 : -1)
 
     return (
         <section className={styles.header}>
@@ -73,7 +72,7 @@ export function MediaBanner({product,trailer,credits,type}:props){
                     <ShareButton/>
                 </div>
                 <div className={styles.crew}>
-                    {crew && crew.map(c => <CrewMemberCard key={`crew-${c.id}-${c.job}`} size={"sm"} people={c} type={"crew"} shadow={false}/>)}
+                    {credits && credits.map(c => <CrewMemberCard key={`crew-${c.id}-${c.job}`} size={"sm"} people={c} type={"crew"} shadow={false}/>)}
                 </div>
             </div>
         </section>
