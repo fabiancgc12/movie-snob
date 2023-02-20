@@ -1,4 +1,4 @@
-import {CastEntity, CrewEntity} from "@/utils/models/Movies/CreditsResponse.interface";
+import {CastEntity, CrewDto} from "@/utils/models/Movies/CreditsResponse.interface";
 import styles from "./CrewMemberCard.module.css";
 import Image from "next/image";
 import {generateImageUrl} from "@/utils/functions/generateImageUrl";
@@ -42,7 +42,7 @@ export function MemberCard({people,size,shadow = true}:props){
     )
 }
 
-type crewProps = baseProps & {people:CrewEntity}
+type crewProps = baseProps & {people:CrewDto}
 
 export function CrewMemberCard({people,...rest}:crewProps){
     return (

@@ -13,10 +13,12 @@
 
 .name{
     font-weight: bold;
+    text-transform: capitalize;
 }
 
 .description p{
     font-weight: lighter;
+    text-transform: capitalize;
 }
 
 .episodes{

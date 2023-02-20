@@ -12,7 +12,6 @@ import {ImageMediaResponse} from "@/utils/models/Movies/ImageMedia.interface";
 import {ProvidersResponseInterface} from "@/utils/models/Movies/Providers.interface";
 import { TvExtraInfo } from "@/components/ExtraInfo/TvExtraInfo";
 import {AgregateCastResponse} from "@/utils/models/tv/TvCast.interface";
-import { Section } from "@/components/common/Section/Section";
 import {SeasonsList} from "@/components/Seasons/SeasonsList";
 
 type props = {
@@ -28,7 +27,7 @@ type props = {
 export default function Tv({show,credits,videos,recommendations,images,providers}:props){
     const createdBy = show.created_by?.map(c => ({
         ...c,
-        job:"created by"
+        job:"creator"
     })).slice(0,2) || []
     // show.
     return (

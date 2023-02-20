@@ -63,7 +63,7 @@ export function MediaBanner({product,trailer,credits,type}:props){
                 </div>
                 <div className={styles.overview}>
                     <h4>Overview</h4>
-                    <p>{product.overview}</p>
+                    <small>{product.overview}</small>
                 </div>
                 <div className={`${styles.flex}`}>
                     <Average value={product.vote_average}/>
@@ -72,7 +72,7 @@ export function MediaBanner({product,trailer,credits,type}:props){
                     <ShareButton/>
                 </div>
                 <div className={styles.crew}>
-                    {credits && credits.map(c => <CrewMemberCard key={`crew-${c.id}-${c.job}`} size={"sm"} people={c} type={"crew"} shadow={false}/>)}
+                    {credits && credits.map(c => <CrewMemberCard key={`crew-${c.id}-${c.job}`} size={"sm"} people={c} shadow={false}/>)}
                 </div>
             </div>
         </section>

@@ -64,8 +64,10 @@
 }
 
 .overview{
-    /*background: var(--primaryDark);*/
     text-align: justify;
+}
+.overview small {
+    display: block;
 }
 
 .flex{
@@ -130,6 +132,12 @@
 
     .title{
         text-align: start;
+    }
+
+    .overview small {
+        max-height: 100px;
+        overflow: auto;
+        scrollbar-gutter: stable both-edges;
     }
 
     .flex:not(.titleWrapper){
