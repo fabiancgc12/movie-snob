@@ -3,10 +3,7 @@ import {Section} from "@/components/common/Section/Section";
 import styles from "./Season.module.css"
 import Image from "next/image";
 import {generateImageUrl} from "@/utils/functions/generateImageUrl";
-import {Slider} from "@/components/Slider/Slider";
-import {MovieCard} from "@/components/movieCard/movieCard";
-import React, {ChangeEvent, ChangeEventHandler, useEffect, useState} from "react";
-import {formatDate} from "@/utils/functions/formatDate";
+import React, {ChangeEvent, useEffect, useState} from "react";
 import {formatYearDate} from "@/utils/functions/formatYearDate";
 
 
@@ -39,7 +36,7 @@ type seasonComponentProp= {
 }
 function Season({season}:seasonComponentProp){
     return (
-        <article className={styles.season}>
+        <div className={styles.season}>
             <div className={styles.posterWrapper}>
                 <Image src={generateImageUrl(season.poster_path)} alt={`${season.name} poster`} fill/>
             </div>
@@ -48,10 +45,10 @@ function Season({season}:seasonComponentProp){
                 <p>
                     <small className={styles.date}>Aired on: {formatYearDate(season.air_date)} | {season.episode_count} episodes</small>
                 </p>
-                <p>
+                <p className={styles.plot}>
                     {season.overview}
                 </p>
             </div>
-        </article>
+        </div>
     )
 }
