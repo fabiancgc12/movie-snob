@@ -12,7 +12,6 @@ type props = {
     mediaType:"movie" | "tv"
 }
 
-//TODO solve bug with link element that redirect only to other movies
 export function PosterCard({data,mediaType}:props){
     const poster = generateImageUrl(data.poster_path)
     return (

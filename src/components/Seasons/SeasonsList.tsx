@@ -20,7 +20,8 @@ export function SeasonsList({seasons}:props){
     const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
         setSelectedId(Number(e.target.value));
     }
-    const selectedSeason = seasons.find(s => s.id == selectedId) as SeasonsEntity;
+    const selectedSeason = seasons.find(s => s.id == selectedId);
+    if (!selectedSeason) return null
     return (
         <Section title={"seasons"}>
             <select value={selectedId} onChange={onChange}>
