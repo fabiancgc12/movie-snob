@@ -1,5 +1,5 @@
 import styles from "@/components/movieCard/cardList.module.css";
-import {MovieCard} from "@/components/movieCard/movieCard";
+import {PosterCard} from "@/components/movieCard/posterCard";
 import {Section} from "@/components/common/Section/Section";
 import {MovieInterface} from "@/utils/models/Movies/Movie.interface";
 import {RecommendationInterface} from "@/utils/models/Movies/RecomendationResponse.interface";
@@ -7,14 +7,15 @@ import {Slider} from "@/components/Slider/Slider";
 
 type props = {
     title:string,
-    movies:(MovieInterface | RecommendationInterface)[]
+    media:(MovieInterface | RecommendationInterface)[],
+    mediaType:"tv" | "movie"
 }
 
-export function CardList({title,movies}:props){
+export function PosterList({title,media,mediaType}:props){
     return (
         <Section className={styles.section} title={title}>
             <Slider speed={300} arrowsInContent={true}>
-                {movies?.map((e,i) => <MovieCard data={e} key={`card-${i}`}/>)}
+                {media?.map((e, i) => <PosterCard data={e} mediaType={mediaType} key={`card-${i}`}/>)}
             </Slider>
         </Section>
 

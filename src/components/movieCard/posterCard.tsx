@@ -8,15 +8,16 @@ import {MovieInterface} from "@/utils/models/Movies/Movie.interface";
 import {RecommendationInterface} from "@/utils/models/Movies/RecomendationResponse.interface";
 
 type props = {
-    data:MovieInterface | RecommendationInterface
+    data:MovieInterface | RecommendationInterface,
+    mediaType:"movie" | "tv"
 }
 
 //TODO solve bug with link element that redirect only to other movies
-export function MovieCard({data}:props){
+export function PosterCard({data,mediaType}:props){
     const poster = generateImageUrl(data.poster_path)
     return (
         <article className={styles.movieCard}>
-            <Link href={`/movie/${data.id}`}>
+            <Link href={`/${mediaType}/${data.id}`}>
                 <Image src={poster} alt={"title poster"} width={200} height={300}/>
                 <div className={styles.info}>
                     <Average value={data.vote_average} />

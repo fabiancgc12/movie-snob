@@ -1,7 +1,7 @@
 import { Banner } from "@/components/banner/Banner";
 import { Inter } from '@next/font/google'
 import mainShowImg from "./main_show.jpg"
-import {CardList} from "@/components/movieCard/cardList";
+import {PosterList} from "@/components/movieCard/posterList";
 import {dummyRecommendations} from "@/services/movies/getMovie";
 
 const inter = Inter({ subsets: ['latin'] })
@@ -19,10 +19,10 @@ export default function Home() {
   return (
     <main>
         <Banner data={show}/>
-        <CardList title={"Currently watching"} movies={dummyRecommendations.results}/>
-        <CardList title={"Most watched"} movies={dummyRecommendations.results}/>
-        <CardList title={"Comedy"} movies={dummyRecommendations.results}/>
-        <CardList title={"Dramas"} movies={dummyRecommendations.results}/>
+        <PosterList mediaType={"movie"} title={"Currently watching"} media={dummyRecommendations.results}/>
+        <PosterList mediaType={"movie"} title={"Most watched"} media={dummyRecommendations.results}/>
+        <PosterList mediaType={"movie"} title={"Comedy"} media={dummyRecommendations.results}/>
+        <PosterList mediaType={"movie"} title={"Dramas"} media={dummyRecommendations.results}/>
     </main>
   )
 }

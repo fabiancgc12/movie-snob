@@ -7,7 +7,7 @@ import {VideoTrailerInterface} from "@/utils/models/Movies/VideoMedia.interface"
 import {ImageMediaResponse} from "@/utils/models/Movies/ImageMedia.interface";
 import {Media} from "@/components/media/Media";
 import { MovieCast} from "@/components/CastList/CastList";
-import {CardList} from "@/components/movieCard/cardList";
+import {PosterList} from "@/components/movieCard/posterList";
 import {ProvidersResponseInterface} from "@/utils/models/Movies/Providers.interface";
 import {RecommendationInterface} from "@/utils/models/Movies/RecomendationResponse.interface";
 import { MediaBanner } from "@/components/ProductBanner/ProductBanner";
@@ -32,7 +32,7 @@ export default function Movie({movie,credits,videos,images,providers,recommendat
                 <MovieExtraInfo movie={movie} providers={providers}/>
                 <Media videos={videos} images={images}/>
             </div>
-            <CardList title={"Recomendations"} movies={recommendations}/>
+            <PosterList mediaType={"movie"} title={"Recomendations"} media={recommendations}/>
         </main>
     )
 }

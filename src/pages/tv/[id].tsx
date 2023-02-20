@@ -3,7 +3,7 @@ import {GetStaticPaths, GetStaticProps} from "next";
 import {getTvShow} from "@/services/tv/getTv";
 import {TvShowInterface} from "@/utils/models/tv/TvShow.interface";
 import {MediaBanner} from "@/components/ProductBanner/ProductBanner";
-import {CardList} from "@/components/movieCard/cardList";
+import {PosterList} from "@/components/movieCard/posterList";
 import { RecommendationInterface } from "@/utils/models/Movies/RecomendationResponse.interface";
 import styles from "@/pages/movie/id.module.css";
 import {TvCast} from "@/components/CastList/CastList";
@@ -39,7 +39,7 @@ export default function Tv({show,credits,videos,recommendations,images,providers
                 <SeasonsList seasons={show.seasons}/>
                 <Media videos={videos} images={images}/>
             </div>
-            <CardList title={"Recommendations"} movies={recommendations}/>
+            <PosterList mediaType={"tv"} title={"Recommendations"} media={recommendations}/>
         </main>
     )
 }
