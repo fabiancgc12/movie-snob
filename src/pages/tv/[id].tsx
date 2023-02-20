@@ -12,6 +12,8 @@ import {ImageMediaResponse} from "@/utils/models/Movies/ImageMedia.interface";
 import {ProvidersResponseInterface} from "@/utils/models/Movies/Providers.interface";
 import { TvExtraInfo } from "@/components/ExtraInfo/TvExtraInfo";
 import {AgregateCastResponse} from "@/utils/models/tv/TvCast.interface";
+import { Section } from "@/components/common/Section/Section";
+import {SeasonsList} from "@/components/Seasons/SeasonsList";
 
 type props = {
     show:TvShowInterface,
@@ -35,9 +37,10 @@ export default function Tv({show,credits,videos,recommendations,images,providers
             <div data-theme="light" className={styles.content}>
                 <TvCast cast={credits.cast}/>
                 <TvExtraInfo show={show} providers={providers}/>
+                <SeasonsList seasons={show.seasons}/>
                 <Media videos={videos} images={images}/>
             </div>
-            <CardList title={"Recomendations"} movies={recommendations}/>
+            <CardList title={"Recommendations"} movies={recommendations}/>
         </main>
     )
 }
@@ -56,3 +59,4 @@ export const getStaticProps:GetStaticProps = async (context) => {
         props: data
     }
 }
+

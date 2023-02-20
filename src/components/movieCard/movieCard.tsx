@@ -10,6 +10,8 @@ import {RecommendationInterface} from "@/utils/models/Movies/RecomendationRespon
 type props = {
     data:MovieInterface | RecommendationInterface
 }
+
+//TODO solve bug with link element that redirect only to other movies
 export function MovieCard({data}:props){
     const poster = generateImageUrl(data.poster_path)
     return (
