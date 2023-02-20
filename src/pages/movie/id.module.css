@@ -1,11 +1,15 @@
 @media screen and (min-width: 768px){
 
-    .content{
+    .movieContent,.tvContent{
         display: grid;
         grid-template-columns: 72% 1fr;
     }
 
-    .content >*:nth-child(n + 3){
+    .movieContent > *:nth-child(n + 3){
+        grid-column: 1 / -1;
+    }
+
+    .tvContent > *:nth-child(n + 4){
         grid-column: 1 / -1;
     }
 }

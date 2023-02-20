@@ -33,7 +33,7 @@ export default function Tv({show,credits,videos,recommendations,images,providers
     return (
         <main>
             <MediaBanner product={show} trailer={videos[0]} credits={createdBy} type={"tv"}/>
-            <div data-theme="light" className={styles.content}>
+            <div data-theme="light" className={styles.tvContent}>
                 <TvCast cast={credits.cast}/>
                 <TvExtraInfo show={show} providers={providers}/>
                 <SeasonsList seasons={show.seasons}/>

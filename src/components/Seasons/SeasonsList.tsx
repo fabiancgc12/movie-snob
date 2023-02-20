@@ -46,7 +46,9 @@ function Season({season}:seasonComponentProp){
                     <small className={styles.date}>Aired on: {formatYearDate(season.air_date)} | {season.episode_count} episodes</small>
                 </p>
                 <p className={styles.plot}>
-                    {season.overview}
+                    <small>
+                        {season.overview}
+                    </small>
                 </p>
             </div>
         </div>

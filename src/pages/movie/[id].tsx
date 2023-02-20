@@ -27,7 +27,7 @@ export default function Movie({movie,credits,videos,images,providers,recommendat
     return (
         <main>
             <MediaBanner product={movie} trailer={videos[0]} credits={crew} type={"movie"}/>
-            <div data-theme="light" className={styles.content}>
+            <div data-theme="light" className={styles.movieContent}>
                 <MovieCast cast={credits.cast}/>
                 <MovieExtraInfo movie={movie} providers={providers}/>
                 <Media videos={videos} images={images}/>
