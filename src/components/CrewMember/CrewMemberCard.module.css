@@ -15,8 +15,12 @@
     font-weight: bold;
 }
 
-.job{
+.description p{
     font-weight: lighter;
+}
+
+.episodes{
+    font-size: 14px;
 }
 
 .small{
@@ -41,15 +45,15 @@
                         "job";
 }
 
-.name,.job{
+.name,.description{
     padding: 0 .5em;
 }
 
-.medium .name,.medium .job{
+.medium .name,.medium .description{
     text-align: center;
 }
 
-.medium .job{
+.medium .description{
     font-size: .8em;
 }
 
@@ -69,10 +73,10 @@
         border-radius: 0.5em 0 0 .5em;
     }
 
-    .medium .name,.medium .job{
+    .medium .name,.medium .description{
         text-align: start;
     }
-    .medium .job{
+    .medium .description{
         font-size: 1em;
     }
 }

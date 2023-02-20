@@ -15,7 +15,8 @@ type props = baseProps
     people:{
         profile_path?:string | null
         name:string
-        job:string
+        job:string,
+        episode_count?:number
     }
 }
 export function MemberCard({people,size,shadow = true}:props){
@@ -33,7 +34,10 @@ export function MemberCard({people,size,shadow = true}:props){
                 />
             </div>
             <h6 className={styles.name}>{people.name}</h6>
-            <h6 className={styles.job}>{people.job}</h6>
+            <div className={styles.description}>
+                <p>{people.job}</p>
+                {people.episode_count && <p className={styles.episodes}>Total episodes: {people.episode_count}</p>}
+            </div>
         </article>
     )
 }
@@ -73,7 +77,8 @@ export function TvMemberCard({actor,...rest}:TvCastCard){
         profile_path:actor.profile_path,
         id:actor.id,
         name:actor.name,
-        job:""
+        job:"",
+        episode_count:actor.total_episode_count
     }
         if (actor.roles){
             const role = actor.roles[0]
