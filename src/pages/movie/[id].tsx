@@ -12,13 +12,14 @@ import {ProvidersResponseInterface} from "@/utils/models/Movies/Providers.interf
 import {RecommendationInterface} from "@/utils/models/Movies/RecomendationResponse.interface";
 import { MediaBanner } from "@/components/ProductBanner/ProductBanner";
 import {MovieExtraInfo} from "@/components/ExtraInfo/MovieExtraInfo";
+import {ProvidersDto} from "@/utils/models/dto/ProvidersDto";
 
 type props = {
     movie:MovieInterface,
     credits:CreditsResponseInterface,
     videos:VideoTrailerInterface[],
     images:ImageMediaResponse,
-    providers:ProvidersResponseInterface,
+    providers:ProvidersDto,
     recommendations:RecommendationInterface[]
 }
 

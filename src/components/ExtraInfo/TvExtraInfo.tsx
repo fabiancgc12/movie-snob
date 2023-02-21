@@ -6,10 +6,11 @@ import Image from "next/image";
 import {generateImageUrl} from "@/utils/functions/generateImageUrl";
 import { ExtraInfo } from "./ExtraInfo";
 import {Providers} from "@/components/ExtraInfo/Providers";
+import {ProvidersDto} from "@/utils/models/dto/ProvidersDto";
 
 type props = {
     show:TvShowInterface,
-    providers:ProvidersResponseInterface
+    providers:ProvidersDto
 }
 
 export function TvExtraInfo({show,providers}:props){

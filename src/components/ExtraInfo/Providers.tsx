@@ -2,9 +2,10 @@ import {ProvidersResponseInterface} from "@/utils/models/Movies/Providers.interf
 import styles from "@/components/ExtraInfo/ExtraInfo.module.css";
 import Image from "next/image";
 import {generateImageUrl} from "@/utils/functions/generateImageUrl";
+import {ProvidersDto} from "@/utils/models/dto/ProvidersDto";
 
 type props = {
-    providers:ProvidersResponseInterface
+    providers:ProvidersDto
 }
 
 export function Providers({providers}:props){

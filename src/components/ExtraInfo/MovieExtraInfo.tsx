@@ -5,10 +5,11 @@ import {MovieInterface} from "@/utils/models/Movies/Movie.interface";
 import {ProvidersResponseInterface} from "@/utils/models/Movies/Providers.interface";
 import { ExtraInfo } from "./ExtraInfo";
 import { Providers } from "./Providers";
+import {ProvidersDto} from "@/utils/models/dto/ProvidersDto";
 
 type props = {
     movie:MovieInterface,
-    providers:ProvidersResponseInterface
+    providers:ProvidersDto
 }
 
 export function MovieExtraInfo({movie,providers}:props){

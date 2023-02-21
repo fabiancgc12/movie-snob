@@ -13,13 +13,14 @@ import {ProvidersResponseInterface} from "@/utils/models/Movies/Providers.interf
 import { TvExtraInfo } from "@/components/ExtraInfo/TvExtraInfo";
 import {AgregateCastResponse} from "@/utils/models/tv/TvCast.interface";
 import {SeasonsList} from "@/components/Seasons/SeasonsList";
+import {ProvidersDto} from "@/utils/models/dto/ProvidersDto";
 
 type props = {
     show:TvShowInterface,
     credits:AgregateCastResponse,
     videos:VideoTrailerInterface[],
     images:ImageMediaResponse,
-    providers:ProvidersResponseInterface,
+    providers:ProvidersDto,
     recommendations:RecommendationInterface[]
 }
 
