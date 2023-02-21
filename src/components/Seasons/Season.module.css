@@ -1,13 +1,13 @@
 .season{
     display: grid;
-    /*grid-template-areas: "poster title"*/
-    /*                    "poster date"*/
-    /*                    "poster episodes"*/
-    /*                    "poster plot";*/
-    /*grid-template-rows: 1fr 1fr 1fr;*/
     grid-template-columns: auto 1fr;
     gap: 0 10px;
     padding-right: .5em;
+}
+
+.select{
+    width: 40%;
+    max-width: 300px;
 }
 
 .posterWrapper{

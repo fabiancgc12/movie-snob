@@ -24,7 +24,7 @@ export function SeasonsList({seasons}:props){
     if (!selectedSeason) return null
     return (
         <Section title={"seasons"}>
-            <select value={selectedId} onChange={onChange}>
+            <select className={styles.select} value={selectedId} onChange={onChange}>
                 {seasons.map(s => <option value={s.id} key={`season-${s.id}`}>{s.name}</option>)}
             </select>
             <Season season={selectedSeason}/>
