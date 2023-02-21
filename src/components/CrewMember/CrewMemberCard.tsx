@@ -1,9 +1,8 @@
-import {CastEntity, CrewDto} from "@/utils/models/Movies/CreditsResponse.interface";
 import styles from "./CrewMemberCard.module.css";
 import Image from "next/image";
 import {generateImageUrl} from "@/utils/functions/generateImageUrl";
 import placeholder from "../../../public/noPhotographyPlaceholder.svg"
-import {AggregateCastEntity} from "@/utils/models/tv/TvCast.interface";
+import {PeopleDto} from "@/utils/models/dto/Credit.dto";
 
 type baseProps = {
     size:"sm" | "md",
@@ -12,12 +11,7 @@ type baseProps = {
 
 type props = baseProps
     & {
-    people:{
-        profile_path?:string | null
-        name:string
-        job:string,
-        episode_count?:number
-    }
+    people:PeopleDto
 }
 export function MemberCard({people,size,shadow = true}:props){
     let sizeStyle = size == "sm" ? styles.small : styles.medium;
@@ -35,14 +29,14 @@ export function MemberCard({people,size,shadow = true}:props){
             </div>
             <h6 className={styles.name}>{people.name}</h6>
             <div className={styles.description}>
-                <p>{people.job}</p>
-                {people.episode_count && <p className={styles.episodes}>Total episodes: {people.episode_count}</p>}
+                <p>{people.role}</p>
+                {people.total_episode_count && <p className={styles.episodes}>Total episodes: {people.total_episode_count}</p>}
             </div>
         </article>
     )
 }
 
-type crewProps = baseProps & {people:CrewDto}
+type crewProps = baseProps & {people:PeopleDto}
 
 export function CrewMemberCard({people,...rest}:crewProps){
     return (
@@ -52,40 +46,23 @@ export function CrewMemberCard({people,...rest}:crewProps){
 
 type MovieCastCard = baseProps
     & {
-        actor:CastEntity
+        actor:PeopleDto
     }
 
 export function MovieCastMemberCard({actor,...rest}:MovieCastCard){
-    const people = {
-        profile_path:actor.profile_path,
-        id:actor.id,
-        name:actor.name,
-        job:actor.character
-    }
     return (
-        <MemberCard {...rest} people={people}/>
+        <MemberCard {...rest} people={actor}/>
     )
 }
 
 type TvCastCard = baseProps
     & {
-    actor:AggregateCastEntity
+    actor:PeopleDto
 }
 
 export function TvMemberCard({actor,...rest}:TvCastCard){
-    const people = {
-        profile_path:actor.profile_path,
-        id:actor.id,
-        name:actor.name,
-        job:"",
-        episode_count:actor.total_episode_count
-    }
-        if (actor.roles){
-            const role = actor.roles[0]
-            people.job = `${role.character}`
-        }
     return (
-        <MemberCard {...rest} people={people}/>
+        <MemberCard {...rest} people={actor}/>
     )
 }
 

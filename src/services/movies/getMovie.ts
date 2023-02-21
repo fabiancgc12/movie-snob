@@ -13,6 +13,7 @@ import {formatProvidersResponse} from "@/utils/functions/formatProvidersResponse
 import {ProvidersDto} from "@/utils/models/dto/ProvidersDto";
 import {formatRecommendations} from "@/utils/functions/formatRecommendations";
 import {formatMovieCredits} from "@/utils/functions/formatMovieCredits";
+import {CreditsDto} from "@/utils/models/dto/Credit.dto";
 
 const dummymovie = {"adult":true,"backdrop_path":"/hZkgoQYus5vegHoetLkCJzb17zJ.jpg","belongs_to_collection":null,"budget":63000000,"genres":[{"id":18,"name":"Drama"},{"id":53,"name":"Thriller"},{"id":35,"name":"Comedy"}],"homepage":"http://www.foxmovies.com/movies/fight-club","id":550,"imdb_id":"tt0137523","original_language":"en","original_title":"Fight Club","overview":"A ticking-time-bomb insomniac and a slippery soap salesman channel primal male aggression into a shocking new form of therapy. Their concept catches on, with underground \"fight clubs\" forming in every town, until an eccentric gets in the way and ignites an out-of-control spiral toward oblivion.","popularity":72.65,
     "poster_path":"/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg",
@@ -67,7 +68,7 @@ type ApiResponse = MovieInterface & {
 export async function getMovie(id:number):Promise<
     {
         movie:MovieInterface,
-        credits:CreditsResponseInterface,
+        credits:CreditsDto,
         videos:VideoTrailerInterface[],
         images:ImageMediaResponse,
         providers:ProvidersDto,

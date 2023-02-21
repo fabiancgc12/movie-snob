@@ -13,6 +13,7 @@ import {formatProvidersResponse} from "@/utils/functions/formatProvidersResponse
 import {ProvidersDto} from "@/utils/models/dto/ProvidersDto";
 import {formatRecommendations} from "@/utils/functions/formatRecommendations";
 import {formatTvCredits} from "@/utils/functions/formatTvCredits";
+import {CreditsDto} from "@/utils/models/dto/Credit.dto";
 
 type ApiResponse = TvShowInterface & {
     videos:VideoMediaResponse,
@@ -24,7 +25,7 @@ type ApiResponse = TvShowInterface & {
 
 export async function getTvShow(id:number):Promise<{
     show:TvShowInterface,
-    credits:AgregateCastResponse,
+    credits:CreditsDto,
     videos:VideoTrailerInterface[],
     images:ImageMediaResponse,
     recommendations:RecommendationInterface[],
@@ -42,7 +43,6 @@ export async function getTvShow(id:number):Promise<{
     const providers = formatProvidersResponse(providersResponse)
     const recommendations = formatRecommendations(recommendationResponse)
     const credits = formatTvCredits(aggregate_credits)
-
     return {
         show,
         videos,

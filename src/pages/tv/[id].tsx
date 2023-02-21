@@ -9,15 +9,14 @@ import styles from "@/pages/movie/id.module.css";
 import {TvCast} from "@/components/CastList/CastList";
 import {Media} from "@/components/media/Media";
 import {ImageMediaResponse} from "@/utils/models/Movies/ImageMedia.interface";
-import {ProvidersResponseInterface} from "@/utils/models/Movies/Providers.interface";
 import { TvExtraInfo } from "@/components/ExtraInfo/TvExtraInfo";
-import {AgregateCastResponse} from "@/utils/models/tv/TvCast.interface";
 import {SeasonsList} from "@/components/Seasons/SeasonsList";
 import {ProvidersDto} from "@/utils/models/dto/ProvidersDto";
+import {CreditsDto, PeopleDto} from "@/utils/models/dto/Credit.dto";
 
 type props = {
     show:TvShowInterface,
-    credits:AgregateCastResponse,
+    credits:CreditsDto,
     videos:VideoTrailerInterface[],
     images:ImageMediaResponse,
     providers:ProvidersDto,
@@ -26,11 +25,7 @@ type props = {
 
 
 export default function Tv({show,credits,videos,recommendations,images,providers}:props){
-    const createdBy = show.created_by?.map(c => ({
-        ...c,
-        job:"creator"
-    })).slice(0,2) || []
-    // show.
+    const createdBy = show.created_by?.map(c => PeopleDto.formatCreatedBy(c)).slice(0,2) || []
     return (
         <main>
             <MediaBanner product={show} trailer={videos[0]} credits={createdBy} type={"tv"}/>

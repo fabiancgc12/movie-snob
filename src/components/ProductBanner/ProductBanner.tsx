@@ -10,12 +10,12 @@ import {ShareButton} from "@/components/common/ActionButton/ShareButton";
 import {CrewMemberCard} from "@/components/CrewMember/CrewMemberCard";
 import {MovieInterface} from "@/utils/models/Movies/Movie.interface";
 import {VideoTrailerInterface} from "@/utils/models/Movies/VideoMedia.interface";
-import { CrewDto} from "@/utils/models/Movies/CreditsResponse.interface";
 import {TvShowInterface} from "@/utils/models/tv/TvShow.interface";
+import {PeopleDto} from "@/utils/models/dto/Credit.dto";
 
 type props = {
     trailer?:VideoTrailerInterface,
-    credits?:(CrewDto)[] | null;
+    credits?:(PeopleDto)[] | null;
 } & ({
     product:MovieInterface,
     type:"movie"
@@ -73,7 +73,7 @@ export function MediaBanner({product,trailer,credits,type}:props){
                     <ShareButton/>
                 </div>
                 <div className={styles.crew}>
-                    {credits && credits.map(c => <CrewMemberCard key={`crew-${c.id}-${c.job}`} size={"sm"} people={c} shadow={false}/>)}
+                    {credits && credits.map(c => <CrewMemberCard key={`crew-${c.id}-${c.role}`} size={"sm"} people={c} shadow={false}/>)}
                 </div>
             </div>
         </section>

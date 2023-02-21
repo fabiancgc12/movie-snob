@@ -1,4 +1,3 @@
-import {CastEntity} from "@/utils/models/Movies/CreditsResponse.interface";
 import styles from "./CastList.module.css";
 import {
     MovieCastMemberCard,
@@ -6,8 +5,8 @@ import {
 } from "@/components/CrewMember/CrewMemberCard";
 import {Section} from "@/components/common/Section/Section";
 import {Slider} from "@/components/Slider/Slider";
-import {AggregateCastEntity} from "@/utils/models/tv/TvCast.interface";
 import {ReactNode} from "react";
+import {PeopleDto} from "@/utils/models/dto/Credit.dto";
 
 type props = {
     children:ReactNode
@@ -26,7 +25,7 @@ export function Cast({children}:props){
 }
 
 type movieProps = {
-    cast?:(CastEntity)[] | null,
+    cast?:(PeopleDto)[] | null,
 }
 
 export function MovieCast({cast}:movieProps){
@@ -41,7 +40,7 @@ export function MovieCast({cast}:movieProps){
 }
 
 type tvProps = {
-    cast?:(AggregateCastEntity)[] | null,
+    cast?:(PeopleDto)[] | null,
 }
 
 export function TvCast({cast}:tvProps){
