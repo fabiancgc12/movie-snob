@@ -29,7 +29,8 @@ export function MediaBanner({product,trailer,credits,type}:props){
     const posterPath = generateImageUrl(product.poster_path);
     const backgroundPath = generateImageUrl(product.backdrop_path);
     const title = type == "movie" ? product.title : product.name
-    const titleSize = title.length > 20 ? styles.titleSmall : ""
+    const titleSize = title.length > 20 ? styles.titleSmall : "";
+    const videoLabel = type == "movie" ? "Watch trailer" : "Watch opening"
     //sorting so the director is always first
 
     return (
@@ -59,7 +60,7 @@ export function MediaBanner({product,trailer,credits,type}:props){
                         {title}
                         {type === "movie" && <small className={styles.year}>({product.release_date.slice(0, 4)})</small>}
                     </h1>
-                    {trailer && <Video video={trailer}><a href={"#"}>Watch trailer</a></Video>}
+                    {trailer && <Video video={trailer}><a href={"#"}>{videoLabel}</a></Video>}
                 </div>
                 <div className={styles.overview}>
                     <h4>Overview</h4>
