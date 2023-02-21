@@ -4,15 +4,13 @@ import {generateImageUrl} from "@/utils/functions/generateImageUrl";
 import placeholder from "../../../public/noPhotographyPlaceholder.svg"
 import {PeopleDto} from "@/utils/models/dto/Credit.dto";
 
-type baseProps = {
+type props = {
     size:"sm" | "md",
-    shadow?:boolean
+    shadow?:boolean,
+    people:PeopleDto
+
 }
 
-type props = baseProps
-    & {
-    people:PeopleDto
-}
 export function MemberCard({people,size,shadow = true}:props){
     let sizeStyle = size == "sm" ? styles.small : styles.medium;
     let shadowStyle = !shadow ? styles.noShadow : "";
@@ -35,34 +33,3 @@ export function MemberCard({people,size,shadow = true}:props){
         </article>
     )
 }
-
-type crewProps = baseProps & {people:PeopleDto}
-
-export function CrewMemberCard({people,...rest}:crewProps){
-    return (
-        <MemberCard people={people} {...rest}/>
-    )
-}
-
-type MovieCastCard = baseProps
-    & {
-        actor:PeopleDto
-    }
-
-export function MovieCastMemberCard({actor,...rest}:MovieCastCard){
-    return (
-        <MemberCard {...rest} people={actor}/>
-    )
-}
-
-type TvCastCard = baseProps
-    & {
-    actor:PeopleDto
-}
-
-export function TvMemberCard({actor,...rest}:TvCastCard){
-    return (
-        <MemberCard {...rest} people={actor}/>
-    )
-}
-

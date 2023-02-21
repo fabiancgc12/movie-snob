@@ -7,7 +7,7 @@ import {Average} from "@/components/common/Average";
 import {BookmarkButton} from "@/components/common/ActionButton/chechMarkButton";
 import {LikeButton} from "@/components/common/ActionButton/LikeButton";
 import {ShareButton} from "@/components/common/ActionButton/ShareButton";
-import {CrewMemberCard} from "@/components/CrewMember/CrewMemberCard";
+import {MemberCard} from "@/components/CrewMember/CrewMemberCard";
 import {MovieInterface} from "@/utils/models/Movies/Movie.interface";
 import {VideoTrailerInterface} from "@/utils/models/Movies/VideoMedia.interface";
 import {TvShowInterface} from "@/utils/models/tv/TvShow.interface";
@@ -73,7 +73,7 @@ export function MediaBanner({product,trailer,credits,type}:props){
                     <ShareButton/>
                 </div>
                 <div className={styles.crew}>
-                    {credits && credits.map(c => <CrewMemberCard key={`crew-${c.id}-${c.role}`} size={"sm"} people={c} shadow={false}/>)}
+                    {credits && credits.map(c => <MemberCard key={`crew-${c.id}-${c.role}`} size={"sm"} people={c} shadow={false}/>)}
                 </div>
             </div>
         </section>

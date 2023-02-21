@@ -1,8 +1,5 @@
 import styles from "./CastList.module.css";
-import {
-    MovieCastMemberCard,
-    TvMemberCard
-} from "@/components/CrewMember/CrewMemberCard";
+import {MemberCard} from "@/components/CrewMember/CrewMemberCard";
 import {Section} from "@/components/common/Section/Section";
 import {Slider} from "@/components/Slider/Slider";
 import {ReactNode} from "react";
@@ -33,7 +30,7 @@ export function MovieCast({cast}:movieProps){
     return (
         <Cast>
             {cast.slice(0,12).map(c =>
-                <MovieCastMemberCard size={"md"} actor={c} key={`cast-${c.id}`}/>
+                <MemberCard size={"md"} people={c} key={`cast-${c.id}`}/>
             )}
         </Cast>
     )
@@ -48,7 +45,7 @@ export function TvCast({cast}:tvProps){
     return (
         <Cast>
             {cast.slice(0,12).map(c =>
-                <TvMemberCard size={"md"} actor={c} key={`cast-${c.id}`}/>
+                <MemberCard size={"md"} people={c} key={`cast-${c.id}`}/>
             )}
         </Cast>
     )
