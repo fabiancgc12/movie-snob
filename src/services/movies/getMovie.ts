@@ -11,6 +11,7 @@ import {formatVideoResponse} from "@/utils/functions/formatVideoResponse";
 import {formatImagesResponse} from "@/utils/functions/formatImagesResponse";
 import {formatProvidersResponse} from "@/utils/functions/formatProvidersResponse";
 import {ProvidersDto} from "@/utils/models/dto/ProvidersDto";
+import {formatRecommendations} from "@/utils/functions/formatRecommendations";
 
 const dummymovie = {"adult":true,"backdrop_path":"/hZkgoQYus5vegHoetLkCJzb17zJ.jpg","belongs_to_collection":null,"budget":63000000,"genres":[{"id":18,"name":"Drama"},{"id":53,"name":"Thriller"},{"id":35,"name":"Comedy"}],"homepage":"http://www.foxmovies.com/movies/fight-club","id":550,"imdb_id":"tt0137523","original_language":"en","original_title":"Fight Club","overview":"A ticking-time-bomb insomniac and a slippery soap salesman channel primal male aggression into a shocking new form of therapy. Their concept catches on, with underground \"fight clubs\" forming in every town, until an eccentric gets in the way and ignites an out-of-control spiral toward oblivion.","popularity":72.65,
     "poster_path":"/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg",
@@ -78,19 +79,19 @@ export async function getMovie(id:number):Promise<
     );
     const data:ApiResponse = await response.json()
     // I destructure all the data to their separate parts to handle them independently from each other
-    let {credits,videos: videoResponse,images:imageResponse,"watch/providers": providersResponse,recommendations:recommendationResponseInterface,...movie} = data
+    let {credits,videos: videoResponse,images:imageResponse,"watch/providers": providersResponse,recommendations:recommendationResponse,...movie} = data
 
     const videos = formatVideoResponse(videoResponse)
     const images = formatImagesResponse(imageResponse)
     const providers = formatProvidersResponse(providersResponse)
+    const recommendations = formatRecommendations(recommendationResponse)
+
     //just returning the first 12 member of the main cast and
     // the director or screenplay members of the crew
     credits.cast = credits.cast?.slice(0,12);
     credits.crew = credits.crew
         ?.filter(c => c.job.toLowerCase() == "director" || c.job.toLowerCase() == "screenplay")
         .slice(0,2)
-    //just returning the first 13 recommendation
-    const recommendations = recommendationResponseInterface.results.slice(0,13)
     return {
         movie:movie,
         credits:credits,
