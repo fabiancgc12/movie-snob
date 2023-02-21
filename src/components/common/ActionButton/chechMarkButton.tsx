@@ -1,18 +1,20 @@
 import styles from "./checkMark.module.css"
 import {ActionButton} from "@/components/common/ActionButton/ActionButton";
 import {useCheckedButton} from "@/components/common/ActionButton/useCheckedButton";
+import {MovieInterface} from "@/utils/models/Movies/Movie.interface";
+import {TvShowInterface} from "@/utils/models/tv/TvShow.interface";
 
 type props = {
-    media:"movie" | "tv",
-    id:number
+    mediaType:"movie" | "tv",
+    media:MovieInterface | TvShowInterface
 }
 
 export function BookmarkButton(props:props){
-    return <Button key={`${props.media}-${props.id}`} {...props}/>
+    return <Button key={`${props.mediaType}-${props.media}`} {...props}/>
 }
 
-function Button({media,id}:props){
-    const [checked,onClick] = useCheckedButton("checked",media,id)
+function Button({mediaType,media}:props){
+    const [checked,onClick] = useCheckedButton("checked",mediaType,media)
 
     return (
         <ActionButton className={`${styles.checkmark} secondary`} onClick={onClick}>

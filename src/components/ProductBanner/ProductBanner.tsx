@@ -68,8 +68,8 @@ export function MediaBanner({product,trailer,credits,type}:props){
                 </div>
                 <div className={`${styles.flex}`}>
                     <Average value={product.vote_average}/>
-                    <BookmarkButton media="movie" id={product.id}/>
-                    <LikeButton media="movie" id={product.id}/>
+                    <BookmarkButton mediaType={type} media={product}/>
+                    <LikeButton mediaType={type} media={product}/>
                     <ShareButton/>
                 </div>
                 <div className={styles.crew}>

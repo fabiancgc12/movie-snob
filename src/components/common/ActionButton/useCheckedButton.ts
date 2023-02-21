@@ -1,22 +1,36 @@
 import {useEffect, useState} from "react";
+import {TvShowInterface} from "@/utils/models/tv/TvShow.interface";
+import {MovieInterface} from "@/utils/models/Movies/Movie.interface";
 
-type CheckedStore = Record<"movie" | "tv", number[]>
+type CheckedStore = Record<"movie" | "tv", Record<number, {
+    vote_average:number,
+    poster_path:string
+}>>
 
-export function useCheckedButton(key:string,media:"movie" | "tv",id:number){
+const defaultValue:CheckedStore = {
+    "movie":{},
+    "tv":{}
+}
+
+export function useCheckedButton(key:string,media:"movie" | "tv",product:MovieInterface | TvShowInterface){
     const [checked,setChecked] = useState(false);
     const onClick = () => {
         const store = localStorage.getItem(key)
         if (store){
             const parsedStore = JSON.parse(store) as CheckedStore;
-            const list = parsedStore[media];
-            const index = list.indexOf(id)
-            if (index >= 0){
-                list.splice(index,1)
+            const checked = parsedStore[media];
+            const item = checked[product.id]
+            if (item){
+                delete checked[product.id]
                 setChecked(false)
             } else {
-                list.push(id)
+                checked[product.id] = {
+                    vote_average:product.vote_average,
+                    poster_path:product.poster_path
+                }
                 setChecked(true)
             }
+            parsedStore[media] = checked
             localStorage.setItem(key,JSON.stringify(parsedStore))
         }
     }
@@ -26,16 +40,14 @@ export function useCheckedButton(key:string,media:"movie" | "tv",id:number){
             const store = localStorage.getItem(key)
             if (store){
                 const parsedStore = JSON.parse(store) as CheckedStore;
-                setChecked(parsedStore[media].includes(id))
+                const itemExist = parsedStore[media][product.id]
+                setChecked(!!itemExist)
             } else {
-                localStorage.setItem(key,JSON.stringify({
-                    "movie":[],
-                    "tv":[]
-                }))
+                localStorage.setItem(key,JSON.stringify(defaultValue))
                 setChecked(false)
             }
         };
-    }, [id,media,key]);
+    }, [product,media,key]);
 
     return [checked,onClick] as const
 }

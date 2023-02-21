@@ -1,18 +1,20 @@
 import {ActionButton} from "@/components/common/ActionButton/ActionButton";
 import styles from "./LikeButton.module.css";
 import {useCheckedButton} from "@/components/common/ActionButton/useCheckedButton";
+import {MovieInterface} from "@/utils/models/Movies/Movie.interface";
+import {TvShowInterface} from "@/utils/models/tv/TvShow.interface";
 
 type props = {
-    media:"movie" | "tv",
-    id:number
+    mediaType:"movie" | "tv",
+    media:MovieInterface | TvShowInterface
 }
 
 export function LikeButton(props:props){
-    return <Button key={`${props.media}-${props.id}`} {...props}/>
+    return <Button key={`${props.mediaType}-${props.media.id}`} {...props}/>
 }
 
-export function Button({media,id}:props){
-    const [checked,onClick] = useCheckedButton("liked",media,id)
+export function Button({mediaType,media}:props){
+    const [checked,onClick] = useCheckedButton("liked",mediaType,media)
 
     return (
         <ActionButton className={`${styles.like} secondary`} onClick={onClick}>{
