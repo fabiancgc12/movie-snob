@@ -1,9 +1,23 @@
+.movieContent,.tvContent {
+    display: flex;
+    flex-direction: column;
+}
+
+.info{
+    order:10
+}
+
 @media screen and (min-width: 768px){
 
     .movieContent,.tvContent{
         display: grid;
         grid-template-columns: 72% 1fr;
     }
+
+    .info{
+        order:unset;
+    }
+
 
     .movieContent > *:nth-child(n + 3){
         grid-column: 1 / -1;
