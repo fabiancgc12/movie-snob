@@ -13,6 +13,7 @@ import { TvExtraInfo } from "@/components/ExtraInfo/TvExtraInfo";
 import {SeasonsList} from "@/components/Seasons/SeasonsList";
 import {ProvidersDto} from "@/utils/models/dto/ProvidersDto";
 import {CreditsDto, PeopleDto} from "@/utils/models/dto/Credit.dto";
+import Head from "next/head";
 
 type props = {
     show:TvShowInterface,
@@ -28,6 +29,9 @@ export default function Tv({show,credits,videos,recommendations,images,providers
     const openingSequence = videos.find(v => v.type.includes("Opening"));
     return (
         <main>
+            <Head>
+                <title>{show.name} - Popcorn Search</title>
+            </Head>
             <MediaBanner product={show} trailer={openingSequence} credits={createdBy} type={"tv"}/>
             <div data-theme="light" className={styles.tvContent}>
                 <TvCast cast={credits.cast}/>
