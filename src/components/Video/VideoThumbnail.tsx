@@ -8,7 +8,7 @@ type props = {
 }
 
 export function VideoThumbnail({video}:props){
-    const videoThumbnail = `https://img.youtube.com/vi/${video.key}/mqdefault.jpg`;
+    const videoThumbnail = `https://img.youtube.com/vi/${video.key}/hqdefault.jpg`;
 
     return (
         <Video video={video}>

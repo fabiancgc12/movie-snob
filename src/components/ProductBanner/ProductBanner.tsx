@@ -27,7 +27,7 @@ type props = {
 
 export function MediaBanner({product,trailer,credits,type}:props){
     const posterPath = generateImageUrl(product.poster_path);
-    const backgroundPath = generateImageUrl(product.backdrop_path);
+    const backgroundPath = generateImageUrl(product.backdrop_path,1280);
     const title = type == "movie" ? product.title : product.name
     const titleSize = title.length > 20 ? styles.titleSmall : "";
     const videoLabel = type == "movie" ? "Watch trailer" : "Watch opening"
