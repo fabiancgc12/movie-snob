@@ -40,12 +40,12 @@ export class PeopleDto{
     }
 
     static formatTvCast(cast:AggregateCastEntity):PeopleDto{
-        const role = cast.roles?.map(r => r.character).join(",") ?? "";
+        const role = cast.roles?.map(r => r.character).slice(0,2).join(",") ?? "";
         return new PeopleDto(cast.id,cast.name,"cast",role,cast.profile_path,cast.total_episode_count)
     }
 
     static formatTvCrew(crew:TvCrewEntity):PeopleDto{
-        const role = crew.jobs?.map(j => j.job).join(",") ?? "";
+        const role = crew.jobs?.map(j => j.job).slice(0,2).join(",") ?? "";
         return new PeopleDto(crew.id,crew.name,"crew",role,crew.profile_path,crew.total_episode_count)
     }
 
