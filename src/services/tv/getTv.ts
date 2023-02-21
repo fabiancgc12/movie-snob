@@ -12,6 +12,7 @@ import {formatImagesResponse} from "@/utils/functions/formatImagesResponse";
 import {formatProvidersResponse} from "@/utils/functions/formatProvidersResponse";
 import {ProvidersDto} from "@/utils/models/dto/ProvidersDto";
 import {formatRecommendations} from "@/utils/functions/formatRecommendations";
+import {formatTvCredits} from "@/utils/functions/formatTvCredits";
 
 type ApiResponse = TvShowInterface & {
     videos:VideoMediaResponse,
@@ -40,17 +41,13 @@ export async function getTvShow(id:number):Promise<{
     const images = formatImagesResponse(imageResponse)
     const providers = formatProvidersResponse(providersResponse)
     const recommendations = formatRecommendations(recommendationResponse)
-
-    //just returning the first 12 member of the main cast and
-    aggregate_credits.cast = aggregate_credits.cast?.slice(0,12);
-    aggregate_credits.crew = []
-    // returning only the first 10 backdrops for now
+    const credits = formatTvCredits(aggregate_credits)
 
     return {
         show,
         videos,
         recommendations,
-        credits:aggregate_credits,
+        credits,
         images,
         providers
     }
