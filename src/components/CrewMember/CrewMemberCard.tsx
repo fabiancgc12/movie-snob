@@ -27,7 +27,7 @@ export function MemberCard({people,size,shadow = true}:props){
             </div>
             <h6 className={styles.name}>{people.name}</h6>
             <div className={styles.description}>
-                <p>{people.role}</p>
+                <p className={styles.role}>{people.role}</p>
                 {people.total_episode_count && <p className={styles.episodes}>Total episodes: {people.total_episode_count}</p>}
             </div>
         </article>

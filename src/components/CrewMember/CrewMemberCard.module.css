@@ -12,23 +12,28 @@
 }
 
 .name{
+    grid-area: name;
     font-weight: bold;
     text-transform: capitalize;
 }
 
+.description{
+    grid-area: description;
+}
+
 .description p{
-    font-weight: lighter;
     text-transform: capitalize;
 }
 
 .episodes{
+    font-weight: lighter;
     font-size: 14px;
 }
 
 .small{
     grid-template-columns: minmax(60px, 20%) 1fr;
     grid-template-areas: "profile name"
-                        "profile job";
+                        "profile description";
 }
 
 .small img {
@@ -44,7 +49,7 @@
     grid-template-columns: minmax(100px,175px);
     grid-template-areas: "profile"
                         "name"
-                        "job";
+                        "description";
 }
 
 .name,.description{
@@ -56,7 +61,7 @@
 }
 
 .medium .description{
-    font-size: .8em;
+    --font-size: .75em;
 }
 
 .noShadow{
@@ -68,7 +73,7 @@
         width: unset;
         grid-template-columns: minmax(100px, 25%) 1fr;
         grid-template-areas: "profile name"
-                        "profile job";
+                        "profile description";
     }
 
     .medium img {
@@ -79,6 +84,14 @@
         text-align: start;
     }
     .medium .description{
-        font-size: 1em;
+        --font-size: .7em;
+    }
+
+    .role{
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        white-space: pre-wrap;
     }
 }
