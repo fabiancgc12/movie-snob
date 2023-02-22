@@ -12,25 +12,26 @@ import {MovieInterface} from "@/utils/models/Movies/Movie.interface";
 import {VideoTrailerInterface} from "@/utils/models/Movies/VideoMedia.interface";
 import {TvShowInterface} from "@/utils/models/tv/TvShow.interface";
 import {PeopleDto} from "@/utils/models/dto/Credit.dto";
+import {generateUrlPage} from "@/utils/functions/generateUrlPage";
 
 type props = {
     trailer?:VideoTrailerInterface,
     credits?:(PeopleDto)[] | null;
 } & ({
     product:MovieInterface,
-    type:"movie"
+    mediaType:"movie"
     }
     | {
     product:TvShowInterface,
-    type:"tv"
+    mediaType:"tv"
 })
 
-export function MediaBanner({product,trailer,credits,type}:props){
+export function MediaBanner({product,trailer,credits,mediaType}:props){
     const posterPath = generateImageUrl(product.poster_path);
     const backgroundPath = generateImageUrl(product.backdrop_path,1280);
-    const title = type == "movie" ? product.title : product.name
+    const title = mediaType == "movie" ? product.title : product.name
     const titleSize = title.length > 20 ? styles.titleSmall : "";
-    const videoLabel = type == "movie" ? "Watch trailer" : "Watch opening"
+    const videoLabel = mediaType == "movie" ? "Watch trailer" : "Watch opening"
     //sorting so the director is always first
 
     return (
@@ -53,12 +54,12 @@ export function MediaBanner({product,trailer,credits,type}:props){
                     <div className={styles.genres}>
                         {product.genres?.slice(0,3).map(g => <small className={"badge"} key={`genre-${g.id}`}>{g.name}</small>)}
                     </div>
-                    {type == "movie" && <div>{calculateRunTime(product.runtime)}</div>}
+                    {mediaType == "movie" && <div>{calculateRunTime(product.runtime)}</div>}
                 </div>
                 <div className={`${styles.flex} ${styles.titleWrapper}`}>
                     <h1 className={`${styles.title} ${titleSize}`}>
                         {title}
-                        {type === "movie" && <small className={styles.year}>({product.release_date.slice(0, 4)})</small>}
+                        {mediaType === "movie" && <small className={styles.year}>({product.release_date.slice(0, 4)})</small>}
                     </h1>
                     {trailer && <Video video={trailer}><a href={"#"}>{videoLabel}</a></Video>}
                 </div>
@@ -68,9 +69,9 @@ export function MediaBanner({product,trailer,credits,type}:props){
                 </div>
                 <div className={`${styles.flex}`}>
                     <Average value={product.vote_average}/>
-                    <BookmarkButton mediaType={type} media={product}/>
-                    <LikeButton mediaType={type} media={product}/>
-                    <ShareButton/>
+                    <BookmarkButton mediaType={mediaType} media={product}/>
+                    <LikeButton mediaType={mediaType} media={product}/>
+                    <ShareButton url={generateUrlPage(product,mediaType)} title={title}/>
                 </div>
                 <div className={styles.crew}>
                     {credits && credits.map(c => <MemberCard key={`crew-${c.id}-${c.role}`} size={"sm"} people={c} shadow={false}/>)}

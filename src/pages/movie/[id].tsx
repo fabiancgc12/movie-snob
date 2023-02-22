@@ -12,7 +12,7 @@ import { MediaBanner } from "@/components/ProductBanner/ProductBanner";
 import {MovieExtraInfo} from "@/components/ExtraInfo/MovieExtraInfo";
 import {ProvidersDto} from "@/utils/models/dto/ProvidersDto";
 import {CreditsDto} from "@/utils/models/dto/Credit.dto";
-import Head from "next/head";
+import {ProductHead} from "@/components/Layout/ProductHead";
 
 type props = {
     movie:MovieInterface,
@@ -25,13 +25,10 @@ type props = {
 
 export default function Movie({movie,credits,videos,images,providers,recommendations}:props){
     const crew = credits.crew?.sort((a) => a.role.toLowerCase() === "screenplay" ? 1 : -1)
-    const title = `${movie.title} - Popcorn Search`
     return (
         <main>
-            <Head>
-                <title>{title}</title>
-            </Head>
-            <MediaBanner product={movie} trailer={videos[0]} credits={crew} type={"movie"}/>
+            <ProductHead media={movie} mediaType={"movie"}/>
+            <MediaBanner product={movie} trailer={videos[0]} credits={crew} mediaType={"movie"}/>
             <div data-theme="light" className={styles.movieContent}>
                 <MovieCast cast={credits.cast}/>
                 <MovieExtraInfo movie={movie} providers={providers}/>

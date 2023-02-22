@@ -13,7 +13,7 @@ import { TvExtraInfo } from "@/components/ExtraInfo/TvExtraInfo";
 import {SeasonsList} from "@/components/Seasons/SeasonsList";
 import {ProvidersDto} from "@/utils/models/dto/ProvidersDto";
 import {CreditsDto, PeopleDto} from "@/utils/models/dto/Credit.dto";
-import Head from "next/head";
+import {ProductHead} from "@/components/Layout/ProductHead";
 
 type props = {
     show:TvShowInterface,
@@ -27,13 +27,10 @@ type props = {
 export default function Tv({show,credits,videos,recommendations,images,providers}:props){
     const createdBy = show.created_by?.map(c => PeopleDto.formatCreatedBy(c)).slice(0,2) || []
     const openingSequence = videos.find(v => v.type.includes("Opening"));
-    const title = `${show.name} - Popcorn Search`
     return (
         <main>
-            <Head>
-                <title>{title}</title>
-            </Head>
-            <MediaBanner product={show} trailer={openingSequence} credits={createdBy} type={"tv"}/>
+            <ProductHead media={show} mediaType={"tv"}/>
+            <MediaBanner product={show} trailer={openingSequence} credits={createdBy} mediaType={"tv"}/>
             <div data-theme="light" className={styles.tvContent}>
                 <TvCast cast={credits.cast}/>
                 <div className={styles.info}>

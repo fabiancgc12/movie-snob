@@ -1,0 +1,12 @@
+.wrapper{
+
+}
+
+.options{
+    position: fixed;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    transform: translateY(-100%);
+}
