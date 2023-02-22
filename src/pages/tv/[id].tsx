@@ -27,10 +27,11 @@ type props = {
 export default function Tv({show,credits,videos,recommendations,images,providers}:props){
     const createdBy = show.created_by?.map(c => PeopleDto.formatCreatedBy(c)).slice(0,2) || []
     const openingSequence = videos.find(v => v.type.includes("Opening"));
+    const title = `${show.name} - Popcorn Search`
     return (
         <main>
             <Head>
-                <title>{show.name} - Popcorn Search</title>
+                <title>{title}</title>
             </Head>
             <MediaBanner product={show} trailer={openingSequence} credits={createdBy} type={"tv"}/>
             <div data-theme="light" className={styles.tvContent}>

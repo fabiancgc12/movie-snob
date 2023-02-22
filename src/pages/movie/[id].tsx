@@ -25,10 +25,11 @@ type props = {
 
 export default function Movie({movie,credits,videos,images,providers,recommendations}:props){
     const crew = credits.crew?.sort((a) => a.role.toLowerCase() === "screenplay" ? 1 : -1)
+    const title = `${movie.title} - Popcorn Search`
     return (
         <main>
             <Head>
-                <title>{movie.title} - Popcorn Search</title>
+                <title>{title}</title>
             </Head>
             <MediaBanner product={movie} trailer={videos[0]} credits={crew} type={"movie"}/>
             <div data-theme="light" className={styles.movieContent}>
