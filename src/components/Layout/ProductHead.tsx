@@ -5,16 +5,18 @@ import {generateImageUrl} from "@/utils/functions/generateImageUrl";
 import Head from "next/head";
 
 type props = {
-    media: TvShowInterface,
-    mediaType: "tv"
-} | {
-    media: MovieInterface,
-    mediaType: "movie"
-}
+        media: TvShowInterface,
+        mediaType: "tv"
+    } | {
+        media: MovieInterface,
+        mediaType: "movie"
+    }
+
 
 export function ProductHead({media,mediaType}:props){
     const mediaTitle = mediaType == "movie" ? media.title : media.name;
     const type = mediaType == "movie" ? "video.movie" : "video.tv_show"
+    const duration = mediaType == "movie" ? media.runtime.toString() : undefined
     const title = `${mediaTitle} - Popcorn Search`;
     return (
         <Head>
@@ -32,6 +34,7 @@ export function ProductHead({media,mediaType}:props){
             <meta name="twitter:description" content={media.overview} />
             <meta name="twitter:image" content={generateImageUrl(media.backdrop_path,1280)} />
             <meta name="twitter:image:alt" content={`${mediaTitle} poster backdrop`} />
+            {duration && <meta property="og:video:duration" content={duration} />}
         </Head>
     )
 }
