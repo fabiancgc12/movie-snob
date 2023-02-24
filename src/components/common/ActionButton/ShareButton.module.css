@@ -1,0 +1,44 @@
+.wrapper{
+    position: relative;
+}
+
+.options{
+    --arrowPosition:10%;
+    position: absolute;
+    top: 0;
+    right: calc(100% + 15px);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+    z-index: 5;
+    padding: 5px;
+    border-radius: .25em;
+    border: 1px solid var(--primaryLight);
+    transition: transform .2s;
+    transform: scale(0,0);
+    transform-origin: right var(--arrowPosition);
+}
+
+.options::before {
+    --arrowSize:10px;
+    content: "";
+    position: absolute;
+    top: var(--arrowPosition);
+    left: 100%;
+    width: 0;
+    border-left: var(--arrowSize) solid whitesmoke;
+    border-top: var(--arrowSize) solid transparent;
+    border-bottom: var(--arrowSize)solid transparent;
+}
+
+.show{
+    transform: scale(1,1);
+}
+
+.shareOption{
+    flex-basis: 100%;
+    margin: 0;
+}
+
