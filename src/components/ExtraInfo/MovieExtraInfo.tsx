@@ -5,8 +5,7 @@ import {MovieInterface} from "@/utils/models/Movies/Movie.interface";
 import { ExtraInfo } from "./ExtraInfo";
 import { Providers } from "./Providers";
 import {ProvidersDto} from "@/utils/models/dto/ProvidersDto";
-import {generateImageUrl} from "@/utils/functions/generateImageUrl";
-import Image from "next/image";
+import {CompanyLogo} from "@/components/ExtraInfo/CompanyLogo";
 
 type props = {
     movie:MovieInterface,
@@ -31,13 +30,10 @@ export function MovieExtraInfo({movie,providers}:props){
             <div className={styles.info}>
                 <p>Production Company</p>
                 <div className={styles.logos}>
-                    {movie.production_companies?.map(company => <Image
+                    {movie.production_companies?.map(company => <CompanyLogo
                         key={`${company.name} logo`}
-                        title={`${company.name} logo`}
-                        src={generateImageUrl(company.logo_path)} alt={`${company.name} logo`}
-                        className={company.logo_path ? "" : "placeholderImage"}
-                        width={50}
-                        height={50}
+                        name={company.name}
+                        logo_path={company.logo_path}
                     />)}
                 </div>
             </div>

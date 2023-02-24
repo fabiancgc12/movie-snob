@@ -1,11 +1,10 @@
 import {TvShowInterface} from "@/utils/models/tv/TvShow.interface";
 import styles from "@/components/ExtraInfo/ExtraInfo.module.css";
 import {formatDate} from "@/utils/functions/formatDate";
-import Image from "next/image";
-import {generateImageUrl} from "@/utils/functions/generateImageUrl";
 import { ExtraInfo } from "./ExtraInfo";
 import {Providers} from "@/components/ExtraInfo/Providers";
 import {ProvidersDto} from "@/utils/models/dto/ProvidersDto";
+import {CompanyLogo} from "@/components/ExtraInfo/CompanyLogo";
 
 type props = {
     show:TvShowInterface,
@@ -34,13 +33,10 @@ export function TvExtraInfo({show,providers}:props){
             <div>
                 <p>Networks</p>
                 <div className={styles.logos}>
-                    {show.networks?.map(network => <Image
+                    {show.networks?.map(network => <CompanyLogo
                         key={`${network.name} logo`}
-                        title={`${network.name} logo`}
-                        src={generateImageUrl(network.logo_path)} alt={`${network.name} logo`}
-                        className={network.logo_path ? "" : "placeholderImage"}
-                        width={50}
-                        height={50}
+                        name={network.name}
+                        logo_path={network.logo_path}
                     />)}
                 </div>
             </div>
