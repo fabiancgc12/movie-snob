@@ -27,7 +27,7 @@ export default function Movie({movie,credits,videos,images,providers,recommendat
     const crew = credits.crew?.sort((a) => a.role.toLowerCase() === "screenplay" ? 1 : -1)
     return (
         <main>
-            <ProductHead media={movie} mediaType={"movie"}/>
+            <ProductHead media={movie} mediaType={"movie"} credits={credits}/>
             <MediaBanner product={movie} trailer={videos[0]} credits={crew} mediaType={"movie"}/>
             <div data-theme="light" className={styles.movieContent}>
                 <MovieCast cast={credits.cast}/>

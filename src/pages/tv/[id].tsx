@@ -29,7 +29,7 @@ export default function Tv({show,credits,videos,recommendations,images,providers
     const openingSequence = videos.find(v => v.type.includes("Opening"));
     return (
         <main>
-            <ProductHead media={show} mediaType={"tv"}/>
+            <ProductHead media={show} mediaType={"tv"} credits={credits}/>
             <MediaBanner product={show} trailer={openingSequence} credits={createdBy} mediaType={"tv"}/>
             <div data-theme="light" className={styles.tvContent}>
                 <TvCast cast={credits.cast}/>
