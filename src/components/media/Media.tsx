@@ -16,12 +16,12 @@ export function Media({videos,images}:props){
     return (
         <>
             <Section title={"Videos"}>
-                <Slider arrowsInContent={true} speed={300}>
+                <Slider arrowsInContent={true} speed={450}>
                     {videos && videos.map(v => <VideoThumbnail video={v} key={`video-${v.key}`}/>)}
                 </Slider>
             </Section>
             <Section className={styles.wrapper} title={"Images"}>
-                <Slider arrowsInContent={true} speed={400}>
+                <Slider arrowsInContent={true} speed={450}>
                     {backdrops
                         .map((b,i) => (
                                 <div className={styles.backdrop} key={`backdrop-${i}`}>
