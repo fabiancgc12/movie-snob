@@ -74,7 +74,7 @@ export function MediaBanner({product,trailer,credits,mediaType}:props){
                     <ShareButton url={generateUrlPage(product,mediaType)} title={title}/>
                 </div>
                 <div className={styles.crew}>
-                    {credits && credits.map(c => <MemberCard key={`crew-${c.id}-${c.role}`} size={"sm"} people={c} shadow={false}/>)}
+                    {credits && credits.slice(0,2).map(c => <MemberCard key={`crew-${c.id}-${c.role}`} size={"sm"} people={c} shadow={false}/>)}
                 </div>
             </div>
         </section>
