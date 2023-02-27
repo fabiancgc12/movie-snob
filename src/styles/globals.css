@@ -63,9 +63,29 @@ article{
   padding: .5em;
 }
 
+[aria-roledescription="carousel"]{
+  position: relative;
+}
+
+[aria-roledescription="carousel"] .indicators{
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  z-index: 2;
+}
+
+.indicators .each-slideshow-indicator{
+
+}
+
 @media screen and (min-width: 768px){
   .badge{
     font-size: .75em;
   }
+}
 
+@media screen and (max-width: 768px){
+  [aria-roledescription="carousel"] .indicators.indicators{
+    display: none;
+  }
 }

@@ -45,7 +45,7 @@ export function Slider({className = "",children,arrowsInContent = false,speed}:p
         return () => {
             window.removeEventListener('resize', onScroll);
         };
-    },[])
+    },[onScroll])
 
     const arrowsInContentStyle = arrowsInContent ? styles.arrowsInContent : ""
     const fadeLeftArrow = showPrevArrow ? styles.fadeIn : styles.fadeOut
@@ -66,7 +66,7 @@ type ArrowProps = {
     className?:string
 }
 
-const NextArrow = ({onClick,className = ""}:ArrowProps) => {
+export const NextArrow = ({onClick,className = ""}:ArrowProps) => {
     return (
         <button
             className={`${styles.nextArrow} ${className}`}
@@ -79,7 +79,7 @@ const NextArrow = ({onClick,className = ""}:ArrowProps) => {
     );
 }
 
-function PrevArrow({onClick,className = ""}:ArrowProps) {
+export function PrevArrow({onClick,className = ""}:ArrowProps) {
     return (
         <button
             className={`${styles.prevArrow} ${className}`}
