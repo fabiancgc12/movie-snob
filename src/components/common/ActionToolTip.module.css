@@ -37,7 +37,7 @@
     transform: scale(1,1);
 }
 
-.shareOption{
+.options > *{
     flex-basis: 100%;
     margin: 0;
 }
