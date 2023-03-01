@@ -4,6 +4,7 @@
 
 .options{
     --arrowPosition:10%;
+    width: max-content;
     position: absolute;
     top: 0;
     right: calc(100% + 15px);

@@ -5,17 +5,18 @@ import styles from "./ActionToolTip.module.css"
 
 type props = {
     children:ReactNode,
-    buttonContent:ReactNode
+    buttonContent:ReactNode,
+    buttonSize?: "sm" | "md"
 }
 
-export function ActionToolTip({children,buttonContent}:props){
+export function ActionToolTip({children,buttonContent,buttonSize = "md"}:props){
     const [show, setShow] = useState(false);
     const ref = useRef<HTMLDivElement>(null);
     useOnClickOutside(ref,() => setShow(false));
     const showOptions = show ? styles.show : ""
     return (
         <div className={styles.wrapper} ref={ref}>
-            <ActionButton onClick={() => setShow(!show)} className={`secondary`}>
+            <ActionButton onClick={() => setShow(!show)} className={`secondary outline`} size={buttonSize}>
                 {buttonContent}
             </ActionButton>
             <div className={`${styles.options} ${showOptions}`} data-theme="light">

@@ -1,6 +1,4 @@
 import {useEffect, useState} from "react";
-import {TvShowInterface} from "@/utils/models/tv/TvShow.interface";
-import {MovieInterface} from "@/utils/models/Movies/Movie.interface";
 
 type CheckedStore = Record<"movie" | "tv", Record<number, {
     vote_average:number,
@@ -12,7 +10,13 @@ const defaultValue:CheckedStore = {
     "tv":{}
 }
 
-export function useCheckedButton(key:string,media:"movie" | "tv",product:MovieInterface | TvShowInterface){
+export type StoreProductType = {
+    id:number,
+    vote_average:number,
+    poster_path:string
+}
+
+export function useCheckedButton(key:string,media:"movie" | "tv",product:StoreProductType){
     const [checked,setChecked] = useState(false);
     const onClick = () => {
         const store = localStorage.getItem(key)

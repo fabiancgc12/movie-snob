@@ -89,3 +89,7 @@ article{
     display: none;
   }
 }
+
+button.noOutline{
+  border: 0;
+}

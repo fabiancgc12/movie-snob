@@ -44,8 +44,15 @@
 }
 
 .actions{
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+.option {
     display: flex;
-    justify-content: center;
+    align-items: center;
+    gap: 5px;
 }
 
 @media (min-width: 768px) {
@@ -53,10 +60,6 @@
     .mainShow{
         height: 100vh;
         padding-bottom: 4em;
-    }
-
-    .actions{
-        justify-content: flex-start;
     }
 
     .info{
@@ -78,9 +81,6 @@
         display: none;
     }
 
-    .actions{
-        display: none;
-    }
 }
 
 .placeholderBanner{

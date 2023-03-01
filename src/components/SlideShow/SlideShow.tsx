@@ -3,7 +3,7 @@ import arrowStyles from "@/components/Slider/Slider.module.css";
 import {NextArrow} from "@/components/Slider/Slider";
 import 'react-slideshow-image/dist/styles.css'
 import {UpcomingMovie} from "@/utils/models/Movies/UpcomingResponse.interface";
-import {MainBanner} from "@/components/mainBanner/MainBanner";
+import {UpcomingBanner} from "@/components/mainBanner/UpcomingBanner";
 import {useRef} from "react";
 
 type props = {
@@ -28,7 +28,7 @@ export function SlideShow({upcoming}:props){
                 nextArrow={<NextArrow onClick={() => {}}/>}
                 indicators={true}
             >
-                {upcoming.map(s => <MainBanner key={`banner-${s.id}`} data={s}/>)}
+                {upcoming.map(s => <UpcomingBanner key={`banner-${s.id}`} data={s}/>)}
             </Fade>
         </div>
     )
