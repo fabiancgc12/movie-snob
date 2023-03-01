@@ -1,5 +1,5 @@
 import {SeasonsEntity} from "@/utils/models/tv/TvShow.interface";
-import {Section} from "@/components/common/Section/Section";
+import {Section} from "@/components/Section/Section";
 import styles from "./Season.module.css"
 import Image from "next/image";
 import {generateImageUrl} from "@/utils/functions/generateImageUrl";

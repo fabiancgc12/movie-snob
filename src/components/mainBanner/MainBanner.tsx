@@ -25,6 +25,9 @@ export function MainBanner({data}:props) {
             <p>
                 <small>{data.overview}</small>
             </p>
+            <div className={styles.actions}>
+                dcsdc
+            </div>
         </div>
     </div>;
 }

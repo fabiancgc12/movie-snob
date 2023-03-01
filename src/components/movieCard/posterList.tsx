@@ -1,6 +1,6 @@
 import styles from "@/components/movieCard/cardList.module.css";
 import {PosterCard} from "@/components/movieCard/posterCard";
-import {Section} from "@/components/common/Section/Section";
+import {Section} from "@/components/Section/Section";
 import {MovieInterface} from "@/utils/models/Movies/Movie.interface";
 import {RecommendationInterface} from "@/utils/models/Movies/RecomendationResponse.interface";
 import {Slider} from "@/components/Slider/Slider";

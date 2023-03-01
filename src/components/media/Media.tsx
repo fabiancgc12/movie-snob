@@ -4,7 +4,7 @@ import {VideoTrailerInterface} from "@/utils/models/Movies/VideoMedia.interface"
 import {ImageMediaResponse} from "@/utils/models/Movies/ImageMedia.interface";
 import styles from "./Media.module.css"
 import {VideoThumbnail} from "@/components/Video/VideoThumbnail";
-import {Section} from "@/components/common/Section/Section";
+import {Section} from "@/components/Section/Section";
 import {Slider} from "@/components/Slider/Slider";
 
 type props = {

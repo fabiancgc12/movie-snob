@@ -1,14 +1,15 @@
-import {ReactNode} from "react";
 import { Fade } from "react-slideshow-image";
 import arrowStyles from "@/components/Slider/Slider.module.css";
 import {NextArrow} from "@/components/Slider/Slider";
 import 'react-slideshow-image/dist/styles.css'
+import {UpcomingMovie} from "@/utils/models/Movies/UpcomingResponse.interface";
+import {MainBanner} from "@/components/mainBanner/MainBanner";
 
 type props = {
-    children:ReactNode
+    upcoming:UpcomingMovie[]
 }
 
-export function SlideShow({children}:props){
+export function SlideShow({upcoming}:props){
     // using the prevArrow component causes the slide the always go forward,
     // using only a button makes it works
     return (
@@ -26,7 +27,8 @@ export function SlideShow({children}:props){
             nextArrow={<NextArrow onClick={() => {}}/>}
             indicators={true}
         >
-            {children}
+            {upcoming.map(s => <MainBanner key={`banner-${s.id}`} data={s}/>)}
         </Fade>
     )
 }
+

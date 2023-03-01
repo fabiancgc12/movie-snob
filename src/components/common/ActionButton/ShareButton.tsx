@@ -18,7 +18,6 @@ type props = {
     url:string
 }
 
-//TODO add functionality to sharebutton
 export function ShareButton({url,title}:props){
     const [show, setShow] = useState(false);
     const ref = useRef<HTMLDivElement>(null);
