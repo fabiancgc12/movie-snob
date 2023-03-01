@@ -6,10 +6,10 @@ import styles from "./ActionToolTip.module.css"
 type props = {
     children:ReactNode,
     buttonContent:ReactNode,
-    buttonSize?: "sm" | "md"
+    buttonSize?: "xs" | "sm" | "md"
 }
 
-export function ActionToolTip({children,buttonContent,buttonSize = "md"}:props){
+export function ActionToolTip({children,buttonContent,buttonSize}:props){
     const [show, setShow] = useState(false);
     const ref = useRef<HTMLDivElement>(null);
     useOnClickOutside(ref,() => setShow(false));

@@ -22,17 +22,29 @@
     transform-origin: right var(--arrowPosition);
 }
 
-.options::before {
+.options::before,.options::after{
     --arrowSize:10px;
     content: "";
     position: absolute;
     top: var(--arrowPosition);
     left: 100%;
     width: 0;
+}
+
+.options::after {
     border-left: var(--arrowSize) solid whitesmoke;
     border-top: var(--arrowSize) solid transparent;
-    border-bottom: var(--arrowSize)solid transparent;
+    border-bottom: var(--arrowSize) solid transparent;
 }
+
+.options::before {
+    --size: calc(var(--arrowSize) + 1px);
+    border-left: var(--size) solid var(--primaryLight);
+    border-top: var(--size) solid transparent;
+    border-bottom: var(--size) solid transparent;
+    top: calc(var(--arrowPosition) - 1px)
+}
+
 
 .show{
     transform: scale(1,1);
