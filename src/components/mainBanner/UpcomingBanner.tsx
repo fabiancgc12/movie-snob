@@ -27,12 +27,12 @@ export function UpcomingBanner({data}:props) {
             <div className={styles.actions}>
                 <ActionToolTip buttonContent={<span>&#8942;</span>} buttonSize={"sm"}>
                     <div className={styles.option}>
-                        <BookmarkButton media={data} mediaType={"movie"} size={"xs"} className={"noOutline"}/>
-                        <small>Add a Bookmark</small>
+                        <BookmarkButton media={data} mediaType={"movie"} size={"xs"} className={"outline noBorder"}/>
+                        <small>Add to Bookmark</small>
                     </div>
                     <div className={styles.option}>
-                        <LikeButton media={data} mediaType={"movie"} size={"xs"} className={"noOutline"}/>
-                        <small>Do you liked it?</small>
+                        <LikeButton media={data} mediaType={"movie"} size={"xs"} className={"outline noBorder"}/>
+                        <small>Give a like!</small>
                     </div>
                 </ActionToolTip>
             </div>

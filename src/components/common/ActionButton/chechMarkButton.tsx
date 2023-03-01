@@ -16,7 +16,7 @@ export function BookmarkButton(props:props){
 function Button({mediaType,media,size,className = ""}:props){
     const [checked,onClick] = useCheckedButton("checked",mediaType,media)
     return (
-        <ActionButton className={`${styles.checkmark} secondary outline ${className}`} onClick={onClick} size={size}>
+        <ActionButton className={`${styles.checkmark} secondary ${className}`} onClick={onClick} size={size}>
             {
                 checked
                     ? <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">

@@ -90,6 +90,6 @@ article{
   }
 }
 
-button.noOutline{
+.noBorder{
   border: 0;
 }

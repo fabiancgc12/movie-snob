@@ -16,7 +16,7 @@ export function ActionToolTip({children,buttonContent,buttonSize = "md"}:props){
     const showOptions = show ? styles.show : ""
     return (
         <div className={styles.wrapper} ref={ref}>
-            <ActionButton onClick={() => setShow(!show)} className={`secondary outline`} size={buttonSize}>
+            <ActionButton onClick={() => setShow(!show)} className={`secondary`} size={buttonSize}>
                 {buttonContent}
             </ActionButton>
             <div className={`${styles.options} ${showOptions}`} data-theme="light">

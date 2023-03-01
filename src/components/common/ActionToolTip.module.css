@@ -10,7 +10,7 @@
     right: calc(100% + 15px);
     display: flex;
     justify-content: space-around;
-    align-items: center;
+    align-items: flex-start;
     flex-direction: column;
     gap: 5px;
     z-index: 5;

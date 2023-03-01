@@ -8,6 +8,10 @@
     margin-bottom: 0;
 }
 
+.button:not(:global(.outline),:global(.secundary),:global(.contrast)){
+    background: hsl(205deg, 15%, 41%,.4);;
+}
+
 .sm{
     font-size: 14px;
     width: 2.5em;
