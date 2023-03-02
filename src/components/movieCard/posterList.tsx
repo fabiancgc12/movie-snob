@@ -14,7 +14,7 @@ type props = {
 export function PosterList({title,media,mediaType}:props){
     return (
         <Section className={styles.section} title={title}>
-            <Slider speed={300} arrowsInContent={true}>
+            <Slider speed={450} arrowsInContent={true}>
                 {media?.map((e, i) => <PosterCard data={e} mediaType={mediaType} key={`card-${i}`}/>)}
             </Slider>
         </Section>

@@ -25,7 +25,7 @@ div[data-theme="light"]{
 
 :is(*,*::before,*::after)::-webkit-scrollbar {
   /*display: none;*/
-  --size:.35em;
+  --size:.20em;
   height: var(--size);
   width: var(--size);
   /*width: ;*/

@@ -13,10 +13,12 @@ export default function Home({upcoming}:props) {
   return (
     <main>
         <SlideShow upcoming={upcoming}/>
-        <PosterList mediaType={"movie"} title={"Currently watching"} media={dummyRecommendations.results}/>
-        <PosterList mediaType={"movie"} title={"Most watched"} media={dummyRecommendations.results}/>
-        <PosterList mediaType={"movie"} title={"Comedy"} media={dummyRecommendations.results}/>
-        <PosterList mediaType={"movie"} title={"Dramas"} media={dummyRecommendations.results}/>
+        <div data-theme="light">
+            <PosterList mediaType={"movie"} title={"Currently watching"} media={dummyRecommendations.results}/>
+            <PosterList mediaType={"movie"} title={"Most watched"} media={dummyRecommendations.results}/>
+            <PosterList mediaType={"movie"} title={"Comedy"} media={dummyRecommendations.results}/>
+            <PosterList mediaType={"movie"} title={"Dramas"} media={dummyRecommendations.results}/>
+        </div>
     </main>
   )
 }
