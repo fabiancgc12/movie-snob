@@ -5,18 +5,22 @@
 }
 
 .track{
+    --gap:10px;
     font-size: 20px;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     align-items: stretch;
     padding: .5em 0;
-    gap:10px;
+    gap:var(--gap);
     scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    scroll-padding: var(--gap);
 }
 
 .track > * {
     flex-shrink: 0;
+    scroll-snap-align: start;
 }
 
 .prevArrow,.nextArrow{
