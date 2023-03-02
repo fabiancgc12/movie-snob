@@ -4,3 +4,7 @@
     max-width: 450px;
     aspect-ratio: 16 / 9;
 }
+
+.backdrop img{
+    border-radius: .5rem;
+}
