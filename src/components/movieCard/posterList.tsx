@@ -13,6 +13,7 @@ type props = {
 }
 
 export function PosterList({title,media,mediaType}:props){
+    if (media.length === 0) return <></>
     return (
         <Section className={styles.section} title={title}>
             <Slider speed={450} arrowsInContent={true}>
