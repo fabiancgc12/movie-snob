@@ -2,11 +2,11 @@ import {PosterList} from "@/components/movieCard/posterList";
 import {dummyRecommendations} from "@/services/movies/getMovie";
 import {SlideShow} from "@/components/SlideShow/SlideShow";
 import {GetStaticProps} from "next";
-import {getUpcomingMovies} from "@/services/movies/getUpcomingMovies";
-import {UpcomingMovie} from "@/utils/models/Movies/UpcomingResponse.interface";
+import {getHomePage} from "@/services/movies/getHomePage";
+import {MovieResumeInterface} from "@/utils/models/Movies/MovieResume.interface";
 
 type props = {
-    upcoming:UpcomingMovie[]
+    upcoming:MovieResumeInterface[]
 }
 
 export default function Home({upcoming}:props) {
@@ -24,7 +24,7 @@ export default function Home({upcoming}:props) {
 }
 
 export const getStaticProps:GetStaticProps = async () => {
-    const upcoming = await getUpcomingMovies()
+    const {upcoming} = await getHomePage()
     return {
         props: {
             upcoming,

@@ -4,11 +4,11 @@ import {generateImageUrl} from "@/utils/functions/generateImageUrl";
 import {CSSProperties, useMemo} from "react";
 import {ActionToolTip} from "@/components/common/ActionToolTip";
 import {BookmarkButton} from "@/components/common/ActionButton/chechMarkButton";
-import {UpcomingMovie} from "@/utils/models/Movies/UpcomingResponse.interface";
+import {MovieResumeInterface} from "@/utils/models/Movies/MovieResume.interface";
 import {LikeButton} from "@/components/common/ActionButton/LikeButton";
 
 type props = {
-    data:UpcomingMovie
+    data:MovieResumeInterface
 }
 
 export function UpcomingBanner({data}:props) {

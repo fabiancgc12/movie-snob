@@ -2,12 +2,12 @@ import {Fade, SlideshowRef} from "react-slideshow-image";
 import arrowStyles from "@/components/Slider/Slider.module.css";
 import {NextArrow} from "@/components/Slider/Slider";
 import 'react-slideshow-image/dist/styles.css'
-import {UpcomingMovie} from "@/utils/models/Movies/UpcomingResponse.interface";
+import {MovieResumeInterface} from "@/utils/models/Movies/MovieResume.interface";
 import {UpcomingBanner} from "@/components/mainBanner/UpcomingBanner";
 import {useRef} from "react";
 
 type props = {
-    upcoming:UpcomingMovie[]
+    upcoming:MovieResumeInterface[]
 }
 
 export function SlideShow({upcoming}:props){
