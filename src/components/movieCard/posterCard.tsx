@@ -19,7 +19,9 @@ export function PosterCard({data,mediaType}:props){
     return (
         <article className={styles.movieCard}>
             <Link href={`/${mediaType}/${data.id}`}>
-                <Image src={poster} alt={"title poster"} width={200} height={300}/>
+                <div className={styles.poster}>
+                    <Image src={poster} alt={"title poster"} fill/>
+                </div>
                 <div className={styles.info}>
                     <Average value={data.vote_average} />
                 </div>
