@@ -28,6 +28,7 @@ export const getStaticProps:GetStaticProps = async () => {
     return {
         props: {
             upcoming,
-        }
+        },
+        revalidate:600 //revalidate in 10 minutes
     }
 }

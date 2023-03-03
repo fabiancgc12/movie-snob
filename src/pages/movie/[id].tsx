@@ -57,6 +57,7 @@ export const getStaticProps:GetStaticProps = async (context) => {
             images,
             providers,
             recommendations
-        }
+        },
+        revalidate:900 //revalidate in 15 minutes
     }
 }

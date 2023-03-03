@@ -55,7 +55,8 @@ export const getStaticProps:GetStaticProps = async (context) => {
     const id = Number(context.params?.id);
     const data = await getTvShow(id)
     return {
-        props: data
+        props: data,
+        revalidate:900 //revalidate in 15 minutes
     }
 }
 
