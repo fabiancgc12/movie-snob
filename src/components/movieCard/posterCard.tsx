@@ -4,11 +4,13 @@ import React from "react";
 import {Average} from "@/components/common/Average";
 import {generateImageUrl} from "@/utils/functions/generateImageUrl";
 import Link from "next/link";
-import {MovieInterface} from "@/utils/models/Movies/Movie.interface";
-import {RecommendationInterface} from "@/utils/models/Movies/RecomendationResponse.interface";
 
 type props = {
-    data:MovieInterface | RecommendationInterface,
+    data:{
+        id:number,
+        poster_path?:string,
+        vote_average:number
+    },
     mediaType:"movie" | "tv"
 }
 
