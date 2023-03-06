@@ -1,5 +1,4 @@
-import {DynamicPosterList, PosterList} from "@/components/movieCard/posterList";
-import {dummyRecommendations} from "@/services/movies/getMovie";
+import {DynamicPosterList} from "@/components/movieCard/posterList";
 import {SlideShow} from "@/components/SlideShow/SlideShow";
 import {GetStaticProps} from "next";
 import {getHomePage} from "@/services/getHomePage";
@@ -41,8 +40,11 @@ export default function Home({upcoming,popular,trending}:props) {
                 title={"Trending movies"}
                 queryData={trending.movie}
                 search={"trendingMovie"}/>
-            <PosterList mediaType={"movie"} title={"Comedy"} media={dummyRecommendations.results}/>
-            <PosterList mediaType={"movie"} title={"Dramas"} media={dummyRecommendations.results}/>
+            <DynamicPosterList
+                mediaType={"tv"}
+                title={"Trending tv shows"}
+                queryData={trending.tv}
+                search={"trendingTv"}/>
         </div>
     </main>
   )
