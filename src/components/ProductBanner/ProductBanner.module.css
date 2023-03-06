@@ -135,7 +135,6 @@
     }
 
     .overview small {
-        max-height: 100px;
         overflow: auto;
         scrollbar-gutter: stable both-edges;
     }
