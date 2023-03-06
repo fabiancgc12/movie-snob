@@ -6,6 +6,7 @@ import {ActionToolTip} from "@/components/common/ActionToolTip";
 import {BookmarkButton} from "@/components/common/ActionButton/chechMarkButton";
 import {MovieResumeInterface} from "@/utils/models/Movies/MovieResume.interface";
 import {LikeButton} from "@/components/common/ActionButton/LikeButton";
+import {BsThreeDotsVertical} from "react-icons/bs";
 
 type props = {
     data:MovieResumeInterface
@@ -25,7 +26,7 @@ export function UpcomingBanner({data}:props) {
                 <small>{data.overview}</small>
             </p>
             <div className={styles.actions}>
-                <ActionToolTip buttonContent={<span>&#8942;</span>} buttonSize={"sm"}>
+                <ActionToolTip buttonContent={<BsThreeDotsVertical/>} buttonSize={"sm"}>
                     <div className={styles.option}>
                         <BookmarkButton media={data} mediaType={"movie"} size={"xs"} className={"outline noBorder"}/>
                         <small>Add to Bookmark</small>
