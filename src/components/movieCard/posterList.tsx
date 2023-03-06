@@ -9,6 +9,7 @@ import {useInfiniteQuery} from "@tanstack/react-query";
 import {PopularMovieResponse} from "@/utils/models/popular/popularMovie.interface";
 import {FaSpinner} from "react-icons/fa";
 import {PopularTvShowResponse} from "@/utils/models/popular/popularTv.interface";
+import {TrendingResponseInterface} from "@/utils/models/trending/TrendingMovieResponse";
 
 type props = {
     title:string,
@@ -29,7 +30,7 @@ export function PosterList({title,media,mediaType}:props){
 
 type posterlist = {
     title:string,
-    queryData:PopularMovieResponse | PopularTvShowResponse,
+    queryData:PopularMovieResponse | PopularTvShowResponse | TrendingResponseInterface,
     mediaType:"tv" | "movie",
     search:string
 }
