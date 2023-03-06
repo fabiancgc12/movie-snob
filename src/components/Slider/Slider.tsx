@@ -5,10 +5,11 @@ type props = {
     className?:string,
     children:ReactNode,
     arrowsInContent?:boolean,
-    speed:number
+    speed:number,
+    onReachEnd?: () => void
 }
 
-export function Slider({className = "",children,arrowsInContent = false,speed}:props){
+export function Slider({className = "",children,arrowsInContent = false,speed,onReachEnd}:props){
     const sliderRef = useRef<HTMLElement>(null)
     const [showPrevArrow, setShowPrevArrow] = useState(false);
     const [showNextArrow, setShowNextArrow] = useState(true);
@@ -46,6 +47,11 @@ export function Slider({className = "",children,arrowsInContent = false,speed}:p
             window.removeEventListener('resize', onScroll);
         };
     },[onScroll])
+
+    useEffect(() => {
+        if (!showNextArrow && onReachEnd)
+            onReachEnd()
+    },[showNextArrow,onReachEnd])
 
     const arrowsInContentStyle = arrowsInContent ? styles.arrowsInContent : ""
     const fadeLeftArrow = showPrevArrow ? styles.fadeIn : styles.fadeOut

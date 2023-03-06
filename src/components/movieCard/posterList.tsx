@@ -5,11 +5,14 @@ import {RecommendationInterface} from "@/utils/models/Movies/RecomendationRespon
 import {Slider} from "@/components/Slider/Slider";
 import {MovieResumeInterface} from "@/utils/models/Movies/MovieResume.interface";
 import {TvShowResume} from "@/utils/models/tv/TvShowResume";
+import {useInfiniteQuery} from "@tanstack/react-query";
+import {PopularMovieResponse} from "@/utils/models/popular/popularMovie.interface";
+import {FaSpinner} from "react-icons/fa";
 
 type props = {
     title:string,
     media:(MovieResumeInterface | RecommendationInterface | TvShowResume)[],
-    mediaType:"tv" | "movie"
+    mediaType:"tv" | "movie",
 }
 
 export function PosterList({title,media,mediaType}:props){
@@ -20,6 +23,43 @@ export function PosterList({title,media,mediaType}:props){
                 {media?.map((e, i) => <PosterCard data={e} mediaType={mediaType} key={`card-${i}`}/>)}
             </Slider>
         </Section>
+    )
+}
 
+type posterlist = {
+    title:string,
+    queryData:PopularMovieResponse,
+    mediaType:"tv" | "movie",
+    search:string
+}
+
+export function DynamicPosterList({title,queryData,mediaType,search}:posterlist){
+    let {data,hasNextPage,fetchNextPage} = useInfiniteQuery<typeof queryData>({
+        queryKey: [search],
+        queryFn: ({pageParam}) => fetch(`api/${search}?page=${pageParam ?? queryData.page}`).then(v => v.json()),
+        initialData: {
+            pages:[queryData],
+            pageParams:[1]
+        },
+        keepPreviousData:true,
+        enabled:false,
+        getNextPageParam: (lastPage) => {
+            if (lastPage.total_pages == lastPage.page) return false
+            return lastPage.page + 1
+        }
+    })
+    const media = data?.pages?.map(p => p.results).flat() ?? []
+    return (
+        <Section className={styles.section} title={title}>
+            <Slider speed={450} arrowsInContent={true} onReachEnd={ () => {
+                if (hasNextPage)
+                    fetchNextPage()
+            }}>
+                {media?.map((e, i) => <PosterCard data={e} mediaType={mediaType} key={`card-${i}`}/>)}
+                {hasNextPage ?? (<article className={styles.loader}>
+                    <FaSpinner className={`fa-spin`} size={32}/>
+                </article>)}
+            </Slider>
+        </Section>
     )
 }

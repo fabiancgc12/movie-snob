@@ -25,7 +25,7 @@ div[data-theme="light"]{
 
 :is(*,*::before,*::after)::-webkit-scrollbar {
   /*display: none;*/
-  --size:.20em;
+  --size:.30em;
   height: var(--size);
   width: var(--size);
   /*width: ;*/
@@ -92,4 +92,16 @@ article{
 
 .noBorder{
   border: 0;
+}
+
+.fa-spin {
+  animation: fa-spin 2s infinite linear;
+}
+@keyframes fa-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
 }
