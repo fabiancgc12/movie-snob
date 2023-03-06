@@ -8,6 +8,7 @@ import {TvShowResume} from "@/utils/models/tv/TvShowResume";
 import {useInfiniteQuery} from "@tanstack/react-query";
 import {PopularMovieResponse} from "@/utils/models/popular/popularMovie.interface";
 import {FaSpinner} from "react-icons/fa";
+import {PopularTvShowResponse} from "@/utils/models/popular/popularTv.interface";
 
 type props = {
     title:string,
@@ -28,13 +29,13 @@ export function PosterList({title,media,mediaType}:props){
 
 type posterlist = {
     title:string,
-    queryData:PopularMovieResponse,
+    queryData:PopularMovieResponse | PopularTvShowResponse,
     mediaType:"tv" | "movie",
     search:string
 }
 
 export function DynamicPosterList({title,queryData,mediaType,search}:posterlist){
-    let {data,hasNextPage,fetchNextPage} = useInfiniteQuery<typeof queryData>({
+    let {data,hasNextPage,isFetchingNextPage,fetchNextPage} = useInfiniteQuery<typeof queryData>({
         queryKey: [search],
         queryFn: ({pageParam}) => fetch(`api/${search}?page=${pageParam ?? queryData.page}`).then(v => v.json()),
         initialData: {
@@ -49,14 +50,15 @@ export function DynamicPosterList({title,queryData,mediaType,search}:posterlist)
         }
     })
     const media = data?.pages?.map(p => p.results).flat() ?? []
+    console.log({hasNextPage,isFetchingNextPage})
     return (
         <Section className={styles.section} title={title}>
             <Slider speed={450} arrowsInContent={true} onReachEnd={ () => {
-                if (hasNextPage)
+                if (hasNextPage && !isFetchingNextPage)
                     fetchNextPage()
             }}>
                 {media?.map((e, i) => <PosterCard data={e} mediaType={mediaType} key={`card-${i}`}/>)}
-                {hasNextPage ?? (<article className={styles.loader}>
+                {hasNextPage && (<article className={styles.loader}>
                     <FaSpinner className={`fa-spin`} size={32}/>
                 </article>)}
             </Slider>

@@ -2,16 +2,16 @@ import {DynamicPosterList, PosterList} from "@/components/movieCard/posterList";
 import {dummyRecommendations} from "@/services/movies/getMovie";
 import {SlideShow} from "@/components/SlideShow/SlideShow";
 import {GetStaticProps} from "next";
-import {getHomePage} from "@/services/movies/getHomePage";
+import {getHomePage} from "@/services/getHomePage";
 import {MovieResumeInterface} from "@/utils/models/Movies/MovieResume.interface";
-import {TvShowResume} from "@/utils/models/tv/TvShowResume";
 import {PopularMovieResponse} from "@/utils/models/popular/popularMovie.interface";
+import {PopularTvShowResponse} from "@/utils/models/popular/popularTv.interface";
 
 type props = {
     upcoming:MovieResumeInterface[],
     popular:{
         movie:PopularMovieResponse,
-        tv:TvShowResume[]
+        tv:PopularTvShowResponse
     }
 }
 
@@ -26,7 +26,11 @@ export default function Home({upcoming,popular}:props) {
                 queryData={popular.movie}
                 search={"popularMovies"}
             />
-            <PosterList mediaType={"tv"} title={"Popular Tv Shows"} media={popular.tv}/>
+            <DynamicPosterList
+                mediaType={"tv"}
+                title={"Popular Tv Shows"}
+                queryData={popular.tv}
+                search={"popularTv"}/>
             <PosterList mediaType={"movie"} title={"Comedy"} media={dummyRecommendations.results}/>
             <PosterList mediaType={"movie"} title={"Dramas"} media={dummyRecommendations.results}/>
         </div>
