@@ -26,6 +26,21 @@ export default function Home({upcoming,popular,trending}:props) {
         <div data-theme="light">
             <DynamicPosterList
                 mediaType={"movie"}
+                title={"Trending right now"}
+                queryData={trending}
+                search={"trending"}/>
+        </div>
+        <div data-theme="dark">
+            <PosterList
+                posterType={"backdrop"}
+                media={popular.movie.results}
+                title={"Upcoming movies"}
+                mediaType={"movie"}
+            />
+        </div>
+        <div data-theme="light">
+            <DynamicPosterList
+                mediaType={"movie"}
                 title={"Popular Movies"}
                 queryData={popular.movie}
                 search={"popularMovies"}
@@ -35,21 +50,6 @@ export default function Home({upcoming,popular,trending}:props) {
                 title={"Popular Tv Shows"}
                 queryData={popular.tv}
                 search={"popularTv"}/>
-        </div>
-            <div data-theme="dark">
-                <PosterList
-                    posterType={"backdrop"}
-                    media={popular.movie.results}
-                    title={"backdroplist"}
-                    mediaType={"movie"}
-                />
-            </div>
-        <div data-theme="light">
-            <DynamicPosterList
-                mediaType={"movie"}
-                title={"Trending right now"}
-                queryData={trending}
-                search={"trending"}/>
         </div>
     </main>
   )
