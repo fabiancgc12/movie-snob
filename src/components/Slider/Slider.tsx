@@ -1,5 +1,6 @@
 import styles from "./Slider.module.css"
 import {ReactNode, useCallback, useEffect, useRef, useState} from "react";
+import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 
 type props = {
     className?:string,
@@ -78,9 +79,7 @@ export const NextArrow = ({onClick,className = ""}:ArrowProps) => {
             className={`${styles.nextArrow} ${className}`}
             onClick={onClick}
         >
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-            </svg>
+            <AiOutlineRight size={32}/>
         </button>
     );
 }
@@ -91,9 +90,7 @@ export function PrevArrow({onClick,className = ""}:ArrowProps) {
             className={`${styles.prevArrow} ${className}`}
             onClick={onClick}
         >
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-            </svg>
+            <AiOutlineLeft size={32}/>
         </button>
     );
 }
