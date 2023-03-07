@@ -51,7 +51,6 @@ export function DynamicPosterList({title,queryData,mediaType,search}:posterlist)
         }
     })
     const media = data?.pages?.map(p => p.results).flat() ?? []
-    console.log({hasNextPage,isFetchingNextPage})
     return (
         <Section className={styles.section} title={title}>
             <Slider speed={450} arrowsInContent={true} onReachEnd={ () => {
