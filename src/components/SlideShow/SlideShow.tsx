@@ -22,6 +22,7 @@ export function SlideShow({children}:props){
                 </button>}
                 nextArrow={<NextArrow onClick={() => {}}/>}
                 indicators={true}
+                transitionDuration={500}
             >
                 {children}
             </Fade>

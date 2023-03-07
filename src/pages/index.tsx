@@ -21,7 +21,7 @@ export default function Home({upcoming,popular,trending}:props) {
   return (
     <main>
         <SlideShow>
-            {upcoming.map(u => <UpcomingBanner key={`banner-${u.id}`} data={u}/>)}
+            {upcoming.slice(0,8).map(u => <UpcomingBanner key={`banner-${u.id}`} data={u}/>)}
         </SlideShow>
         <div data-theme="light">
             <DynamicPosterList
