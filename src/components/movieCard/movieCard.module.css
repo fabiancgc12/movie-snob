@@ -5,6 +5,11 @@
     cursor: pointer;
     isolation: isolate;
     overflow: hidden;
+    width: 200px;
+}
+
+.backdropCard{
+    width: 300px;
 }
 
 .info{
@@ -16,8 +21,13 @@
 
 .poster{
     position: relative;
-    width: 200px;
+    width: 100%;
     aspect-ratio: 1 / 1.5;
+}
+
+.backdropCard .poster{
+    aspect-ratio: 16 / 9;
+
 }
 
 @media (min-width: 768px) {
