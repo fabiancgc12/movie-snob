@@ -36,7 +36,7 @@ type posterlist = {
 }
 
 export function DynamicPosterList({title,queryData,mediaType,search}:posterlist){
-    let {data,hasNextPage,isFetchingNextPage,fetchNextPage} = useInfiniteQuery<typeof queryData>({
+    let {data,hasNextPage,isFetching,isFetchingNextPage,fetchNextPage} = useInfiniteQuery<typeof queryData>({
         queryKey: [search],
         queryFn: ({pageParam}) => fetch(`api/${search}?page=${pageParam ?? queryData.page}`).then(v => v.json()),
         initialData: {
@@ -54,7 +54,7 @@ export function DynamicPosterList({title,queryData,mediaType,search}:posterlist)
     return (
         <Section className={styles.section} title={title}>
             <Slider speed={450} arrowsInContent={true} onReachEnd={ () => {
-                if (hasNextPage && !isFetchingNextPage)
+                if (hasNextPage && !isFetchingNextPage && !isFetching)
                     fetchNextPage()
             }}>
                 {media?.map((e, i) => <PosterCard data={e} mediaType={mediaType} key={`card-${i}`}/>)}

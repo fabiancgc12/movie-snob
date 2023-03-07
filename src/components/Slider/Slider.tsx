@@ -50,8 +50,10 @@ export function Slider({className = "",children,arrowsInContent = false,speed,on
     },[onScroll])
 
     useEffect(() => {
-        if (!showNextArrow && onReachEnd)
+        if (!showNextArrow && onReachEnd){
             onReachEnd()
+            moveSlider(-20)
+        }
     },[showNextArrow,onReachEnd])
 
     const arrowsInContentStyle = arrowsInContent ? styles.arrowsInContent : ""
