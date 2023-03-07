@@ -14,10 +14,7 @@ type props = {
         movie:PopularMovieResponse,
         tv:PopularTvShowResponse
     },
-    trending:{
-        movie:TrendingResponseInterface,
-        tv:TrendingResponseInterface,
-    }
+    trending:TrendingResponseInterface
 }
 
 export default function Home({upcoming,popular,trending}:props) {
@@ -50,14 +47,9 @@ export default function Home({upcoming,popular,trending}:props) {
         <div data-theme="light">
             <DynamicPosterList
                 mediaType={"movie"}
-                title={"Trending movies"}
-                queryData={trending.movie}
-                search={"trendingMovie"}/>
-            <DynamicPosterList
-                mediaType={"tv"}
-                title={"Trending tv shows"}
-                queryData={trending.tv}
-                search={"trendingTv"}/>
+                title={"Trending right now"}
+                queryData={trending}
+                search={"trending"}/>
         </div>
     </main>
   )

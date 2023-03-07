@@ -13,29 +13,15 @@ export async function getHomePage():Promise<{
         movie:PopularMovieResponse,
         tv:PopularTvShowResponse,
     },
-    trending:{
-        movie:TrendingResponseInterface,
-        tv:TrendingResponseInterface,
-    }
+    trending:TrendingResponseInterface
 }>{
     const [upcoming,popularMovies,popularTv,trending] =  await Promise.all([getUpcoming(),getPopularMovies(),getPopularTv(),getTrending("all")])
-    const trendingMovies:Trending[] = []
-    const trendingTv:Trending[] = []
-    trending.results.forEach(t => {
-        if (t.media_type == "movie")
-            trendingMovies.push(t)
-        else if (t.media_type == "tv")
-            trendingTv.push(t)
-    })
     return {
         upcoming:upcoming.results,
         popular:{
             movie:popularMovies,
             tv:popularTv
         },
-        trending: {
-            movie: {...trending,results:trendingMovies},
-            tv: {...trending,results:trendingTv}
-        }
+        trending: trending
     }
 }
