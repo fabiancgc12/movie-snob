@@ -6,6 +6,7 @@ import {MovieResumeInterface} from "@/utils/models/Movies/MovieResume.interface"
 import {PopularMovieResponse} from "@/utils/models/popular/popularMovie.interface";
 import {PopularTvShowResponse} from "@/utils/models/popular/popularTv.interface";
 import {TrendingResponseInterface} from "@/utils/models/trending/TrendingMovieResponse";
+import {UpcomingBanner} from "@/components/mainBanner/UpcomingBanner";
 
 type props = {
     upcoming:MovieResumeInterface[],
@@ -22,7 +23,9 @@ type props = {
 export default function Home({upcoming,popular,trending}:props) {
   return (
     <main>
-        <SlideShow upcoming={upcoming}/>
+        <SlideShow>
+            {upcoming.map(u => <UpcomingBanner key={`banner-${u.id}`} data={u}/>)}
+        </SlideShow>
         <div data-theme="light">
             <DynamicPosterList
                 mediaType={"movie"}
