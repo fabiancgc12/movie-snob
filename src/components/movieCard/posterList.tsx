@@ -54,14 +54,18 @@ export function DynamicPosterList({title,queryData,mediaType,search}:posterlist)
     const media = data?.pages?.map(p => p.results).flat() ?? []
     return (
         <Section className={styles.section} title={title}>
-            <Slider speed={450} arrowsInContent={true} onReachEnd={ () => {
+            <Slider
+                speed={450}
+                arrowsInContent={true}
+                onReachEnd={ () => {
                 if (hasNextPage && !isFetchingNextPage && !isFetching)
                     fetchNextPage()
-            }}>
+                }}
+                endElement={hasNextPage && (<div className={styles.loader}>
+                        <FaSpinner className={`fa-spin`} size={32}/>
+                    </div>)}
+            >
                 {media?.map((e, i) => <PosterCard data={e} mediaType={mediaType} key={`card-${i}`}/>)}
-                {hasNextPage && (<article className={styles.loader}>
-                    <FaSpinner className={`fa-spin`} size={32}/>
-                </article>)}
             </Slider>
         </Section>
     )

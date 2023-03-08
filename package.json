@@ -20,6 +20,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.8.0",
+    "react-intersection-observer": "^9.4.3",
     "react-share": "^4.4.1",
     "react-slideshow-image": "^4.2.1",
     "sharp": "^0.31.3",
