@@ -3,25 +3,18 @@ import {SlideShow} from "@/components/SlideShow/SlideShow";
 import {GetStaticProps} from "next";
 import {getHomePage} from "@/services/getHomePage";
 import {MovieResumeInterface} from "@/models/Movies/MovieResume.interface";
-import {PopularMovieResponse} from "@/models/popular/popularMovie.interface";
-import {PopularTvShowResponse} from "@/models/popular/popularTv.interface";
-import {TrendingResponseInterface} from "@/models/trending/TrendingMovieResponse";
 import {UpcomingBanner} from "@/components/mainBanner/UpcomingBanner";
 import {useInView} from "react-intersection-observer";
 import {Spinner} from "@/components/common/Spinner";
 import {useEffect, useState} from "react";
 import {ApiGenres} from "@/utils/apiGenres";
+import {dehydrate, QueryClient} from "@tanstack/react-query";
 
 type props = {
     upcoming:MovieResumeInterface[],
-    popular:{
-        movie:PopularMovieResponse,
-        tv:PopularTvShowResponse
-    },
-    trending:TrendingResponseInterface
 }
 
-export default function Home({upcoming,popular,trending}:props) {
+export default function Home({upcoming}:props) {
   return (
     <main>
         <SlideShow>
@@ -31,13 +24,12 @@ export default function Home({upcoming,popular,trending}:props) {
             <DynamicPosterList
                 mediaType={"movie"}
                 title={"Trending right now"}
-                initialData={trending}
                 search={"trending"}/>
         </div>
         <div data-theme="dark">
             <PosterList
                 posterType={"backdrop"}
-                media={popular.movie.results}
+                media={upcoming}
                 title={"Upcoming movies"}
                 mediaType={"movie"}
             />
@@ -46,13 +38,11 @@ export default function Home({upcoming,popular,trending}:props) {
             <DynamicPosterList
                 mediaType={"movie"}
                 title={"Popular Movies"}
-                initialData={popular.movie}
                 search={"popularMovies"}
             />
             <DynamicPosterList
                 mediaType={"tv"}
                 title={"Popular Tv Shows"}
-                initialData={popular.tv}
                 search={"popularTv"}/>
         </div>
         <GenreSection/>
@@ -97,9 +87,16 @@ function GenreSection(){
 
 
 export const getStaticProps:GetStaticProps = async () => {
+    const queryClient = new QueryClient()
     const data = await getHomePage()
+    await queryClient.prefetchInfiniteQuery(["trending"],() => data.trending)
+    await queryClient.prefetchInfiniteQuery(["popularMovies"],() => data.popular.movie)
+    await queryClient.prefetchInfiniteQuery(["popularTv"],() => data.popular.tv)
     return {
-        props: data,
+        props: {
+            ...data,
+            dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
+        },
         revalidate:600 //revalidate in 10 minutes
     }
 }

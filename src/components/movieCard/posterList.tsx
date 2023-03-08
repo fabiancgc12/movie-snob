@@ -31,33 +31,25 @@ export function PosterList({title,media,mediaType,posterType}:props){
 
 type posterlist = {
     title:string,
-    initialData?:PopularMovieResponse | PopularTvShowResponse | TrendingResponseInterface,
     mediaType:"tv" | "movie",
     search:string
 }
 
-const initial = {
-    page:1,
-    results:       [],
-    total_pages:   100,
-    total_results: 1000
-}
-
-export function DynamicPosterList({title,initialData = initial ,mediaType,search}:posterlist){
+export function DynamicPosterList({title,mediaType,search}:posterlist){
     let {data,hasNextPage,isFetching,isFetchingNextPage,fetchNextPage} = useInfiniteQuery<PopularMovieResponse | PopularTvShowResponse | TrendingResponseInterface>({
         queryKey: [search],
-        queryFn: ({pageParam}) => fetch(`api/${search}?page=${pageParam ?? initialData.page}`).then(v => v.json()),
-        initialData: {
-            pages:[initialData],
-            pageParams:[1]
-        },
-        keepPreviousData:true,
         enabled:false,
+        queryFn: ({pageParam = 1}) => fetch(`api/${search}?page=${pageParam ?? 1}`).then(v => v.json()),
         getNextPageParam: (lastPage) => {
             if (lastPage.total_pages == lastPage.page) return false
             return lastPage.page + 1
         }
     })
+    if (!data) return (
+        <Section className={styles.section} title={title}>
+            <Spinner/>
+        </Section>
+    )
     const media = data?.pages?.map(p => p.results).flat() ?? []
     return (
         <Section className={styles.section} title={title}>
