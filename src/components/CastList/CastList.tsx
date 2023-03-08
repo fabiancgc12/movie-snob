@@ -3,7 +3,7 @@ import {MemberCard} from "@/components/CrewMember/CrewMemberCard";
 import {Section} from "@/components/Section/Section";
 import {Slider} from "@/components/Slider/Slider";
 import {ReactNode} from "react";
-import {PeopleDto} from "@/utils/models/dto/Credit.dto";
+import {PeopleDto} from "@/models/dto/Credit.dto";
 
 type props = {
     children:ReactNode

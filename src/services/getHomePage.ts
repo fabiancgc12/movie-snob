@@ -1,10 +1,10 @@
-import {MovieResumeInterface} from "@/utils/models/Movies/MovieResume.interface";
+import {MovieResumeInterface} from "@/models/Movies/MovieResume.interface";
 import {getPopularMovies} from "@/services/movies/getPopularMovies";
-import {PopularMovieResponse} from "@/utils/models/popular/popularMovie.interface";
+import {PopularMovieResponse} from "@/models/popular/popularMovie.interface";
 import {getPopularTv} from "@/services/tv/getPopularTv";
-import {PopularTvShowResponse} from "@/utils/models/popular/popularTv.interface";
+import {PopularTvShowResponse} from "@/models/popular/popularTv.interface";
 import {getTrending} from "@/services/trending/getTrending";
-import {Trending, TrendingResponseInterface} from "@/utils/models/trending/TrendingMovieResponse";
+import {TrendingResponseInterface} from "@/models/trending/TrendingMovieResponse";
 import {getUpcoming} from "@/services/movies/getUpcoming";
 
 export async function getHomePage():Promise<{

@@ -1,4 +1,4 @@
-import {VideoTrailerInterface} from "@/utils/models/Movies/VideoMedia.interface";
+import {VideoTrailerInterface} from "@/models/Movies/VideoMedia.interface";
 import { Video } from "./Video";
 import styles from "@/components/Video/Video.module.css";
 import Image from "next/image";

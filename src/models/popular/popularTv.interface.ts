@@ -1,4 +1,4 @@
-import {TvShowResume} from "@/utils/models/tv/TvShowResume";
+import {TvShowResume} from "@/models/tv/TvShowResume";
 
 export interface PopularTvShowResponse {
     page:          number;

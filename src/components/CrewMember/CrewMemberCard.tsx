@@ -2,7 +2,7 @@ import styles from "./CrewMemberCard.module.css";
 import Image from "next/image";
 import {generateImageUrl} from "@/utils/functions/generateImageUrl";
 import placeholder from "../../../public/noPhotographyPlaceholder.svg"
-import {PeopleDto} from "@/utils/models/dto/Credit.dto";
+import {PeopleDto} from "@/models/dto/Credit.dto";
 
 type props = {
     size:"sm" | "md",

@@ -1,5 +1,5 @@
-import {CreditsResponseInterface} from "@/utils/models/Movies/CreditsResponse.interface";
-import {CreditsDto, PeopleDto} from "@/utils/models/dto/Credit.dto";
+import {CreditsResponseInterface} from "@/models/Movies/CreditsResponse.interface";
+import {CreditsDto, PeopleDto} from "@/models/dto/Credit.dto";
 
 export function formatMovieCredits(movieCredits:CreditsResponseInterface):CreditsDto{
     //just returning the first 12 member of the main cast and

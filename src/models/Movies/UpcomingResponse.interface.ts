@@ -1,4 +1,4 @@
-import {MovieResumeInterface} from "@/utils/models/Movies/MovieResume.interface";
+import {MovieResumeInterface} from "@/models/Movies/MovieResume.interface";
 
 export interface UpcomingInterfaceResponse {
     dates: Dates;

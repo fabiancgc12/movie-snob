@@ -4,7 +4,7 @@ import {generateImageUrl} from "@/utils/functions/generateImageUrl";
 import {CSSProperties, useMemo} from "react";
 import {ActionToolTip} from "@/components/common/ActionToolTip";
 import {BookmarkButton} from "@/components/common/ActionButton/chechMarkButton";
-import {MovieResumeInterface} from "@/utils/models/Movies/MovieResume.interface";
+import {MovieResumeInterface} from "@/models/Movies/MovieResume.interface";
 import {LikeButton} from "@/components/common/ActionButton/LikeButton";
 import {BsThreeDotsVertical} from "react-icons/bs";
 

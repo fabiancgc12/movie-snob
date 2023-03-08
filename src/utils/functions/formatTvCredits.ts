@@ -1,5 +1,5 @@
-import {AgregateCastResponse} from "@/utils/models/tv/TvCast.interface";
-import {CreditsDto, PeopleDto} from "@/utils/models/dto/Credit.dto";
+import {AgregateCastResponse} from "@/models/tv/TvCast.interface";
+import {CreditsDto, PeopleDto} from "@/models/dto/Credit.dto";
 
 export function formatTvCredits(tvCredits:AgregateCastResponse):CreditsDto{
     //just returning the first 12 member of the main cast and

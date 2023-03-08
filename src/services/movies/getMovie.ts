@@ -1,19 +1,19 @@
-import {CreditsResponseInterface} from "@/utils/models/Movies/CreditsResponse.interface";
-import {MovieInterface} from "@/utils/models/Movies/Movie.interface";
-import {VideoMediaResponse, VideoTrailerInterface} from "@/utils/models/Movies/VideoMedia.interface";
-import {ImageMediaResponse} from "@/utils/models/Movies/ImageMedia.interface";
-import {ProvidersResponseInterface} from "@/utils/models/Movies/Providers.interface";
+import {CreditsResponseInterface} from "@/models/Movies/CreditsResponse.interface";
+import {MovieInterface} from "@/models/Movies/Movie.interface";
+import {VideoMediaResponse, VideoTrailerInterface} from "@/models/Movies/VideoMedia.interface";
+import {ImageMediaResponse} from "@/models/Movies/ImageMedia.interface";
+import {ProvidersResponseInterface} from "@/models/Movies/Providers.interface";
 import {
     RecommendationInterface,
     RecommendationResponseInterface
-} from "@/utils/models/Movies/RecomendationResponse.interface";
+} from "@/models/Movies/RecomendationResponse.interface";
 import {formatVideoResponse} from "@/utils/functions/formatVideoResponse";
 import {formatImagesResponse} from "@/utils/functions/formatImagesResponse";
 import {formatProvidersResponse} from "@/utils/functions/formatProvidersResponse";
-import {ProvidersDto} from "@/utils/models/dto/ProvidersDto";
+import {ProvidersDto} from "@/models/dto/ProvidersDto";
 import {formatRecommendations} from "@/utils/functions/formatRecommendations";
 import {formatMovieCredits} from "@/utils/functions/formatMovieCredits";
-import {CreditsDto} from "@/utils/models/dto/Credit.dto";
+import {CreditsDto} from "@/models/dto/Credit.dto";
 
 export const dummyRecommendations = {"page":1,"results":[{"adult":false,"backdrop_path":"/suaEOtk1N1sgg2MTM7oZd2cfVp3.jpg","id":680,"title":"Pulp Fiction","original_language":"en","original_title":"Pulp Fiction","overview":"A burger-loving hit man, his philosophical partner, a drug-addled gangster's moll and a washed-up boxer converge in this sprawling, comedic crime caper. Their adventures unfurl in three stories that ingeniously trip back and forth in time.","poster_path":"/fIE3lAGcZDV1G6XM5KmuWnNsPp1.jpg","media_type":"movie","genre_ids":[53,80],"popularity":66.399,"release_date":"1994-09-10","video":false,"vote_average":8.49,"vote_count":24650},{"adult":false,"backdrop_path":"/hh28CTWLdxTXA5yJgefZ6gUnFDo.jpg","id":807,"title":"Se7en","original_language":"en","original_title":"Se7en","overview":"Two homicide detectives are on a desperate hunt for a serial killer whose crimes are based on the \"seven deadly sins\" in this dark and haunting film that takes viewers from the tortured remains of one victim to the next. The seasoned Det. Sommerset researches each sin in an effort to get inside the killer's mind, while his novice partner, Mills, scoffs at his efforts to unravel the case.","poster_path":"/69Sns8WoET6CfaYlIkHbla4l7nC.jpg","media_type":"movie","genre_ids":[80,9648,53],"popularity":57.235,"release_date":"1995-09-22","video":false,"vote_average":8.362,"vote_count":18349},{"adult":false,"backdrop_path":"/8ZTVqvKDQ8emSGUEMjsS4yHAwrp.jpg","id":27205,"title":"Inception","original_language":"en","original_title":"Inception","overview":"Cobb, a skilled thief who commits corporate espionage by infiltrating the subconscious of his targets is offered a chance to regain his old life as payment for a task considered to be impossible: \"inception\", the implantation of another person's idea into a target's subconscious.","poster_path":"/edv5CZvWj09upOsy2Y6IwDhK8bt.jpg","media_type":"movie","genre_ids":[28,878,12],"popularity":103.95,"release_date":"2010-07-15","video":false,"vote_average":8.362,"vote_count":33161},
         {

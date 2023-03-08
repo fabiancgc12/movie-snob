@@ -1,4 +1,4 @@
-import {PopularMovieResponse} from "@/utils/models/popular/popularMovie.interface";
+import {PopularMovieResponse} from "@/models/popular/popularMovie.interface";
 
 export async function getPopularMovies(page:number = 1):Promise<PopularMovieResponse>{
 

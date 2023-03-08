@@ -1,19 +1,19 @@
-import {VideoMediaResponse, VideoTrailerInterface} from "@/utils/models/Movies/VideoMedia.interface";
-import {TvShowInterface} from "@/utils/models/tv/TvShow.interface";
-import {ImageMediaResponse} from "@/utils/models/Movies/ImageMedia.interface";
+import {VideoMediaResponse, VideoTrailerInterface} from "@/models/Movies/VideoMedia.interface";
+import {TvShowInterface} from "@/models/tv/TvShow.interface";
+import {ImageMediaResponse} from "@/models/Movies/ImageMedia.interface";
 import {
     RecommendationInterface,
     RecommendationResponseInterface
-} from "@/utils/models/Movies/RecomendationResponse.interface";
-import {ProvidersResponseInterface} from "@/utils/models/Movies/Providers.interface";
-import {AgregateCastResponse} from "@/utils/models/tv/TvCast.interface";
+} from "@/models/Movies/RecomendationResponse.interface";
+import {ProvidersResponseInterface} from "@/models/Movies/Providers.interface";
+import {AgregateCastResponse} from "@/models/tv/TvCast.interface";
 import {formatVideoResponse} from "@/utils/functions/formatVideoResponse";
 import {formatImagesResponse} from "@/utils/functions/formatImagesResponse";
 import {formatProvidersResponse} from "@/utils/functions/formatProvidersResponse";
-import {ProvidersDto} from "@/utils/models/dto/ProvidersDto";
+import {ProvidersDto} from "@/models/dto/ProvidersDto";
 import {formatRecommendations} from "@/utils/functions/formatRecommendations";
 import {formatTvCredits} from "@/utils/functions/formatTvCredits";
-import {CreditsDto} from "@/utils/models/dto/Credit.dto";
+import {CreditsDto} from "@/models/dto/Credit.dto";
 
 type ApiResponse = TvShowInterface & {
     videos:VideoMediaResponse,

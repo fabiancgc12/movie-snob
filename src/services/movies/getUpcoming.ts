@@ -1,4 +1,4 @@
-import {UpcomingMoviesResponse} from "@/utils/models/Movies/UpcomingMoviesResponse";
+import {UpcomingMoviesResponse} from "@/models/Movies/UpcomingMoviesResponse";
 
 export async function getUpcoming():Promise<UpcomingMoviesResponse>{
     const response = await fetch(

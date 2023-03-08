@@ -3,7 +3,7 @@ import {
     ProductionCompaniesEntity,
     ProductionCountriesEntity,
     SpokenLanguagesEntity
-} from "@/utils/models/Movies/Movie.interface";
+} from "@/models/Movies/Movie.interface";
 
 export interface TvShowInterface {
     adult: boolean;

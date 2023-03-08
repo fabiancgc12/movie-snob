@@ -1,18 +1,18 @@
-import {VideoTrailerInterface} from "@/utils/models/Movies/VideoMedia.interface";
+import {VideoTrailerInterface} from "@/models/Movies/VideoMedia.interface";
 import {GetStaticPaths, GetStaticProps} from "next";
 import {getTvShow} from "@/services/tv/getTv";
-import {TvShowInterface} from "@/utils/models/tv/TvShow.interface";
+import {TvShowInterface} from "@/models/tv/TvShow.interface";
 import {MediaBanner} from "@/components/ProductBanner/ProductBanner";
 import {PosterList} from "@/components/movieCard/posterList";
-import { RecommendationInterface } from "@/utils/models/Movies/RecomendationResponse.interface";
+import { RecommendationInterface } from "@/models/Movies/RecomendationResponse.interface";
 import styles from "@/pages/movie/id.module.css";
 import {TvCast} from "@/components/CastList/CastList";
 import {Media} from "@/components/media/Media";
-import {ImageMediaResponse} from "@/utils/models/Movies/ImageMedia.interface";
+import {ImageMediaResponse} from "@/models/Movies/ImageMedia.interface";
 import { TvExtraInfo } from "@/components/ExtraInfo/TvExtraInfo";
 import {SeasonsList} from "@/components/Seasons/SeasonsList";
-import {ProvidersDto} from "@/utils/models/dto/ProvidersDto";
-import {CreditsDto, PeopleDto} from "@/utils/models/dto/Credit.dto";
+import {ProvidersDto} from "@/models/dto/ProvidersDto";
+import {CreditsDto, PeopleDto} from "@/models/dto/Credit.dto";
 import {ProductHead} from "@/components/Layout/ProductHead";
 
 type props = {

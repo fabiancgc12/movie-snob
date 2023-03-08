@@ -1,15 +1,15 @@
 import styles from "@/components/movieCard/cardList.module.css";
 import {PosterCard} from "@/components/movieCard/posterCard";
 import {Section} from "@/components/Section/Section";
-import {RecommendationInterface} from "@/utils/models/Movies/RecomendationResponse.interface";
+import {RecommendationInterface} from "@/models/Movies/RecomendationResponse.interface";
 import {Slider} from "@/components/Slider/Slider";
-import {MovieResumeInterface} from "@/utils/models/Movies/MovieResume.interface";
-import {TvShowResume} from "@/utils/models/tv/TvShowResume";
+import {MovieResumeInterface} from "@/models/Movies/MovieResume.interface";
+import {TvShowResume} from "@/models/tv/TvShowResume";
 import {useInfiniteQuery} from "@tanstack/react-query";
-import {PopularMovieResponse} from "@/utils/models/popular/popularMovie.interface";
+import {PopularMovieResponse} from "@/models/popular/popularMovie.interface";
 import {FaSpinner} from "react-icons/fa";
-import {PopularTvShowResponse} from "@/utils/models/popular/popularTv.interface";
-import {TrendingResponseInterface} from "@/utils/models/trending/TrendingMovieResponse";
+import {PopularTvShowResponse} from "@/models/popular/popularTv.interface";
+import {TrendingResponseInterface} from "@/models/trending/TrendingMovieResponse";
 
 export type props = {
     title:string,

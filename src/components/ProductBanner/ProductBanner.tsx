@@ -8,10 +8,10 @@ import {BookmarkButton} from "@/components/common/ActionButton/chechMarkButton";
 import {LikeButton} from "@/components/common/ActionButton/LikeButton";
 import {ShareButton} from "@/components/common/ActionButton/ShareButton";
 import {MemberCard} from "@/components/CrewMember/CrewMemberCard";
-import {MovieInterface} from "@/utils/models/Movies/Movie.interface";
-import {VideoTrailerInterface} from "@/utils/models/Movies/VideoMedia.interface";
-import {TvShowInterface} from "@/utils/models/tv/TvShow.interface";
-import {PeopleDto} from "@/utils/models/dto/Credit.dto";
+import {MovieInterface} from "@/models/Movies/Movie.interface";
+import {VideoTrailerInterface} from "@/models/Movies/VideoMedia.interface";
+import {TvShowInterface} from "@/models/tv/TvShow.interface";
+import {PeopleDto} from "@/models/dto/Credit.dto";
 import {generateUrlPage} from "@/utils/functions/generateUrlPage";
 
 type props = {

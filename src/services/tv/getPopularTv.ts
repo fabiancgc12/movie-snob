@@ -1,4 +1,4 @@
-import {PopularTvShowResponse} from "@/utils/models/popular/popularTv.interface";
+import {PopularTvShowResponse} from "@/models/popular/popularTv.interface";
 
 export async function getPopularTv(page:number = 1):Promise<PopularTvShowResponse>{
 

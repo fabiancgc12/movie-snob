@@ -1,4 +1,4 @@
-import {RecommendationResponseInterface} from "@/utils/models/Movies/RecomendationResponse.interface";
+import {RecommendationResponseInterface} from "@/models/Movies/RecomendationResponse.interface";
 
 export function formatRecommendations(recommendations:RecommendationResponseInterface){
     //just returning the first 12 recommendation

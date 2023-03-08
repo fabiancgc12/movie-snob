@@ -1,9 +1,9 @@
-import {TvShowInterface} from "@/utils/models/tv/TvShow.interface";
+import {TvShowInterface} from "@/models/tv/TvShow.interface";
 import styles from "@/components/ExtraInfo/ExtraInfo.module.css";
 import {formatDate} from "@/utils/functions/formatDate";
 import { ExtraInfo } from "./ExtraInfo";
 import {Providers} from "@/components/ExtraInfo/Providers";
-import {ProvidersDto} from "@/utils/models/dto/ProvidersDto";
+import {ProvidersDto} from "@/models/dto/ProvidersDto";
 import {CompanyLogo} from "@/components/ExtraInfo/CompanyLogo";
 
 type props = {

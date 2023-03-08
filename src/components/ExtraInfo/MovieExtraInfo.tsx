@@ -1,10 +1,10 @@
 import styles from "@/components/ExtraInfo/ExtraInfo.module.css";
 import {formatDate} from "@/utils/functions/formatDate";
 import {formatCurrency} from "@/utils/functions/formatCurrency";
-import {MovieInterface} from "@/utils/models/Movies/Movie.interface";
+import {MovieInterface} from "@/models/Movies/Movie.interface";
 import { ExtraInfo } from "./ExtraInfo";
 import { Providers } from "./Providers";
-import {ProvidersDto} from "@/utils/models/dto/ProvidersDto";
+import {ProvidersDto} from "@/models/dto/ProvidersDto";
 import {CompanyLogo} from "@/components/ExtraInfo/CompanyLogo";
 
 type props = {

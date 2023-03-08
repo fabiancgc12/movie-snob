@@ -1,17 +1,17 @@
 import {GetStaticPaths, GetStaticProps} from "next";
 import styles from "./id.module.css";
 import {getMovie} from "@/services/movies/getMovie";
-import {MovieInterface} from "@/utils/models/Movies/Movie.interface";
-import {VideoTrailerInterface} from "@/utils/models/Movies/VideoMedia.interface";
-import {ImageMediaResponse} from "@/utils/models/Movies/ImageMedia.interface";
+import {MovieInterface} from "@/models/Movies/Movie.interface";
+import {VideoTrailerInterface} from "@/models/Movies/VideoMedia.interface";
+import {ImageMediaResponse} from "@/models/Movies/ImageMedia.interface";
 import {Media} from "@/components/media/Media";
 import { MovieCast} from "@/components/CastList/CastList";
 import {PosterList} from "@/components/movieCard/posterList";
-import {RecommendationInterface} from "@/utils/models/Movies/RecomendationResponse.interface";
+import {RecommendationInterface} from "@/models/Movies/RecomendationResponse.interface";
 import { MediaBanner } from "@/components/ProductBanner/ProductBanner";
 import {MovieExtraInfo} from "@/components/ExtraInfo/MovieExtraInfo";
-import {ProvidersDto} from "@/utils/models/dto/ProvidersDto";
-import {CreditsDto} from "@/utils/models/dto/Credit.dto";
+import {ProvidersDto} from "@/models/dto/ProvidersDto";
+import {CreditsDto} from "@/models/dto/Credit.dto";
 import {ProductHead} from "@/components/Layout/ProductHead";
 
 type props = {

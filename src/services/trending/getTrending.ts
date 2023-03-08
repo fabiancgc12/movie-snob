@@ -1,4 +1,4 @@
-import {TrendingResponseInterface} from "@/utils/models/trending/TrendingMovieResponse";
+import {TrendingResponseInterface} from "@/models/trending/TrendingMovieResponse";
 
 export async function getTrending(media:"all"|"movie"|"tv",page=1):Promise<TrendingResponseInterface>{
     const response = await fetch(

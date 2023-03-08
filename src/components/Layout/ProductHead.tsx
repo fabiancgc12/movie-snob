@@ -1,9 +1,9 @@
-import {TvShowInterface} from "@/utils/models/tv/TvShow.interface";
-import {MovieInterface} from "@/utils/models/Movies/Movie.interface";
+import {TvShowInterface} from "@/models/tv/TvShow.interface";
+import {MovieInterface} from "@/models/Movies/Movie.interface";
 import {generateUrlPage} from "@/utils/functions/generateUrlPage";
 import {generateImageUrl} from "@/utils/functions/generateImageUrl";
 import Head from "next/head";
-import {PeopleDto} from "@/utils/models/dto/Credit.dto";
+import {PeopleDto} from "@/models/dto/Credit.dto";
 
 type props = {
     cast:PeopleDto[],
