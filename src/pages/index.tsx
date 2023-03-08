@@ -7,6 +7,10 @@ import {PopularMovieResponse} from "@/models/popular/popularMovie.interface";
 import {PopularTvShowResponse} from "@/models/popular/popularTv.interface";
 import {TrendingResponseInterface} from "@/models/trending/TrendingMovieResponse";
 import {UpcomingBanner} from "@/components/mainBanner/UpcomingBanner";
+import {useInView} from "react-intersection-observer";
+import {Spinner} from "@/components/common/Spinner";
+import {useEffect, useState} from "react";
+import {ApiGenres} from "@/utils/apiGenres";
 
 type props = {
     upcoming:MovieResumeInterface[],
@@ -27,7 +31,7 @@ export default function Home({upcoming,popular,trending}:props) {
             <DynamicPosterList
                 mediaType={"movie"}
                 title={"Trending right now"}
-                queryData={trending}
+                initialData={trending}
                 search={"trending"}/>
         </div>
         <div data-theme="dark">
@@ -42,19 +46,54 @@ export default function Home({upcoming,popular,trending}:props) {
             <DynamicPosterList
                 mediaType={"movie"}
                 title={"Popular Movies"}
-                queryData={popular.movie}
+                initialData={popular.movie}
                 search={"popularMovies"}
             />
             <DynamicPosterList
                 mediaType={"tv"}
                 title={"Popular Tv Shows"}
-                queryData={popular.tv}
+                initialData={popular.tv}
                 search={"popularTv"}/>
         </div>
+        <GenreSection/>
     </main>
   )
 }
 
+const genresLimit = 9;
+
+function GenreSection(){
+    const [genres, setGenres] = useState<typeof ApiGenres>([]);
+    const [loadMoreRef,inView] = useInView({
+        threshold:1,
+        rootMargin:"150px",
+    });
+    useEffect(() => {
+        if (inView){
+            setGenres(current => {
+                if (ApiGenres.length > current.length && current.length <= (genresLimit - 1)) {
+                    return ApiGenres.slice(0,current.length + 3)
+                }
+                return [...current]
+            })
+        }
+    }, [inView]);
+
+    return (
+        <div>
+            {genres.map((g,i) => <div
+                key={`genre-section-${g.id}`}
+                data-theme={(i % 3 == 0) ? "dark" : "light"}
+            >
+                {g.name}
+            </div>)
+            }
+            {genres.length <= (genresLimit - 1) && <div ref={loadMoreRef}>
+                <Spinner/>
+            </div>}
+        </div>
+    )
+}
 
 
 export const getStaticProps:GetStaticProps = async () => {
