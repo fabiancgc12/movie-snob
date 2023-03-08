@@ -7,9 +7,9 @@ import {MovieResumeInterface} from "@/models/Movies/MovieResume.interface";
 import {TvShowResume} from "@/models/tv/TvShowResume";
 import {useInfiniteQuery} from "@tanstack/react-query";
 import {PopularMovieResponse} from "@/models/popular/popularMovie.interface";
-import {FaSpinner} from "react-icons/fa";
 import {PopularTvShowResponse} from "@/models/popular/popularTv.interface";
 import {TrendingResponseInterface} from "@/models/trending/TrendingMovieResponse";
+import {Spinner} from "@/components/common/Spinner";
 
 export type props = {
     title:string,
@@ -61,9 +61,7 @@ export function DynamicPosterList({title,queryData,mediaType,search}:posterlist)
                 if (hasNextPage && !isFetchingNextPage && !isFetching)
                     fetchNextPage()
                 }}
-                endElement={hasNextPage && (<div className={styles.loader}>
-                        <FaSpinner className={`fa-spin`} size={32}/>
-                    </div>)}
+                endElement={hasNextPage && <Spinner/>}
             >
                 {media?.map((e, i) => <PosterCard data={e} mediaType={mediaType} key={`card-${i}`}/>)}
             </Slider>
