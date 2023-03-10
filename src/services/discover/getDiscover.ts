@@ -1,23 +1,25 @@
 import {DiscoverResponseInterface} from "@/models/discover/discoverResponse.interface";
 
 type options = {
-    withGenres?:number[],
+    genre?:string | string[],
     page?:number
 }
-export async function getDiscover({withGenres,page=1}:options):Promise<DiscoverResponseInterface>{
-    let parameters = ""
-    if (withGenres && withGenres?.length > 0){
-        parameters+=`with_genres=${withGenres.join(",")}`
+export async function getDiscover({genre,page=1}:options):Promise<DiscoverResponseInterface>{
+    let parameters:Record<string, any> = {}
+    parameters.page = page
+    if (genre){
+        if (Array.isArray(genre))
+            parameters.with_genres = genre.join(",")
+        else
+            parameters.with_genres = genre
     }
-    const [moviesResponse,tvResponse] = await Promise.all([
-        fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.TMDB_KEY}&page=${page}&${parameters}`),
-        fetch(`https://api.themoviedb.org/3/discover/tv?api_key=${process.env.TMDB_KEY}&page=${page}&${parameters}`)
-    ])
-    const movies = await moviesResponse.json() as DiscoverResponseInterface;
-    const tv = await tvResponse.json() as DiscoverResponseInterface;
-    const result = [...movies.results,...tv.results].sort((a,b) => Number(a.id) - Number(b.id))
-    return {
-        ...movies,
-        results:result
-    }
+
+    const params = new URLSearchParams(parameters).toString();
+
+    console.log(parameters)
+    console.log(params)
+    console.log(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.TMDB_KEY}&${params}`)
+    const response = await fetch(
+        `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.TMDB_KEY}&${params}`)
+    return  await response.json() as DiscoverResponseInterface;
 }

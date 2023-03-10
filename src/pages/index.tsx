@@ -23,8 +23,10 @@ export default function Home({upcoming}:props) {
         <div data-theme="light">
             <DynamicPosterList
                 mediaType={"movie"}
+                enabled={false}
                 title={"Trending right now"}
-                search={"trending"}/>
+                api={"trending"}
+                queryKey={["trending"]}/>
         </div>
         <div data-theme="dark">
             <PosterList
@@ -38,12 +40,17 @@ export default function Home({upcoming}:props) {
             <DynamicPosterList
                 mediaType={"movie"}
                 title={"Popular Movies"}
-                search={"popularMovies"}
+                enabled={false}
+                api={"popularMovies"}
+                queryKey={["popularMovies"]}
             />
             <DynamicPosterList
                 mediaType={"tv"}
                 title={"Popular Tv Shows"}
-                search={"popularTv"}/>
+                enabled={false}
+                api={"popularTv"}
+                queryKey={["popularTv"]}
+            />
         </div>
         <GenreSection/>
     </main>
@@ -56,7 +63,7 @@ function GenreSection(){
     const [genres, setGenres] = useState<typeof ApiGenres>([]);
     const [loadMoreRef,inView] = useInView({
         threshold:1,
-        rootMargin:"150px",
+        rootMargin:"300px",
     });
     useEffect(() => {
         if (inView){
@@ -75,7 +82,15 @@ function GenreSection(){
                 key={`genre-section-${g.id}`}
                 data-theme={(i % 3 == 0) ? "dark" : "light"}
             >
-                {g.name}
+                <DynamicPosterList
+                    title={g.name}
+                    mediaType={"movie"}
+                    api={`discoverMovies`}
+                    parameters={{
+                        genre:g.id
+                    }}
+                    queryKey={["discoverMovies",`genre-${g.id}`]}
+                />
             </div>)
             }
             {genres.length <= (genresLimit - 1) && <div ref={loadMoreRef}>

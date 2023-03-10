@@ -32,14 +32,24 @@ export function PosterList({title,media,mediaType,posterType}:props){
 type posterlist = {
     title:string,
     mediaType:"tv" | "movie",
-    search:string
+    api:string,
+    parameters?:Record<string, any>
+    enabled?:boolean,
+    queryKey:any[]
 }
 
-export function DynamicPosterList({title,mediaType,search}:posterlist){
+export function DynamicPosterList({title,mediaType,api,enabled = true,parameters={},queryKey}:posterlist){
+    if (!parameters.page)
+        parameters.page = 1
+
     let {data,hasNextPage,isFetching,isFetchingNextPage,fetchNextPage} = useInfiniteQuery<PopularMovieResponse | PopularTvShowResponse | TrendingResponseInterface>({
-        queryKey: [search],
-        enabled:false,
-        queryFn: ({pageParam = 1}) => fetch(`api/${search}?page=${pageParam ?? 1}`).then(v => v.json()),
+        queryKey: queryKey,
+        enabled:enabled,
+        queryFn: ({pageParam}) => {
+            parameters.page = pageParam ?? parameters.page
+            const params = new URLSearchParams(parameters).toString();
+            return fetch(`api/${api}?${params}`).then(v => v.json())
+        },
         getNextPageParam: (lastPage) => {
             if (lastPage.total_pages == lastPage.page) return false
             return lastPage.page + 1
