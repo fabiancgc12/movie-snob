@@ -24,11 +24,13 @@ export default function Home({upcoming}:props) {
         </SlideShow>
         <div data-theme="light">
             <Section title={"Trending movies"}>
-                <DynamicPosterList
-                    mediaType={"movie"}
-                    enabled={false}
-                    api={"trending"}
-                    queryKey={["trending"]}/>
+                <Slider speed={450}>
+                    <DynamicPosterList
+                        mediaType={"movie"}
+                        enabled={false}
+                        api={"trending"}
+                        queryKey={["trending"]}/>
+                </Slider>
             </Section>
         </div>
         <div data-theme="dark">
@@ -45,20 +47,24 @@ export default function Home({upcoming}:props) {
         </div>
         <div data-theme="light">
             <Section title={"Popular Movies"}>
-                <DynamicPosterList
-                    mediaType={"movie"}
-                    enabled={false}
-                    api={"popularMovies"}
-                    queryKey={["popularMovies"]}
-                />
+                <Slider speed={450}>
+                    <DynamicPosterList
+                        mediaType={"movie"}
+                        enabled={false}
+                        api={"popularMovies"}
+                        queryKey={["popularMovies"]}
+                    />
+                </Slider>
             </Section>
             <Section title={"Popular Tv Shows"}>
-                <DynamicPosterList
-                    mediaType={"tv"}
-                    enabled={false}
-                    api={"popularTv"}
-                    queryKey={["popularTv"]}
-                />
+                <Slider speed={450}>
+                    <DynamicPosterList
+                        mediaType={"tv"}
+                        enabled={false}
+                        api={"popularTv"}
+                        queryKey={["popularTv"]}
+                    />
+                </Slider>
             </Section>
         </div>
         <GenreSection/>
@@ -92,15 +98,17 @@ function GenreSection(){
                 data-theme={(i % 3 == 0) ? "dark" : "light"}
             >
                 <Section title={g.name}>
-                    <DynamicPosterList
-                        mediaType={"movie"}
-                        api={`discoverMovies`}
-                        parameters={{
-                            genre:g.id
-                        }}
-                        isBackdrop={i % 3 == 0}
-                        queryKey={["discoverMovies",`genre-${g.id}`]}
-                    />
+                    <Slider speed={450}>
+                        <DynamicPosterList
+                            mediaType={"movie"}
+                            api={`discoverMovies`}
+                            parameters={{
+                                genre:g.id
+                            }}
+                            isBackdrop={i % 3 == 0}
+                            queryKey={["discoverMovies",`genre-${g.id}`]}
+                        />
+                    </Slider>
                 </Section>
             </div>)
             }

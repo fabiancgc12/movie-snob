@@ -5,6 +5,8 @@ import {PopularMovieResponse} from "@/models/popular/popularMovie.interface";
 import {PopularTvShowResponse} from "@/models/popular/popularTv.interface";
 import {TrendingResponseInterface} from "@/models/trending/TrendingMovieResponse";
 import {Spinner} from "@/components/common/Spinner";
+import {useSliderContext} from "@/components/Slider/SliderContext";
+import {useEffect} from "react";
 
 export type props = {
     media:PosterType[],
@@ -47,18 +49,21 @@ export function DynamicPosterList({mediaType,api,enabled = true,parameters={},qu
             return lastPage.page + 1
         }
     })
+    const {isEndVisible} = useSliderContext()
+    useEffect(() => {
+        if (isEndVisible)
+            if (hasNextPage && !isFetchingNextPage && !isFetching){
+                fetchNextPage()
+            }
+    }, [isEndVisible,hasNextPage,isFetchingNextPage,isFetching,fetchNextPage]);
     if (!data) return <Slider speed={450}><Spinner/></Slider>
     const media = data?.pages?.map(p => p.results).flat() ?? []
+
+
     return (
-        <Slider
-            speed={450}
-            onReachEnd={ () => {
-            if (hasNextPage && !isFetchingNextPage && !isFetching)
-                fetchNextPage()
-            }}
-            endElement={hasNextPage && <Spinner/>}
-        >
+        <>
             <PosterList mediaType={mediaType} media={media} isBackdrop={isBackdrop}/>
-        </Slider>
+            {hasNextPage && <Spinner/>}
+        </>
     )
 }
