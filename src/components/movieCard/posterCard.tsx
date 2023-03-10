@@ -15,11 +15,10 @@ export type PosterType = {
 type props = {
     data:PosterType,
     mediaType:"movie" | "tv",
-    posterType?:"poster" | "backdrop"
+    isBackdrop?:boolean
 }
 
-export function PosterCard({data,mediaType,posterType = "poster"}:props){
-    const isBackdrop = posterType == "backdrop"
+export function PosterCard({data,mediaType,isBackdrop = false}:props){
     const posterPath = isBackdrop ? data.backdrop_path : data.poster_path
     const poster = generateImageUrl(posterPath)
     return (

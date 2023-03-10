@@ -9,14 +9,14 @@ import {Spinner} from "@/components/common/Spinner";
 export type props = {
     media:PosterType[],
     mediaType:"tv" | "movie",
-    posterType?:"poster" | "backdrop"
+    isBackdrop?:boolean
 }
 
-export function PosterList({media,mediaType,posterType}:props){
+export function PosterList({media,mediaType,isBackdrop}:props){
     if (!media || media.length === 0) return <></>
     return (
         <>
-            {media.map((e, i) => <PosterCard posterType={posterType} data={e} mediaType={mediaType} key={`card-${i}`}/>)}
+            {media.map((e, i) => <PosterCard isBackdrop={isBackdrop} data={e} mediaType={mediaType} key={`card-${i}`}/>)}
         </>
     )
 }
@@ -26,10 +26,11 @@ type posterlist = {
     api:string,
     parameters?:Record<string, any>
     enabled?:boolean,
-    queryKey:any[]
+    queryKey:any[],
+    isBackdrop?:boolean
 }
 
-export function DynamicPosterList({mediaType,api,enabled = true,parameters={},queryKey}:posterlist){
+export function DynamicPosterList({mediaType,api,enabled = true,parameters={},queryKey,isBackdrop}:posterlist){
     if (!parameters.page)
         parameters.page = 1
 
@@ -57,7 +58,7 @@ export function DynamicPosterList({mediaType,api,enabled = true,parameters={},qu
             }}
             endElement={hasNextPage && <Spinner/>}
         >
-            <PosterList mediaType={mediaType} media={media}/>
+            <PosterList mediaType={mediaType} media={media} isBackdrop={isBackdrop}/>
         </Slider>
     )
 }

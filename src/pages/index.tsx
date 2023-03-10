@@ -23,7 +23,7 @@ export default function Home({upcoming}:props) {
             {upcoming.slice(0,8).map(u => <UpcomingBanner key={`banner-${u.id}`} data={u}/>)}
         </SlideShow>
         <div data-theme="light">
-            <Section title={"Upcoming movies"}>
+            <Section title={"Trending movies"}>
                 <DynamicPosterList
                     mediaType={"movie"}
                     enabled={false}
@@ -35,7 +35,7 @@ export default function Home({upcoming}:props) {
             <Section title={"Upcoming movies"}>
                 <Slider speed={450}>
                     <PosterList
-                        posterType={"backdrop"}
+                        isBackdrop={true}
                         media={upcoming}
                         mediaType={"movie"}
                     />
@@ -98,6 +98,7 @@ function GenreSection(){
                         parameters={{
                             genre:g.id
                         }}
+                        isBackdrop={i % 3 == 0}
                         queryKey={["discoverMovies",`genre-${g.id}`]}
                     />
                 </Section>
