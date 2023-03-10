@@ -7,7 +7,7 @@ import {UpcomingBanner} from "@/components/mainBanner/UpcomingBanner";
 import {useInView} from "react-intersection-observer";
 import {Spinner} from "@/components/common/Spinner";
 import {useEffect, useState} from "react";
-import {ApiGenres} from "@/utils/apiGenres";
+import {MovieGenres} from "@/utils/movieGenres";
 import {dehydrate, QueryClient} from "@tanstack/react-query";
 
 type props = {
@@ -60,7 +60,7 @@ export default function Home({upcoming}:props) {
 const genresLimit = 9;
 
 function GenreSection(){
-    const [genres, setGenres] = useState<typeof ApiGenres>([]);
+    const [genres, setGenres] = useState<typeof MovieGenres>([]);
     const [loadMoreRef,inView] = useInView({
         threshold:1,
         rootMargin:"300px",
@@ -68,8 +68,8 @@ function GenreSection(){
     useEffect(() => {
         if (inView){
             setGenres(current => {
-                if (ApiGenres.length > current.length && current.length <= (genresLimit - 1)) {
-                    return ApiGenres.slice(0,current.length + 3)
+                if (MovieGenres.length > current.length && current.length <= (genresLimit - 1)) {
+                    return MovieGenres.slice(0,current.length + 3)
                 }
                 return [...current]
             })
