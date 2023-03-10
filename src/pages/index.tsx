@@ -23,12 +23,13 @@ export default function Home({upcoming}:props) {
             {upcoming.slice(0,8).map(u => <UpcomingBanner key={`banner-${u.id}`} data={u}/>)}
         </SlideShow>
         <div data-theme="light">
-            <DynamicPosterList
-                mediaType={"movie"}
-                enabled={false}
-                title={"Trending right now"}
-                api={"trending"}
-                queryKey={["trending"]}/>
+            <Section title={"Upcoming movies"}>
+                <DynamicPosterList
+                    mediaType={"movie"}
+                    enabled={false}
+                    api={"trending"}
+                    queryKey={["trending"]}/>
+            </Section>
         </div>
         <div data-theme="dark">
             <Section title={"Upcoming movies"}>
@@ -43,20 +44,22 @@ export default function Home({upcoming}:props) {
 
         </div>
         <div data-theme="light">
-            <DynamicPosterList
-                mediaType={"movie"}
-                title={"Popular Movies"}
-                enabled={false}
-                api={"popularMovies"}
-                queryKey={["popularMovies"]}
-            />
-            <DynamicPosterList
-                mediaType={"tv"}
-                title={"Popular Tv Shows"}
-                enabled={false}
-                api={"popularTv"}
-                queryKey={["popularTv"]}
-            />
+            <Section title={"Popular Movies"}>
+                <DynamicPosterList
+                    mediaType={"movie"}
+                    enabled={false}
+                    api={"popularMovies"}
+                    queryKey={["popularMovies"]}
+                />
+            </Section>
+            <Section title={"Popular Tv Shows"}>
+                <DynamicPosterList
+                    mediaType={"tv"}
+                    enabled={false}
+                    api={"popularTv"}
+                    queryKey={["popularTv"]}
+                />
+            </Section>
         </div>
         <GenreSection/>
     </main>
@@ -88,15 +91,16 @@ function GenreSection(){
                 key={`genre-section-${g.id}`}
                 data-theme={(i % 3 == 0) ? "dark" : "light"}
             >
-                <DynamicPosterList
-                    title={g.name}
-                    mediaType={"movie"}
-                    api={`discoverMovies`}
-                    parameters={{
-                        genre:g.id
-                    }}
-                    queryKey={["discoverMovies",`genre-${g.id}`]}
-                />
+                <Section title={g.name}>
+                    <DynamicPosterList
+                        mediaType={"movie"}
+                        api={`discoverMovies`}
+                        parameters={{
+                            genre:g.id
+                        }}
+                        queryKey={["discoverMovies",`genre-${g.id}`]}
+                    />
+                </Section>
             </div>)
             }
             {genres.length <= (genresLimit - 1) && <div ref={loadMoreRef}>

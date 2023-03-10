@@ -5,13 +5,15 @@ import {Average} from "@/components/common/Average";
 import {generateImageUrl} from "@/utils/functions/generateImageUrl";
 import Link from "next/link";
 
+export type PosterType = {
+    id:number,
+    poster_path?:string,
+    backdrop_path?:string | null,
+    vote_average:number
+}
+
 type props = {
-    data:{
-        id:number,
-        poster_path?:string,
-        backdrop_path?:string | null,
-        vote_average:number
-    },
+    data:PosterType,
     mediaType:"movie" | "tv",
     posterType?:"poster" | "backdrop"
 }
