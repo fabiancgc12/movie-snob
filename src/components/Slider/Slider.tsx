@@ -12,7 +12,7 @@ type props = {
     endElement?:ReactNode
 }
 
-export function Slider({className = "",children,arrowsInContent = false,speed,onReachEnd,endElement}:props){
+export function Slider({className = "",children,arrowsInContent = true,speed,onReachEnd,endElement}:props){
     const sliderRef = useRef<HTMLElement>(null);
     const [endElementRef] = useInView({
         threshold:1,

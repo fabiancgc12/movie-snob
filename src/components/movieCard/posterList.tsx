@@ -12,20 +12,17 @@ import {TrendingResponseInterface} from "@/models/trending/TrendingMovieResponse
 import {Spinner} from "@/components/common/Spinner";
 
 export type props = {
-    title:string,
     media:(MovieResumeInterface | RecommendationInterface | TvShowResume)[],
     mediaType:"tv" | "movie",
     posterType?:"poster" | "backdrop"
 }
 
-export function PosterList({title,media,mediaType,posterType}:props){
-    if (media.length === 0) return <></>
+export function PosterList({media,mediaType,posterType}:props){
+    if (!media || media.length === 0) return <></>
     return (
-        <Section className={styles.section} title={title}>
-            <Slider speed={450} arrowsInContent={true}>
-                {media?.map((e, i) => <PosterCard posterType={posterType} data={e} mediaType={mediaType} key={`card-${i}`}/>)}
-            </Slider>
-        </Section>
+        <>
+            {media.map((e, i) => <PosterCard posterType={posterType} data={e} mediaType={mediaType} key={`card-${i}`}/>)}
+        </>
     )
 }
 

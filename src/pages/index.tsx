@@ -9,6 +9,8 @@ import {Spinner} from "@/components/common/Spinner";
 import {useEffect, useState} from "react";
 import {MovieGenres} from "@/utils/movieGenres";
 import {dehydrate, QueryClient} from "@tanstack/react-query";
+import { Section } from "@/components/Section/Section";
+import {Slider} from "@/components/Slider/Slider";
 
 type props = {
     upcoming:MovieResumeInterface[],
@@ -29,12 +31,16 @@ export default function Home({upcoming}:props) {
                 queryKey={["trending"]}/>
         </div>
         <div data-theme="dark">
-            <PosterList
-                posterType={"backdrop"}
-                media={upcoming}
-                title={"Upcoming movies"}
-                mediaType={"movie"}
-            />
+            <Section title={"Upcoming movies"}>
+                <Slider speed={450}>
+                    <PosterList
+                        posterType={"backdrop"}
+                        media={upcoming}
+                        mediaType={"movie"}
+                    />
+                </Slider>
+            </Section>
+
         </div>
         <div data-theme="light">
             <DynamicPosterList

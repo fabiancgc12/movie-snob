@@ -14,6 +14,8 @@ import {SeasonsList} from "@/components/Seasons/SeasonsList";
 import {ProvidersDto} from "@/models/dto/ProvidersDto";
 import {CreditsDto, PeopleDto} from "@/models/dto/Credit.dto";
 import {ProductHead} from "@/components/Layout/ProductHead";
+import {Slider} from "@/components/Slider/Slider";
+import {Section} from "@/components/Section/Section";
 
 type props = {
     show:TvShowInterface,
@@ -39,7 +41,11 @@ export default function Tv({show,credits,videos,recommendations,images,providers
                 <SeasonsList seasons={show.seasons}/>
                 <Media videos={videos} images={images}/>
             </div>
-            <PosterList mediaType={"tv"} title={"Recommendations"} media={recommendations}/>
+            <Section title={"Recomendations"}>
+                <Slider speed={450}>
+                    <PosterList mediaType={"tv"} media={recommendations}/>
+                </Slider>
+            </Section>
         </main>
     )
 }

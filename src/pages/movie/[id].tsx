@@ -13,6 +13,8 @@ import {MovieExtraInfo} from "@/components/ExtraInfo/MovieExtraInfo";
 import {ProvidersDto} from "@/models/dto/ProvidersDto";
 import {CreditsDto} from "@/models/dto/Credit.dto";
 import {ProductHead} from "@/components/Layout/ProductHead";
+import {Slider} from "@/components/Slider/Slider";
+import {Section} from "@/components/Section/Section";
 
 type props = {
     movie:MovieInterface,
@@ -34,7 +36,11 @@ export default function Movie({movie,credits,videos,images,providers,recommendat
                 <MovieExtraInfo movie={movie} providers={providers}/>
                 <Media videos={videos} images={images}/>
             </div>
-            <PosterList mediaType={"movie"} title={"Recomendations"} media={recommendations}/>
+            <Section title={"Recomendations"}>
+                <Slider speed={450}>
+                    <PosterList mediaType={"movie"} media={recommendations}/>
+                </Slider>
+            </Section>
         </main>
     )
 }
