@@ -17,6 +17,7 @@
     scroll-behavior: smooth;
     scroll-snap-type: x mandatory;
     scroll-padding: var(--gap);
+    overflow-x: auto;
 }
 
 .track > * {
