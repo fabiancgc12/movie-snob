@@ -4,15 +4,14 @@ import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import {useInView} from "react-intersection-observer";
 import {SliderProvider} from "./SliderContext";
 
-type props = {
+export type SliderProps = {
     className?:string,
     children:ReactNode,
-    arrowsInContent?:boolean,
-    speed:number,
+    speed?:number,
     endElement?:ReactNode
 }
 
-export function Slider({className = "",children,arrowsInContent = true,speed}:props){
+export function Slider({className = "",children,speed = 200}:SliderProps){
     const sliderRef = useRef<HTMLElement>(null);
     const [endElementRef,endInView] = useInView({
         threshold:1,
@@ -61,20 +60,18 @@ export function Slider({className = "",children,arrowsInContent = true,speed}:pr
         [endInView]
     );
 
-    const arrowsInContentStyle = arrowsInContent ? styles.arrowsInContent : ""
     const fadeLeftArrow = showPrevArrow ? styles.fadeIn : styles.fadeOut
     const fadeRightArrow = showNextArrow ? styles.fadeIn : styles.fadeOut;
-
 
     return (
         <SliderProvider value={providerMemo}>
             <div className={`${className} ${styles.slider}`}>
-                <PrevArrow className={`${arrowsInContentStyle} ${fadeLeftArrow}`} onClick={() => moveSlider(speed*(-1))}/>
+                <PrevArrow className={`${styles.arrowsInContent} ${fadeLeftArrow}`} onClick={() => moveSlider(speed*(-1))}/>
                 <figure className={styles.track} ref={sliderRef} onScroll={onScroll}>
                     {children}
                     <div ref={endElementRef}></div>
                 </figure>
-                <NextArrow className={`${arrowsInContentStyle} ${fadeRightArrow}`} onClick={() => moveSlider(speed)}/>
+                <NextArrow className={`${styles.arrowsInContent} ${fadeRightArrow}`} onClick={() => moveSlider(speed)}/>
             </div>
         </SliderProvider>
     )
@@ -106,3 +103,4 @@ export function PrevArrow({onClick,className = ""}:ArrowProps) {
         </button>
     );
 }
+
