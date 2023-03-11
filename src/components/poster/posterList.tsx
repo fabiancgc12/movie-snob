@@ -1,5 +1,4 @@
-import {PosterCard, PosterType} from "@/components/movieCard/posterCard";
-import {Slider} from "@/components/Slider/Slider";
+import {PosterCard, PosterType} from "@/components/poster/posterCard";
 import {useInfiniteQuery} from "@tanstack/react-query";
 import {PopularMovieResponse} from "@/models/popular/popularMovie.interface";
 import {PopularTvShowResponse} from "@/models/popular/popularTv.interface";
@@ -56,14 +55,14 @@ export function DynamicPosterList({mediaType,api,enabled = true,parameters={},qu
                 fetchNextPage()
             }
     }, [isEndVisible,hasNextPage,isFetchingNextPage,isFetching,fetchNextPage]);
-    if (!data) return <Slider speed={450}><Spinner/></Slider>
+
+    if (!data) return <Spinner/>
+
     const media = data?.pages?.map(p => p.results).flat() ?? []
-
-
     return (
         <>
             <PosterList mediaType={mediaType} media={media} isBackdrop={isBackdrop}/>
-            {hasNextPage && <Spinner/>}
+            <div>{hasNextPage && <Spinner/>}</div>
         </>
     )
 }
