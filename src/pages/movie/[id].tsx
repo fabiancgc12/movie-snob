@@ -6,15 +6,14 @@ import {VideoTrailerInterface} from "@/models/Movies/VideoMedia.interface";
 import {ImageMediaResponse} from "@/models/Movies/ImageMedia.interface";
 import {Media} from "@/components/media/Media";
 import { MovieCast} from "@/components/CastList/CastList";
-import {PosterList} from "@/components/movieCard/posterList";
+import {PosterList} from "@/components/poster/posterList";
 import {RecommendationInterface} from "@/models/Movies/RecomendationResponse.interface";
 import { MediaBanner } from "@/components/ProductBanner/ProductBanner";
 import {MovieExtraInfo} from "@/components/ExtraInfo/MovieExtraInfo";
 import {ProvidersDto} from "@/models/dto/ProvidersDto";
 import {CreditsDto} from "@/models/dto/Credit.dto";
 import {ProductHead} from "@/components/Layout/ProductHead";
-import {Slider} from "@/components/Slider/Slider";
-import {Section} from "@/components/Section/Section";
+import {SliderSection} from "@/components/Slider/SliderSection";
 
 type props = {
     movie:MovieInterface,
@@ -36,11 +35,9 @@ export default function Movie({movie,credits,videos,images,providers,recommendat
                 <MovieExtraInfo movie={movie} providers={providers}/>
                 <Media videos={videos} images={images}/>
             </div>
-            <Section title={"Recomendations"}>
-                <Slider speed={450}>
-                    <PosterList mediaType={"movie"} media={recommendations}/>
-                </Slider>
-            </Section>
+            <SliderSection title={"Recommendations"} speed={450}>
+                <PosterList mediaType={"movie"} media={recommendations}/>
+            </SliderSection>
         </main>
     )
 }

@@ -3,7 +3,7 @@ import {GetStaticPaths, GetStaticProps} from "next";
 import {getTvShow} from "@/services/tv/getTv";
 import {TvShowInterface} from "@/models/tv/TvShow.interface";
 import {MediaBanner} from "@/components/ProductBanner/ProductBanner";
-import {PosterList} from "@/components/movieCard/posterList";
+import {PosterList} from "@/components/poster/posterList";
 import { RecommendationInterface } from "@/models/Movies/RecomendationResponse.interface";
 import styles from "@/pages/movie/id.module.css";
 import {TvCast} from "@/components/CastList/CastList";
@@ -14,8 +14,7 @@ import {SeasonsList} from "@/components/Seasons/SeasonsList";
 import {ProvidersDto} from "@/models/dto/ProvidersDto";
 import {CreditsDto, PeopleDto} from "@/models/dto/Credit.dto";
 import {ProductHead} from "@/components/Layout/ProductHead";
-import {Slider} from "@/components/Slider/Slider";
-import {Section} from "@/components/Section/Section";
+import { SliderSection } from "@/components/Slider/SliderSection";
 
 type props = {
     show:TvShowInterface,
@@ -41,11 +40,9 @@ export default function Tv({show,credits,videos,recommendations,images,providers
                 <SeasonsList seasons={show.seasons}/>
                 <Media videos={videos} images={images}/>
             </div>
-            <Section title={"Recomendations"}>
-                <Slider speed={450}>
-                    <PosterList mediaType={"tv"} media={recommendations}/>
-                </Slider>
-            </Section>
+            <SliderSection title={"Recommendations"} speed={450}>
+                <PosterList mediaType={"tv"} media={recommendations}/>
+            </SliderSection>
         </main>
     )
 }
