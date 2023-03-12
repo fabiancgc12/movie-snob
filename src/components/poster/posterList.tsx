@@ -1,4 +1,4 @@
-import {PosterCard, PosterType} from "@/components/poster/posterCard";
+import {PosterCard, PosterType, SkeletonCard} from "@/components/poster/posterCard";
 import {useInfiniteQuery} from "@tanstack/react-query";
 import {PopularMovieResponse} from "@/models/popular/popularMovie.interface";
 import {PopularTvShowResponse} from "@/models/popular/popularTv.interface";
@@ -6,6 +6,7 @@ import {TrendingResponseInterface} from "@/models/trending/TrendingMovieResponse
 import {Spinner} from "@/components/common/Spinner";
 import {useSliderContext} from "@/components/Slider/SliderContext";
 import {useEffect} from "react";
+import {useWhyDidYouUpdate} from "@/hooks/whydidYouRender";
 
 export type props = {
     media:PosterType[],
@@ -34,7 +35,6 @@ type posterlist = {
 export function DynamicPosterList({mediaType,api,enabled = true,parameters={},queryKey,isBackdrop}:posterlist){
     if (!parameters.page)
         parameters.page = 1
-
     let {data,hasNextPage,isFetching,isFetchingNextPage,fetchNextPage} = useInfiniteQuery<PopularMovieResponse | PopularTvShowResponse | TrendingResponseInterface>({
         queryKey: queryKey,
         enabled:enabled,
@@ -52,11 +52,22 @@ export function DynamicPosterList({mediaType,api,enabled = true,parameters={},qu
     useEffect(() => {
         if (isEndVisible)
             if (hasNextPage && !isFetchingNextPage && !isFetching){
+                console.log(api)
                 fetchNextPage()
             }
-    }, [isEndVisible,hasNextPage,isFetchingNextPage,isFetching,fetchNextPage]);
+    }, [isEndVisible,hasNextPage,isFetchingNextPage,isFetching,fetchNextPage,api]);
+    useWhyDidYouUpdate("posterlist api/" + api + "/genre" + parameters.genre,{data,hasNextPage,isFetching,isFetchingNextPage,fetchNextPage,isEndVisible})
 
-    if (!data) return <Spinner/>
+    if (!data) return (
+    <>
+        <SkeletonCard isBackdrop={isBackdrop}/>
+        <SkeletonCard isBackdrop={isBackdrop}/>
+        <SkeletonCard isBackdrop={isBackdrop}/>
+        <SkeletonCard isBackdrop={isBackdrop}/>
+        <SkeletonCard isBackdrop={isBackdrop}/>
+        <SkeletonCard isBackdrop={isBackdrop}/>
+    </>
+    )
 
     const media = data?.pages?.map(p => p.results).flat() ?? []
     return (

@@ -23,6 +23,12 @@ div[data-theme="light"]{
   background: whitesmoke;
 }
 
+div[data-theme="dark"] .react-loading-skeleton{
+  /*overwriting styles of skeletons on theme dark*/
+  --base-color:#313131 !important;
+  --highlight-color:#525252 !important;
+}
+
 :is(*,*::before,*::after)::-webkit-scrollbar {
   /*display: none;*/
   --size:.30em;
@@ -97,6 +103,7 @@ article{
 .fa-spin {
   animation: fa-spin 2s infinite linear;
 }
+
 @keyframes fa-spin {
   from {
     transform: rotate(0deg);
@@ -104,4 +111,8 @@ article{
   to {
     transform: rotate(359deg);
   }
+}
+
+.skeleton[aria-busy=true]::before{
+  content: none;
 }

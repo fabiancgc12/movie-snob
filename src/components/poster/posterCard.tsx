@@ -4,6 +4,7 @@ import React from "react";
 import {Average} from "@/components/common/Average";
 import {generateImageUrl} from "@/utils/functions/generateImageUrl";
 import Link from "next/link";
+import Skeleton from "react-loading-skeleton";
 
 export type PosterType = {
     id:number,
@@ -33,4 +34,16 @@ export function PosterCard({data,mediaType,isBackdrop = false}:props){
             </Link>
         </article>
     )
+}
+
+type SkeletonProps = {
+    isBackdrop?:boolean
+}
+
+export function SkeletonCard({isBackdrop}:SkeletonProps){
+    return <div className={`${styles.movieCard} ${isBackdrop ? styles.backdropCard : ""}`}>
+        {/*<div className={styles.poster}>*/}
+            <Skeleton className={styles.poster} containerClassName={"skeleton"}/>
+        {/*</div>*/}
+    </div>
 }
