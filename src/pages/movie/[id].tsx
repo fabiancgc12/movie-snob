@@ -5,7 +5,7 @@ import {MovieInterface} from "@/models/Movies/Movie.interface";
 import {VideoTrailerInterface} from "@/models/Movies/VideoMedia.interface";
 import {ImageMediaResponse} from "@/models/Movies/ImageMedia.interface";
 import {Media} from "@/components/media/Media";
-import { MovieCast} from "@/components/CastList/CastList";
+import { CastSection} from "@/components/CastSection/CastSection";
 import {PosterList} from "@/components/poster/posterList";
 import {RecommendationInterface} from "@/models/Movies/RecomendationResponse.interface";
 import { MediaBanner } from "@/components/ProductBanner/ProductBanner";
@@ -31,7 +31,7 @@ export default function Movie({movie,credits,videos,images,providers,recommendat
             <ProductHead media={movie} mediaType={"movie"} cast={credits.cast || []} crew={credits.crew || []}/>
             <MediaBanner product={movie} trailer={videos[0]} credits={crew} mediaType={"movie"}/>
             <div data-theme="light" className={styles.movieContent}>
-                <MovieCast cast={credits.cast}/>
+                <CastSection cast={credits.cast}/>
                 <MovieExtraInfo movie={movie} providers={providers}/>
                 <Media videos={videos} images={images}/>
             </div>

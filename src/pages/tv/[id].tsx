@@ -6,7 +6,7 @@ import {MediaBanner} from "@/components/ProductBanner/ProductBanner";
 import {PosterList} from "@/components/poster/posterList";
 import { RecommendationInterface } from "@/models/Movies/RecomendationResponse.interface";
 import styles from "@/pages/movie/id.module.css";
-import {TvCast} from "@/components/CastList/CastList";
+import {CastSection} from "@/components/CastSection/CastSection";
 import {Media} from "@/components/media/Media";
 import {ImageMediaResponse} from "@/models/Movies/ImageMedia.interface";
 import { TvExtraInfo } from "@/components/ExtraInfo/TvExtraInfo";
@@ -33,7 +33,7 @@ export default function Tv({show,credits,videos,recommendations,images,providers
             <ProductHead media={show} mediaType={"tv"} cast={credits.cast || []} crew={createdBy}/>
             <MediaBanner product={show} trailer={openingSequence} credits={createdBy} mediaType={"tv"}/>
             <div data-theme="light" className={styles.tvContent}>
-                <TvCast cast={credits.cast}/>
+                <CastSection cast={credits.cast}/>
                 <div className={styles.info}>
                     <TvExtraInfo show={show} providers={providers}/>
                 </div>
