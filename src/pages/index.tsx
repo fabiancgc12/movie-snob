@@ -12,6 +12,7 @@ import {dehydrate, QueryClient} from "@tanstack/react-query";
 import { Section } from "@/components/Section/Section";
 import {Slider} from "@/components/Slider/Slider";
 import {SliderSection} from "@/components/Slider/SliderSection";
+import styles from "./index.module.css";
 
 type props = {
     upcoming:MovieResumeInterface[],
@@ -105,7 +106,7 @@ function GenreSection(){
                 </SliderSection>
             </div>)
             }
-            {genres.length <= (genresLimit - 1) && <div ref={loadMoreRef}>
+            {genres.length <= (genresLimit - 1) && <div ref={loadMoreRef} className={styles.loading}>
                 <Spinner/>
             </div>}
         </div>
