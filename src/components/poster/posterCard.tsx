@@ -11,7 +11,8 @@ export type PosterType = {
     id:number,
     poster_path?:string,
     backdrop_path?:string | null,
-    vote_average:number
+    vote_average:number,
+    media_type?: MediaType;
 }
 
 type props = {
@@ -22,10 +23,11 @@ type props = {
 
 export function PosterCard({data,mediaType,isBackdrop = false}:props){
     const posterPath = isBackdrop ? data.backdrop_path : data.poster_path
-    const poster = generateImageUrl(posterPath)
+    const poster = generateImageUrl(posterPath);
+    const type = data.media_type ?? mediaType
     return (
         <article className={`${styles.movieCard} ${isBackdrop ? styles.backdropCard : ""}`}>
-            <Link href={`/${mediaType}/${data.id}`}>
+            <Link href={`/${type}/${data.id}`}>
                 <div className={styles.poster}>
                     <Image src={poster} alt={"title poster"} fill/>
                 </div>
