@@ -4,7 +4,6 @@ import {PopularMovieResponse} from "@/models/popular/popularMovie.interface";
 import {PopularTvShowResponse} from "@/models/popular/popularTv.interface";
 import {TrendingResponseInterface} from "@/models/trending/TrendingMovieResponse";
 import {Spinner} from "@/components/common/Spinner";
-import {useWhyDidYouUpdate} from "@/hooks/whydidYouRender";
 import {useInView} from "react-intersection-observer";
 
 export type props = {
@@ -54,13 +53,10 @@ export function DynamicPosterList({mediaType,api,enabled = true,parameters={},qu
         onChange: inView => {
             if (inView)
                 if (hasNextPage && !isFetchingNextPage && !isFetching){
-                    console.log("posterlist api/" + api + "/genre" + parameters.genre)
                     fetchNextPage()
                 }
         }
     });
-
-    useWhyDidYouUpdate("posterlist api/" + api + "/genre" + parameters.genre,{data,hasNextPage,isFetching,isFetchingNextPage,fetchNextPage})
 
     if (!data) return (
     <>
