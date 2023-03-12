@@ -13,6 +13,8 @@ export type PosterType = {
     backdrop_path?:string | null,
     vote_average:number,
     media_type?: MediaType;
+    title?:string,
+    name?:string
 }
 
 type props = {
@@ -24,17 +26,21 @@ type props = {
 export function PosterCard({data,mediaType,isBackdrop = false}:props){
     const posterPath = isBackdrop ? data.backdrop_path : data.poster_path
     const poster = generateImageUrl(posterPath);
-    const type = data.media_type ?? mediaType
+    const type = data.media_type ?? mediaType;
+    const title = data.title ?? data.name as string
     return (
         <article className={`${styles.movieCard} ${isBackdrop ? styles.backdropCard : ""}`}>
-            <Link href={`/${type}/${data.id}`}>
+            <Link href={`/${type}/${data.id}`} className={styles.posterWrapper}>
                 <div className={styles.poster}>
                     <Image src={poster} alt={"title poster"} fill/>
                 </div>
-                <div className={styles.info}>
-                    <Average value={data.vote_average} />
+                <div className={styles.rating}>
+                    <Average value={data.vote_average} size={"sm"}/>
                 </div>
             </Link>
+            <div className={styles.title}>
+                <small>{title}</small>
+            </div>
         </article>
     )
 }
@@ -44,9 +50,12 @@ type SkeletonProps = {
 }
 
 export function SkeletonCard({isBackdrop}:SkeletonProps){
-    return <div className={`${styles.movieCard} ${isBackdrop ? styles.backdropCard : ""}`}>
-        {/*<div className={styles.poster}>*/}
+    return (
+        <article className={`${styles.movieCard} ${isBackdrop ? styles.backdropCard : ""}`}>
             <Skeleton className={styles.poster} containerClassName={"skeleton"}/>
-        {/*</div>*/}
-    </div>
+            <div className={styles.title}>
+                <Skeleton  containerClassName={"skeleton"}/>
+            </div>
+        </article>
+    )
 }

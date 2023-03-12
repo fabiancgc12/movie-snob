@@ -14,7 +14,8 @@
 }
 
 .small{
-    --fontSize: 12px;
+    --fontSize: 14px;
+    padding: .25em;
 }
 
 .bg{
@@ -33,10 +34,15 @@
 }
 
 .average::before{
+    --width: calc(var(--fontSize)/2);
     background: conic-gradient(
             var(--secondaryDark) var(--degree,0), transparent var(--degree,0));
-    width: calc(100% - var(--fontSize)/2);
+    width: calc(100% - var(--width));
     z-index: -2;
+}
+
+.average.small{
+    --width: calc(var(--fontSize)/2 + 2px);
 }
 
 .average::after{
