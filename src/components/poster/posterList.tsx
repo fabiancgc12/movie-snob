@@ -5,10 +5,11 @@ import {PopularTvShowResponse} from "@/models/popular/popularTv.interface";
 import {TrendingResponseInterface} from "@/models/trending/TrendingMovieResponse";
 import {Spinner} from "@/components/common/Spinner";
 import {useInView} from "react-intersection-observer";
+import {MediaType} from "@/models/MediaType";
 
 export type props = {
     media:PosterType[],
-    mediaType:"tv" | "movie",
+    mediaType:MediaType,
     isBackdrop?:boolean
 }
 
@@ -22,7 +23,7 @@ export function PosterList({media,mediaType,isBackdrop}:props){
 }
 
 type posterlist = {
-    mediaType:"tv" | "movie",
+    mediaType:MediaType,
     api:string,
     parameters?:Record<string, any>
     enabled?:boolean,

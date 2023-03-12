@@ -1,3 +1,5 @@
+import {MediaType} from "@/models/MediaType";
+
 export interface RecommendationResponseInterface {
     page:          number;
     results:       RecommendationInterface[];
@@ -14,17 +16,13 @@ export interface RecommendationInterface {
     original_title: string;
     overview: string;
     poster_path: string;
-    media_type: string;
+    media_type: MediaType;
     genre_ids?: (number)[] | null;
     popularity: number;
     release_date: string;
     video: boolean;
     vote_average: number;
     vote_count: number;
-}
-
-export enum MediaType {
-    Movie = "movie",
 }
 
 export enum OriginalLanguage {

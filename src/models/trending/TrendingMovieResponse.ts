@@ -1,3 +1,5 @@
+import { MediaType } from "../MediaType";
+
 export interface TrendingResponseInterface {
     page:          number;
     results:       Trending[];
@@ -14,7 +16,7 @@ export interface Trending {
     original_name?:    string;
     overview:          string;
     poster_path:       string;
-    media_type:        "movie" | "tv";
+    media_type:        MediaType;
     genre_ids:         number[];
     popularity:        number;
     first_air_date?:   Date;
@@ -25,11 +27,6 @@ export interface Trending {
     original_title?:   string;
     release_date?:     Date;
     video?:            boolean;
-}
-
-export enum MediaType {
-    Movie = "movie",
-    Tv = "tv",
 }
 
 export enum OriginalLanguage {

@@ -5,6 +5,7 @@ import {Average} from "@/components/common/Average";
 import {generateImageUrl} from "@/utils/functions/generateImageUrl";
 import Link from "next/link";
 import Skeleton from "react-loading-skeleton";
+import {MediaType} from "@/models/MediaType";
 
 export type PosterType = {
     id:number,
@@ -15,7 +16,7 @@ export type PosterType = {
 
 type props = {
     data:PosterType,
-    mediaType:"movie" | "tv",
+    mediaType:MediaType,
     isBackdrop?:boolean
 }
 
