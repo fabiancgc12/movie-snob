@@ -1,6 +1,7 @@
 import styles from "./Slider.module.css"
-import {ReactNode, useCallback, useEffect, useMemo, useRef, useState} from "react";
+import {ReactNode, useCallback, useRef, useState} from "react";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
+import useResizeObserver from "@react-hook/resize-observer";
 
 export type SliderProps = {
     className?:string,
@@ -28,7 +29,7 @@ export function Slider({className = "",children,speed = 200}:SliderProps){
         },
         [],
     );
-
+    useResizeObserver(sliderRef, onScroll)
 
     const moveSlider = useCallback(
     (scrollValue:number) => {
@@ -39,14 +40,6 @@ export function Slider({className = "",children,speed = 200}:SliderProps){
         },
     [onScroll],
     );
-
-    useEffect(() => {
-        onScroll()
-        window.addEventListener('resize', onScroll);
-        return () => {
-            window.removeEventListener('resize', onScroll);
-        };
-    },[onScroll])
 
     const fadeLeftArrow = showPrevArrow ? styles.fadeIn : styles.fadeOut
     const fadeRightArrow = showNextArrow ? styles.fadeIn : styles.fadeOut;

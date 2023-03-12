@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@picocss/pico": "^1.5.7",
+    "@react-hook/resize-observer": "^1.2.6",
     "@tanstack/react-query": "^4.24.10",
     "@types/node": "18.11.18",
     "@types/react": "18.0.27",
