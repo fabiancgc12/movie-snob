@@ -1,8 +1,6 @@
 import styles from "./Slider.module.css"
 import {ReactNode, useCallback, useEffect, useMemo, useRef, useState} from "react";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
-import {useInView} from "react-intersection-observer";
-import {SliderProvider} from "./SliderContext";
 
 export type SliderProps = {
     className?:string,
@@ -13,11 +11,6 @@ export type SliderProps = {
 
 export function Slider({className = "",children,speed = 200}:SliderProps){
     const sliderRef = useRef<HTMLElement>(null);
-    const [endElementRef,endInView] = useInView({
-        threshold:1,
-        rootMargin:"700px",
-        root:sliderRef.current,
-    });
     const [showPrevArrow, setShowPrevArrow] = useState(false);
     const [showNextArrow, setShowNextArrow] = useState(true);
 
@@ -54,26 +47,18 @@ export function Slider({className = "",children,speed = 200}:SliderProps){
             window.removeEventListener('resize', onScroll);
         };
     },[onScroll])
-    const providerMemo = useMemo(() => ({
-            isEndVisible: endInView
-        }),
-        [endInView]
-    );
 
     const fadeLeftArrow = showPrevArrow ? styles.fadeIn : styles.fadeOut
     const fadeRightArrow = showNextArrow ? styles.fadeIn : styles.fadeOut;
 
     return (
-        <SliderProvider value={providerMemo}>
-            <div className={`${className} ${styles.slider}`}>
-                <PrevArrow className={`${styles.arrowsInContent} ${fadeLeftArrow}`} onClick={() => moveSlider(speed*(-1))}/>
-                <figure className={styles.track} ref={sliderRef} onScroll={onScroll}>
-                    {children}
-                    <div ref={endElementRef}></div>
-                </figure>
-                <NextArrow className={`${styles.arrowsInContent} ${fadeRightArrow}`} onClick={() => moveSlider(speed)}/>
-            </div>
-        </SliderProvider>
+        <div className={`${className} ${styles.slider}`}>
+            <PrevArrow className={`${styles.arrowsInContent} ${fadeLeftArrow}`} onClick={() => moveSlider(speed*(-1))}/>
+            <figure className={styles.track} ref={sliderRef} onScroll={onScroll}>
+                {children}
+            </figure>
+            <NextArrow className={`${styles.arrowsInContent} ${fadeRightArrow}`} onClick={() => moveSlider(speed)}/>
+        </div>
     )
 }
 

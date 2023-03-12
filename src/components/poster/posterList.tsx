@@ -4,9 +4,8 @@ import {PopularMovieResponse} from "@/models/popular/popularMovie.interface";
 import {PopularTvShowResponse} from "@/models/popular/popularTv.interface";
 import {TrendingResponseInterface} from "@/models/trending/TrendingMovieResponse";
 import {Spinner} from "@/components/common/Spinner";
-import {useSliderContext} from "@/components/Slider/SliderContext";
-import {useEffect} from "react";
 import {useWhyDidYouUpdate} from "@/hooks/whydidYouRender";
+import {useInView} from "react-intersection-observer";
 
 export type props = {
     media:PosterType[],
@@ -48,15 +47,20 @@ export function DynamicPosterList({mediaType,api,enabled = true,parameters={},qu
             return lastPage.page + 1
         }
     })
-    const {isEndVisible} = useSliderContext()
-    useEffect(() => {
-        if (isEndVisible)
-            if (hasNextPage && !isFetchingNextPage && !isFetching){
-                console.log("posterlist api/" + api + "/genre" + parameters.genre)
-                fetchNextPage()
-            }
-    }, [isEndVisible,hasNextPage,isFetchingNextPage,isFetching,fetchNextPage,api]);
-    useWhyDidYouUpdate("posterlist api/" + api + "/genre" + parameters.genre,{data,hasNextPage,isFetching,isFetchingNextPage,fetchNextPage,isEndVisible})
+
+    const [endElementRef] = useInView({
+        threshold:1,
+        rootMargin:"700px 700px",
+        onChange: inView => {
+            if (inView)
+                if (hasNextPage && !isFetchingNextPage && !isFetching){
+                    console.log("posterlist api/" + api + "/genre" + parameters.genre)
+                    fetchNextPage()
+                }
+        }
+    });
+
+    useWhyDidYouUpdate("posterlist api/" + api + "/genre" + parameters.genre,{data,hasNextPage,isFetching,isFetchingNextPage,fetchNextPage})
 
     if (!data) return (
     <>
@@ -73,7 +77,7 @@ export function DynamicPosterList({mediaType,api,enabled = true,parameters={},qu
     return (
         <>
             <PosterList mediaType={mediaType} media={media} isBackdrop={isBackdrop}/>
-            <div>{hasNextPage && <Spinner/>}</div>
+            {hasNextPage && <div ref={endElementRef}><Spinner/></div>}
         </>
     )
 }
