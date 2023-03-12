@@ -52,7 +52,7 @@ export function DynamicPosterList({mediaType,api,enabled = true,parameters={},qu
     useEffect(() => {
         if (isEndVisible)
             if (hasNextPage && !isFetchingNextPage && !isFetching){
-                console.log(api)
+                console.log("posterlist api/" + api + "/genre" + parameters.genre)
                 fetchNextPage()
             }
     }, [isEndVisible,hasNextPage,isFetchingNextPage,isFetching,fetchNextPage,api]);
