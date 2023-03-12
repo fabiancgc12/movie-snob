@@ -4,20 +4,22 @@ import React from "react";
 import {Average} from "@/components/common/Average";
 import {generateImageUrl} from "@/utils/functions/generateImageUrl";
 import Link from "next/link";
+import Skeleton from "react-loading-skeleton";
 
-type props = {
-    data:{
-        id:number,
-        poster_path?:string,
-        backdrop_path?:string | null,
-        vote_average:number
-    },
-    mediaType:"movie" | "tv",
-    posterType?:"poster" | "backdrop"
+export type PosterType = {
+    id:number,
+    poster_path?:string,
+    backdrop_path?:string | null,
+    vote_average:number
 }
 
-export function PosterCard({data,mediaType,posterType = "poster"}:props){
-    const isBackdrop = posterType == "backdrop"
+type props = {
+    data:PosterType,
+    mediaType:"movie" | "tv",
+    isBackdrop?:boolean
+}
+
+export function PosterCard({data,mediaType,isBackdrop = false}:props){
     const posterPath = isBackdrop ? data.backdrop_path : data.poster_path
     const poster = generateImageUrl(posterPath)
     return (
@@ -32,4 +34,16 @@ export function PosterCard({data,mediaType,posterType = "poster"}:props){
             </Link>
         </article>
     )
+}
+
+type SkeletonProps = {
+    isBackdrop?:boolean
+}
+
+export function SkeletonCard({isBackdrop}:SkeletonProps){
+    return <div className={`${styles.movieCard} ${isBackdrop ? styles.backdropCard : ""}`}>
+        {/*<div className={styles.poster}>*/}
+            <Skeleton className={styles.poster} containerClassName={"skeleton"}/>
+        {/*</div>*/}
+    </div>
 }

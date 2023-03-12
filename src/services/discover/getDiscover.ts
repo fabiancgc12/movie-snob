@@ -16,9 +16,6 @@ export async function getDiscover({genre,page=1}:options):Promise<DiscoverRespon
 
     const params = new URLSearchParams(parameters).toString();
 
-    console.log(parameters)
-    console.log(params)
-    console.log(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.TMDB_KEY}&${params}`)
     const response = await fetch(
         `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.TMDB_KEY}&${params}`)
     return  await response.json() as DiscoverResponseInterface;

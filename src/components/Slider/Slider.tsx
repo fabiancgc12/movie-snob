@@ -1,28 +1,17 @@
 import styles from "./Slider.module.css"
-import {ReactNode, useCallback, useEffect, useRef, useState} from "react";
+import {ReactNode, useCallback, useRef, useState} from "react";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
-import {useInView} from "react-intersection-observer";
+import useResizeObserver from "@react-hook/resize-observer";
 
-type props = {
+export type SliderProps = {
     className?:string,
     children:ReactNode,
-    arrowsInContent?:boolean,
-    speed:number,
-    onReachEnd?: () => void,
+    speed?:number,
     endElement?:ReactNode
 }
 
-export function Slider({className = "",children,arrowsInContent = false,speed,onReachEnd,endElement}:props){
+export function Slider({className = "",children,speed = 200}:SliderProps){
     const sliderRef = useRef<HTMLElement>(null);
-    const [endElementRef] = useInView({
-        threshold:1,
-        rootMargin:"200px",
-        root:sliderRef.current,
-        onChange:(inView) => {
-            if (inView && onReachEnd)
-                onReachEnd()
-        }
-    });
     const [showPrevArrow, setShowPrevArrow] = useState(false);
     const [showNextArrow, setShowNextArrow] = useState(true);
 
@@ -40,7 +29,7 @@ export function Slider({className = "",children,arrowsInContent = false,speed,on
         },
         [],
     );
-
+    useResizeObserver(sliderRef, onScroll)
 
     const moveSlider = useCallback(
     (scrollValue:number) => {
@@ -52,25 +41,16 @@ export function Slider({className = "",children,arrowsInContent = false,speed,on
     [onScroll],
     );
 
-    useEffect(() => {
-        onScroll()
-        window.addEventListener('resize', onScroll);
-        return () => {
-            window.removeEventListener('resize', onScroll);
-        };
-    },[onScroll])
-
-    const arrowsInContentStyle = arrowsInContent ? styles.arrowsInContent : ""
     const fadeLeftArrow = showPrevArrow ? styles.fadeIn : styles.fadeOut
-    const fadeRightArrow = showNextArrow ? styles.fadeIn : styles.fadeOut
+    const fadeRightArrow = showNextArrow ? styles.fadeIn : styles.fadeOut;
+
     return (
         <div className={`${className} ${styles.slider}`}>
-            <PrevArrow className={`${arrowsInContentStyle} ${fadeLeftArrow}`} onClick={() => moveSlider(speed*(-1))}/>
+            <PrevArrow className={`${styles.arrowsInContent} ${fadeLeftArrow}`} onClick={() => moveSlider(speed*(-1))}/>
             <figure className={styles.track} ref={sliderRef} onScroll={onScroll}>
                 {children}
-                <div ref={endElementRef}>{endElement}</div>
             </figure>
-            <NextArrow className={`${arrowsInContentStyle} ${fadeRightArrow}`} onClick={() => moveSlider(speed)}/>
+            <NextArrow className={`${styles.arrowsInContent} ${fadeRightArrow}`} onClick={() => moveSlider(speed)}/>
         </div>
     )
 }
@@ -101,3 +81,4 @@ export function PrevArrow({onClick,className = ""}:ArrowProps) {
         </button>
     );
 }
+
