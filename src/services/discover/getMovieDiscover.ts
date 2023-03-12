@@ -1,10 +1,10 @@
-import {DiscoverResponseInterface} from "@/models/discover/discoverResponse.interface";
+import {DiscoverMovieResponseInterface} from "@/models/discover/discoverMovieResponse.Interface";
 
 type options = {
     genre?:string | string[],
     page?:number
 }
-export async function getDiscover({genre,page=1}:options):Promise<DiscoverResponseInterface>{
+export async function getMovieDiscover({genre,page=1}:options):Promise<DiscoverMovieResponseInterface>{
     let parameters:Record<string, any> = {}
     parameters.page = page
     if (genre){
@@ -18,5 +18,5 @@ export async function getDiscover({genre,page=1}:options):Promise<DiscoverRespon
 
     const response = await fetch(
         `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.TMDB_KEY}&${params}`)
-    return  await response.json() as DiscoverResponseInterface;
+    return  await response.json() as DiscoverMovieResponseInterface;
 }

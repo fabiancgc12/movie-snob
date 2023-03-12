@@ -1,6 +1,6 @@
-export interface DiscoverResponseInterface {
+export interface DiscoverMovieResponseInterface {
     page:          number;
-    results:       (MovieDiscover | TvDiscover)[];
+    results:       MovieDiscover[];
     total_pages:   number;
     total_results: number;
 }

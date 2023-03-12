@@ -1,16 +1,15 @@
 import {NextApiRequest, NextApiResponse} from "next";
-import {getDiscover} from "@/services/discover/getDiscover";
-import {DiscoverResponseInterface} from "@/models/discover/discoverResponse.interface";
+import {getMovieDiscover} from "@/services/discover/getMovieDiscover";
+import {DiscoverMovieResponseInterface} from "@/models/discover/discoverMovieResponse.Interface";
 
 export default async function handler(
     req: NextApiRequest,
-    res: NextApiResponse<DiscoverResponseInterface>
+    res: NextApiResponse<DiscoverMovieResponseInterface>
 ){
-    console.log(req.query)
     const parameters = {
         genre: req.query.genre,
         page:Number(req.query.page)
     }
-    const data = await getDiscover(parameters)
+    const data = await getMovieDiscover(parameters)
     res.status(200).json(data)
 }
