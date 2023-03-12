@@ -15,27 +15,33 @@ export function Media({videos,images}:props){
     const backdrops = images.backdrops.slice(0,9)
     return (
         <>
-            <Section title={"Videos"}>
-                <Slider arrowsInContent={true} speed={450}>
-                    {videos && videos.map(v => <VideoThumbnail video={v} key={`video-${v.key}`}/>)}
-                </Slider>
-            </Section>
-            <Section className={styles.wrapper} title={"Images"}>
-                <Slider arrowsInContent={true} speed={450}>
-                    {backdrops
-                        .map((b,i) => (
-                                <div className={styles.backdrop} key={`backdrop-${i}`}>
-                                    <Image
-                                        src={generateImageUrl(b.file_path)}
-                                        alt={`movie backdrop ${i}`}
-                                        fill
-                                    />
-                                </div>
+                <Section title={"Videos"}>
+                    {videos.length > 0
+                        ? <Slider speed={450}>
+                            {videos && videos.map(v => <VideoThumbnail video={v} key={`video-${v.key}`}/>)}
+                          </Slider>
+                        : <p>Currently there is no videos related to this movie/tv show on our database.</p>
+                    }
+                </Section>
+                <Section className={styles.wrapper} title={"Images"}>
+                    {backdrops.length > 0 ?
+                        <Slider speed={450}>
+                            {backdrops
+                                .map((b,i) => (
+                                        <div className={styles.backdrop} key={`backdrop-${i}`}>
+                                            <Image
+                                                src={generateImageUrl(b.file_path)}
+                                                alt={`movie backdrop ${i}`}
+                                                fill
+                                            />
+                                        </div>
+                                    )
+                                )}
+                        </Slider>
+                        : <p>Currently there is no images related to this movie/tv show on our database.</p>
+                    }
+                </Section>
 
-                            )
-                        )}
-                </Slider>
-            </Section>
         </>
     )
 }
