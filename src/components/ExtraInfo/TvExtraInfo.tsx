@@ -5,6 +5,7 @@ import { ExtraInfo } from "./ExtraInfo";
 import {Providers} from "@/components/ExtraInfo/Providers";
 import {ProvidersDto} from "@/models/dto/ProvidersDto";
 import {CompanyLogo} from "@/components/ExtraInfo/CompanyLogo";
+import {FullDate} from "@/components/common/FullDate";
 
 type props = {
     show:TvShowInterface,
@@ -16,11 +17,11 @@ export function TvExtraInfo({show,providers}:props){
         <ExtraInfo>
             <div className={styles.info}>
                 <p>Release Date</p>
-                <small>{formatDate(show.first_air_date)}</small>
+                <FullDate date={formatDate(show.first_air_date)}/>
             </div>
             <div className={styles.info}>
                 <p>Last air Date</p>
-                <small>{formatDate(show.last_air_date)}</small>
+                <FullDate date={formatDate(show.last_air_date)}/>
             </div>
             <div>
                 <p>Status</p>

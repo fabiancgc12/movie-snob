@@ -7,6 +7,7 @@ import {BookmarkButton} from "@/components/common/ActionButton/chechMarkButton";
 import {MovieResumeInterface} from "@/models/Movies/MovieResume.interface";
 import {LikeButton} from "@/components/common/ActionButton/LikeButton";
 import {BsThreeDotsVertical} from "react-icons/bs";
+import {FullDate} from "@/components/common/FullDate";
 
 type props = {
     data:MovieResumeInterface
@@ -21,7 +22,11 @@ export function UpcomingBanner({data}:props) {
     const bigTitleStyle = data.title.length >= 20 ? styles.bigTitle : ""
     return <div className={`${styles.mainShow} ${placeholderStyle}`} style={bg}>
         <div className={styles.info}>
-            <h2 className={bigTitleStyle}><Link href={`/movie/${data.id}`}>{data.title}</Link></h2>
+            <h2 className={bigTitleStyle}>{data.title}</h2>
+            <FullDate date={data.release_date}/>
+            <div className={styles.buttons}>
+                <Link className={"contrast"} role="button" href={`/movie/${data.id}`}>Read More</Link>
+            </div>
             <p>
                 <small>{data.overview}</small>
             </p>

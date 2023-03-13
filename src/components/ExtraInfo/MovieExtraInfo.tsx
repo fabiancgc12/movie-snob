@@ -1,11 +1,11 @@
 import styles from "@/components/ExtraInfo/ExtraInfo.module.css";
-import {formatDate} from "@/utils/functions/formatDate";
 import {formatCurrency} from "@/utils/functions/formatCurrency";
 import {MovieInterface} from "@/models/Movies/Movie.interface";
 import { ExtraInfo } from "./ExtraInfo";
 import { Providers } from "./Providers";
 import {ProvidersDto} from "@/models/dto/ProvidersDto";
 import {CompanyLogo} from "@/components/ExtraInfo/CompanyLogo";
+import {FullDate} from "@/components/common/FullDate";
 
 type props = {
     movie:MovieInterface,
@@ -17,7 +17,7 @@ export function MovieExtraInfo({movie,providers}:props){
         <ExtraInfo>
             <div className={styles.info}>
                 <p>Release Date</p>
-                <small>{formatDate(movie.release_date)}</small>
+                <FullDate date={movie.release_date}/>
             </div>
             <div className={styles.info}>
                 <p>original language</p>
