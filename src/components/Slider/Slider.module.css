@@ -22,8 +22,11 @@
     scroll-snap-stop: always;
 }
 
-.track > *:not(:last-child) {
+.track > * {
     flex-shrink: 0;
+}
+
+.track > *:not(.loader) {
     scroll-snap-align: start;
 }
 

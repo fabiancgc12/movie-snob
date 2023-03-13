@@ -74,7 +74,7 @@ export function DynamicPosterList({mediaType,api,enabled = true,parameters={},qu
     return (
         <>
             <PosterList mediaType={mediaType} media={media} isBackdrop={isBackdrop}/>
-            {hasNextPage && <div ref={endElementRef}><Spinner/></div>}
+            {hasNextPage && <div ref={endElementRef} className={"loader"}><Spinner/></div>}
         </>
     )
 }
