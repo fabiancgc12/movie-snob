@@ -7,15 +7,19 @@ export function useWhyDidYouUpdate(name:string, props:any) {
     useEffect(() => {
         if (previousProps.current) {
             // Get all keys from previous and current props
+            // @ts-ignore
             const allKeys = Object.keys({ ...previousProps.current, ...props });
             // Use this object to keep track of changed props
             const changesObj = {};
             // Iterate through keys
             allKeys.forEach((key) => {
                 // If previous is different from current
+                // @ts-ignore
                 if (previousProps.current[key] !== props[key]) {
                     // Add to changesObj
+                    // @ts-ignore
                     changesObj[key] = {
+                        // @ts-ignore
                         from: previousProps.current[key],
                         to: props[key],
                     };

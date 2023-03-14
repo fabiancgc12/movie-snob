@@ -6,6 +6,9 @@ import {Providers} from "@/components/ExtraInfo/Providers";
 import {ProvidersDto} from "@/models/dto/ProvidersDto";
 import {CompanyLogo} from "@/components/ExtraInfo/CompanyLogo";
 import {FullDate} from "@/components/common/FullDate";
+import React from "react";
+import {SiStatuspal} from "react-icons/si";
+import { MdLanguage } from "react-icons/md";
 
 type props = {
     show:TvShowInterface,
@@ -25,11 +28,11 @@ export function TvExtraInfo({show,providers}:props){
             </div>
             <div>
                 <p>Status</p>
-                <small>{show.status}</small>
+                <small className={"alignCenter"}><SiStatuspal/>{show.status}</small>
             </div>
             <div className={styles.info}>
                 <p>original language</p>
-                <small>{show.spoken_languages?.map(sp => sp.english_name)?.join(",")}</small>
+                <small className={"alignCenter"}><MdLanguage/>{show.spoken_languages?.map(sp => sp.english_name)?.join(",")}</small>
             </div>
             <div>
                 <p>Networks</p>

@@ -116,3 +116,8 @@ article{
 .skeleton[aria-busy=true]::before{
   content: none;
 }
+
+.alignCenter{
+  display:flex;
+  align-items: center;
+}

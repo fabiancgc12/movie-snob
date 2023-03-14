@@ -5,5 +5,5 @@ type props = {
     date:string
 }
 export function FullDate({date}:props){
-    return <small><AiOutlineCalendar/>{formatDate(date)}</small>
+    return <small className={"alignCenter"}><AiOutlineCalendar/>{formatDate(date)}</small>
 }

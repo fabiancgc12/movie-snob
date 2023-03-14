@@ -6,6 +6,7 @@ import { Providers } from "./Providers";
 import {ProvidersDto} from "@/models/dto/ProvidersDto";
 import {CompanyLogo} from "@/components/ExtraInfo/CompanyLogo";
 import {FullDate} from "@/components/common/FullDate";
+import { MdLanguage } from "react-icons/md";
 
 type props = {
     movie:MovieInterface,
@@ -21,7 +22,7 @@ export function MovieExtraInfo({movie,providers}:props){
             </div>
             <div className={styles.info}>
                 <p>original language</p>
-                <small>{movie.spoken_languages?.map(sp => sp.english_name)?.join(",")}</small>
+                <small className={"alignCenter"}><MdLanguage/>{movie.spoken_languages?.map(sp => sp.english_name)?.join(",")}</small>
             </div>
             <div className={styles.info}>
                 <p>budget</p>
