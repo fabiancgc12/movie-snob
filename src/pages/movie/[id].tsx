@@ -26,10 +26,12 @@ type props = {
 
 export default function Movie({movie,credits,videos,images,providers,recommendations}:props){
     const crew = credits.crew?.sort((a) => a.role.toLowerCase() === "screenplay" ? 1 : -1)
+    const trailer = videos.find(t => t.site == "YouTube" && t.name.toLowerCase().includes("trailer"))
+
     return (
         <main>
             <ProductHead media={movie} mediaType={"movie"} cast={credits.cast || []} crew={credits.crew || []}/>
-            <MediaBanner product={movie} trailer={videos[0]} credits={crew} mediaType={"movie"}/>
+            <MediaBanner product={movie} trailer={trailer} credits={crew} mediaType={"movie"}/>
             <div data-theme="light" className={styles.movieContent}>
                 <CastSection cast={credits.cast}/>
                 <MovieExtraInfo movie={movie} providers={providers}/>
