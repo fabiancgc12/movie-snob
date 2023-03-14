@@ -21,7 +21,7 @@ export async function getHomePage():Promise<{
     const [upcoming,popularMovies,popularTv,trending] =  await Promise.all([getUpcoming(),getPopularMovies(),getPopularTv(),getTrending("all")])
     const trailerPromises = upcoming.results.map(u => getMovieTrailer(u.id))
     const upcomingTrailers = (await Promise.all(trailerPromises))
-        .map(t => t.results.filter(t => t.site == "YouTube" && t.name.toLowerCase().includes("trailer"))[0])
+        .map(t => t.results.filter(t => t.site == "YouTube" && t.name.toLowerCase().includes("trailer"))[0] ?? null)
     return {
         upcoming:upcoming.results,
         upcomingTrailers:upcomingTrailers,
