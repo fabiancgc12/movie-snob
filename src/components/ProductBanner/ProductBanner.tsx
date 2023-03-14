@@ -13,6 +13,7 @@ import {VideoTrailerInterface} from "@/models/Movies/VideoMedia.interface";
 import {TvShowInterface} from "@/models/tv/TvShow.interface";
 import {PeopleDto} from "@/models/dto/Credit.dto";
 import {generateUrlPage} from "@/utils/functions/generateUrlPage";
+import {CSSProperties, useMemo} from "react";
 
 type props = {
     trailer?:VideoTrailerInterface,
@@ -27,15 +28,18 @@ type props = {
 })
 
 export function MediaBanner({product,trailer,credits,mediaType}:props){
+    const bg = useMemo(() => ({
+        "--bgImage":`url(${generateImageUrl(product.backdrop_path,1280)})`
+    }) as CSSProperties, [product]);
+
     const posterPath = generateImageUrl(product.poster_path);
-    const backgroundPath = generateImageUrl(product.backdrop_path,1280);
     const title = mediaType == "movie" ? product.title : product.name
     const titleSize = title.length > 20 ? styles.titleSmall : "";
     const videoLabel = mediaType == "movie" ? "Watch trailer" : "Watch opening"
     //sorting so the director is always first
 
     return (
-        <section className={styles.header}>
+        <section className={styles.header} style={bg}>
             <div className={styles.poster}>
                 <div>
                     <Image
@@ -45,9 +49,6 @@ export function MediaBanner({product,trailer,credits,mediaType}:props){
                         fill
                     />
                 </div>
-            </div>
-            <div className={styles.banner}>
-                <Image src={backgroundPath} alt={`${title} backdrop`} className={styles.backdrop} fill/>
             </div>
             <div className={styles.generalInfo}>
                 <div className={styles.flex}>
