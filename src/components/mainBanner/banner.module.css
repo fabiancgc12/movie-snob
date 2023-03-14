@@ -1,6 +1,6 @@
 .mainShow{
     display: flex;
-    padding: 1em 4em;
+    padding: 1em 2em;
     position: relative;
     align-items: flex-end;
     background-image:var(--bgImage,url("../../../public/noPhotographyPlaceholder.svg"));
@@ -16,9 +16,9 @@
     width: 100%;
     height: 100%;
     background: linear-gradient(
-            to top,
+            to right,
             var(--primaryColor) 0%,
-            transparent 40%
+            transparent 50%
     );
 }
 
@@ -29,16 +29,22 @@
     z-index: 2;
 }
 
+.info h2{
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    white-space: pre-wrap;
+}
 
 .info h2 a{
     color: inherit;
-    /*text-decoration: none;*/
 }
 
 .info p small{
     overflow: hidden;
     display: -webkit-box;
-    -webkit-line-clamp: 4;
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     white-space: pre-wrap;
 }
@@ -55,6 +61,17 @@
     gap: 5px;
 }
 
+.buttons{
+    display: flex;
+    align-items: flex-start;
+    gap:5px
+}
+
+.buttons > * {
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
 @media (min-width: 768px) {
 
     .mainShow{
@@ -69,8 +86,9 @@
 
 @media (max-width: 768px) {
     .mainShow{
-        aspect-ratio: 16 / 9;
-        background-size: contain;
+        height: 300px;
+        background-size: cover;
+        background-position: center;
     }
 
     .bigTitle{

@@ -8,13 +8,15 @@ import {MovieResumeInterface} from "@/models/Movies/MovieResume.interface";
 import {LikeButton} from "@/components/common/ActionButton/LikeButton";
 import {BsThreeDotsVertical} from "react-icons/bs";
 import {FullDate} from "@/components/common/FullDate";
+import {VideoTrailerInterface} from "@/models/Movies/VideoMedia.interface";
+import {Video} from "@/components/Video/Video";
 
 type props = {
-    data:MovieResumeInterface
+    data:MovieResumeInterface,
+    trailer?:VideoTrailerInterface
 }
 
-export function UpcomingBanner({data}:props) {
-
+export function UpcomingBanner({data,trailer}:props) {
     const bg = useMemo(() => ({
         "--bgImage":`url(${generateImageUrl(data.backdrop_path,1280)})`
     }) as CSSProperties, [data]);
@@ -26,6 +28,9 @@ export function UpcomingBanner({data}:props) {
             <FullDate date={data.release_date}/>
             <div className={styles.buttons}>
                 <Link className={"contrast"} role="button" href={`/movie/${data.id}`}>Read More</Link>
+                {trailer &&
+                    <Video video={trailer}><a className={"contrast outline"} href={"#"} role="button">Watch Trailer</a></Video>
+                }
             </div>
             <p>
                 <small>{data.overview}</small>

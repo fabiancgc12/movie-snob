@@ -13,16 +13,25 @@ import { Section } from "@/components/Section/Section";
 import {Slider} from "@/components/Slider/Slider";
 import {SliderSection} from "@/components/Slider/SliderSection";
 import styles from "./index.module.css";
+import {VideoTrailerInterface} from "@/models/Movies/VideoMedia.interface";
 
 type props = {
     upcoming:MovieResumeInterface[],
+    upcomingTrailers:VideoTrailerInterface[]
+
 }
 
-export default function Home({upcoming}:props) {
+export default function Home({upcoming,upcomingTrailers}:props) {
   return (
     <main>
         <SlideShow>
-            {upcoming.slice(0,8).map(u => <UpcomingBanner key={`banner-${u.id}`} data={u}/>)}
+            {upcoming
+                .slice(0,8)
+                .map((u,i) => <UpcomingBanner
+                    key={`banner-${u.id}`}
+                    data={u}
+                    trailer={upcomingTrailers[i]}
+                />)}
         </SlideShow>
         <div data-theme="light">
             <SliderSection title={"Trending movies"} speed={450}>
@@ -122,9 +131,10 @@ export const getStaticProps:GetStaticProps = async () => {
     await queryClient.prefetchInfiniteQuery(["popularTv"],() => data.popular.tv)
     return {
         props: {
-            ...data,
+            upcoming:data.upcoming,
+            upcomingTrailers:data.upcomingTrailers,
             dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
         },
-        revalidate:600 //revalidate in 10 minutes
+        revalidate:1200 //revalidate in 20 minutes
     }
 }
