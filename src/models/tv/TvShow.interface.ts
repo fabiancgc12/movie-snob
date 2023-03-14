@@ -67,8 +67,8 @@ export interface NetworksEntity {
     origin_country: string;
 }
 export interface SeasonsEntity {
-    air_date: string;
-    episode_count: number;
+    air_date?: string;
+    episode_count?: number;
     id: number;
     name: string;
     overview: string;

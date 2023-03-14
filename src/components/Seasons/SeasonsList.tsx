@@ -36,6 +36,7 @@ type seasonComponentProp= {
     season:SeasonsEntity
 }
 function Season({season}:seasonComponentProp){
+    console.log(season)
     return (
         <div className={styles.season}>
             <div className={styles.posterWrapper}>
@@ -44,7 +45,10 @@ function Season({season}:seasonComponentProp){
             <div>
                 <h6 className={styles.title}>{season.name}</h6>
                 <p>
-                    <small className={styles.date}>Aired on: {formatYearDate(season.air_date)} | {season.episode_count} episodes</small>
+                    <small className={styles.date}>
+                        Aired on: {season.air_date ? formatYearDate(season.air_date) : "Not announced"}
+                    </small>
+                    {season.episode_count && <small className={styles.date}> | {season.episode_count} episodes</small>}
                 </p>
                 <p className={styles.plot}>
                     <small>
