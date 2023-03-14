@@ -1,9 +1,10 @@
-.movieCard{
+.posterCard{
     position: relative;
     padding: 0;
     margin: 0;
     isolation: isolate;
     width: 200px;
+    border-radius: .5em;
 }
 
 .backdropCard{
@@ -19,6 +20,10 @@
     width: 100%;
     aspect-ratio: 1 / 1.5;
     overflow: hidden;
+}
+
+.poster img{
+    border-radius: .5em .5em 0 0;
 }
 
 .poster::after{

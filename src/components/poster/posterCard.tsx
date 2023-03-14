@@ -29,7 +29,7 @@ export function PosterCard({data,mediaType,isBackdrop = false}:props){
     const type = data.media_type ?? mediaType;
     const title = data.title ?? data.name as string
     return (
-        <article className={`${styles.movieCard} ${isBackdrop ? styles.backdropCard : ""}`}>
+        <article className={`${styles.posterCard} ${isBackdrop ? styles.backdropCard : ""}`}>
             <Link href={`/${type}/${data.id}`} className={styles.posterWrapper}>
                 <div className={styles.poster}>
                     <Image src={poster} alt={"title poster"} fill/>
@@ -51,7 +51,7 @@ type SkeletonProps = {
 
 export function SkeletonCard({isBackdrop}:SkeletonProps){
     return (
-        <article className={`${styles.movieCard} ${isBackdrop ? styles.backdropCard : ""}`}>
+        <article className={`${styles.posterCard} ${isBackdrop ? styles.backdropCard : ""}`}>
             <Skeleton className={styles.poster} containerClassName={"skeleton"}/>
             <div className={styles.title}>
                 <Skeleton  containerClassName={"skeleton"}/>
