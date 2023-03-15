@@ -9,8 +9,6 @@
             transparent 50%),
             var(--bgImage,url("../../../public/noPhotographyPlaceholder.svg"));
     background-repeat: no-repeat;
-    background-size: 82%;
-    background-position: top right;
 }
 
 .poster{
@@ -83,6 +81,8 @@
     .header{
         padding: 0 1em;
         place-items: stretch;
+        background-position: top center;
+        background-size:cover;
     }
 
     .poster{
@@ -138,6 +138,10 @@
 }
 
 @media screen and (max-width: 768px){
+    .header{
+        background-position: top right;
+        background-size: 82%;
+    }
     .titleSmall{
         font-size: 20px;
     }
