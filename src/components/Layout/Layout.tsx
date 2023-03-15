@@ -1,5 +1,7 @@
 import {ReactNode} from "react";
 import {Footer} from "@/components/Layout/Footer";
+import { NavBar } from "./NavBar";
+import {Header} from "@/components/Layout/Header";
 
 type props = {
     children:ReactNode
@@ -7,7 +9,11 @@ type props = {
 export function Layout({children}:props){
     return (
         <>
-            {children}
+            <Header/>
+            <NavBar/>
+            <main>
+                {children}
+            </main>
             <Footer/>
         </>
     )

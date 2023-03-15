@@ -36,7 +36,6 @@ type seasonComponentProp= {
     season:SeasonsEntity
 }
 function Season({season}:seasonComponentProp){
-    console.log(season)
     return (
         <div className={styles.season}>
             <div className={styles.posterWrapper}>

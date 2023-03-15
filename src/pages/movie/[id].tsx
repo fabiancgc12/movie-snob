@@ -29,7 +29,7 @@ export default function Movie({movie,credits,videos,images,providers,recommendat
     const trailer = videos.find(t => t.site == "YouTube" && t.name.toLowerCase().includes("trailer"))
 
     return (
-        <main>
+        <>
             <ProductHead media={movie} mediaType={"movie"} cast={credits.cast || []} crew={credits.crew || []}/>
             <MediaBanner product={movie} trailer={trailer} credits={crew} mediaType={"movie"}/>
             <div data-theme="light" className={styles.movieContent}>
@@ -40,7 +40,7 @@ export default function Movie({movie,credits,videos,images,providers,recommendat
             <SliderSection title={"Recommendations"} speed={450}>
                 <PosterList mediaType={"movie"} media={recommendations}/>
             </SliderSection>
-        </main>
+        </>
     )
 }
 

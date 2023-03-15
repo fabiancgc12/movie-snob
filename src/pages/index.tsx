@@ -23,7 +23,7 @@ type props = {
 
 export default function Home({upcoming,upcomingTrailers}:props) {
   return (
-    <main>
+    <>
         <SlideShow>
             {upcoming
                 .slice(0,8)
@@ -73,7 +73,7 @@ export default function Home({upcoming,upcomingTrailers}:props) {
             </SliderSection>
         </div>
         <GenreSection/>
-    </main>
+    </>
   )
 }
 

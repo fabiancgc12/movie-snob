@@ -1,9 +1,14 @@
 import styles from "./Footer.module.css"
 import imdbLogo from "../../../public/tmdb.svg"
 import Image from "next/image"
-export function Footer(){
+
+type props = {
+    className?:string
+}
+
+export function Footer({className = ""}:props){
     return (
-        <footer className={styles.footer}>
+        <footer className={`${styles.footer} ${className}`}>
             <div>
                 <p>
                     Developed by
