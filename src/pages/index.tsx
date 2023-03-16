@@ -9,8 +9,6 @@ import {Spinner} from "@/components/common/Spinner";
 import {useEffect, useState} from "react";
 import {MovieGenres} from "@/utils/movieGenres";
 import {dehydrate, QueryClient} from "@tanstack/react-query";
-import { Section } from "@/components/Section/Section";
-import {Slider} from "@/components/Slider/Slider";
 import {SliderSection} from "@/components/Slider/SliderSection";
 import styles from "./index.module.css";
 import {VideoTrailerInterface} from "@/models/Movies/VideoMedia.interface";
@@ -43,15 +41,13 @@ export default function Home({upcoming,upcomingTrailers}:props) {
             </SliderSection>
         </div>
         <div data-theme="dark">
-            <Section title={"Upcoming movies"}>
-                <Slider speed={450}>
-                    <PosterList
-                        isBackdrop={true}
-                        media={upcoming}
-                        mediaType={"movie"}
-                    />
-                </Slider>
-            </Section>
+            <SliderSection title={"Upcoming movies"} speed={450}>
+                <PosterList
+                    isBackdrop={true}
+                    media={upcoming}
+                    mediaType={"movie"}
+                />
+            </SliderSection>
 
         </div>
         <div data-theme="light">

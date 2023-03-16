@@ -6,6 +6,7 @@ import styles from "./Media.module.css"
 import {VideoThumbnail} from "@/components/Video/VideoThumbnail";
 import {Section} from "@/components/Section/Section";
 import {Slider} from "@/components/Slider/Slider";
+import {SliderSection} from "@/components/Slider/SliderSection";
 
 type props = {
     videos:VideoTrailerInterface[],
@@ -23,11 +24,8 @@ export function Media({videos,images}:props){
                         : <p>Currently there is no videos related to this movie/tv show on our database.</p>
                     }
                 </Section>
-                <Section className={styles.wrapper} title={"Images"}>
-                    {backdrops.length > 0 ?
-                        <Slider speed={450}>
-                            {backdrops
-                                .map((b,i) => (
+                <SliderSection className={styles.wrapper} title={"Images"} speed={450}>
+                    {backdrops.length > 0 ? backdrops.map((b,i) => (
                                         <div className={styles.backdrop} key={`backdrop-${i}`}>
                                             <Image
                                                 src={generateImageUrl(b.file_path)}
@@ -36,11 +34,10 @@ export function Media({videos,images}:props){
                                             />
                                         </div>
                                     )
-                                )}
-                        </Slider>
+                                )
                         : <p>Currently there is no images related to this movie/tv show on our database.</p>
                     }
-                </Section>
+                </SliderSection>
 
         </>
     )
