@@ -19,8 +19,12 @@ body{
   background: var(--primaryColor);
 }
 
+:root:not([data-theme=dark]), [data-theme=light]{
+  --background-color: whitesmoke;
+}
+
 div[data-theme="light"]{
-  background: whitesmoke;
+  background: var(--background-color);
 }
 
 div[data-theme="dark"] .react-loading-skeleton{
