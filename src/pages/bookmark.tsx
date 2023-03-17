@@ -3,7 +3,7 @@ import {PosterList} from "@/components/poster/posterList";
 import {useEffect, useState} from "react";
 import {ProductStore, StoreProductType} from "@/components/common/ActionButton/useCheckedButton";
 import {bookmarkStoreKey} from "@/components/common/ActionButton/chechMarkButton";
-import {Grid} from "@/components/Grid/Grid";
+import {PosterGrid} from "@/components/poster/PosterGrid";
 import {SkeletonCard} from "@/components/poster/posterCard";
 
 const defaultPosters = [
@@ -32,14 +32,14 @@ export default function BookMarkPage(){
         return (
             <div data-theme="light">
                 <Section title={"Your Bookmarked this movies"}>
-                    <Grid>
+                    <PosterGrid>
                         {defaultPosters}
-                    </Grid>
+                    </PosterGrid>
                 </Section>
                 <Section title={"Your Bookmarked this tv shows"}>
-                    <Grid>
+                    <PosterGrid>
                         {defaultPosters}
-                    </Grid>
+                    </PosterGrid>
                 </Section>
             </div>
         )
@@ -48,14 +48,14 @@ export default function BookMarkPage(){
     return (
         <div data-theme="light">
             <Section title={"You Bookmarked this movies"}>
-                <Grid>
+                <PosterGrid>
                     <PosterList media={movies} mediaType={"movie"}/>
-                </Grid>
+                </PosterGrid>
             </Section>
             <Section title={"You Bookmarked this tv shows"}>
-                <Grid>
+                <PosterGrid>
                     <PosterList media={tv} mediaType={"tv"}/>
-                </Grid>
+                </PosterGrid>
             </Section>
         </div>
     )
