@@ -1,3 +1,7 @@
+.wrapper{
+    isolation: isolate;
+}
+
 .arrow{
     transform: translateY(-75%);
 }

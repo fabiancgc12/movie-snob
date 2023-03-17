@@ -16,7 +16,7 @@ export function SlideShow({children}:props){
     // using the prevArrow component causes the slide the always go forward,
     // for some reason using a component makes it to go always forward and using only a button makes it works
     return (
-        <div>
+        <div className={styles.wrapper}>
             <Fade
                 ref={slideRef}
                 prevArrow={<button className={`${arrowStyles.prevArrow} ${styles.arrow}`} onClick={() => {}}>
