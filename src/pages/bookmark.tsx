@@ -5,6 +5,7 @@ import {ProductStore, StoreProductType} from "@/components/common/ActionButton/u
 import {bookmarkStoreKey} from "@/components/common/ActionButton/chechMarkButton";
 import {PosterGrid} from "@/components/poster/PosterGrid";
 import {SkeletonCard} from "@/components/poster/posterCard";
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 const defaultPosters = [
     <SkeletonCard key={"default-card-1"}/>,
@@ -28,33 +29,46 @@ export default function BookMarkPage(){
         }
     }, []);
 
-    if (!onClient){
-        return (
-            <div data-theme="light">
-                <Section title={"Your Bookmarked this movies"}>
-                    <PosterGrid>
-                        {defaultPosters}
-                    </PosterGrid>
-                </Section>
-                <Section title={"Your Bookmarked this tv shows"}>
-                    <PosterGrid>
-                        {defaultPosters}
-                    </PosterGrid>
-                </Section>
-            </div>
-        )
-    }
+    if (!onClient) return <Loading/>
 
     return (
         <div data-theme="light">
-            <Section title={"You Bookmarked this movies"}>
+            <Section title={"You Bookmarked this"}>
+                <Tabs>
+                    <TabList>
+                        <Tab>Movie</Tab>
+                        <Tab>Tv</Tab>
+                    </TabList>
+
+                    <TabPanel>
+                        <PosterGrid>
+                            <PosterList media={movies} mediaType={"movie"}/>
+                        </PosterGrid>
+                    </TabPanel>
+                    <TabPanel>
+                        <PosterGrid>
+                            <PosterList media={tv} mediaType={"tv"}/>
+                        </PosterGrid>
+                    </TabPanel>
+                </Tabs>
+            </Section>
+        </div>
+    )
+}
+
+
+function Loading(){
+    return (
+        <div data-theme="light">
+            <Section title={"Your Bookmarked this movies"}>
                 <PosterGrid>
-                    <PosterList media={movies} mediaType={"movie"}/>
+                    {defaultPosters}
                 </PosterGrid>
             </Section>
-            <Section title={"You Bookmarked this tv shows"}>
+
+            <Section title={"Your Bookmarked this tv shows"}>
                 <PosterGrid>
-                    <PosterList media={tv} mediaType={"tv"}/>
+                    {defaultPosters}
                 </PosterGrid>
             </Section>
         </div>

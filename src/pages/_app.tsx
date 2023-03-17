@@ -1,11 +1,12 @@
 import '@picocss/pico'
+import 'react-loading-skeleton/dist/skeleton.css'
+import 'react-tabs/style/react-tabs.css';
 import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
 import Head from "next/head";
 import {Layout} from "@/components/Layout/Layout";
 import {Hydrate, QueryClient, QueryClientProvider} from '@tanstack/react-query';
 import {useState} from "react";
-import 'react-loading-skeleton/dist/skeleton.css'
 
 export default function App({ Component, pageProps }: AppProps) {
     const [queryClient] = useState(() => new QueryClient({

@@ -121,3 +121,15 @@ article{
   display:flex;
   align-items: center;
 }
+
+:where(dl,ol,ul) li {
+  margin: 0;
+}
+
+.react-tabs__tab--selected{
+ background: var(--background-color);
+}
+
+.react-tabs__tab:focus:after{
+  background: var(--background-color);
+}
