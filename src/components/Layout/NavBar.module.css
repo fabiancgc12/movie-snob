@@ -64,5 +64,10 @@
 
     .aside{
         transform:translate(-100%);
+        transition: transform .3s ease-in-out;
+    }
+
+    .show{
+        transform:translate(0%);
     }
 }

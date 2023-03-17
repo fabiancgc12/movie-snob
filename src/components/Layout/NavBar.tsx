@@ -6,6 +6,9 @@ import {MdLocalMovies} from "react-icons/md";
 import Link from "next/link";
 import Image from "next/image"
 import logo from "@public/logo.png";
+import {useShowNavBarContext} from "@/global/ShowNavbarContext";
+import useClickOutside from "@/hooks/useClickOutside";
+import {useRef} from "react";
 
 type props = {
     className?:string
@@ -28,8 +31,14 @@ const navItems = [{
 
 
 export function NavBar({className = ""}:props){
+    const [show,setShow] = useShowNavBarContext()
+    const ref = useRef<HTMLElement>(null)
+    useClickOutside(ref,() => {
+        if (show)
+            setShow(false)
+    })
     return (
-        <aside className={`${className} ${styles.aside}`}>
+        <aside ref={ref} className={`${className} ${styles.aside} ${show ? styles.show : ""}`}>
             <nav className={styles.navigation}>
                 <div className={styles.logo}>
                     <Link href={"/"} className={styles.link}>
