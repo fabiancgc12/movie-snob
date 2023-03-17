@@ -9,6 +9,7 @@ import logo from "@public/logo.png";
 import {useShowNavBarContext} from "@/global/ShowNavbarContext";
 import useClickOutside from "@/hooks/useClickOutside";
 import {useRef} from "react";
+import {useRouter} from "next/router";
 
 type props = {
     className?:string
@@ -35,6 +36,7 @@ const navItems = [{
 
 
 export function NavBar({className = ""}:props){
+    const router = useRouter();
     const [show,setShow] = useShowNavBarContext()
     const ref = useRef<HTMLElement>(null)
     useClickOutside(ref,() => {
@@ -50,7 +52,10 @@ export function NavBar({className = ""}:props){
                     </Link>
                 </div>
                 {navItems.map(item => (
-                    <div key={`nav-item-${item.label}`} className={styles.item}>
+                    <div
+                        key={`nav-item-${item.label}`}
+                        className={`${styles.item} ${ router.pathname == item.url ? styles.active : ""}`}
+                    >
                         <Link href={item.url} className={styles.link} >
                             {item.icon}
                             <p className={styles.label}>{item.label}</p>

@@ -35,6 +35,11 @@
     color:var(--primaryDark)
 }
 
+.active{
+    background: white;
+    color:var(--primaryDark)
+}
+
 .navigation > .item:last-child{
     margin-top: auto;
 }
