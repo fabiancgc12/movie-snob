@@ -14,8 +14,10 @@ export function BookmarkButton(props:props){
     return <Button key={`${props.mediaType}-${props.media}`} {...props}/>
 }
 
+export const bookmarkStoreKey = "checked";
+
 function Button({mediaType,media,size,className = ""}:props){
-    const [checked,onClick] = useCheckedButton("checked",mediaType,media)
+    const [checked,onClick] = useCheckedButton(bookmarkStoreKey,mediaType,media)
     return (
         <ActionButton className={`${styles.checkmark} secondary ${className}`} onClick={onClick} size={size}>
             {checked ? <FaBookmark size={24}/> : <FaRegBookmark size={24}/>}

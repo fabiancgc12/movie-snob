@@ -1,11 +1,14 @@
 import {useEffect, useState} from "react";
 
-type CheckedStore = Record<"movie" | "tv", Record<number, {
+export type ProductStore = Record<"movie" | "tv", Record<number, {
+    id:number,
     vote_average:number,
-    poster_path:string
+    poster_path:string,
+    title?:string,
+    name?:string
 }>>
 
-const defaultValue:CheckedStore = {
+const defaultValue:ProductStore = {
     "movie":{},
     "tv":{}
 }
@@ -13,7 +16,9 @@ const defaultValue:CheckedStore = {
 export type StoreProductType = {
     id:number,
     vote_average:number,
-    poster_path:string
+    poster_path:string,
+    name?:string,
+    title?:string,
 }
 
 export function useCheckedButton(key:string,media:"movie" | "tv",product:StoreProductType){
@@ -21,7 +26,7 @@ export function useCheckedButton(key:string,media:"movie" | "tv",product:StorePr
     const onClick = () => {
         const store = localStorage.getItem(key)
         if (store){
-            const parsedStore = JSON.parse(store) as CheckedStore;
+            const parsedStore = JSON.parse(store) as ProductStore;
             const checked = parsedStore[media];
             const item = checked[product.id]
             if (item){
@@ -29,8 +34,11 @@ export function useCheckedButton(key:string,media:"movie" | "tv",product:StorePr
                 setChecked(false)
             } else {
                 checked[product.id] = {
+                    id:product.id,
                     vote_average:product.vote_average,
-                    poster_path:product.poster_path
+                    poster_path:product.poster_path,
+                    title:product.title,
+                    name:product.name
                 }
                 setChecked(true)
             }
@@ -43,7 +51,7 @@ export function useCheckedButton(key:string,media:"movie" | "tv",product:StorePr
         return () => {
             const store = localStorage.getItem(key)
             if (store){
-                const parsedStore = JSON.parse(store) as CheckedStore;
+                const parsedStore = JSON.parse(store) as ProductStore;
                 const itemExist = parsedStore[media][product.id]
                 setChecked(!!itemExist)
             } else {

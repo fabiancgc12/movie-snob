@@ -16,17 +16,21 @@ type props = {
 
 const navItems = [{
     icon:<FaBookmark />,
-    label:"Marked"
+    label:"Marked",
+    url:"/bookmark"
 },{
     icon:<AiFillHeart />,
-    label:"Liked"
+    label:"Liked",
+    url:"#"
 },{
     icon:<MdLocalMovies />,
-    label:"Discover"
+    label:"Discover",
+    url:"#"
 },
 {
     icon:<BiUserCircle />,
-    label:"User"
+    label:"User",
+    url:"#"
 }]
 
 
@@ -47,7 +51,7 @@ export function NavBar({className = ""}:props){
                 </div>
                 {navItems.map(item => (
                     <div key={`nav-item-${item.label}`} className={styles.item}>
-                        <Link href={"#"} className={styles.link} >
+                        <Link href={item.url} className={styles.link} >
                             {item.icon}
                             <p className={styles.label}>{item.label}</p>
                         </Link>
