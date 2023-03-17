@@ -11,7 +11,7 @@
 
     .movieContent,.tvContent{
         display: grid;
-        grid-template-columns: 72% 1fr;
+        grid-template-columns: 75% 1fr;
     }
 
     .info{

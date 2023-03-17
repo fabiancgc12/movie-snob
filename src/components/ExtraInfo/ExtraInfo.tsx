@@ -8,7 +8,7 @@ type props = {
 
 export function ExtraInfo({children}:props){
     return (
-        <Section title={"More info"}>
+        <Section title={"More"}>
             <div className={styles.wrapper}>
                 {children}
             </div>
