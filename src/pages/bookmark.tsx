@@ -17,7 +17,7 @@ const defaultPosters = [
 export default function BookMarkPage(){
     const [movies,setMovies] = useState<StoreProductType[]>([]);
     const [tv,setTv] = useState<StoreProductType[]>([]);
-    const [onClient, setOnClient] = useState(false);
+    const [ready, setReady] = useState(false);
 
     useEffect(() => {
         const store = localStorage.getItem(bookmarkStoreKey)
@@ -25,11 +25,9 @@ export default function BookMarkPage(){
             const parsedStore = JSON.parse(store) as ProductStore;
             setMovies(Object.values(parsedStore.movie))
             setTv(Object.values(parsedStore.tv))
-            setOnClient(true)
+            setReady(true)
         }
     }, []);
-
-    if (!onClient) return <Loading/>
 
     return (
         <div data-theme="light">
@@ -39,37 +37,17 @@ export default function BookMarkPage(){
                         <Tab>Movie</Tab>
                         <Tab>Tv</Tab>
                     </TabList>
-
                     <TabPanel>
                         <PosterGrid>
-                            <PosterList media={movies} mediaType={"movie"}/>
+                            {ready ? <PosterList media={movies} mediaType={"movie"}/> : defaultPosters}
                         </PosterGrid>
                     </TabPanel>
                     <TabPanel>
                         <PosterGrid>
-                            <PosterList media={tv} mediaType={"tv"}/>
+                            {ready ? <PosterList media={tv} mediaType={"tv"}/> : defaultPosters}
                         </PosterGrid>
                     </TabPanel>
                 </Tabs>
-            </Section>
-        </div>
-    )
-}
-
-
-function Loading(){
-    return (
-        <div data-theme="light">
-            <Section title={"Your Bookmarked this movies"}>
-                <PosterGrid>
-                    {defaultPosters}
-                </PosterGrid>
-            </Section>
-
-            <Section title={"Your Bookmarked this tv shows"}>
-                <PosterGrid>
-                    {defaultPosters}
-                </PosterGrid>
             </Section>
         </div>
     )
