@@ -8,8 +8,11 @@ export function LikeButton(props:props){
     return <Button key={`${props.mediaType}-${props.media.id}`} {...props}/>
 }
 
+export const likedStoreKey = "liked";
+
+
 export function Button({mediaType,media,size,className = ""}:props){
-    const [checked,onClick] = useCheckedButton("liked",mediaType,media)
+    const [checked,onClick] = useCheckedButton(likedStoreKey,mediaType,media)
 
     return (
         <ActionButton className={`${styles.like} secondary ${className}`} size={size} onClick={onClick}>

@@ -2,25 +2,18 @@ import {Section} from "@/components/Section/Section";
 import {PosterList} from "@/components/poster/posterList";
 import {useEffect, useState} from "react";
 import {ProductStore, StoreProductType} from "@/components/common/ActionButton/useCheckedButton";
-import {bookmarkStoreKey} from "@/components/common/ActionButton/chechMarkButton";
 import {PosterGrid} from "@/components/poster/PosterGrid";
-import {SkeletonCard} from "@/components/poster/posterCard";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import {defaultPosters} from "@/pages/bookmark";
+import {likedStoreKey} from "@/components/common/ActionButton/LikeButton";
 
-export const defaultPosters = [
-    <SkeletonCard key={"default-card-1"}/>,
-    <SkeletonCard key={"default-card-2"}/>,
-    <SkeletonCard key={"default-card-3"}/>,
-    <SkeletonCard key={"default-card-4"}/>
-]
-
-export default function BookMarkPage(){
+export default function LiedPage(){
     const [movies,setMovies] = useState<StoreProductType[]>([]);
     const [tv,setTv] = useState<StoreProductType[]>([]);
     const [ready, setReady] = useState(false);
 
     useEffect(() => {
-        const store = localStorage.getItem(bookmarkStoreKey)
+        const store = localStorage.getItem(likedStoreKey)
         if (store){
             const parsedStore = JSON.parse(store) as ProductStore;
             setMovies(Object.values(parsedStore.movie))
@@ -41,7 +34,7 @@ export default function BookMarkPage(){
                         {ready
                             ? movies.length > 0
                                 ? <PosterGrid><PosterList media={movies} mediaType={"movie"}/></PosterGrid>
-                                : <p>You dont have any movies bookmarked</p>
+                                : <p>You don&#8216;t have movies that you liked.</p>
                             : <PosterGrid>{defaultPosters}</PosterGrid>
                         }
                     </TabPanel>
@@ -49,7 +42,7 @@ export default function BookMarkPage(){
                         {ready
                             ? tv.length > 0
                                 ? <PosterGrid><PosterList media={tv} mediaType={"tv"}/></PosterGrid>
-                                : <p>You dont have any tv shows bookmarked</p>
+                                : <p>You don&#8216;t have tv shows that you liked.</p>
                             : <PosterGrid>{defaultPosters}</PosterGrid>
                         }
                     </TabPanel>

@@ -22,7 +22,7 @@ const navItems = [{
 },{
     icon:<AiFillHeart />,
     label:"Liked",
-    url:"#"
+    url:"/liked"
 },{
     icon:<MdLocalMovies />,
     label:"Discover",
