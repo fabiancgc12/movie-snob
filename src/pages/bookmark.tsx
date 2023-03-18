@@ -25,12 +25,12 @@ export default function BookMarkPage(){
             const parsedStore = JSON.parse(store) as ProductStore;
             setMovies(Object.values(parsedStore.movie))
             setTv(Object.values(parsedStore.tv))
-            setReady(true)
         }
+        setReady(true)
     }, []);
 
     return (
-        <div data-theme="light">
+        <div data-theme="light" className={"full-h"}>
             <Section title={"You Bookmarked this"}>
                 <Tabs>
                     <TabList>
@@ -38,14 +38,20 @@ export default function BookMarkPage(){
                         <Tab>Tv</Tab>
                     </TabList>
                     <TabPanel>
-                        <PosterGrid>
-                            {ready ? <PosterList media={movies} mediaType={"movie"}/> : defaultPosters}
-                        </PosterGrid>
+                        {ready
+                            ? movies.length > 0
+                                ? <PosterGrid><PosterList media={movies} mediaType={"movie"}/></PosterGrid>
+                                : <p>You dont have any movies bookmarked</p>
+                            : <PosterGrid>{defaultPosters}</PosterGrid>
+                        }
                     </TabPanel>
                     <TabPanel>
-                        <PosterGrid>
-                            {ready ? <PosterList media={tv} mediaType={"tv"}/> : defaultPosters}
-                        </PosterGrid>
+                        {ready
+                            ? tv.length > 0
+                                ? <PosterGrid><PosterList media={tv} mediaType={"tv"}/></PosterGrid>
+                                : <p>You dont have any tv shows bookmarked</p>
+                            : <PosterGrid>{defaultPosters}</PosterGrid>
+                        }
                     </TabPanel>
                 </Tabs>
             </Section>
