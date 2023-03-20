@@ -21,7 +21,7 @@ export function Media({videos,images}:props){
                         ? <Slider speed={450}>
                             {videos && videos.map(v => <VideoThumbnail video={v} key={`video-${v.key}`}/>)}
                           </Slider>
-                        : <p>Currently there is no videos related to this movie/tv show on our database.</p>
+                        : <p>Currently there are no videos related to this movie/tv show on our database.</p>
                     }
                 </Section>
                 <SliderSection className={styles.wrapper} title={"Images"} speed={450}>
@@ -35,7 +35,7 @@ export function Media({videos,images}:props){
                                         </div>
                                     )
                                 )
-                        : <p>Currently there is no images related to this movie/tv show on our database.</p>
+                        : <p>Currently there are no images related to this movie/tv show on our database.</p>
                     }
                 </SliderSection>
 
