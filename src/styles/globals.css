@@ -64,8 +64,14 @@ article{
 
 .badge{
   background: var(--primaryLight);
+  color: inherit;
   padding: .15em .35em;
   border-radius: .45em;
+}
+
+.badge:hover,.badge:focus{
+  background: var(--primaryColor);
+  text-decoration: none;
 }
 
 .placeholderImage{

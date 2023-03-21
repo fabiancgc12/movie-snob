@@ -14,6 +14,7 @@ import {TvShowInterface} from "@/models/tv/TvShow.interface";
 import {PeopleDto} from "@/models/dto/Credit.dto";
 import {generateUrlPage} from "@/utils/functions/generateUrlPage";
 import {CSSProperties, useMemo} from "react";
+import Link from "next/link";
 
 type props = {
     trailer?:VideoTrailerInterface,
@@ -53,7 +54,14 @@ export function MediaBanner({product,trailer,credits,mediaType}:props){
             <div className={styles.generalInfo}>
                 <div className={styles.flex}>
                     <div className={styles.genres}>
-                        {product.genres?.slice(0,3).map(g => <small className={"badge"} key={`genre-${g.id}`}>{g.name}</small>)}
+                        {product.genres?.slice(0,3).map(g => (
+                            <Link
+                                className={"badge"}
+                                href={`/discover?media=${mediaType}&genre=${g.id}`}
+                                key={`genre-${g.id}`}
+                            >
+                                {g.name}
+                            </Link>))}
                     </div>
                     {mediaType == "movie" && <div>{calculateRunTime(product.runtime)}</div>}
                 </div>
