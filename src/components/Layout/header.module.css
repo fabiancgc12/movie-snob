@@ -4,7 +4,7 @@
     justify-content: space-between;
 }
 
-.openMenu{
+.button{
     display: grid;
     place-items: center;
     border-radius: 100%;
@@ -19,7 +19,7 @@
 /*big screen*/
 @media screen and (min-width: 768px){
 
-    .openMenu{
+    .button{
         display: none;
     }
 }
