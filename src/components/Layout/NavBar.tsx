@@ -26,7 +26,7 @@ const navItems = [{
 },{
     icon:<MdLocalMovies />,
     label:"Discover",
-    url:"#"
+    url:"/discover"
 },
 {
     icon:<BiUserCircle />,
