@@ -1,0 +1,12 @@
+.links{
+    padding: 10px;
+}
+
+.links >*{
+    font-size: .8rem;
+    padding: .75em 1em;
+}
+
+.links >*:not(:first-child){
+    margin-left: 10px;
+}

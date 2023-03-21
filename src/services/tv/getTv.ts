@@ -31,24 +31,40 @@ export async function getTvShow(id:number):Promise<{
     recommendations:RecommendationInterface[],
     providers:ProvidersDto
 }>{
+
     const response = await fetch(
-        `https://api.themoviedb.org/3/tv/${id}?api_key=${process.env.TMDB_KEY}&`+
+        `https://api.themoviedb.org/3/tv/${id}?api_key=${process.env.TMDB_KEY}&` +
         `append_to_response=videos,recommendations,aggregate_credits,images,watch/providers`
     );
-    const data:ApiResponse = await response.json()
-    let {videos:videoResponse,recommendations:recommendationResponse,aggregate_credits,images:imageResponse,"watch/providers": providersResponse,...show} = data;
+    const data: ApiResponse = await response.json()
+    try {
+        // @ts-ignore
+        if (data?.success == false){
+            throw data;
+        }
+        let {
+            videos: videoResponse,
+            recommendations: recommendationResponse,
+            aggregate_credits,
+            images: imageResponse,
+            "watch/providers": providersResponse,
+            ...show
+        } = data;
 
-    const videos = formatVideoResponse(videoResponse)
-    const images = formatImagesResponse(imageResponse)
-    const providers = formatProvidersResponse(providersResponse)
-    const recommendations = formatRecommendations(recommendationResponse)
-    const credits = formatTvCredits(aggregate_credits)
-    return {
-        show,
-        videos,
-        recommendations,
-        credits,
-        images,
-        providers
+        const videos = formatVideoResponse(videoResponse)
+        const images = formatImagesResponse(imageResponse)
+        const providers = formatProvidersResponse(providersResponse)
+        const recommendations = formatRecommendations(recommendationResponse)
+        const credits = formatTvCredits(aggregate_credits)
+        return {
+            show,
+            videos,
+            recommendations,
+            credits,
+            images,
+            providers
+        }
+    } catch (e) {
+        throw e
     }
 }

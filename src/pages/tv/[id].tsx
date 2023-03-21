@@ -15,6 +15,7 @@ import {ProvidersDto} from "@/models/dto/ProvidersDto";
 import {CreditsDto, PeopleDto} from "@/models/dto/Credit.dto";
 import {ProductHead} from "@/components/Layout/ProductHead";
 import { SliderSection } from "@/components/Slider/SliderSection";
+import {TMDBCodes} from "@/utils/TMDBCodes";
 
 type props = {
     show:TvShowInterface,
@@ -56,10 +57,26 @@ export const getStaticPaths:GetStaticPaths = () => {
 
 export const getStaticProps:GetStaticProps = async (context) => {
     const id = Number(context.params?.id);
-    const data = await getTvShow(id)
-    return {
-        props: data,
-        revalidate:900 //revalidate in 15 minutes
+    try {
+        const data = await getTvShow(id)
+        return {
+            props: data,
+            revalidate:900 //revalidate in 15 minutes
+        }
+    } catch (e) {
+        // @ts-ignore
+        if (e.status_code == TMDBCodes.resourceNotFound)
+            return {
+                props:{},
+                redirect:{
+                    destination:"/tv/not-found"
+                }
+            }
+        else
+            return {
+                notFound:true
+            }
     }
+
 }
 
