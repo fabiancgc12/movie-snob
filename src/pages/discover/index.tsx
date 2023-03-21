@@ -9,11 +9,11 @@ import styles from "./discover.module.css"
 
 export default function DiscoverPage(){
     const router = useRouter();
-    let apiRoute = "discoverMovies"
-    if (router.query.media == "tv")
-        apiRoute = "discoverTv"
-    const media = router.query.media as MediaType;
-    const genre = router.query.genre as string
+
+    // if there is no 'media' on the query then fetch movies by default
+    const media = router.query.media as MediaType ?? "movie";
+    const genre = router.query.genre as string;
+
     const handleMediaChange = (e:ChangeEvent<HTMLSelectElement>) => {
         const value = e.target.value as MediaType
         let genres = value == "movie" ? MovieGenres : TvGenres;
@@ -39,7 +39,12 @@ export default function DiscoverPage(){
             }})
     }
 
-    let genres = media == "movie" ? MovieGenres : TvGenres;
+    let apiRoute = "discoverMovies"
+    let genres = MovieGenres
+    if (router.query.media == "tv"){
+        apiRoute = "discoverTv"
+        genres = TvGenres
+    }
 
     return (
         <>
@@ -59,8 +64,9 @@ export default function DiscoverPage(){
                         <DynamicPosterList
                             mediaType={media}
                             api={apiRoute}
-                            queryKey={[apiRoute,media,genre]}
-                            parameters={{media:media,genre:genre}}
+                            queryKey={[apiRoute, media, genre]}
+                            parameters={{media: media, genre: genre}}
+                            enabled={router.isReady}
                         />
                     </PosterGrid>
                 </Section>
