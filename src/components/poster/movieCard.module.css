@@ -1,14 +1,15 @@
 .posterCard{
+    --posterWidth:200px;
     position: relative;
     padding: 0;
     margin: 0;
     isolation: isolate;
-    width: 200px;
+    width: var(--posterWidth);
     border-radius: .5em;
 }
 
 .backdropCard{
-    width: 300px;
+    --posterWidth:300px
 }
 
 .posterWrapper{
@@ -64,4 +65,20 @@
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+}
+
+/*small screen*/
+@media screen and (max-width: 768px){
+
+    .posterCard:not(.backdropCard){
+        --posterWidth: 40vw;
+        min-width: 160px;
+        max-width: 200px;
+    }
+
+    .backdropCard{
+        --posterWidth: 35vw;
+        min-width: 220px;
+        max-width: 300px;
+    }
 }
