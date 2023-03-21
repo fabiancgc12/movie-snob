@@ -1,5 +1,5 @@
-import {NotFound} from "@/components/notFound/NotFound";
+import {ErrorPageComponent} from "@/components/notFound/ErrorPageComponent";
 
 export default function NotFoundPage(){
-    return <NotFound title={"Movie not found"}/>
+    return <ErrorPageComponent title={"Movie not found"}/>
 }

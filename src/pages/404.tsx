@@ -1,5 +1,5 @@
-import {NotFound} from "@/components/notFound/NotFound";
+import {ErrorPageComponent} from "@/components/notFound/ErrorPageComponent";
 
 export default function Error404(){
-    return <NotFound title={"Page not found"}/>
+    return <ErrorPageComponent title={"Page not found"}/>
 }

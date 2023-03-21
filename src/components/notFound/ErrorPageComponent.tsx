@@ -5,7 +5,7 @@ import styles from "./notFound.module.css"
 type props = {
     title:string
 }
-export function NotFound({title}:props){
+export function ErrorPageComponent({title}:props){
     return (
         <div data-theme={"light"}  className={"full-h"}>
             <Section title={title}>
