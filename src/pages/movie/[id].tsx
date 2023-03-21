@@ -14,6 +14,7 @@ import {ProvidersDto} from "@/models/dto/ProvidersDto";
 import {CreditsDto} from "@/models/dto/Credit.dto";
 import {ProductHead} from "@/components/Layout/ProductHead";
 import {SliderSection} from "@/components/Slider/SliderSection";
+import {TMDBCodes} from "@/utils/TMDBCodes";
 
 type props = {
     movie:MovieInterface,
@@ -53,16 +54,31 @@ export const getStaticPaths:GetStaticPaths = () => {
 
 export const getStaticProps:GetStaticProps = async (context) => {
     const id = Number(context.params?.id);
-    const {movie,credits,videos,images,providers,recommendations} = await getMovie(id)
-    return {
-        props: {
-            movie,
-            credits,
-            videos,
-            images,
-            providers,
-            recommendations
-        },
-        revalidate:900 //revalidate in 15 minutes
+    try {
+        const {movie,credits,videos,images,providers,recommendations} = await getMovie(id)
+        return {
+            props: {
+                movie,
+                credits,
+                videos,
+                images,
+                providers,
+                recommendations
+            },
+            revalidate:900 //revalidate in 15 minutes
+        }
+    } catch (e) {
+        // @ts-ignore
+        if (e.status_code == TMDBCodes.resourceNotFound)
+            return {
+                props:{},
+                redirect:{
+                    destination:"/movie/not-found"
+                }
+            }
+        else
+            return {
+                notFound:true
+            }
     }
 }

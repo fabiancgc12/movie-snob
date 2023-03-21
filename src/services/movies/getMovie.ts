@@ -37,20 +37,36 @@ export async function getMovie(id:number):Promise<
         `append_to_response=videos,images,credits,watch/providers,recommendations`
     );
     const data:ApiResponse = await response.json()
-    // I destructure all the data to their separate parts to handle them independently from each other
-    let {credits:creditsResponse,videos: videoResponse,images:imageResponse,"watch/providers": providersResponse,recommendations:recommendationResponse,...movie} = data
+    try {
+        // @ts-ignore
+        if (data?.success == false){
+            throw data;
+        }
 
-    const videos = formatVideoResponse(videoResponse)
-    const images = formatImagesResponse(imageResponse)
-    const providers = formatProvidersResponse(providersResponse)
-    const recommendations = formatRecommendations(recommendationResponse)
-    const credits = formatMovieCredits(creditsResponse)
-    return {
-        movie:movie,
-        credits:credits,
-        videos:videos,
-        images:images,
-        providers:providers,
-        recommendations:recommendations
+        // I destructure all the data to their separate parts to handle them independently from each other
+        let {
+            credits: creditsResponse,
+            videos: videoResponse,
+            images: imageResponse,
+            "watch/providers": providersResponse,
+            recommendations: recommendationResponse,
+            ...movie
+        } = data
+
+        const videos = formatVideoResponse(videoResponse)
+        const images = formatImagesResponse(imageResponse)
+        const providers = formatProvidersResponse(providersResponse)
+        const recommendations = formatRecommendations(recommendationResponse)
+        const credits = formatMovieCredits(creditsResponse)
+        return {
+            movie: movie,
+            credits: credits,
+            videos: videos,
+            images: images,
+            providers: providers,
+            recommendations: recommendations
+        }
+    } catch (e) {
+        throw e
     }
 }
