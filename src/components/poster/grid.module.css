@@ -1,7 +1,10 @@
+/*in this case flex was a better option than grid because it allows the posters with grow as needed
+in the bidimensional layout, with grid i would had to define a grid-column for every width that
+the posters had and it also lead to a lot od empty space*/
 .wrapper{
-    display: grid;
-    grid-template-columns: repeat(auto-fit,200px);
-    gap: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px 15px;
     padding: 10px 0;
     justify-content: space-around;
 }
