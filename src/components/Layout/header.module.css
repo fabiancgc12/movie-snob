@@ -2,6 +2,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 10px;
+    background: var(--primaryDarker);
 }
 
 .button{
@@ -16,10 +18,27 @@
     margin: 0;
 }
 
+.logo{
+    position: relative;
+    height: 100%;
+    aspect-ratio: 2.4 / 1;
+}
+
+.search{
+    margin-left: auto;
+}
+
+.search input{
+    padding: .25em .5em  .25em 55px !important;
+    margin: 0 !important;
+    height: 45px;
+}
+
+
 /*big screen*/
 @media screen and (min-width: 768px){
 
-    .button{
+    .button,.logo{
         display: none;
     }
 }

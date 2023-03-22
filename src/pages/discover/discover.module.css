@@ -3,7 +3,10 @@
     gap: 20px;
     align-items: center;
     padding: 1em;
-    margin:0
+    margin:0;
+    /*background: hsl(240, 2%, 16%);*/
+    /*background: var(--primaryDarker)*/
+    /*box-shadow: 0 10px 10px 10px var(--primaryDark);*/
 }
 
 .form > *{

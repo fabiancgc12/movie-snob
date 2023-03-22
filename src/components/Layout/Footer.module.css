@@ -3,8 +3,8 @@
     grid-template-columns: 1fr 1fr;
     justify-content: space-between;
     justify-items: center;
-    background: var(--primaryDark);
     padding: 1em;
+    background: var(--primaryDarker);
 }
 
 .footer > * {
@@ -19,10 +19,6 @@
 
 @media screen and (min-width: 768px) {
     .footer{
-        display: grid;
-        grid-template-columns: 1fr 1fr;
         justify-content: start;
-        background: var(--primaryDark);
-        padding: 1em;
     }
 }
