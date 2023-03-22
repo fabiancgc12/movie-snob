@@ -1,10 +1,11 @@
 import {useShowNavBarContext} from "@/global/ShowNavbarContext";
 import {CiMenuBurger} from "react-icons/ci";
 import styles from "./header.module.css"
-import {useRef} from "react";
+import {FormEvent, useRef} from "react";
 import Image from "next/image"
 import wideLogo from "@public/logo-wide.png"
 import Link from "next/link";
+import {useRouter} from "next/router";
 
 type props = {
     className?:string
@@ -12,7 +13,14 @@ type props = {
 
 export function Header({className = ""}:props){
     const [showNavBar,setShowNavBar] = useShowNavBarContext()
-    const searchRef = useRef(null);
+    const searchRef = useRef<HTMLInputElement>(null);
+    const router = useRouter()
+    const onSubmit = (e:FormEvent) => {
+        e.preventDefault();
+        if (searchRef.current?.value)
+            router.push(`/search?title=${searchRef.current.value}`)
+    }
+
     return (
         <header className={`${className} ${styles.wrapper}`}>
             <button
@@ -26,9 +34,9 @@ export function Header({className = ""}:props){
                     <Image src={wideLogo} alt={"wide logo"} fill/>
                 </Link>
             </div>
-            <div className={styles.search}>
+            <form className={styles.search} onSubmit={onSubmit}>
                 <input type={"search"} placeholder={"search..."} ref={searchRef}/>
-            </div>
+            </form>
         </header>
     )
 }
