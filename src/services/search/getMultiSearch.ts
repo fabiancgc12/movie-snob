@@ -13,13 +13,11 @@ export async function getMultiSearch({page = 1,title}:options):Promise<MultiSear
     }
 
     const paramsString = new URLSearchParams(parameters).toString();
-    console.log({paramsString,parameters})
 
     const response = await fetch(
         `https://api.themoviedb.org/3/search/multi?api_key=${process.env.TMDB_KEY}&${paramsString}`)
     const data = await response.json() as MultiSearchResponseInterface;
     //filtering anything that is not a movie or tv show
     data.results = data.results.filter(r => r.media_type == "movie" || r.media_type == "tv")
-    console.log(data)
     return data;
 }
