@@ -8,3 +8,7 @@ the posters had and it also lead to a lot od empty space*/
     padding: 10px 0;
     justify-content: space-around;
 }
+
+.wrapper :global(.loader){
+    width: 100%;
+}
