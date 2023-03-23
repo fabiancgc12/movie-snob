@@ -68,7 +68,7 @@ export function MediaBanner({product,trailer,credits,mediaType}:props){
                 <div className={`${styles.flex} ${styles.titleWrapper}`}>
                     <h1 className={`${styles.title} ${titleSize}`}>
                         {title}
-                        {mediaType === "movie" && <small className={styles.year}>({product.release_date.slice(0, 4)})</small>}
+                        {mediaType === "movie" && <small className={styles.year}> ({product.release_date.slice(0, 4)})</small>}
                     </h1>
                     {trailer && <Video video={trailer}><a href={"#"}>{videoLabel}</a></Video>}
                 </div>

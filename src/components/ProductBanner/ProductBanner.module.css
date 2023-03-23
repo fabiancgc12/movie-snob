@@ -76,6 +76,7 @@
     padding: .25em 0;
 }
 
+/*big screen*/
 @media screen and (min-width: 768px){
 
     .header{
@@ -137,11 +138,22 @@
     }
 }
 
+
+/*small screen*/
 @media screen and (max-width: 768px){
     .header{
         background-position: top right;
         background-size: 82%;
     }
+
+    .title{
+        font-size: 22px;
+    }
+
+    .title .year{
+        font-size: 18px;
+    }
+
     .titleSmall{
         font-size: 20px;
     }
