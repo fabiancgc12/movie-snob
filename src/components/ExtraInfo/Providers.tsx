@@ -11,12 +11,14 @@ export function Providers({providers}:props){
         <div className={styles.info}>
             <p>Available on</p>
             <div className={styles.logos}>
-                {providers.results.US.flatrate?.map(st => <CompanyLogo
-                    key={`${st.provider_name} logo`}
-                    name={st.provider_name}
-                    logo_path={st.logo_path}
-                />)}
-                <small>You can visit <a href={"https://www.justwatch.com/"}>JustWatch</a> for more information</small>
+                {providers.results.US.flatrate && providers.results.US.flatrate.length > 0
+                    ? providers.results.US.flatrate?.map(st => <CompanyLogo
+                        key={`${st.provider_name} logo`}
+                        name={st.provider_name}
+                        logo_path={st.logo_path}
+                    />)
+                    : <div><small>Currently it&#39;s not available for streaming.</small></div>}
+                <small>You can visit <a href={"https://www.justwatch.com/"}>JustWatch</a> for more information.</small>
             </div>
         </div>
     )

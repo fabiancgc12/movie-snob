@@ -31,7 +31,7 @@ export function TvExtraInfo({show,providers}:props){
             </div>
             <div className={styles.info}>
                 <p>original language</p>
-                <small className={"alignCenter"}><MdLanguage/>{show.spoken_languages?.map(sp => sp.english_name)?.join(",")}</small>
+                <small className={"alignCenter"}><MdLanguage/>{show.spoken_languages?.slice(0,4).map(sp => sp.english_name)?.join(", ")}</small>
             </div>
             <div>
                 <p>Networks</p>
