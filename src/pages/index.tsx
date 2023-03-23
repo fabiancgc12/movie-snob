@@ -37,7 +37,9 @@ export default function Home({upcoming,upcomingTrailers}:props) {
                     mediaType={"movie"}
                     enabled={false}
                     api={"trending"}
-                    queryKey={["trending"]}/>
+                    queryKey={["trending"]}
+                    fallbackMessage={"There are not trending movies."}
+                />
             </SliderSection>
         </div>
         <div data-theme="dark">
@@ -46,6 +48,7 @@ export default function Home({upcoming,upcomingTrailers}:props) {
                     isBackdrop={true}
                     media={upcoming}
                     mediaType={"movie"}
+                    fallbackMessage={"There are not upcoming movies."}
                 />
             </SliderSection>
 
@@ -57,6 +60,7 @@ export default function Home({upcoming,upcomingTrailers}:props) {
                     enabled={false}
                     api={"popularMovies"}
                     queryKey={["popularMovies"]}
+                    fallbackMessage={"There are not popular movies."}
                 />
             </SliderSection>
             <SliderSection title={"Popular Movies"} speed={450}>
@@ -65,6 +69,7 @@ export default function Home({upcoming,upcomingTrailers}:props) {
                     enabled={false}
                     api={"popularTv"}
                     queryKey={["popularTv"]}
+                    fallbackMessage={"There are not popular tv shows."}
                 />
             </SliderSection>
         </div>
@@ -107,6 +112,7 @@ function GenreSection(){
                         }}
                         isBackdrop={i % 3 == 0}
                         queryKey={["discoverMovies",`genre-${g.id}`]}
+                        fallbackMessage={`There are not movies of the genre ${g.name}.`}
                     />
                 </SliderSection>
             </div>)

@@ -11,11 +11,12 @@ import styles from "./list.module.css"
 export type props = {
     media:PosterType[],
     mediaType:MediaType,
-    isBackdrop?:boolean
+    isBackdrop?:boolean,
+    fallbackMessage:string
 }
 
-export function PosterList({media,mediaType,isBackdrop}:props){
-    if (!media || media.length === 0) return <></>
+export function PosterList({media,mediaType,isBackdrop,fallbackMessage}:props){
+    if (!media || media.length === 0) return <p>{fallbackMessage}</p>
     return (
         <>
             {media.map((e, i) => <PosterCard isBackdrop={isBackdrop} data={e} mediaType={mediaType} key={`card-${i}`}/>)}
@@ -30,9 +31,10 @@ type posterlist = {
     enabled?:boolean,
     queryKey:any[],
     isBackdrop?:boolean
+    fallbackMessage:string
 }
 
-export function DynamicPosterList({mediaType,api,enabled = true,parameters={},queryKey,isBackdrop}:posterlist){
+export function DynamicPosterList({mediaType,api,enabled = true,parameters={},queryKey,isBackdrop,fallbackMessage}:posterlist){
     if (!parameters.page)
         parameters.page = 1
     let {data,hasNextPage,isFetching,isFetchingNextPage,fetchNextPage,refetch,error,isError,isLoadingError,isRefetchError} = useInfiniteQuery<PopularMovieResponse | PopularTvShowResponse | TrendingResponseInterface>({
@@ -82,8 +84,13 @@ export function DynamicPosterList({mediaType,api,enabled = true,parameters={},qu
     const media = data?.pages?.map(p => p.results).flat() ?? []
     return (
         <>
-            <PosterList mediaType={mediaType} media={media} isBackdrop={isBackdrop}/>
-            {hasNextPage && <div ref={endElementRef} className={"loader"}><Spinner/></div>}
+            <PosterList
+                mediaType={mediaType}
+                media={media}
+                isBackdrop={isBackdrop}
+                fallbackMessage={fallbackMessage}
+            />
+            {hasNextPage && media.length > 0 && <div ref={endElementRef} className={"loader"}><Spinner/></div>}
         </>
     )
 }

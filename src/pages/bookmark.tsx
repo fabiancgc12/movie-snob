@@ -39,17 +39,13 @@ export default function BookMarkPage(){
                     </TabList>
                     <TabPanel>
                         {ready
-                            ? movies.length > 0
-                                ? <PosterGrid><PosterList media={movies} mediaType={"movie"}/></PosterGrid>
-                                : <p>You dont have any movies bookmarked</p>
+                            ? <PosterGrid><PosterList media={movies} mediaType={"movie"} fallbackMessage={"You dont have any movies bookmarked."}/></PosterGrid>
                             : <PosterGrid>{defaultPosters}</PosterGrid>
                         }
                     </TabPanel>
                     <TabPanel>
                         {ready
-                            ? tv.length > 0
-                                ? <PosterGrid><PosterList media={tv} mediaType={"tv"}/></PosterGrid>
-                                : <p>You dont have any tv shows bookmarked</p>
+                            ? <PosterGrid><PosterList media={tv} mediaType={"tv"} fallbackMessage={"You dont have any tv shows bookmarked."}/></PosterGrid>
                             : <PosterGrid>{defaultPosters}</PosterGrid>
                         }
                     </TabPanel>

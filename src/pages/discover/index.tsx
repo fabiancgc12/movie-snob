@@ -41,9 +41,11 @@ export default function DiscoverPage(){
 
     let apiRoute = "discoverMovies"
     let genres = MovieGenres
+    let fallbackMessage = "There are no movies that match the criteria."
     if (router.query.media == "tv"){
         apiRoute = "discoverTv"
         genres = TvGenres
+        fallbackMessage = "There are no tv shows that match the criteria."
     }
 
     return (
@@ -67,6 +69,7 @@ export default function DiscoverPage(){
                             queryKey={[apiRoute, media, genre]}
                             parameters={{media: media, genre: genre}}
                             enabled={router.isReady}
+                            fallbackMessage={fallbackMessage}
                         />
                     </PosterGrid>
                 </Section>

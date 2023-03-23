@@ -39,7 +39,11 @@ export default function Movie({movie,credits,videos,images,providers,recommendat
                 <Media videos={videos} images={images}/>
             </div>
             <SliderSection title={"Recommendations"} speed={450}>
-                <PosterList mediaType={"movie"} media={recommendations}/>
+                <PosterList
+                    mediaType={"movie"}
+                    media={recommendations}
+                    fallbackMessage={"currently there are no recommendations."}
+                />
             </SliderSection>
         </>
     )

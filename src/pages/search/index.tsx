@@ -16,6 +16,7 @@ export default function FindPage(){
                         queryKey={["search", title]}
                         parameters={{title}}
                         enabled={router.isReady}
+                        fallbackMessage={"There are not movies or tv shows with that title."}
                     />
                 </PosterGrid>
             </Section>

@@ -42,7 +42,11 @@ export default function Tv({show,credits,videos,recommendations,images,providers
                 <Media videos={videos} images={images}/>
             </div>
             <SliderSection title={"Recommendations"} speed={450}>
-                <PosterList mediaType={"tv"} media={recommendations}/>
+                <PosterList
+                    mediaType={"tv"}
+                    media={recommendations}
+                    fallbackMessage={"currently there are no recommendations."}
+                />
             </SliderSection>
         </>
     )

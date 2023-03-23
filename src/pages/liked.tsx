@@ -32,17 +32,13 @@ export default function LiedPage(){
                     </TabList>
                     <TabPanel>
                         {ready
-                            ? movies.length > 0
-                                ? <PosterGrid><PosterList media={movies} mediaType={"movie"}/></PosterGrid>
-                                : <p>You don&#8216;t have movies that you liked.</p>
+                            ? <PosterGrid><PosterList media={movies} mediaType={"movie"} fallbackMessage={"You don't have movies in your liked list."}/></PosterGrid>
                             : <PosterGrid>{defaultPosters}</PosterGrid>
                         }
                     </TabPanel>
                     <TabPanel>
                         {ready
-                            ? tv.length > 0
-                                ? <PosterGrid><PosterList media={tv} mediaType={"tv"}/></PosterGrid>
-                                : <p>You don&#8216;t have tv shows that you liked.</p>
+                            ? <PosterGrid><PosterList media={tv} mediaType={"tv"} fallbackMessage={"You don't have tv shows that you liked."}/></PosterGrid>
                             : <PosterGrid>{defaultPosters}</PosterGrid>
                         }
                     </TabPanel>
