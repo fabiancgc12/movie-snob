@@ -1,6 +1,5 @@
 import {TvShowInterface} from "@/models/tv/TvShow.interface";
 import styles from "@/components/ExtraInfo/ExtraInfo.module.css";
-import {formatDate} from "@/utils/functions/formatDate";
 import { ExtraInfo } from "./ExtraInfo";
 import {Providers} from "@/components/ExtraInfo/Providers";
 import {ProvidersDto} from "@/models/dto/ProvidersDto";
@@ -20,11 +19,11 @@ export function TvExtraInfo({show,providers}:props){
         <ExtraInfo>
             <div className={styles.info}>
                 <p>Release Date</p>
-                <FullDate date={formatDate(show.first_air_date)}/>
+                <FullDate date={show.first_air_date}/>
             </div>
             <div className={styles.info}>
                 <p>Last air Date</p>
-                <FullDate date={formatDate(show.last_air_date)}/>
+                <FullDate date={show.last_air_date}/>
             </div>
             <div>
                 <p>Status</p>
