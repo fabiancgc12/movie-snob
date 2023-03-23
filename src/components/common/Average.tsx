@@ -1,5 +1,5 @@
 import React, {CSSProperties, useMemo} from "react";
-import styles from "./average.module.css";
+import styles from "./Average.module.css";
 
 type props = {
     value:number,
