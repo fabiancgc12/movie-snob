@@ -4,9 +4,9 @@ the posters had and it also lead to a lot od empty space*/
 .wrapper{
     display: flex;
     flex-wrap: wrap;
-    gap: 15px 15px;
-    padding: 10px 0;
-    justify-content: space-around;
+    gap: 15px 10px;
+    padding: 10px 20px 10px 0;
+    justify-content: space-between;
 }
 
 .wrapper :global(.loader){

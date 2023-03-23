@@ -153,3 +153,12 @@ article{
 .full-h{
   height: 100%;
 }
+
+button{
+  display: inline-block;
+  width: fit-content;
+}
+
+button,[role="button"]{
+  padding: .75em 1em;
+}

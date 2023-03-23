@@ -6,6 +6,7 @@ import {TrendingResponseInterface} from "@/models/trending/TrendingMovieResponse
 import {Spinner} from "@/components/common/Spinner";
 import {useInView} from "react-intersection-observer";
 import {MediaType} from "@/models/MediaType";
+import styles from "./list.module.css"
 
 export type props = {
     media:PosterType[],
@@ -34,7 +35,7 @@ type posterlist = {
 export function DynamicPosterList({mediaType,api,enabled = true,parameters={},queryKey,isBackdrop}:posterlist){
     if (!parameters.page)
         parameters.page = 1
-    let {data,hasNextPage,isFetching,isFetchingNextPage,fetchNextPage} = useInfiniteQuery<PopularMovieResponse | PopularTvShowResponse | TrendingResponseInterface>({
+    let {data,hasNextPage,isFetching,isFetchingNextPage,fetchNextPage,refetch,error,isError,isLoadingError,isRefetchError} = useInfiniteQuery<PopularMovieResponse | PopularTvShowResponse | TrendingResponseInterface>({
         queryKey: queryKey,
         enabled:enabled,
         queryFn: ({pageParam}) => {
@@ -58,7 +59,15 @@ export function DynamicPosterList({mediaType,api,enabled = true,parameters={},qu
                 }
         }
     });
-
+    console.log({error,isError,isLoadingError,isRefetchError})
+    if (error || isError || isLoadingError || isRefetchError){
+        return (
+            <div className={styles.error}>
+                <p>There was an error connecting to the server.</p>
+                <button onClick={() => refetch()}>Retry</button>
+            </div>
+        )
+    }
     if (!data) return (
     <>
         <SkeletonCard isBackdrop={isBackdrop}/>
