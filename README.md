@@ -6,8 +6,8 @@ They also have the option to select movies and shows as bookmarked or liked so t
 
 ## Made using
 
-Reactjs
-Nextjs
-Tanstack query (or react query)
-css modules
-picocss
+- Reactjs
+- Nextjs
+- Tanstack query (or react query)
+- Css modules
+- Picocss
