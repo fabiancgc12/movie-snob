@@ -21,7 +21,7 @@ export function ProductHead({media,mediaType,cast,crew}:props){
     const mediaTitle = mediaType == "movie" ? media.title : media.name;
     const type = mediaType == "movie" ? "video.movie" : "video.tv_show"
     const duration = mediaType == "movie" ? media.runtime.toString() : media.episode_run_time?.at(0)?.toString()
-    const title = `${mediaTitle} - Popcorn Search`;
+    const title = `${mediaTitle} - Movie Snob`;
     const jsonDl = mediaType == "movie" ? movieJsonLd(media,cast,crew) : tvJsonLd(media,cast,crew);
     return (
         <Head>
@@ -31,7 +31,7 @@ export function ProductHead({media,mediaType,cast,crew}:props){
             <meta property="og:url" content={generateUrlPage(media,"tv")} />
             <meta property="og:image" content={generateImageUrl(media.backdrop_path,1280)} />
             <meta property="og:image:alt" content={`${mediaTitle} poster backdrop`} />
-            <meta property="og:site_name" content="Popcorn Search" />
+            <meta property="og:site_name" content="Movie Snob" />
             <meta property="og:type" content={type} />
             <meta property="og:locale" content="en_US" />
             <meta name="twitter:title" content={title} />

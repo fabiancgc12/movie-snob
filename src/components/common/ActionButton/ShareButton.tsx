@@ -29,7 +29,7 @@ export function ShareButton({url,title}:props){
             <TwitterShareButton
                 url={url}
                 title={title}
-                hashtags={[`PopCorn-Search`,title]}
+                hashtags={[`Movie Snob`,title]}
             >
                 <TwitterIcon size={32} round={true}/>
             </TwitterShareButton>
@@ -41,7 +41,7 @@ export function ShareButton({url,title}:props){
             </TelegramShareButton>
             <FacebookShareButton
                 url={url}
-                hashtag={`PopCorn-Search`}
+                hashtag={`Movie Snob`}
             >
                 <FacebookIcon size={32} round={true}/>
             </FacebookShareButton>
