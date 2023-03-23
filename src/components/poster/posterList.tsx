@@ -61,7 +61,6 @@ export function DynamicPosterList({mediaType,api,enabled = true,parameters={},qu
                 }
         }
     });
-    console.log({error,isError,isLoadingError,isRefetchError})
     if (error || isError || isLoadingError || isRefetchError){
         return (
             <div className={styles.error}>
