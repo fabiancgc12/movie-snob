@@ -21,7 +21,7 @@ type props = {
 }
 
 export default function Home({upcoming,upcomingTrailers}:props) {
-  const {t,lang} = useTranslation("home");
+  const {t} = useTranslation("home");
     const trendingLabel = t("trendingLabel")
     const upcomingLabel = t("upcomingLabel")
     const popularMoviesLabel = t("popularMoviesLabel")
@@ -88,7 +88,7 @@ const genresLimit = 9;
 
 //TODO Add links to genres
 function GenreSection(){
-    const {lang} = useTranslation()
+    const {t,lang} = useTranslation()
     const [genres, setGenres] = useState<typeof MovieGenres>([]);
     const [loadMoreRef,inView] = useInView({
         threshold:1,
@@ -104,7 +104,10 @@ function GenreSection(){
                 return [...current]
             })
         }
-    }, [inView]);
+    }, [inView,lang]);
+
+    const noMovies = t("noMovies")
+
     return (
         <div>
             {genres.map((g,i) => <div
@@ -120,7 +123,7 @@ function GenreSection(){
                         }}
                         isBackdrop={i % 3 == 0}
                         queryKey={["discoverMovies",`genre-${g.id}`]}
-                        fallbackMessage={`There are not movies of the genre ${g.name}.`}
+                        fallbackMessage={noMovies}
                     />
                 </SliderSection>
             </div>)

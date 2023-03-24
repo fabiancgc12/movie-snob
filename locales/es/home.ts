@@ -7,6 +7,7 @@ const spanish:HomeInterface = {
     upcomingLabel:"Próximas películas",
     popularMoviesLabel:"películas populares",
     popularTvLabel:"Series populares",
+    noMovies:"No se encontraron películas."
 }
 
 export default spanish
