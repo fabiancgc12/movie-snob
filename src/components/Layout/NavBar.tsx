@@ -10,6 +10,7 @@ import {useShowNavBarContext} from "@/global/ShowNavbarContext";
 import useClickOutside from "@/hooks/useClickOutside";
 import {useRef} from "react";
 import {useRouter} from "next/router";
+import useTranslation from "next-translate/useTranslation";
 
 type props = {
     className?:string
@@ -17,25 +18,26 @@ type props = {
 
 const navItems = [{
     icon:<FaBookmark />,
-    label:"Marked",
+    label:"marked",
     url:"/bookmark"
 },{
     icon:<AiFillHeart />,
-    label:"Liked",
+    label:"liked",
     url:"/liked"
 },{
     icon:<MdLocalMovies />,
-    label:"Discover",
+    label:"discover",
     url:"/discover"
 },
 {
     icon:<BiUserCircle />,
-    label:"User",
+    label:"user",
     url:"#"
 }]
 
-
+//TODO change styles of navbar
 export function NavBar({className = ""}:props){
+    const { t } = useTranslation('common')
     const router = useRouter();
     const [show,setShow] = useShowNavBarContext()
     const ref = useRef<HTMLElement>(null)
@@ -51,17 +53,20 @@ export function NavBar({className = ""}:props){
                         <Image src={logo} alt={"logo"}/>
                     </Link>
                 </div>
-                {navItems.map(item => (
-                    <div
-                        key={`nav-item-${item.label}`}
-                        className={`${styles.item} ${ router.pathname == item.url ? styles.active : ""}`}
-                    >
-                        <Link href={item.url} className={styles.link} >
-                            {item.icon}
-                            <p className={styles.label}>{item.label}</p>
-                        </Link>
-                    </div>
-                ))}
+                {navItems.map(item => {
+                    const label = t(item.label)
+                    return (
+                        <div
+                            key={`nav-item-${item.label}`}
+                            className={`${styles.item} ${router.pathname == item.url ? styles.active : ""}`}
+                        >
+                            <Link href={item.url} className={styles.link}>
+                                {item.icon}
+                                <p className={styles.label}>{label}</p>
+                            </Link>
+                        </div>
+                    )
+                })}
             </nav>
         </aside>
     )

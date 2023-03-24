@@ -6,12 +6,14 @@ import Image from "next/image"
 import wideLogo from "@public/logo-wide.png"
 import Link from "next/link";
 import {useRouter} from "next/router";
+import useTranslation from 'next-translate/useTranslation'
 
 type props = {
     className?:string
 }
 
 export function Header({className = ""}:props){
+    const { t } = useTranslation('common')
     const [showNavBar,setShowNavBar] = useShowNavBarContext()
     const searchRef = useRef<HTMLInputElement>(null);
     const router = useRouter()
@@ -20,7 +22,7 @@ export function Header({className = ""}:props){
         if (searchRef.current?.value)
             router.push(`/search?title=${searchRef.current.value}`)
     }
-
+    const placeholder = t("searchPlaceHolder")
     return (
         <header className={`${className} ${styles.wrapper}`}>
             <button
@@ -35,7 +37,7 @@ export function Header({className = ""}:props){
                 </Link>
             </div>
             <form className={styles.search} onSubmit={onSubmit}>
-                <input type={"search"} placeholder={"search..."} ref={searchRef}/>
+                <input type={"search"} placeholder={placeholder} ref={searchRef}/>
             </form>
         </header>
     )
