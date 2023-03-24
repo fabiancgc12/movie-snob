@@ -6,11 +6,13 @@ import {PosterGrid} from "@/components/poster/PosterGrid";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import {defaultPosters} from "@/pages/bookmark";
 import {likedStoreKey} from "@/components/common/ActionButton/LikeButton";
+import useTranslation from "next-translate/useTranslation";
 
 export default function LiedPage(){
     const [movies,setMovies] = useState<StoreProductType[]>([]);
     const [tv,setTv] = useState<StoreProductType[]>([]);
     const [ready, setReady] = useState(false);
+    const {t} = useTranslation("likedorbookmark")
 
     useEffect(() => {
         const store = localStorage.getItem(likedStoreKey)
@@ -22,9 +24,13 @@ export default function LiedPage(){
         setReady(true)
     }, []);
 
+    const title = t("likedTitle")
+    const movieFallback = t("fallbackMovieMessage")
+    const tvFallback = t("fallbackTvMessage")
+
     return (
         <div data-theme="light" className={"full-h"}>
-            <Section title={"You Bookmarked this"}>
+            <Section title={title}>
                 <Tabs>
                     <TabList>
                         <Tab>Movie</Tab>
@@ -32,13 +38,13 @@ export default function LiedPage(){
                     </TabList>
                     <TabPanel>
                         {ready
-                            ? <PosterGrid><PosterList media={movies} mediaType={"movie"} fallbackMessage={"You don't have movies in your liked list."}/></PosterGrid>
+                            ? <PosterGrid><PosterList media={movies} mediaType={"movie"} fallbackMessage={movieFallback}/></PosterGrid>
                             : <PosterGrid>{defaultPosters}</PosterGrid>
                         }
                     </TabPanel>
                     <TabPanel>
                         {ready
-                            ? <PosterGrid><PosterList media={tv} mediaType={"tv"} fallbackMessage={"You don't have tv shows that you liked."}/></PosterGrid>
+                            ? <PosterGrid><PosterList media={tv} mediaType={"tv"} fallbackMessage={tvFallback}/></PosterGrid>
                             : <PosterGrid>{defaultPosters}</PosterGrid>
                         }
                     </TabPanel>

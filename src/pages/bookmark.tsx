@@ -6,6 +6,7 @@ import {bookmarkStoreKey} from "@/components/common/ActionButton/chechMarkButton
 import {PosterGrid} from "@/components/poster/PosterGrid";
 import {SkeletonCard} from "@/components/poster/posterCard";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import useTranslation from "next-translate/useTranslation";
 
 export const defaultPosters = [
     <SkeletonCard key={"default-card-1"}/>,
@@ -18,7 +19,7 @@ export default function BookMarkPage(){
     const [movies,setMovies] = useState<StoreProductType[]>([]);
     const [tv,setTv] = useState<StoreProductType[]>([]);
     const [ready, setReady] = useState(false);
-
+    const {t} = useTranslation("likedorbookmark")
     useEffect(() => {
         const store = localStorage.getItem(bookmarkStoreKey)
         if (store){
@@ -29,23 +30,29 @@ export default function BookMarkPage(){
         setReady(true)
     }, []);
 
+    const title = t("bookmarkTitle")
+    const movieFallback = t("fallbackMovieMessage")
+    const movieLabel = t("common:mediaMovie")
+    const tvFallback = t("fallbackTvMessage")
+    const tvLabel = t("common:mediaTv")
+
     return (
         <div data-theme="light" className={"full-h"}>
-            <Section title={"You Bookmarked this"}>
+            <Section title={title}>
                 <Tabs>
                     <TabList>
-                        <Tab>Movie</Tab>
-                        <Tab>Tv</Tab>
+                        <Tab>{movieLabel}</Tab>
+                        <Tab>{tvLabel}</Tab>
                     </TabList>
                     <TabPanel>
                         {ready
-                            ? <PosterGrid><PosterList media={movies} mediaType={"movie"} fallbackMessage={"You dont have any movies bookmarked."}/></PosterGrid>
+                            ? <PosterGrid><PosterList media={movies} mediaType={"movie"} fallbackMessage={movieFallback}/></PosterGrid>
                             : <PosterGrid>{defaultPosters}</PosterGrid>
                         }
                     </TabPanel>
                     <TabPanel>
                         {ready
-                            ? <PosterGrid><PosterList media={tv} mediaType={"tv"} fallbackMessage={"You dont have any tv shows bookmarked."}/></PosterGrid>
+                            ? <PosterGrid><PosterList media={tv} mediaType={"tv"} fallbackMessage={tvFallback}/></PosterGrid>
                             : <PosterGrid>{defaultPosters}</PosterGrid>
                         }
                     </TabPanel>
