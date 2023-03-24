@@ -31,10 +31,18 @@
 
 .search input{
     padding: .25em .5em  .25em 55px !important;
-    margin: 0 !important;
     height: 45px;
+    margin: 0 !important;
+    transition: all .5s ease-in-out;
+    width: 250px;
 }
 
+.search input:not(:hover,:focus){
+    width: 50px;
+    background-color: var(--primaryDarker);
+    border: 0;
+    cursor: pointer;
+}
 
 /*big screen*/
 @media screen and (min-width: 768px){
