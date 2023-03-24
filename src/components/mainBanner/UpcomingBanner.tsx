@@ -10,6 +10,7 @@ import {BsThreeDotsVertical} from "react-icons/bs";
 import {FullDate} from "@/components/common/FullDate";
 import {VideoTrailerInterface} from "@/models/Movies/VideoMedia.interface";
 import {Video} from "@/components/Video/Video";
+import useTranslation from "next-translate/useTranslation";
 
 type props = {
     data:MovieResumeInterface,
@@ -17,19 +18,22 @@ type props = {
 }
 
 export function UpcomingBanner({data,trailer}:props) {
+    const {t,lang} = useTranslation("home");
     const bg = useMemo(() => ({
         "--bgImage":`url(${generateImageUrl(data.backdrop_path,1280)})`
     }) as CSSProperties, [data]);
     const placeholderStyle = data.backdrop_path ? "" : `${styles.placeholderBanner} placeholderImage`;
-    const bigTitleStyle = data.title.length >= 20 ? styles.bigTitle : ""
+    const bigTitleStyle = data.title.length >= 20 ? styles.bigTitle : "";
+    const readMore = t("bannerRead")
+    const watchTrailer = t("bannerTrailer")
     return <div className={`${styles.mainShow} ${placeholderStyle}`} style={bg}>
         <div className={styles.info}>
             <h2 className={bigTitleStyle}>{data.title}</h2>
-            <FullDate date={data.release_date}/>
+            <FullDate date={data.release_date} lang={lang}/>
             <div className={styles.buttons}>
-                <Link className={"contrast"} role="button" href={`/movie/${data.id}`}>Read More</Link>
+                <Link className={"contrast"} role="button" href={`/movie/${data.id}`}>{readMore}</Link>
                 {trailer &&
-                    <Video video={trailer}><a className={"contrast outline"} href={"#"} role="button">Watch Trailer</a></Video>
+                    <Video video={trailer}><a className={"contrast outline"} href={"#"} role="button">{watchTrailer}</a></Video>
                 }
             </div>
             <p>

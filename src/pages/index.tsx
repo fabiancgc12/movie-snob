@@ -7,11 +7,12 @@ import {UpcomingBanner} from "@/components/mainBanner/UpcomingBanner";
 import {useInView} from "react-intersection-observer";
 import {Spinner} from "@/components/common/Spinner";
 import {useEffect, useState} from "react";
-import {MovieGenres} from "@/utils/movieGenres";
+import {MovieGenres, MovieGenresSpanish} from "@/utils/movieGenres";
 import {dehydrate, QueryClient} from "@tanstack/react-query";
 import {SliderSection} from "@/components/Slider/SliderSection";
 import styles from "./index.module.css";
 import {VideoTrailerInterface} from "@/models/Movies/VideoMedia.interface";
+import useTranslation from "next-translate/useTranslation";
 
 type props = {
     upcoming:MovieResumeInterface[],
@@ -20,6 +21,11 @@ type props = {
 }
 
 export default function Home({upcoming,upcomingTrailers}:props) {
+  const {t,lang} = useTranslation("home");
+    const trendingLabel = t("trendingLabel")
+    const upcomingLabel = t("upcomingLabel")
+    const popularMoviesLabel = t("popularMoviesLabel")
+    const popularTvLabel = t("popularTvLabel")
   return (
     <>
         <SlideShow>
@@ -32,7 +38,7 @@ export default function Home({upcoming,upcomingTrailers}:props) {
                 />)}
         </SlideShow>
         <div data-theme="light">
-            <SliderSection title={"Trending movies"} speed={450}>
+            <SliderSection title={trendingLabel} speed={450}>
                 <DynamicPosterList
                     mediaType={"movie"}
                     enabled={false}
@@ -43,7 +49,7 @@ export default function Home({upcoming,upcomingTrailers}:props) {
             </SliderSection>
         </div>
         <div data-theme="dark">
-            <SliderSection title={"Upcoming movies"} speed={450}>
+            <SliderSection title={upcomingLabel} speed={450}>
                 <PosterList
                     isBackdrop={true}
                     media={upcoming}
@@ -54,7 +60,7 @@ export default function Home({upcoming,upcomingTrailers}:props) {
 
         </div>
         <div data-theme="light">
-            <SliderSection title={"Popular Movies"} speed={450}>
+            <SliderSection title={popularMoviesLabel} speed={450}>
                 <DynamicPosterList
                     mediaType={"movie"}
                     enabled={false}
@@ -63,7 +69,7 @@ export default function Home({upcoming,upcomingTrailers}:props) {
                     fallbackMessage={"There are not popular movies."}
                 />
             </SliderSection>
-            <SliderSection title={"Popular Movies"} speed={450}>
+            <SliderSection title={popularTvLabel} speed={450}>
                 <DynamicPosterList
                     mediaType={"tv"}
                     enabled={false}
@@ -80,7 +86,9 @@ export default function Home({upcoming,upcomingTrailers}:props) {
 
 const genresLimit = 9;
 
+//TODO Add links to genres
 function GenreSection(){
+    const {lang} = useTranslation()
     const [genres, setGenres] = useState<typeof MovieGenres>([]);
     const [loadMoreRef,inView] = useInView({
         threshold:1,
@@ -88,15 +96,15 @@ function GenreSection(){
     });
     useEffect(() => {
         if (inView){
+            const langGenres = lang == "es" ? MovieGenresSpanish : MovieGenres;
             setGenres(current => {
-                if (MovieGenres.length > current.length && current.length <= (genresLimit - 1)) {
-                    return MovieGenres.slice(0,current.length + 3)
+                if (langGenres.length > current.length && current.length <= (genresLimit - 1)) {
+                    return langGenres.slice(0,current.length + 3)
                 }
                 return [...current]
             })
         }
     }, [inView]);
-
     return (
         <div>
             {genres.map((g,i) => <div
