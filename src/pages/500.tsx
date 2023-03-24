@@ -1,5 +1,8 @@
 import {ErrorPageComponent} from "@/components/notFound/ErrorPageComponent";
+import useTranslation from "next-translate/useTranslation";
 
 export default function Custom500() {
-    return <ErrorPageComponent title={"there was an error on the server"}/>;
+    const {t} = useTranslation("common");
+    const title = t("serverErrorTitle")
+    return <ErrorPageComponent title={title}/>;
 }

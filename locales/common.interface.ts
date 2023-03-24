@@ -5,5 +5,8 @@ export interface CommonInterface {
     user:string,
     developedby:string,
     madeusing:string,
-    searchPlaceHolder:string
+    searchPlaceHolder:string,
+    errorPageLabel:string,
+    homeButtonLabel:string,
+    serverErrorTitle:string
 }
