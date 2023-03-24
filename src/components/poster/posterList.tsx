@@ -44,7 +44,7 @@ export function DynamicPosterList({mediaType,api,enabled = true,parameters={},qu
         queryFn: ({pageParam}) => {
             parameters.page = pageParam ?? parameters.page
             const params = new URLSearchParams(parameters).toString();
-            return fetch(`api/${api}?${params}`).then(v => v.json())
+            return fetch(`/api/${api}?${params}`).then(v => v.json())
         },
         getNextPageParam: (lastPage) => {
             if (lastPage.total_pages == lastPage.page) return false
