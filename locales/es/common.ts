@@ -10,7 +10,11 @@ const spanish:CommonInterface = {
     madeusing: "Creado usando la api de:",
     marked: "marcado",
     user: "usuario",
-    searchPlaceHolder:"Buscar..."
+    searchPlaceHolder:"Buscar...",
+    mediaMovie:"Película",
+    mediaTv:"Televisión",
+    errorConnectingToServer:"Hubo un error al conectarse al servidor.",
+    retry:"Reintentar"
 }
 
 export default spanish

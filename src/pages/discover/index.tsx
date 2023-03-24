@@ -4,12 +4,13 @@ import {DynamicPosterList} from "@/components/poster/posterList";
 import {useRouter} from "next/router";
 import {MediaType} from "@/models/MediaType";
 import {ChangeEvent} from "react";
-import {MovieGenres, TvGenres} from "@/utils/movieGenres";
+import {MovieGenres, MovieGenresSpanish, TvGenres, TvGenresSpanish} from "@/utils/movieGenres";
 import styles from "./discover.module.css"
+import useTranslation from "next-translate/useTranslation";
 
 export default function DiscoverPage(){
     const router = useRouter();
-
+    const {t,lang} = useTranslation("discover");
     // if there is no 'media' on the query then fetch movies by default
     const media = router.query.media as MediaType ?? "movie";
     const genre = router.query.genre as string;
@@ -40,28 +41,31 @@ export default function DiscoverPage(){
     }
 
     let apiRoute = "discoverMovies"
-    let genres = MovieGenres
-    let fallbackMessage = "There are no movies that match the criteria."
+    let genres = lang == "es" ? MovieGenres : MovieGenresSpanish
+    let fallbackMessage = t("movieFallback")
     if (router.query.media == "tv"){
         apiRoute = "discoverTv"
-        genres = TvGenres
-        fallbackMessage = "There are no tv shows that match the criteria."
+        genres = lang == "es" ? TvGenres : TvGenresSpanish
+        fallbackMessage = t("tvFallback")
     }
-
+    const title = t("discoverPageTitle")
+    const movieLabel = t("common:mediaMovie")
+    const tvLabel = t("common:mediaTv")
+    const allLabel = t("allOption")
     return (
         <>
             <form className={styles.form}>
                 <select value={media} onChange={handleMediaChange} name={"media"}>
-                    <option value={"movie"}>Movie</option>
-                    <option value={"tv"}>Tv</option>
+                    <option value={"movie"}>{movieLabel}</option>
+                    <option value={"tv"}>{tvLabel}</option>
                 </select>
                 <select value={genre} onChange={handleGenreChange} name={"genre"}>
-                    <option value={""}>All</option>
+                    <option value={""}>{allLabel}</option>
                     {genres.map(g => <option value={g.id} key={`${media}-genre-${g.id}`}>{g.name}</option>)}
                 </select>
             </form>
             <div data-theme="light" className={"full-h"}>
-                <Section title={"Discover what to watch"}>
+                <Section title={title}>
                     <PosterGrid>
                         <DynamicPosterList
                             mediaType={media}

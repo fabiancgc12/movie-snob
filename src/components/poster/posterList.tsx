@@ -7,6 +7,7 @@ import {Spinner} from "@/components/common/Spinner";
 import {useInView} from "react-intersection-observer";
 import {MediaType} from "@/models/MediaType";
 import styles from "./list.module.css"
+import useTranslation from "next-translate/useTranslation";
 
 export type props = {
     media:PosterType[],
@@ -50,7 +51,7 @@ export function DynamicPosterList({mediaType,api,enabled = true,parameters={},qu
             return lastPage.page + 1
         }
     })
-
+    const {t} = useTranslation("common")
     const [endElementRef] = useInView({
         threshold:1,
         rootMargin:"700px 700px",
@@ -62,10 +63,12 @@ export function DynamicPosterList({mediaType,api,enabled = true,parameters={},qu
         }
     });
     if (error || isError || isLoadingError || isRefetchError){
+        const retry = t("retry");
+        const message = t("errorConnectingToServer")
         return (
             <div className={styles.error}>
-                <p>There was an error connecting to the server.</p>
-                <button onClick={() => refetch()}>Retry</button>
+                <p>{message}</p>
+                <button onClick={() => refetch()}>{retry}</button>
             </div>
         )
     }

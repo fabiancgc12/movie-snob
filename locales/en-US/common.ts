@@ -10,7 +10,11 @@ const english:CommonInterface = {
     madeusing: "Made using the api of:",
     marked: "Marked",
     user: "User",
-    searchPlaceHolder:"Search..."
+    searchPlaceHolder:"Search...",
+    mediaMovie:"Movie",
+    mediaTv:"Tv",
+    errorConnectingToServer:"There was an error connecting to the server.",
+    retry:"Retry"
 }
 
 export default english

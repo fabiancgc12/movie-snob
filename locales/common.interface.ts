@@ -8,5 +8,9 @@ export interface CommonInterface {
     searchPlaceHolder:string,
     errorPageLabel:string,
     homeButtonLabel:string,
-    serverErrorTitle:string
+    serverErrorTitle:string,
+    mediaMovie:string,
+    mediaTv:string,
+    errorConnectingToServer:string,
+    retry:string
 }
