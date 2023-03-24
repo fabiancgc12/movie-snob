@@ -7,6 +7,8 @@ module.exports = {
     "/":["home"],
     "/discover":["discover"],
     "/liked":["likedorbookmark"],
-    "/bookmark":["likedorbookmark"]
+    "/bookmark":["likedorbookmark"],
+    "/movie/[id]":["movieortv"],
+    "/tv/[id]":["movieortv"]
   },
 }

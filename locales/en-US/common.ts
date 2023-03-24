@@ -14,7 +14,12 @@ const english:CommonInterface = {
     mediaMovie:"Movie",
     mediaTv:"Tv",
     errorConnectingToServer:"There was an error connecting to the server.",
-    retry:"Retry"
+    retry:"Retry",
+    imagesLabel: "Images",
+    recommendationLabel: "Recommendations",
+    videosLabel: "Videos",
+    director:"Director",
+    screenPlay:"Screenplay"
 }
 
 export default english

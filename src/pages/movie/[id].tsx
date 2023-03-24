@@ -15,6 +15,7 @@ import {CreditsDto} from "@/models/dto/Credit.dto";
 import {ProductHead} from "@/components/Layout/ProductHead";
 import {SliderSection} from "@/components/Slider/SliderSection";
 import {TMDBCodes} from "@/utils/TMDBCodes";
+import useTranslation from "next-translate/useTranslation";
 
 type props = {
     movie:MovieInterface,
@@ -26,8 +27,12 @@ type props = {
 }
 
 export default function Movie({movie,credits,videos,images,providers,recommendations}:props){
+    const {t} = useTranslation("movieortv")
     const crew = credits.crew?.sort((a) => a.role.toLowerCase() === "screenplay" ? 1 : -1)
     const trailer = videos.find(t => t.site == "YouTube" && t.name.toLowerCase().includes("trailer"))
+
+    const recommendationTitle = t("common:recommendationLabel")
+    const recommendationFallbackMessage = t("recommendationFallbackMessage")
 
     return (
         <>
@@ -38,11 +43,11 @@ export default function Movie({movie,credits,videos,images,providers,recommendat
                 <MovieExtraInfo movie={movie} providers={providers}/>
                 <Media videos={videos} images={images}/>
             </div>
-            <SliderSection title={"Recommendations"} speed={450}>
+            <SliderSection title={recommendationTitle} speed={450}>
                 <PosterList
                     mediaType={"movie"}
                     media={recommendations}
-                    fallbackMessage={"currently there are no recommendations."}
+                    fallbackMessage={recommendationFallbackMessage}
                 />
             </SliderSection>
         </>

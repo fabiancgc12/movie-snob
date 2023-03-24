@@ -19,7 +19,7 @@ type props = {
     upcomingTrailers:VideoTrailerInterface[]
 
 }
-
+// TODO add page when there are trouble fetching movie or tv show
 export default function Home({upcoming,upcomingTrailers}:props) {
   const {t} = useTranslation("home");
     const trendingLabel = t("trendingLabel")

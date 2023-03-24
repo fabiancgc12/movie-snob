@@ -14,7 +14,12 @@ const spanish:CommonInterface = {
     mediaMovie:"Película",
     mediaTv:"Televisión",
     errorConnectingToServer:"Hubo un error al conectarse al servidor.",
-    retry:"Reintentar"
+    retry:"Reintentar",
+    imagesLabel: "Imágenes",
+    recommendationLabel: "Recomendaciones",
+    videosLabel: "Videos",
+    director:"Director",
+    screenPlay:"Guion"
 }
 
 export default spanish

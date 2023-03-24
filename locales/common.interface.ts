@@ -12,5 +12,10 @@ export interface CommonInterface {
     mediaMovie:string,
     mediaTv:string,
     errorConnectingToServer:string,
-    retry:string
+    retry:string,
+    videosLabel:string,
+    imagesLabel:string,
+    recommendationLabel:string,
+    director:string,
+    screenPlay:string
 }
