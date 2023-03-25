@@ -23,7 +23,7 @@ type ApiResponse = TvShowInterface & {
     ["watch/providers"]:ProvidersResponseInterface
 }
 
-export async function getTvShow(id:number):Promise<{
+export async function getTvShow(id:number,locale?:string | string[]):Promise<{
     show:TvShowInterface,
     credits:CreditsDto,
     videos:VideoTrailerInterface[],
@@ -33,7 +33,7 @@ export async function getTvShow(id:number):Promise<{
 }>{
 
     const response = await fetch(
-        `https://api.themoviedb.org/3/tv/${id}?api_key=${process.env.TMDB_KEY}&` +
+        `https://api.themoviedb.org/3/tv/${id}?api_key=${process.env.TMDB_KEY}&language=${locale}&` +
         `append_to_response=videos,recommendations,aggregate_credits,images,watch/providers`
     );
     const data: ApiResponse = await response.json()

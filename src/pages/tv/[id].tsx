@@ -62,7 +62,7 @@ export const getStaticPaths:GetStaticPaths = () => {
 export const getStaticProps:GetStaticProps = async (context) => {
     const id = Number(context.params?.id);
     try {
-        const data = await getTvShow(id)
+        const data = await getTvShow(id,context.locale)
         return {
             props: data,
             revalidate:900 //revalidate in 15 minutes
