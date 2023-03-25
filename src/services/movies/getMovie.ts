@@ -14,6 +14,7 @@ import {ProvidersDto} from "@/models/dto/ProvidersDto";
 import {formatRecommendations} from "@/utils/functions/formatRecommendations";
 import {formatMovieCredits} from "@/utils/functions/formatMovieCredits";
 import {CreditsDto} from "@/models/dto/Credit.dto";
+import {getLocale} from "@/utils/functions/getLanguage";
 
 type ApiResponse = MovieInterface & {
     videos:VideoMediaResponse,
@@ -22,18 +23,19 @@ type ApiResponse = MovieInterface & {
     recommendations:RecommendationResponseInterface,
     ["watch/providers"]:ProvidersResponseInterface
 }
-export async function getMovie(id:number):Promise<
+export async function getMovie(id:number,locale?:string | string[]):Promise<
     {
         movie:MovieInterface,
         credits:CreditsDto,
         videos:VideoTrailerInterface[],
         images:ImageMediaResponse,
         providers:ProvidersDto,
-        recommendations:RecommendationInterface[]
+        recommendations:RecommendationInterface[],
     }
 >{
+    locale = getLocale(locale)
     const response = await fetch(
-        `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.TMDB_KEY}&`+
+        `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.TMDB_KEY}&language=${locale}&`+
         `append_to_response=videos,images,credits,watch/providers,recommendations`
     );
     const data:ApiResponse = await response.json()

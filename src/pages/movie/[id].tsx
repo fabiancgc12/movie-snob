@@ -64,7 +64,7 @@ export const getStaticPaths:GetStaticPaths = () => {
 export const getStaticProps:GetStaticProps = async (context) => {
     const id = Number(context.params?.id);
     try {
-        const {movie,credits,videos,images,providers,recommendations} = await getMovie(id)
+        const {movie,credits,videos,images,providers,recommendations} = await getMovie(id,context.locale)
         return {
             props: {
                 movie,
