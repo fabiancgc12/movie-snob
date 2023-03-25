@@ -41,11 +41,11 @@ export default function DiscoverPage(){
     }
 
     let apiRoute = "discoverMovies"
-    let genres = lang == "es" ? MovieGenres : MovieGenresSpanish
+    let genres = lang == "es" ? MovieGenresSpanish : MovieGenres
     let fallbackMessage = t("movieFallback")
     if (router.query.media == "tv"){
         apiRoute = "discoverTv"
-        genres = lang == "es" ? TvGenres : TvGenresSpanish
+        genres = lang == "es" ? TvGenresSpanish : TvGenres
         fallbackMessage = t("tvFallback")
     }
     const title = t("discoverPageTitle")
