@@ -15,6 +15,7 @@ import {PeopleDto} from "@/models/dto/Credit.dto";
 import {generateUrlPage} from "@/utils/functions/generateUrlPage";
 import {CSSProperties, useMemo} from "react";
 import Link from "next/link";
+import useTranslation from "next-translate/useTranslation";
 
 type props = {
     trailer?:VideoTrailerInterface,
@@ -29,6 +30,7 @@ type props = {
 })
 
 export function MediaBanner({product,trailer,credits,mediaType}:props){
+    const {t} = useTranslation("common")
     const bg = useMemo(() => ({
         "--bgImage":`url(${generateImageUrl(product.backdrop_path,1280)})`
     }) as CSSProperties, [product]);
@@ -36,7 +38,7 @@ export function MediaBanner({product,trailer,credits,mediaType}:props){
     const posterPath = generateImageUrl(product.poster_path);
     const title = mediaType == "movie" ? product.title : product.name
     const titleSize = title.length > 20 ? styles.titleSmall : "";
-    const videoLabel = mediaType == "movie" ? "Watch trailer" : "Watch opening"
+    const videoLabel = mediaType == "movie" ? t("watchTrailer"): t("watchOpening")
     //sorting so the director is always first
 
     return (

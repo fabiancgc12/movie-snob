@@ -19,7 +19,10 @@ const english:CommonInterface = {
     recommendationLabel: "Recommendations",
     videosLabel: "Videos",
     director:"Director",
-    screenPlay:"Screenplay"
+    screenPlay:"Screenplay",
+    watchTrailer:"Watch trailer",
+    watchOpening:"Watch opening",
+    readMore:"Read more"
 }
 
 export default english

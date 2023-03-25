@@ -17,5 +17,8 @@ export interface CommonInterface {
     imagesLabel:string,
     recommendationLabel:string,
     director:string,
-    screenPlay:string
+    screenPlay:string,
+    watchTrailer:string,
+    watchOpening:string,
+    readMore:string
 }

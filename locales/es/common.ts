@@ -19,7 +19,10 @@ const spanish:CommonInterface = {
     recommendationLabel: "Recomendaciones",
     videosLabel: "Videos",
     director:"Director",
-    screenPlay:"Guion"
+    screenPlay:"Guion",
+    watchTrailer:"Ver tráiler",
+    watchOpening:"Ver intro",
+    readMore:"Leer más"
 }
 
 export default spanish

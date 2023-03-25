@@ -5,6 +5,7 @@ import Image from "next/image";
 import {generateImageUrl} from "@/utils/functions/generateImageUrl";
 import React, {ChangeEvent, useEffect, useState} from "react";
 import {formatYearDate} from "@/utils/functions/formatYearDate";
+import useTranslation from "next-translate/useTranslation";
 
 
 type props = {
@@ -12,6 +13,7 @@ type props = {
 }
 
 export function SeasonsList({seasons}:props){
+    const {t} = useTranslation("movieortv")
     const [selectedId,setSelectedId] = useState(seasons?.at(-1)?.id ?? 0 )
     useEffect(() => {
         setSelectedId(seasons?.at(-1)?.id ?? 0 )
@@ -23,7 +25,7 @@ export function SeasonsList({seasons}:props){
     const selectedSeason = seasons.find(s => s.id == selectedId);
     if (!selectedSeason) return null
     return (
-        <Section title={"seasons"}>
+        <Section title={t("seasonsLabel")}>
             <select className={styles.select} value={selectedId} onChange={onChange}>
                 {seasons.map(s => <option value={s.id} key={`season-${s.id}`}>{s.name}</option>)}
             </select>
@@ -36,6 +38,10 @@ type seasonComponentProp= {
     season:SeasonsEntity
 }
 function Season({season}:seasonComponentProp){
+    const {t} = useTranslation("movieortv")
+    const airedOnLabel = t("airedOnLabel")
+    const notAnnouncedLabel = t("notAnnounced")
+    const episodesLabel = t("episodes")
     return (
         <div className={styles.season}>
             <div className={styles.posterWrapper}>
@@ -45,9 +51,9 @@ function Season({season}:seasonComponentProp){
                 <h6 className={styles.title}>{season.name}</h6>
                 <p>
                     <small className={styles.date}>
-                        Aired on: {season.air_date ? formatYearDate(season.air_date) : "Not announced"}
+                        {airedOnLabel}: {season.air_date ? formatYearDate(season.air_date) : notAnnouncedLabel}
                     </small>
-                    {season.episode_count && <small className={styles.date}> | {season.episode_count} episodes</small>}
+                    {season.episode_count && <small className={styles.date}> | {season.episode_count} {episodesLabel}</small>}
                 </p>
                 <p className={styles.plot}>
                     <small>

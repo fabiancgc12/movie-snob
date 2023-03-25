@@ -18,14 +18,14 @@ type props = {
 }
 
 export function UpcomingBanner({data,trailer}:props) {
-    const {t,lang} = useTranslation("home");
+    const {t,lang} = useTranslation("common");
     const bg = useMemo(() => ({
         "--bgImage":`url(${generateImageUrl(data.backdrop_path,1280)})`
     }) as CSSProperties, [data]);
     const placeholderStyle = data.backdrop_path ? "" : `${styles.placeholderBanner} placeholderImage`;
     const bigTitleStyle = data.title.length >= 20 ? styles.bigTitle : "";
-    const readMore = t("bannerRead")
-    const watchTrailer = t("bannerTrailer")
+    const readMore = t("readMore")
+    const watchTrailer = t("watchTrailer")
     return <div className={`${styles.mainShow} ${placeholderStyle}`} style={bg}>
         <div className={styles.info}>
             <h2 className={bigTitleStyle}>{data.title}</h2>

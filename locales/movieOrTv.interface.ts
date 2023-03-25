@@ -1,14 +1,22 @@
 export interface MovieOrTvInterface {
     overview:string,
     releaseDate:string,
+    lastAirDate:string,
     language:string
     budget:string,
     production:string,
+    networks:string,
     availableOn:string,
     moreLabel:string,
     castLabel:string,
     recommendationFallbackMessage:string,
     castFallbackMessage:string,
     notAvailableMessage:string,
-    justWatchMessage:string
+    justWatchMessage:string,
+    totalEpisodes:string,
+    status:string,
+    seasonsLabel:string,
+    airedOnLabel:string,
+    notAnnounced:string,
+    episodes:string
 }
