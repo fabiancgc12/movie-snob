@@ -8,7 +8,7 @@ export default async function handler(
   res: NextApiResponse<PopularTvShowResponse>
 ) {
   let page = Number(req?.query.page ?? 1);
-  let locale = req.query.locale as string | undefined
+  let locale = req.query.locale as string | undefined;
   const data = await getPopularTv(page,locale)
   res.status(200).json(data)
 }
