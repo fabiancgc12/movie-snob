@@ -8,5 +8,7 @@ export interface MovieOrTvInterface {
     moreLabel:string,
     castLabel:string,
     recommendationFallbackMessage:string,
-    castFallbackMessage:string
+    castFallbackMessage:string,
+    notAvailableMessage:string,
+    justWatchMessage:string
 }
