@@ -21,6 +21,7 @@ type props = {
 }
 // TODO add page when there are trouble fetching movie or tv show
 export default function Home({upcoming,upcomingTrailers}:props) {
+    console.log(upcomingTrailers)
   const {t} = useTranslation("home");
     const trendingLabel = t("trendingLabel")
     const upcomingLabel = t("upcomingLabel")

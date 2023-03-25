@@ -6,7 +6,7 @@ import {PopularTvShowResponse} from "@/models/popular/popularTv.interface";
 import {getTrending} from "@/services/trending/getTrending";
 import {TrendingResponseInterface} from "@/models/trending/TrendingMovieResponse";
 import {getUpcoming} from "@/services/movies/getUpcoming";
-import {getMovieTrailer} from "@/services/movies/getMovieTrailer";
+import {getMovieVideos} from "@/services/movies/getMovieVideos";
 import {VideoTrailerInterface} from "@/models/Movies/VideoMedia.interface";
 
 export async function getHomePage(locale?:string):Promise<{
@@ -24,9 +24,9 @@ export async function getHomePage(locale?:string):Promise<{
         getPopularTv(1,locale),
         getTrending("all")
     ])
-    const trailerPromises = upcoming.results.map(u => getMovieTrailer(u.id))
+    const trailerPromises = upcoming.results.map(u => getMovieVideos(u.id,locale))
     const upcomingTrailers = (await Promise.all(trailerPromises))
-        .map(t => t.results.filter(t => t.site == "YouTube" && t.name.toLowerCase().includes("trailer"))[0] ?? null)
+        .map(t => t.results.filter(isTrailer)[0] ?? null)
     return {
         upcoming:upcoming.results,
         upcomingTrailers:upcomingTrailers,
@@ -36,4 +36,9 @@ export async function getHomePage(locale?:string):Promise<{
         },
         trending: trending
     }
+}
+
+function isTrailer(video:VideoTrailerInterface){
+    const name = video.name.toLowerCase()
+    return video.site == "YouTube" && (name.includes("trailer") || name.includes("tráiler"))
 }
