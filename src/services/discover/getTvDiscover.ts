@@ -1,12 +1,15 @@
 import {DiscoverTvResponseInterface} from "@/models/discover/discoverTvResponse.interface";
+import {getLocale} from "@/utils/functions/getLanguage";
 
 type options = {
     genre?:string | string[],
-    page?:number
+    page?:number,
+    locale?:string | string[]
 }
-export async function getTvDiscover({genre,page=1}:options):Promise<DiscoverTvResponseInterface>{
+export async function getTvDiscover({genre,page=1,locale}:options):Promise<DiscoverTvResponseInterface>{
     let parameters:Record<string, any> = {}
     parameters.page = page
+    parameters.language = getLocale(locale)
     if (genre){
         if (Array.isArray(genre))
             parameters.with_genres = genre.join(",")

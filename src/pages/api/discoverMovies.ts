@@ -8,7 +8,8 @@ export default async function handler(
 ){
     const parameters = {
         genre: req.query.genre,
-        page:Number(req.query.page)
+        page:Number(req.query.page),
+        locale:req.query.locale
     }
     const data = await getMovieDiscover(parameters)
     res.status(200).json(data)
