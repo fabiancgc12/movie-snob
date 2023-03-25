@@ -8,6 +8,7 @@ export default async function handler(
   res: NextApiResponse<PopularMovieResponse>
 ) {
   let page = Number(req?.query.page ?? 1);
-  const data = await getPopularMovies(page)
+  let locale = req.query.locale as string | undefined;
+  const data = await getPopularMovies(page,locale)
   res.status(200).json(data)
 }

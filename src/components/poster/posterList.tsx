@@ -36,6 +36,7 @@ type posterlist = {
 }
 
 export function DynamicPosterList({mediaType,api,enabled = true,parameters={},queryKey,isBackdrop,fallbackMessage}:posterlist){
+    const {t,lang} = useTranslation("common")
     if (!parameters.page)
         parameters.page = 1
     let {data,hasNextPage,isFetching,isFetchingNextPage,fetchNextPage,refetch,error,isError,isLoadingError,isRefetchError} = useInfiniteQuery<PopularMovieResponse | PopularTvShowResponse | TrendingResponseInterface>({
@@ -43,6 +44,7 @@ export function DynamicPosterList({mediaType,api,enabled = true,parameters={},qu
         enabled:enabled,
         queryFn: ({pageParam}) => {
             parameters.page = pageParam ?? parameters.page
+            parameters.locale = lang
             const params = new URLSearchParams(parameters).toString();
             return fetch(`/api/${api}?${params}`).then(v => v.json())
         },
@@ -51,7 +53,6 @@ export function DynamicPosterList({mediaType,api,enabled = true,parameters={},qu
             return lastPage.page + 1
         }
     })
-    const {t} = useTranslation("common")
     const [endElementRef] = useInView({
         threshold:1,
         rootMargin:"700px 700px",

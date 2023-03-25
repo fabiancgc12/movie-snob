@@ -18,7 +18,12 @@ export async function getHomePage(locale?:string):Promise<{
     },
     trending:TrendingResponseInterface
 }>{
-    const [upcoming,popularMovies,popularTv,trending] =  await Promise.all([getUpcoming(locale),getPopularMovies(),getPopularTv(),getTrending("all")])
+    const [upcoming,popularMovies,popularTv,trending] =  await Promise.all([
+        getUpcoming(locale),
+        getPopularMovies(1,locale),
+        getPopularTv(),
+        getTrending("all")
+    ])
     const trailerPromises = upcoming.results.map(u => getMovieTrailer(u.id))
     const upcomingTrailers = (await Promise.all(trailerPromises))
         .map(t => t.results.filter(t => t.site == "YouTube" && t.name.toLowerCase().includes("trailer"))[0] ?? null)
