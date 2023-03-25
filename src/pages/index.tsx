@@ -136,9 +136,9 @@ function GenreSection(){
 }
 
 
-export const getStaticProps:GetStaticProps = async () => {
+export const getStaticProps:GetStaticProps = async ({locale}) => {
     const queryClient = new QueryClient()
-    const data = await getHomePage()
+    const data = await getHomePage(locale)
     await queryClient.prefetchInfiniteQuery(["trending"],() => data.trending)
     await queryClient.prefetchInfiniteQuery(["popularMovies"],() => data.popular.movie)
     await queryClient.prefetchInfiniteQuery(["popularTv"],() => data.popular.tv)

@@ -9,7 +9,7 @@ import {getUpcoming} from "@/services/movies/getUpcoming";
 import {getMovieTrailer} from "@/services/movies/getMovieTrailer";
 import {VideoTrailerInterface} from "@/models/Movies/VideoMedia.interface";
 
-export async function getHomePage():Promise<{
+export async function getHomePage(locale?:string):Promise<{
     upcoming:MovieResumeInterface[],
     upcomingTrailers:VideoTrailerInterface[]
     popular:{
@@ -18,7 +18,7 @@ export async function getHomePage():Promise<{
     },
     trending:TrendingResponseInterface
 }>{
-    const [upcoming,popularMovies,popularTv,trending] =  await Promise.all([getUpcoming(),getPopularMovies(),getPopularTv(),getTrending("all")])
+    const [upcoming,popularMovies,popularTv,trending] =  await Promise.all([getUpcoming(locale),getPopularMovies(),getPopularTv(),getTrending("all")])
     const trailerPromises = upcoming.results.map(u => getMovieTrailer(u.id))
     const upcomingTrailers = (await Promise.all(trailerPromises))
         .map(t => t.results.filter(t => t.site == "YouTube" && t.name.toLowerCase().includes("trailer"))[0] ?? null)
