@@ -20,5 +20,7 @@ export interface CommonInterface {
     screenPlay:string,
     watchTrailer:string,
     watchOpening:string,
-    readMore:string
+    readMore:string,
+    find:string,
+    notFoundMovieOrTvMessage:string
 }

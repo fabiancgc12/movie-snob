@@ -22,7 +22,9 @@ const english:CommonInterface = {
     screenPlay:"Screenplay",
     watchTrailer:"Watch trailer",
     watchOpening:"Watch opening",
-    readMore:"Read more"
+    readMore:"Read more",
+    find:"You searched for",
+    notFoundMovieOrTvMessage:"There are not movies or tv shows with that title."
 }
 
 export default english

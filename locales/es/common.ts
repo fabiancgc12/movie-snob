@@ -22,7 +22,9 @@ const spanish:CommonInterface = {
     screenPlay:"Guion",
     watchTrailer:"Ver tráiler",
     watchOpening:"Ver intro",
-    readMore:"Leer más"
+    readMore:"Leer más",
+    find:"Buscaste",
+    notFoundMovieOrTvMessage:"No hay películas o programas de televisión con ese título."
 }
 
 export default spanish
