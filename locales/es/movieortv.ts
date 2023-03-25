@@ -20,7 +20,9 @@ const spanish:MovieOrTvInterface = {
     seasonsLabel:"Temporadas",
     airedOnLabel:"Emitido en",
     notAnnounced:"No anunciada",
-    episodes:"Episodios"
+    episodes:"Episodios",
+    movieNotFoundErrorMessage:"Película no encontrada",
+    tvNotFoundErrorMessage:"Programa de televisión no encontrado"
 }
 
 export default spanish

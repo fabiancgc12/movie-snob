@@ -20,7 +20,9 @@ const english:MovieOrTvInterface = {
     seasonsLabel:"seasons",
     airedOnLabel:"Aired on",
     notAnnounced:"Not announced",
-    episodes:"Episodes"
+    episodes:"Episodes",
+    movieNotFoundErrorMessage:"Movie not found",
+    tvNotFoundErrorMessage:"TV show not found"
 }
 
 export default english

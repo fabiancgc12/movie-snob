@@ -18,5 +18,7 @@ export interface MovieOrTvInterface {
     seasonsLabel:string,
     airedOnLabel:string,
     notAnnounced:string,
-    episodes:string
+    episodes:string,
+    movieNotFoundErrorMessage:string,
+    tvNotFoundErrorMessage:string
 }

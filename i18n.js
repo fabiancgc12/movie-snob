@@ -9,6 +9,8 @@ module.exports = {
     "/liked":["likedorbookmark"],
     "/bookmark":["likedorbookmark"],
     "/movie/[id]":["movieortv"],
-    "/tv/[id]":["movieortv"]
+    "/movie/not-found":["movieortv"],
+    "/tv/[id]":["movieortv"],
+    "/tv/not-found":["movieortv"],
   },
 }
