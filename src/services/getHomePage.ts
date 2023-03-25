@@ -21,7 +21,7 @@ export async function getHomePage(locale?:string):Promise<{
     const [upcoming,popularMovies,popularTv,trending] =  await Promise.all([
         getUpcoming(locale),
         getPopularMovies(1,locale),
-        getPopularTv(),
+        getPopularTv(1,locale),
         getTrending("all")
     ])
     const trailerPromises = upcoming.results.map(u => getMovieTrailer(u.id))
