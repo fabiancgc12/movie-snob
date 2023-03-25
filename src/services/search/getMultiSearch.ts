@@ -1,13 +1,16 @@
 import {MultiSearchResponseInterface} from "@/models/search/MultiSearchResponse.interface";
+import {getLocale} from "@/utils/functions/getLanguage";
 
 type options = {
     title?:string,
-    page?:number
+    page?:number,
+    locale?:string | string[]
 }
 
-export async function getMultiSearch({page = 1,title}:options):Promise<MultiSearchResponseInterface>{
+export async function getMultiSearch({page = 1,title,locale}:options):Promise<MultiSearchResponseInterface>{
     let parameters:Record<string, any> = {}
     parameters.page = page
+    parameters.language = getLocale(locale)
     if (title){
         parameters.query = title
     }

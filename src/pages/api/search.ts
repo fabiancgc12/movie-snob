@@ -8,7 +8,8 @@ export default async function handler(
 ){
     const parameters = {
         title: Array.isArray(req.query.title) ? req.query.title.join() : req.query.title,
-        page:Number(req.query.page)
+        page:Number(req.query.page),
+        locale:req.query.locale
     }
     const data = await getMultiSearch(parameters)
     res.status(200).json(data)
