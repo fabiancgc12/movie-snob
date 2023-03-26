@@ -52,6 +52,7 @@ export default function DiscoverPage(){
     const movieLabel = t("common:mediaMovie")
     const tvLabel = t("common:mediaTv")
     const allLabel = t("allOption")
+    console.log([apiRoute, media, genre])
     return (
         <>
             <form className={styles.form}>
@@ -70,7 +71,7 @@ export default function DiscoverPage(){
                         <DynamicPosterList
                             mediaType={media}
                             api={apiRoute}
-                            queryKey={[apiRoute, media, genre]}
+                            queryKey={[apiRoute, media, genre,lang]}
                             parameters={{media: media, genre: genre}}
                             enabled={router.isReady}
                             fallbackMessage={fallbackMessage}

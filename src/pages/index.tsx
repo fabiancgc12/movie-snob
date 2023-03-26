@@ -110,23 +110,26 @@ function GenreSection(){
 
     return (
         <div>
-            {genres.map((g,i) => <div
-                key={`genre-section-${g.id}`}
-                data-theme={(i % 3 == 0) ? "dark" : "light"}
-            >
-                <SliderSection title={g.name} speed={450}>
-                    <DynamicPosterList
-                        mediaType={"movie"}
-                        api={`discoverMovies`}
-                        parameters={{
-                            genre:g.id
-                        }}
-                        isBackdrop={i % 3 == 0}
-                        queryKey={["discoverMovies",`genre-${g.id}`]}
-                        fallbackMessage={noMovies}
-                    />
-                </SliderSection>
-            </div>)
+            {genres.map((g,i) => {
+                console.log(["discoverMovies", "movie", g.id.toString()])
+                return <div
+                    key={`genre-section-${g.id}`}
+                    data-theme={(i % 3 == 0) ? "dark" : "light"}
+                >
+                    <SliderSection title={g.name} speed={450}>
+                        <DynamicPosterList
+                            mediaType={"movie"}
+                            api={`discoverMovies`}
+                            parameters={{
+                                genre: g.id
+                            }}
+                            isBackdrop={i % 3 == 0}
+                            queryKey={["discoverMovies", "movie", g.id.toString(),lang]}
+                            fallbackMessage={noMovies}
+                        />
+                    </SliderSection>
+                </div>
+            })
             }
             {genres.length <= (genresLimit - 1) && <div ref={loadMoreRef} className={styles.loading}>
                 <Spinner/>
