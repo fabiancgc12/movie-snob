@@ -16,6 +16,7 @@ import {CreditsDto, PeopleDto} from "@/models/dto/Credit.dto";
 import {ProductHead} from "@/components/Layout/ProductHead";
 import { SliderSection } from "@/components/Slider/SliderSection";
 import {TMDBCodes} from "@/utils/TMDBCodes";
+import useTranslation from "next-translate/useTranslation";
 
 type props = {
     show:TvShowInterface,
@@ -27,8 +28,10 @@ type props = {
 }
 
 export default function Tv({show,credits,videos,recommendations,images,providers}:props){
+    const {t} = useTranslation("movieortv")
     const createdBy = show.created_by?.map(c => PeopleDto.formatCreatedBy(c)).slice(0,2) || []
     const openingSequence = videos.find(v => v.type.includes("Opening"));
+
     return (
         <>
             <ProductHead media={show} mediaType={"tv"} cast={credits.cast || []} crew={createdBy}/>
@@ -41,11 +44,11 @@ export default function Tv({show,credits,videos,recommendations,images,providers
                 <SeasonsList seasons={show.seasons}/>
                 <Media videos={videos} images={images}/>
             </div>
-            <SliderSection title={"Recommendations"} speed={450}>
+            <SliderSection title={t("common:recommendationLabel")} speed={450}>
                 <PosterList
                     mediaType={"tv"}
                     media={recommendations}
-                    fallbackMessage={"currently there are no recommendations."}
+                    fallbackMessage={t("recommendationFallbackMessage")}
                 />
             </SliderSection>
         </>

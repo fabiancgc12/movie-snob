@@ -20,5 +20,6 @@ export interface MovieOrTvInterface {
     notAnnounced:string,
     episodes:string,
     movieNotFoundErrorMessage:string,
-    tvNotFoundErrorMessage:string
+    tvNotFoundErrorMessage:string,
+    noMediaFallbackMessage:string
 }

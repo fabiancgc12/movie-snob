@@ -22,7 +22,8 @@ const spanish:MovieOrTvInterface = {
     notAnnounced:"No anunciada",
     episodes:"Episodios",
     movieNotFoundErrorMessage:"Película no encontrada",
-    tvNotFoundErrorMessage:"Programa de televisión no encontrado"
+    tvNotFoundErrorMessage:"Programa de televisión no encontrado",
+    noMediaFallbackMessage:"Actualmente, no hay {{media}} relacionados con esta serie o película en nuestra base de datos."
 }
 
 export default spanish

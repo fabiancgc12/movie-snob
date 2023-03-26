@@ -15,7 +15,14 @@ type props = {
 }
 export function Media({videos,images}:props){
     const {t} = useTranslation("common");
-    const backdrops = images.backdrops.slice(0,9)
+    const backdrops = images.backdrops.slice(0,9);
+    const movieFallBackMessage = t("movieortv:noMediaFallbackMessage",{
+        media:t("videosLabel").toLowerCase()
+    })
+    const tvFallBackMessage = t("movieortv:noMediaFallbackMessage",{
+        media:t("imagesLabel").toLowerCase()
+    })
+
     return (
         <>
                 <Section title={t("videosLabel")}>
@@ -23,7 +30,7 @@ export function Media({videos,images}:props){
                         ? <Slider speed={450}>
                             {videos && videos.map(v => <VideoThumbnail video={v} key={`video-${v.key}`}/>)}
                           </Slider>
-                        : <p>Currently there are no videos related to this movie/tv show on our database.</p>
+                        : <p>{movieFallBackMessage}</p>
                     }
                 </Section>
                 <SliderSection className={styles.wrapper} title={t("imagesLabel")} speed={450}>
@@ -37,7 +44,7 @@ export function Media({videos,images}:props){
                                         </div>
                                     )
                                 )
-                        : <p>Currently there are no images related to this movie/tv show on our database.</p>
+                        : <p>{tvFallBackMessage}</p>
                     }
                 </SliderSection>
 

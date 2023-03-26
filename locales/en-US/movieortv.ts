@@ -22,7 +22,8 @@ const english:MovieOrTvInterface = {
     notAnnounced:"Not announced",
     episodes:"Episodes",
     movieNotFoundErrorMessage:"Movie not found",
-    tvNotFoundErrorMessage:"TV show not found"
+    tvNotFoundErrorMessage:"TV show not found",
+    noMediaFallbackMessage:"Currently there are no {{media}} related to this movie/tv show on our database."
 }
 
 export default english
