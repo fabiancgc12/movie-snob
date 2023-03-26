@@ -15,6 +15,7 @@ import {formatRecommendations} from "@/utils/functions/formatRecommendations";
 import {formatMovieCredits} from "@/utils/functions/formatMovieCredits";
 import {CreditsDto} from "@/models/dto/Credit.dto";
 import {getLocale} from "@/utils/functions/getLanguage";
+import {extractLanguageFromLocale} from "@/utils/functions/extractLanguageFromLocale";
 
 type ApiResponse = MovieInterface & {
     videos:VideoMediaResponse,
@@ -34,9 +35,10 @@ export async function getMovie(id:number,locale?:string | string[]):Promise<
     }
 >{
     locale = getLocale(locale)
+    const languageWithoutCountry = extractLanguageFromLocale(locale)
     const response = await fetch(
         `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.TMDB_KEY}&language=${locale}&`+
-        `append_to_response=videos,images,credits,watch/providers,recommendations`
+        `append_to_response=videos,images,credits,watch/providers,recommendations&include_image_language=${languageWithoutCountry},null`
     );
     const data:ApiResponse = await response.json()
     try {

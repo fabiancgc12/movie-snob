@@ -14,6 +14,8 @@ import {ProvidersDto} from "@/models/dto/ProvidersDto";
 import {formatRecommendations} from "@/utils/functions/formatRecommendations";
 import {formatTvCredits} from "@/utils/functions/formatTvCredits";
 import {CreditsDto} from "@/models/dto/Credit.dto";
+import {extractLanguageFromLocale} from "@/utils/functions/extractLanguageFromLocale";
+import {getLocale} from "@/utils/functions/getLanguage";
 
 type ApiResponse = TvShowInterface & {
     videos:VideoMediaResponse,
@@ -31,10 +33,11 @@ export async function getTvShow(id:number,locale?:string | string[]):Promise<{
     recommendations:RecommendationInterface[],
     providers:ProvidersDto
 }>{
-
+    locale = getLocale(locale)
+    const languageWithoutCountry = extractLanguageFromLocale(locale)
     const response = await fetch(
         `https://api.themoviedb.org/3/tv/${id}?api_key=${process.env.TMDB_KEY}&language=${locale}&` +
-        `append_to_response=videos,recommendations,aggregate_credits,images,watch/providers`
+        `include_image_language=${languageWithoutCountry},null&append_to_response=videos,recommendations,aggregate_credits,images,watch/providers`
     );
     const data: ApiResponse = await response.json()
     try {
