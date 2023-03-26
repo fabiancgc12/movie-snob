@@ -29,7 +29,7 @@ export function Header({className = ""}:props){
                 onClick={() => setShowNavBar(!showNavBar)}
                 className={`${styles.button} outline contrast`}
                     >
-                <CiMenuBurger />
+                <CiMenuBurger size={20}/>
             </button>
             <div className={styles.logo}>
                 <Link href={"/"} className={styles.link}>

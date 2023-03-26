@@ -21,11 +21,11 @@ const navItems = [{
     label:"marked",
     url:"/bookmark"
 },{
-    icon:<AiFillHeart />,
+    icon:<AiFillHeart/>,
     label:"liked",
     url:"/liked"
 },{
-    icon:<MdLocalMovies />,
+    icon:<MdLocalMovies/>,
     label:"discover",
     url:"/discover"
 },
@@ -36,12 +36,11 @@ const navItems = [{
     switchLanguage:true
 },
 {
-    icon:<BiUserCircle />,
+    icon:<BiUserCircle/>,
     label:"user",
     url:"#"
 }]
 
-//TODO change styles of navbar and header
 export function NavBar({className = ""}:props){
     const { t } = useTranslation('common')
     const router = useRouter();

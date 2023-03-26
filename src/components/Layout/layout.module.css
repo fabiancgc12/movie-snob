@@ -1,4 +1,5 @@
 .pageContainer{
+    --navBarWidth:80px;
     display: grid;
     grid-template-areas: "header"
                         "main"
@@ -32,6 +33,6 @@
                         "nav main"
                         "nav footer";
         /*minmax(0,1fr) solves an issue with grid when there is horizontal scroll*/
-        grid-template-columns: 65px minmax(0,1fr);
+        grid-template-columns: var(--navBarWidth) minmax(0,1fr);
     }
 }

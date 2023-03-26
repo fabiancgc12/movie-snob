@@ -5,6 +5,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 10px;
     padding: 10px;
     background: var(--primaryDarker-90);
     backdrop-filter: blur(5px);
