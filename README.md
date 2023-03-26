@@ -10,4 +10,5 @@ They also have the option to select movies and shows as bookmarked or liked so t
 - Nextjs
 - Tanstack query (or react query)
 - Css modules
+- Next translate
 - Picocss
