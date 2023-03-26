@@ -41,7 +41,7 @@ const navItems = [{
     url:"#"
 }]
 
-//TODO change styles of navbar
+//TODO change styles of navbar and header
 export function NavBar({className = ""}:props){
     const { t } = useTranslation('common')
     const router = useRouter();

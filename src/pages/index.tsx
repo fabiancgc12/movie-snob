@@ -21,7 +21,7 @@ type props = {
 }
 // TODO add page when there are trouble fetching movie or tv show
 export default function Home({upcoming,upcomingTrailers}:props) {
-  const {t} = useTranslation("home");
+  const {t,lang} = useTranslation("home");
     const trendingLabel = t("trendingLabel")
     const upcomingLabel = t("upcomingLabel")
     const popularMoviesLabel = t("popularMoviesLabel")
@@ -43,7 +43,7 @@ export default function Home({upcoming,upcomingTrailers}:props) {
                     mediaType={"movie"}
                     enabled={false}
                     api={"trending"}
-                    queryKey={["trending"]}
+                    queryKey={["trending",lang]}
                     fallbackMessage={"There are not trending movies."}
                 />
             </SliderSection>
@@ -65,7 +65,7 @@ export default function Home({upcoming,upcomingTrailers}:props) {
                     mediaType={"movie"}
                     enabled={false}
                     api={"popularMovies"}
-                    queryKey={["popularMovies"]}
+                    queryKey={["popularMovies",lang]}
                     fallbackMessage={"There are not popular movies."}
                 />
             </SliderSection>
@@ -74,7 +74,7 @@ export default function Home({upcoming,upcomingTrailers}:props) {
                     mediaType={"tv"}
                     enabled={false}
                     api={"popularTv"}
-                    queryKey={["popularTv"]}
+                    queryKey={["popularTv",lang]}
                     fallbackMessage={"There are not popular tv shows."}
                 />
             </SliderSection>
@@ -111,7 +111,6 @@ function GenreSection(){
     return (
         <div>
             {genres.map((g,i) => {
-                console.log(["discoverMovies", "movie", g.id.toString()])
                 return <div
                     key={`genre-section-${g.id}`}
                     data-theme={(i % 3 == 0) ? "dark" : "light"}
@@ -142,9 +141,9 @@ function GenreSection(){
 export const getStaticProps:GetStaticProps = async ({locale}) => {
     const queryClient = new QueryClient()
     const data = await getHomePage(locale)
-    await queryClient.prefetchInfiniteQuery(["trending"],() => data.trending)
-    await queryClient.prefetchInfiniteQuery(["popularMovies"],() => data.popular.movie)
-    await queryClient.prefetchInfiniteQuery(["popularTv"],() => data.popular.tv)
+    await queryClient.prefetchInfiniteQuery(["trending",locale],() => data.trending)
+    await queryClient.prefetchInfiniteQuery(["popularMovies",locale],() => data.popular.movie)
+    await queryClient.prefetchInfiniteQuery(["popularTv",locale],() => data.popular.tv)
     return {
         props: {
             upcoming:data.upcoming,

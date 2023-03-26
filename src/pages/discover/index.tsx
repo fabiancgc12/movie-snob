@@ -52,7 +52,6 @@ export default function DiscoverPage(){
     const movieLabel = t("common:mediaMovie")
     const tvLabel = t("common:mediaTv")
     const allLabel = t("allOption")
-    console.log([apiRoute, media, genre])
     return (
         <>
             <form className={styles.form}>

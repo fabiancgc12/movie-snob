@@ -5,7 +5,7 @@ import {useRouter} from "next/router";
 import useTranslation from "next-translate/useTranslation";
 
 export default function FindPage(){
-    const {t} = useTranslation("common")
+    const {t,lang} = useTranslation("common")
     const router = useRouter()
     const title = router.query.title as string;
     return (
@@ -15,7 +15,7 @@ export default function FindPage(){
                     <DynamicPosterList
                         mediaType={"movie"}
                         api={"search"}
-                        queryKey={["search", title]}
+                        queryKey={["search", title,lang]}
                         parameters={{title}}
                         enabled={router.isReady}
                         fallbackMessage={t("notFoundMovieOrTvMessage")}
