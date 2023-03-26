@@ -39,7 +39,7 @@
     height: 45px;
     margin: 0 !important;
     transition: all .5s ease-in-out;
-    width: 250px;
+    width: 150px;
 }
 
 .search input:not(:hover,:focus){
@@ -51,6 +51,10 @@
 
 /*big screen*/
 @media screen and (min-width: 768px){
+
+    .search input{
+        width: 250px;
+    }
 
     .button,.logo{
         display: none;
