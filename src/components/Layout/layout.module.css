@@ -19,6 +19,7 @@
 
 .pageContainer > main{
     grid-area: main;
+    isolation: isolate;
 }
 
 .pageContainer > footer{

@@ -1,9 +1,13 @@
 .wrapper{
+    position: sticky;
+    top: 0;
+    z-index: 9;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 10px;
-    background: var(--primaryDarker);
+    background: var(--primaryDarker-90);
+    backdrop-filter: blur(5px);
 }
 
 .button{
