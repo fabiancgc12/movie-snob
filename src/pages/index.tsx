@@ -13,6 +13,8 @@ import {SliderSection} from "@/components/Slider/SliderSection";
 import styles from "./index.module.css";
 import {VideoTrailerInterface} from "@/models/Movies/VideoMedia.interface";
 import useTranslation from "next-translate/useTranslation";
+import { Section } from "@/components/Section/Section";
+import {Slider} from "@/components/Slider/Slider";
 
 type props = {
     upcoming:MovieResumeInterface[],
@@ -85,7 +87,6 @@ export default function Home({upcoming,upcomingTrailers}:props) {
 
 const genresLimit = 9;
 
-//TODO Add links to genres
 function GenreSection(){
     const {t,lang} = useTranslation("home")
     const [genres, setGenres] = useState<typeof MovieGenres>([]);
@@ -114,18 +115,20 @@ function GenreSection(){
                     key={`genre-section-${g.id}`}
                     data-theme={(i % 3 == 0) ? "dark" : "light"}
                 >
-                    <SliderSection title={g.name} speed={450}>
-                        <DynamicPosterList
-                            mediaType={"movie"}
-                            api={`discoverMovies`}
-                            parameters={{
-                                genre: g.id
-                            }}
-                            isBackdrop={i % 3 == 0}
-                            queryKey={["discoverMovies", "movie", g.id.toString(),lang]}
-                            fallbackMessage={noMovies}
-                        />
-                    </SliderSection>
+                    <Section title={g.name} titleAsLink={true} url={`/discover?media=movie&genre=${g.id}`}>
+                        <Slider speed={450}>
+                            <DynamicPosterList
+                                mediaType={"movie"}
+                                api={`discoverMovies`}
+                                parameters={{
+                                    genre: g.id
+                                }}
+                                isBackdrop={i % 3 == 0}
+                                queryKey={["discoverMovies", "movie", g.id.toString(),lang]}
+                                fallbackMessage={noMovies}
+                            />
+                        </Slider>
+                    </Section>
                 </div>
             })
             }
