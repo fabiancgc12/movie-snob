@@ -37,7 +37,8 @@ export async function getTvShow(id:number,locale?:string | string[]):Promise<{
     const languageWithoutCountry = extractLanguageFromLocale(locale)
     const response = await fetch(
         `https://api.themoviedb.org/3/tv/${id}?api_key=${process.env.TMDB_KEY}&language=${locale}&` +
-        `include_image_language=${languageWithoutCountry},null&append_to_response=videos,recommendations,aggregate_credits,images,watch/providers`
+        `include_image_language=${languageWithoutCountry},null&append_to_response=videos,recommendations,aggregate_credits,images,watch/providers&` +
+        `include_video_language=${locale}`
     );
     const data: ApiResponse = await response.json()
     try {
