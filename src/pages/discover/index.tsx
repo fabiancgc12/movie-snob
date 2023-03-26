@@ -7,10 +7,12 @@ import {ChangeEvent} from "react";
 import {MovieGenres, MovieGenresSpanish, TvGenres, TvGenresSpanish} from "@/utils/movieGenres";
 import styles from "./discover.module.css"
 import useTranslation from "next-translate/useTranslation";
+import {useTheme} from "@/global/ThemeContext";
 
 export default function DiscoverPage(){
     const router = useRouter();
     const {t,lang} = useTranslation("discover");
+    const [theme] = useTheme();
     // if there is no 'media' on the query then fetch movies by default
     const media = router.query.media as MediaType ?? "movie";
     const genre = router.query.genre as string;
@@ -64,7 +66,7 @@ export default function DiscoverPage(){
                     {genres.map(g => <option value={g.id} key={`${media}-genre-${g.id}`}>{g.name}</option>)}
                 </select>
             </form>
-            <div data-theme="light" className={"full-h"}>
+            <div data-theme={theme} className={"full-h"}>
                 <Section title={title}>
                     <PosterGrid>
                         <DynamicPosterList

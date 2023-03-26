@@ -26,7 +26,8 @@ const spanish:CommonInterface = {
     find:"Buscaste",
     notFoundMovieOrTvMessage:"No hay películas o programas de televisión con ese título.",
     language:"Español",
-    notAvailable:"No disponible."
+    notAvailable:"No disponible.",
+    theme:"Tema"
 }
 
 export default spanish

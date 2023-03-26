@@ -2,6 +2,7 @@ import {ReactNode, useRef, useState} from "react";
 import useOnClickOutside from "@/hooks/useClickOutside";
 import {ActionButton} from "@/components/common/ActionButton/ActionButton";
 import styles from "./ActionToolTip.module.css"
+import {useTheme} from "@/global/ThemeContext";
 
 type props = {
     children:ReactNode,
@@ -11,6 +12,7 @@ type props = {
 
 export function ActionToolTip({children,buttonContent,buttonSize}:props){
     const [show, setShow] = useState(false);
+    const [theme] = useTheme();
     const ref = useRef<HTMLDivElement>(null);
     useOnClickOutside(ref,() => setShow(false));
     const showOptions = show ? styles.show : ""
@@ -19,7 +21,7 @@ export function ActionToolTip({children,buttonContent,buttonSize}:props){
             <ActionButton onClick={() => setShow(!show)} className={`secondary`} size={buttonSize}>
                 {buttonContent}
             </ActionButton>
-            <div className={`${styles.options} ${showOptions}`} data-theme="light">
+            <div className={`${styles.options} ${showOptions}`} data-theme={theme}>
                 {children}
             </div>
         </div>

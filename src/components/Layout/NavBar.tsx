@@ -1,8 +1,7 @@
 import styles from "./NavBar.module.css"
 import {FaBookmark} from "react-icons/fa";
 import {AiFillHeart} from "react-icons/ai";
-import {BiUserCircle} from "react-icons/bi";
-import {MdLocalMovies,MdLanguage} from "react-icons/md";
+import {MdLocalMovies,MdLanguage,MdModeNight,MdSunny} from "react-icons/md";
 import Link from "next/link";
 import Image from "next/image"
 import logo from "@public/logo.png";
@@ -11,6 +10,7 @@ import useClickOutside from "@/hooks/useClickOutside";
 import {useRef} from "react";
 import {useRouter} from "next/router";
 import useTranslation from "next-translate/useTranslation";
+import {useTheme} from "@/global/ThemeContext";
 
 type props = {
     className?:string
@@ -34,12 +34,8 @@ const navItems = [{
     label:"language",
     url:"/",
     switchLanguage:true
-},
-{
-    icon:<BiUserCircle/>,
-    label:"user",
-    url:"#"
-}]
+}
+]
 
 export function NavBar({className = ""}:props){
     const { t } = useTranslation('common')
@@ -90,7 +86,25 @@ export function NavBar({className = ""}:props){
                         </div>
                     )
                 })}
+                <SwitchThemeButton/>
             </nav>
         </aside>
+    )
+}
+
+function SwitchThemeButton(){
+    const [theme,setTheme] = useTheme();
+    const {t} = useTranslation("common");
+    const themeLabel = t("theme")
+    return (
+        <div className={styles.item}>
+            <div onClick={setTheme} className={`${styles.link} ${styles.switchLanguageButton}`}>
+                <div className={`${styles.witchLanguageIcons} ${theme == "dark" ? styles.showDarkModeIcon : ""}`}>
+                    <MdModeNight/>
+                    <MdSunny/>
+                </div>
+                <p className={styles.label}>{themeLabel}</p>
+            </div>
+        </div>
     )
 }

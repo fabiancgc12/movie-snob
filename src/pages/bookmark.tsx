@@ -7,6 +7,7 @@ import {PosterGrid} from "@/components/poster/PosterGrid";
 import {SkeletonCard} from "@/components/poster/posterCard";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import useTranslation from "next-translate/useTranslation";
+import {useTheme} from "@/global/ThemeContext";
 
 export const defaultPosters = [
     <SkeletonCard key={"default-card-1"}/>,
@@ -20,6 +21,7 @@ export default function BookMarkPage(){
     const [tv,setTv] = useState<StoreProductType[]>([]);
     const [ready, setReady] = useState(false);
     const {t} = useTranslation("likedorbookmark")
+    const [theme] = useTheme();
     useEffect(() => {
         const store = localStorage.getItem(bookmarkStoreKey)
         if (store){
@@ -37,7 +39,7 @@ export default function BookMarkPage(){
     const tvLabel = t("common:mediaTv")
 
     return (
-        <div data-theme="light" className={"full-h"}>
+        <div data-theme={theme} className={"full-h"}>
             <Section title={title}>
                 <Tabs>
                     <TabList>

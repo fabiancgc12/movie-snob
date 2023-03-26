@@ -26,7 +26,8 @@ const english:CommonInterface = {
     find:"You searched for",
     notFoundMovieOrTvMessage:"There are not movies or tv shows with that title.",
     language:"English",
-    notAvailable:"Not available."
+    notAvailable:"Not available.",
+    theme:"Theme"
 }
 
 export default english

@@ -25,4 +25,5 @@ export interface CommonInterface {
     notFoundMovieOrTvMessage:string,
     language:string,
     notAvailable:string
+    theme:string
 }

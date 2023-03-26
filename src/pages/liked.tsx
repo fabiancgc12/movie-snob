@@ -7,12 +7,14 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import {defaultPosters} from "@/pages/bookmark";
 import {likedStoreKey} from "@/components/common/ActionButton/LikeButton";
 import useTranslation from "next-translate/useTranslation";
+import {useTheme} from "@/global/ThemeContext";
 
 export default function LiedPage(){
     const [movies,setMovies] = useState<StoreProductType[]>([]);
     const [tv,setTv] = useState<StoreProductType[]>([]);
     const [ready, setReady] = useState(false);
     const {t} = useTranslation("likedorbookmark")
+    const [theme] = useTheme();
 
     useEffect(() => {
         const store = localStorage.getItem(likedStoreKey)
@@ -29,7 +31,7 @@ export default function LiedPage(){
     const tvFallback = t("fallbackTvMessage")
 
     return (
-        <div data-theme="light" className={"full-h"}>
+        <div data-theme={theme} className={"full-h"}>
             <Section title={title}>
                 <Tabs>
                     <TabList>

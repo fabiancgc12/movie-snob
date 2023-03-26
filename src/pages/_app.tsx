@@ -7,6 +7,7 @@ import Head from "next/head";
 import {Layout} from "@/components/Layout/Layout";
 import {Hydrate, QueryClient, QueryClientProvider} from '@tanstack/react-query';
 import {useState} from "react";
+import {ThemeProvider} from "@/global/ThemeContext";
 
 export default function App({ Component, pageProps }: AppProps) {
     const [queryClient] = useState(() => new QueryClient({
@@ -27,9 +28,11 @@ export default function App({ Component, pageProps }: AppProps) {
         </Head>
         <QueryClientProvider client={queryClient}>
             <Hydrate state={pageProps.dehydratedState}>
-                <Layout>
-                    <Component {...pageProps} />
-                </Layout>
+                <ThemeProvider>
+                    <Layout>
+                        <Component {...pageProps} />
+                    </Layout>
+                </ThemeProvider>
             </Hydrate>
         </QueryClientProvider>
       </>

@@ -17,6 +17,7 @@ import {ProductHead} from "@/components/Layout/ProductHead";
 import { SliderSection } from "@/components/Slider/SliderSection";
 import {TMDBCodes} from "@/utils/TMDBCodes";
 import useTranslation from "next-translate/useTranslation";
+import {useTheme} from "@/global/ThemeContext";
 
 type props = {
     show:TvShowInterface,
@@ -29,6 +30,7 @@ type props = {
 
 export default function Tv({show,credits,videos,recommendations,images,providers}:props){
     const {t} = useTranslation("movieortv")
+    const [theme] = useTheme();
     const createdBy = show.created_by?.map(c => PeopleDto.formatCreatedBy(c)).slice(0,2) || []
     const openingSequence = videos.find(v => v.type.includes("Opening"));
 
@@ -36,7 +38,7 @@ export default function Tv({show,credits,videos,recommendations,images,providers
         <>
             <ProductHead media={show} mediaType={"tv"} cast={credits.cast || []} crew={createdBy}/>
             <MediaBanner product={show} trailer={openingSequence} credits={createdBy} mediaType={"tv"}/>
-            <div data-theme="light" className={styles.tvContent}>
+            <div data-theme={theme} className={styles.tvContent}>
                 <CastSection cast={credits.cast}/>
                 <div className={styles.info}>
                     <TvExtraInfo show={show} providers={providers}/>

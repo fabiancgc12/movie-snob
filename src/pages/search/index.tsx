@@ -3,13 +3,15 @@ import {PosterGrid} from "@/components/poster/PosterGrid";
 import {DynamicPosterList} from "@/components/poster/posterList";
 import {useRouter} from "next/router";
 import useTranslation from "next-translate/useTranslation";
+import {useTheme} from "@/global/ThemeContext";
 
 export default function FindPage(){
     const {t,lang} = useTranslation("common")
+    const [theme] = useTheme();
     const router = useRouter()
     const title = router.query.title as string;
     return (
-        <div data-theme="light" className={"full-h"}>
+        <div data-theme={theme} className={"full-h"}>
             <Section title={t("find")}>
                 <PosterGrid>
                     <DynamicPosterList

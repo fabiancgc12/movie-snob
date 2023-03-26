@@ -16,6 +16,7 @@ import {ProductHead} from "@/components/Layout/ProductHead";
 import {SliderSection} from "@/components/Slider/SliderSection";
 import {TMDBCodes} from "@/utils/TMDBCodes";
 import useTranslation from "next-translate/useTranslation";
+import {useTheme} from "@/global/ThemeContext";
 
 type props = {
     movie:MovieInterface,
@@ -28,6 +29,7 @@ type props = {
 
 export default function Movie({movie,credits,videos,images,providers,recommendations}:props){
     const {t} = useTranslation("movieortv")
+    const [theme] = useTheme();
     const crew = credits.crew?.sort((a) => a.role.toLowerCase() === "screenplay" ? 1 : -1)
     const trailer = videos.find(t => t.site == "YouTube" && t.name.toLowerCase().includes("trailer"))
 
@@ -38,7 +40,7 @@ export default function Movie({movie,credits,videos,images,providers,recommendat
         <>
             <ProductHead media={movie} mediaType={"movie"} cast={credits.cast || []} crew={credits.crew || []}/>
             <MediaBanner product={movie} trailer={trailer} credits={crew} mediaType={"movie"}/>
-            <div data-theme="light" className={styles.movieContent}>
+            <div data-theme={theme} className={styles.movieContent}>
                 <CastSection cast={credits.cast}/>
                 <MovieExtraInfo movie={movie} providers={providers}/>
                 <Media videos={videos} images={images}/>

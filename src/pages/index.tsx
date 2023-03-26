@@ -15,6 +15,7 @@ import {VideoTrailerInterface} from "@/models/Movies/VideoMedia.interface";
 import useTranslation from "next-translate/useTranslation";
 import { Section } from "@/components/Section/Section";
 import {Slider} from "@/components/Slider/Slider";
+import {useTheme} from "@/global/ThemeContext";
 
 type props = {
     upcoming:MovieResumeInterface[],
@@ -22,12 +23,13 @@ type props = {
 
 }
 export default function Home({upcoming,upcomingTrailers}:props) {
-  const {t,lang} = useTranslation("home");
+    const {t,lang} = useTranslation("home");
+    const [theme] = useTheme();
     const trendingLabel = t("trendingLabel")
     const upcomingLabel = t("upcomingLabel")
     const popularMoviesLabel = t("popularMoviesLabel")
     const popularTvLabel = t("popularTvLabel")
-  return (
+    return (
     <>
         <SlideShow>
             {upcoming
@@ -38,7 +40,7 @@ export default function Home({upcoming,upcomingTrailers}:props) {
                     trailer={upcomingTrailers[i]}
                 />)}
         </SlideShow>
-        <div data-theme="light">
+        <div data-theme={theme}>
             <SliderSection title={trendingLabel} speed={450}>
                 <DynamicPosterList
                     mediaType={"movie"}
@@ -60,7 +62,7 @@ export default function Home({upcoming,upcomingTrailers}:props) {
             </SliderSection>
 
         </div>
-        <div data-theme="light">
+        <div data-theme={theme}>
             <SliderSection title={popularMoviesLabel} speed={450}>
                 <DynamicPosterList
                     mediaType={"movie"}
@@ -82,7 +84,7 @@ export default function Home({upcoming,upcomingTrailers}:props) {
         </div>
         <GenreSection/>
     </>
-  )
+    )
 }
 
 const genresLimit = 9;
@@ -90,6 +92,7 @@ const genresLimit = 9;
 function GenreSection(){
     const {t,lang} = useTranslation("home")
     const [genres, setGenres] = useState<typeof MovieGenres>([]);
+    const [theme] = useTheme();
     const [loadMoreRef,inView] = useInView({
         threshold:1,
         rootMargin:"300px",
@@ -113,7 +116,7 @@ function GenreSection(){
             {genres.map((g,i) => {
                 return <div
                     key={`genre-section-${g.id}`}
-                    data-theme={(i % 3 == 0) ? "dark" : "light"}
+                    data-theme={(i % 3 == 0) ? "dark" : theme}
                 >
                     <Section title={g.name} titleAsLink={true} url={`/discover?media=movie&genre=${g.id}`}>
                         <Slider speed={450}>
