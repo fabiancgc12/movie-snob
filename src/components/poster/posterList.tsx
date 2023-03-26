@@ -54,7 +54,7 @@ export function DynamicPosterList({mediaType,api,enabled = true,parameters={},qu
         }
     })
     const [endElementRef] = useInView({
-        threshold:1,
+        threshold:0.5,
         rootMargin:"700px 700px",
         onChange: inView => {
             if (inView)
@@ -93,7 +93,7 @@ export function DynamicPosterList({mediaType,api,enabled = true,parameters={},qu
                 isBackdrop={isBackdrop}
                 fallbackMessage={fallbackMessage}
             />
-            {hasNextPage && media.length > 0 && <div ref={endElementRef} className={"loader"}><Spinner/></div>}
+            {<div ref={endElementRef} className={"loader"}><Spinner/></div>}
         </>
     )
 }
