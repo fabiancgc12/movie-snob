@@ -25,7 +25,7 @@ const spanish:CommonInterface = {
     readMore:"Leer más",
     find:"Buscaste",
     notFoundMovieOrTvMessage:"No hay películas o programas de televisión con ese título.",
-    language:"Español",
+    language:"English",
     notAvailable:"No disponible.",
     theme:"Tema"
 }
