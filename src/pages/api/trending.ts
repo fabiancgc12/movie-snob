@@ -8,6 +8,7 @@ export default async function handler(
   res: NextApiResponse<TrendingResponseInterface>
 ) {
   let page = Number(req?.query.page ?? 1);
-  const data = await getTrending("all",page)
+  let locale = req.query.locale;
+  const data = await getTrending("all",page,locale)
   res.status(200).json(data)
 }
