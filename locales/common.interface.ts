@@ -22,5 +22,6 @@ export interface CommonInterface {
     watchOpening:string,
     readMore:string,
     find:string,
-    notFoundMovieOrTvMessage:string
+    notFoundMovieOrTvMessage:string,
+    language:string
 }

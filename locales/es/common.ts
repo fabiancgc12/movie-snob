@@ -24,7 +24,8 @@ const spanish:CommonInterface = {
     watchOpening:"Ver intro",
     readMore:"Leer más",
     find:"Buscaste",
-    notFoundMovieOrTvMessage:"No hay películas o programas de televisión con ese título."
+    notFoundMovieOrTvMessage:"No hay películas o programas de televisión con ese título.",
+    language:"Lenguaje"
 }
 
 export default spanish

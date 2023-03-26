@@ -40,7 +40,7 @@
     color:var(--primaryDark)
 }
 
-.navigation > .item:last-child{
+.navigation > .item:nth-last-child(2){
     margin-top: auto;
 }
 

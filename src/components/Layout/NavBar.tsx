@@ -2,7 +2,7 @@ import styles from "./NavBar.module.css"
 import {FaBookmark} from "react-icons/fa";
 import {AiFillHeart} from "react-icons/ai";
 import {BiUserCircle} from "react-icons/bi";
-import {MdLocalMovies} from "react-icons/md";
+import {MdLocalMovies,MdLanguage} from "react-icons/md";
 import Link from "next/link";
 import Image from "next/image"
 import logo from "@public/logo.png";
@@ -30,6 +30,12 @@ const navItems = [{
     url:"/discover"
 },
 {
+    icon:<MdLanguage/>,
+    label:"language",
+    url:"/",
+    switchLanguage:true
+},
+{
     icon:<BiUserCircle />,
     label:"user",
     url:"#"
@@ -45,6 +51,10 @@ export function NavBar({className = ""}:props){
         if (show)
             setShow(false)
     })
+
+    //if locale is in spanish then set false (default) if not then set to spanish
+    // const nextLocale = router.locale == "es" ? "en-US" : "es";
+    const nextLocale:string = router.locales?.find(l => l != router.locale) ?? "es"
     return (
         <aside ref={ref} className={`${className} ${styles.aside} ${show ? styles.show : ""}`}>
             <nav className={styles.navigation}>
@@ -58,12 +68,26 @@ export function NavBar({className = ""}:props){
                     return (
                         <div
                             key={`nav-item-${item.label}`}
-                            className={`${styles.item} ${router.pathname == item.url ? styles.active : ""}`}
+                            className={`${styles.item} ${(router.pathname == item.url && !item.switchLanguage) ? styles.active : ""}`}
                         >
-                            <Link href={item.url} className={styles.link}>
-                                {item.icon}
-                                <p className={styles.label}>{label}</p>
-                            </Link>
+                            {
+                                item.switchLanguage
+                                    ? <Link
+                                            href={{
+                                                pathname:router.pathname,
+                                                query:router.query
+                                            }}
+                                            className={styles.link}
+                                            locale={nextLocale}
+                                    >
+                                        {item.icon}
+                                        <p className={styles.label}>{label}</p>
+                                    </Link>
+                                    : <Link href={item.url} className={styles.link}>
+                                        {item.icon}
+                                        <p className={styles.label}>{label}</p>
+                                    </Link>
+                            }
                         </div>
                     )
                 })}
