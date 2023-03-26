@@ -144,6 +144,9 @@ export const getStaticProps:GetStaticProps = async ({locale}) => {
     const queryClient = new QueryClient()
     try {
         const data = await getHomePage(locale)
+        //could delete this prefecths so the stale data persist on the client during navigation
+        // but at the cost of fetching every time the user goes to the home page
+        // for now I prefer this version where the whole home page is delivered to the user
         await queryClient.prefetchInfiniteQuery(["trending",locale],() => data.trending)
         await queryClient.prefetchInfiniteQuery(["popularMovies",locale],() => data.popular.movie)
         await queryClient.prefetchInfiniteQuery(["popularTv",locale],() => data.popular.tv)

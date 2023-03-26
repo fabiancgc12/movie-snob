@@ -13,6 +13,7 @@ export default function App({ Component, pageProps }: AppProps) {
         defaultOptions: {
             queries: {
                 refetchOnWindowFocus: false, // default: true
+                staleTime: 10 * (60 * 1000), // 10 mins
             },
         },
     }))
