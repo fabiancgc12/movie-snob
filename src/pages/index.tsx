@@ -19,7 +19,6 @@ type props = {
     upcomingTrailers:VideoTrailerInterface[]
 
 }
-// TODO add page when there are trouble fetching movie or tv show
 export default function Home({upcoming,upcomingTrailers}:props) {
   const {t,lang} = useTranslation("home");
     const trendingLabel = t("trendingLabel")
@@ -140,16 +139,25 @@ function GenreSection(){
 
 export const getStaticProps:GetStaticProps = async ({locale}) => {
     const queryClient = new QueryClient()
-    const data = await getHomePage(locale)
-    await queryClient.prefetchInfiniteQuery(["trending",locale],() => data.trending)
-    await queryClient.prefetchInfiniteQuery(["popularMovies",locale],() => data.popular.movie)
-    await queryClient.prefetchInfiniteQuery(["popularTv",locale],() => data.popular.tv)
-    return {
-        props: {
-            upcoming:data.upcoming,
-            upcomingTrailers:data.upcomingTrailers,
-            dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
-        },
-        revalidate:1200 //revalidate in 20 minutes
+    try {
+        const data = await getHomePage(locale)
+        await queryClient.prefetchInfiniteQuery(["trending",locale],() => data.trending)
+        await queryClient.prefetchInfiniteQuery(["popularMovies",locale],() => data.popular.movie)
+        await queryClient.prefetchInfiniteQuery(["popularTv",locale],() => data.popular.tv)
+        return {
+            props: {
+                upcoming:data.upcoming,
+                upcomingTrailers:data.upcomingTrailers,
+                dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
+            },
+            revalidate:1200 //revalidate in 20 minutes
+        }
+    } catch (e) {
+        return {
+            props:{},
+            redirect:{
+                destination:`/${locale}/500`,
+            }
+        }
     }
 }
