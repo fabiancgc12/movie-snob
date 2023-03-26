@@ -23,5 +23,6 @@ export interface CommonInterface {
     readMore:string,
     find:string,
     notFoundMovieOrTvMessage:string,
-    language:string
+    language:string,
+    notAvailable:string
 }

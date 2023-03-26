@@ -7,6 +7,7 @@ const english:MovieOrTvInterface = {
     budget: "Budget",
     language: "Original Language",
     overview: "Overview",
+    overviewFallback:"Currently, we do not have a description.",
     production: "Production Company",
     networks:"Networks",
     releaseDate: "Release Date",

@@ -1,5 +1,6 @@
 export interface MovieOrTvInterface {
     overview:string,
+    overviewFallback:string,
     releaseDate:string,
     lastAirDate:string,
     language:string

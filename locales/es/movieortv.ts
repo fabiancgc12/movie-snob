@@ -2,6 +2,7 @@ import {MovieOrTvInterface} from "../movieOrTv.interface";
 
 const spanish:MovieOrTvInterface = {
     castLabel: "Elenco",
+    overviewFallback:"Actualmente, no tenemos una descripción.",
     moreLabel: "Extra",
     availableOn: "Disponible en",
     budget: "Presupuesto",
