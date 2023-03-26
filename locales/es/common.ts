@@ -6,7 +6,7 @@ const spanish:CommonInterface = {
     homeButtonLabel: "Inicio",
     developedby: "Desarrollado por",
     discover: "Descubrir",
-    liked: "Te gustaron",
+    liked: "Favoritos",
     madeusing: "Creado usando la api de:",
     marked: "marcado",
     user: "usuario",
@@ -25,7 +25,7 @@ const spanish:CommonInterface = {
     readMore:"Leer más",
     find:"Buscaste",
     notFoundMovieOrTvMessage:"No hay películas o programas de televisión con ese título.",
-    language:"Lenguaje",
+    language:"Español",
     notAvailable:"No disponible."
 }
 

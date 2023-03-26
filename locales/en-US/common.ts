@@ -25,7 +25,7 @@ const english:CommonInterface = {
     readMore:"Read more",
     find:"You searched for",
     notFoundMovieOrTvMessage:"There are not movies or tv shows with that title.",
-    language:"Language",
+    language:"English",
     notAvailable:"Not available."
 }
 
