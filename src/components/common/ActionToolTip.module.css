@@ -32,7 +32,7 @@
 }
 
 .options::after {
-    border-left: var(--arrowSize) solid whitesmoke;
+    border-left: var(--arrowSize) solid var(--background-color);
     border-top: var(--arrowSize) solid transparent;
     border-bottom: var(--arrowSize) solid transparent;
 }

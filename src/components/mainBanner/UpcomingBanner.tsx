@@ -26,6 +26,8 @@ export function UpcomingBanner({data,trailer}:props) {
     const bigTitleStyle = data.title.length >= 20 ? styles.bigTitle : "";
     const readMore = t("readMore")
     const watchTrailer = t("watchTrailer")
+    const addToBookmark = t("addToBookmark")
+    const addToLiked = t("addToLiked")
     return <div className={`${styles.mainShow} ${placeholderStyle}`} style={bg}>
         <div className={styles.info}>
             <h2 className={bigTitleStyle}>{data.title}</h2>
@@ -43,11 +45,11 @@ export function UpcomingBanner({data,trailer}:props) {
                 <ActionToolTip buttonContent={<BsThreeDotsVertical/>} buttonSize={"sm"}>
                     <div className={styles.option}>
                         <BookmarkButton media={data} mediaType={"movie"} size={"xs"} className={"outline noBorder"}/>
-                        <small>Add to Bookmark</small>
+                        <small>{addToBookmark}</small>
                     </div>
                     <div className={styles.option}>
                         <LikeButton media={data} mediaType={"movie"} size={"xs"} className={"outline noBorder"}/>
-                        <small>Give a like!</small>
+                        <small>{addToLiked}</small>
                     </div>
                 </ActionToolTip>
             </div>

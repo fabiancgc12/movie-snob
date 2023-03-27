@@ -27,7 +27,9 @@ const spanish:CommonInterface = {
     notFoundMovieOrTvMessage:"No hay películas o programas de televisión con ese título.",
     language:"English",
     notAvailable:"No disponible.",
-    theme:"Tema"
+    theme:"Tema",
+    addToBookmark:"Añadir a marcadores",
+    addToLiked:"Añadir a favoritos"
 }
 
 export default spanish

@@ -34,6 +34,11 @@ div[data-theme="light"]{
   background: var(--background-color);
 }
 
+div[data-theme="dark"]{
+  --background-color: var(--primaryColor);
+  background: var(--background-color);
+}
+
 div[data-theme="dark"] .react-loading-skeleton{
   /*overwriting styles of skeletons on theme dark*/
   --base-color:#313131 !important;

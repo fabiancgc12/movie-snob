@@ -25,5 +25,7 @@ export interface CommonInterface {
     notFoundMovieOrTvMessage:string,
     language:string,
     notAvailable:string
-    theme:string
+    theme:string,
+    addToBookmark:string,
+    addToLiked:string
 }
