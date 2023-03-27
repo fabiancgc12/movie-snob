@@ -28,6 +28,7 @@
 
 .track > *:not(.loader) {
     scroll-snap-align: start;
+    align-items: flex-start;
 }
 
 .prevArrow,.nextArrow{
