@@ -16,6 +16,10 @@ export function Footer({className = ""}:props){
         <footer className={`${styles.footer} ${className}`}>
             <div>
                 <p>{developedBy}</p>
+                <a href="https://github.com/fabiancgc12"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                >Fabian Graterol</a>
             </div>
             <div className={styles.tmdbLogo} >
                 {madeUsing}
