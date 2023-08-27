@@ -2,8 +2,10 @@ import {TvShowInterface} from "@/models/tv/TvShow.interface";
 import {MovieInterface} from "@/models/Movies/Movie.interface";
 import {generateUrlPage} from "@/utils/functions/generateUrlPage";
 import {generateImageUrl} from "@/utils/functions/generateImageUrl";
-import Head from "next/head";
 import {PeopleDto} from "@/models/dto/Credit.dto";
+import {NextSeo} from "next-seo";
+import React from "react";
+import Script from "next/script";
 
 type props = {
     cast:PeopleDto[],
@@ -23,29 +25,37 @@ export function ProductHead({media,mediaType,cast,crew}:props){
     const duration = mediaType == "movie" ? media.runtime.toString() : media.episode_run_time?.at(0)?.toString()
     const title = `${mediaTitle} - Movie Snob`;
     const jsonDl = mediaType == "movie" ? movieJsonLd(media,cast,crew) : tvJsonLd(media,cast,crew);
+    const releaseDate = mediaType == "movie" ? media.release_date : media.first_air_date
     return (
-        <Head>
-            <title>{title}</title>
-            <meta property="og:title" content={title} />
-            <meta property="og:description" content={media.overview} />
-            <meta property="og:url" content={generateUrlPage(media,"tv")} />
-            <meta property="og:image" content={generateImageUrl(media.backdrop_path,1280)} />
-            <meta property="og:image:alt" content={`${mediaTitle} poster backdrop`} />
-            <meta property="og:site_name" content="Movie Snob" />
-            <meta property="og:type" content={type} />
-            <meta property="og:locale" content="en_US" />
-            <meta name="twitter:title" content={title} />
-            <meta name="twitter:card" content="summary_large_image" />
-            <meta name="twitter:description" content={media.overview} />
-            <meta name="twitter:image" content={generateImageUrl(media.backdrop_path,1280)} />
-            <meta name="twitter:image:alt" content={`${mediaTitle} poster backdrop`} />
-            <script
+        <>
+            <NextSeo
+                title={title}
+                openGraph={{
+                    title,
+                    description:media.overview,
+                    url:generateUrlPage(media,"tv"),
+                    images:[{
+                        url:generateImageUrl(media.backdrop_path, 1280),
+                        alt:`${mediaTitle} poster backdrop`
+                    }],
+                    siteName:"Movie Snob",
+                    type:type,
+                    locale:"en_US",
+                    video:{
+                        releaseDate:releaseDate,
+                        duration:duration ? Number(duration) : undefined
+                    }
+                }}
+                twitter={{
+                    cardType:"summary_large_image",
+                }}
+            />
+            <Script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={jsonDl}
                 key="item-jsonld"
             />
-            {duration && <meta property="og:video:duration" content={duration} />}
-        </Head>
+        </>
     )
 }
 
