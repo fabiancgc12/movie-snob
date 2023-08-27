@@ -51,6 +51,7 @@ export function ProductHead({media,mediaType,cast,crew}:props){
                 }}
             />
             <Script
+                id="jsonDl"
                 type="application/ld+json"
                 dangerouslySetInnerHTML={jsonDl}
                 key="item-jsonld"
