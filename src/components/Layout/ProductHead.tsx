@@ -26,6 +26,8 @@ export function ProductHead({media,mediaType,cast,crew}:props){
     const title = `${mediaTitle} - Movie Snob`;
     const jsonDl = mediaType == "movie" ? movieJsonLd(media,cast,crew) : tvJsonLd(media,cast,crew);
     const releaseDate = mediaType == "movie" ? media.release_date : media.first_air_date
+    const directors = crew.filter(crew => crew.role.toLowerCase() == 'director')
+    const writers = crew.filter(crew => crew.role.toLowerCase() == 'screenplay')
     return (
         <>
             <NextSeo
@@ -43,8 +45,14 @@ export function ProductHead({media,mediaType,cast,crew}:props){
                     locale:"en_US",
                     video:{
                         releaseDate:releaseDate,
-                        duration:duration ? Number(duration) : undefined
-                    }
+                        duration:duration ? Number(duration) : undefined,
+                        actors: cast.map(actor => ({
+                            profile: actor.name,
+                            role: actor.role
+                        })),
+                        directors: directors.map(director => director.name),
+                        writers: writers.map(writer => writer.name),
+                    },
                 }}
                 twitter={{
                     cardType:"summary_large_image",
