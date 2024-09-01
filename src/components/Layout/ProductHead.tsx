@@ -70,18 +70,15 @@ export function ProductHead({media,mediaType,cast,crew}:props){
 
 function tvJsonLd(show:TvShowInterface,cast:PeopleDto[],crew:PeopleDto[]){
     const productions = show.production_companies || []
+    const [castInfo,itemListElement] = handleCastList(cast)
     const structuredData = {
         '@context': 'https://schema.org',
         '@type': 'TVSeries',
         name: show.name,
         headline: show.tagline,
         description: show.overview,
-        actor: cast.map(a => ({
-            '@type': 'Person',
-            name: a.name,
-            jobTitle:a.role,
-            image:generateImageUrl(a.profile_path)
-        })),
+        itemListElement: itemListElement,
+        actor: castInfo,
         author: crew.map(a => ({
             '@type': 'Person',
             name: a.name,
@@ -106,18 +103,15 @@ function tvJsonLd(show:TvShowInterface,cast:PeopleDto[],crew:PeopleDto[]){
 function movieJsonLd(movie:MovieInterface,cast:PeopleDto[],crew:PeopleDto[]){
     const directors = crew.filter((a) => a.role.toLowerCase() === "director")
     const productions = movie.production_companies || []
+    const [castInfo,itemListElement] = handleCastList(cast)
     const structuredData = {
         '@context': 'https://schema.org',
         '@type': 'Movie',
         name: movie.title,
         headline: movie.tagline,
         description: movie.overview,
-        actor: cast.map(a => ({
-            '@type': 'Person',
-            name: a.name,
-            jobTitle:a.role,
-            image:generateImageUrl(a.profile_path)
-        })),
+        itemListElement: itemListElement,
+        actor: castInfo,
         director:directors.map(d => ({
             '@type': 'Person',
             name: d.name,
@@ -142,4 +136,20 @@ function movieJsonLd(movie:MovieInterface,cast:PeopleDto[],crew:PeopleDto[]){
     return {
         __html: JSON.stringify(structuredData)
     }
+}
+
+function handleCastList(cast: PeopleDto[]){
+    const castInfo = cast.map(a => ({
+        '@type': 'Person',
+        name: a.name,
+        jobTitle:a.role,
+        image:generateImageUrl(a.profile_path)
+    }))
+    const itemList = castInfo.map((cast, index) => ({
+        "@type": "ListItem",
+        position: (index + 1).toString(),
+        item: cast
+    }))
+
+    return [castInfo, itemList]
 }
