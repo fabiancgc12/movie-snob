@@ -1,0 +1,30 @@
+This robots.txt file provides instructions to web crawlers.
+It's a key tool for managing how bots interact with your site.
+To prevent ALL bots from scraping, use the following:
+User-agent: *
+Disallow: /
+This configuration has been updated to be more restrictive, allowing
+only specific, friendly search engine bots to crawl the site.
+Global rule: Disallow all bots by default.
+User-agent: *
+Disallow: /
+
+Explicitly allow Google's crawler.
+User-agent: Googlebot
+Disallow:
+
+Explicitly allow Bing's crawler.
+User-agent: Bingbot
+Disallow:
+
+Explicitly allow DuckDuckGo's crawler.
+User-agent: DuckDuckBot
+Disallow:
+
+Explicitly allow Brave's crawler.
+User-agent: BraveBot
+Disallow:
+
+Direct search engine crawlers to your sitemap for better indexing.
+Replace the URL with the actual path to your sitemap.
+Sitemap: https://www.google.com/search?q=https://www.moviesnob.vercel.app/sitemap.xml
