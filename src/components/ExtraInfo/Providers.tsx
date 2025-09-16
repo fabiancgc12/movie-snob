@@ -13,7 +13,7 @@ export function Providers({providers}:props){
     const availableLabel = t("availableOn")
     const notAvailableMessage = t("notAvailableMessage")
     return (
-        <div className={styles.info}>
+        <div className={`${styles.info} text`}>
             <p>{availableLabel}</p>
             <div className={styles.logos}>
                 {providers.results.US.flatrate && providers.results.US.flatrate.length > 0

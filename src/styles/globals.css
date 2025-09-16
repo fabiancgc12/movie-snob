@@ -169,3 +169,11 @@ button{
 button,[role="button"]{
   padding: .75em 1em;
 }
+
+:root:not([data-theme=dark]) .text, [data-theme=light] .text {
+  color: var(--primaryColor)
+}
+
+:root:not([data-theme=light]) .text, [data-theme=dark] .text {
+  color: var(--color)
+}

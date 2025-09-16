@@ -22,19 +22,19 @@ export function MovieExtraInfo({movie,providers}:props){
     const productionLabel = t("production")
     return (
         <ExtraInfo>
-            <div className={styles.info}>
+            <div className={`${styles.info} text`}>
                 <p>{releaseDateLabel}</p>
                 <FullDate date={movie.release_date} lang={lang}/>
             </div>
-            <div className={styles.info}>
+            <div className={`${styles.info} text`}>
                 <p>{languageLabel}</p>
                 <small className={"alignCenter"}><MdLanguage/>{movie.spoken_languages?.slice(0,4).map(sp => sp.english_name)?.join(", ")}</small>
             </div>
-            <div className={styles.info}>
+            <div className={`${styles.info} text`}>
                 <p>{budgetLabel}</p>
                 <small>{formatCurrency.format(movie.budget)}</small>
             </div>
-            <div className={styles.info}>
+            <div className={`${styles.info} text`}>
                 <p>{productionLabel}</p>
                 <div className={styles.logos}>
                     {movie.production_companies?.map(company => <CompanyLogo
