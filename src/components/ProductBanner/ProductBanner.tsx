@@ -41,6 +41,7 @@ export function MediaBanner({product,trailer,credits,mediaType}:props){
     const videoLabel = mediaType == "movie" ? t("watchTrailer"): t("watchOpening")
     //sorting so the director is always first
     const overviewFallback = t("movieortv:overviewFallback")
+    const overviewTitle = t("movieortv:overview")
     return (
         <section className={styles.header} style={bg}>
             <div className={styles.poster}>
@@ -75,7 +76,7 @@ export function MediaBanner({product,trailer,credits,mediaType}:props){
                     {trailer && <Video video={trailer}><a href={"#"}>{videoLabel}</a></Video>}
                 </div>
                 <div className={styles.overview}>
-                    <h4>Overview</h4>
+                    <h4>{overviewTitle}</h4>
                     <small>{product.overview || overviewFallback}</small>
                 </div>
                 <div className={`${styles.flex}`}>
