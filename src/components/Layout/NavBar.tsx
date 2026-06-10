@@ -7,27 +7,37 @@ import Image from "next/image"
 import logo from "@public/logo.png";
 import {useShowNavBarContext} from "@/global/ShowNavbarContext";
 import useClickOutside from "@/hooks/useClickOutside";
-import {useRef} from "react";
+import {ReactNode, useRef} from "react";
 import {usePathname} from "next/navigation";
-import useTranslation from "next-translate/useTranslation";
+import {useTranslations, useLocale} from "next-intl";
 import {useTheme} from "@/global/ThemeContext";
 
 type props = {
     className?: string
 }
 
+type NavItemType = {
+    icon:ReactNode,
+    label: string
+    url: string
+    switchLanguage?: boolean
+}
+
 const navItems = [{
     icon: <FaBookmark/>,
     label: "marked",
-    url: "/bookmark"
+    url: "/bookmark",
+    switchLanguage: false
 }, {
     icon: <AiFillHeart/>,
     label: "liked",
-    url: "/liked"
+    url: "/liked",
+    switchLanguage: false
 }, {
     icon: <MdLocalMovies/>,
     label: "discover",
-    url: "/discover"
+    url: "/discover",
+    switchLanguage: false
 },
     {
         icon: <MdLanguage/>,
@@ -35,10 +45,11 @@ const navItems = [{
         url: "/",
         switchLanguage: true
     }
-]
+] as const satisfies NavItemType[]
 
 export function NavBar({className = ""}: props) {
-    const {t, lang} = useTranslation('common')
+    const t = useTranslations('common')
+    const locale = useLocale()
     const pathname = usePathname();
     const [show, setShow] = useShowNavBarContext()
     const ref = useRef<HTMLElement>(null)
@@ -47,18 +58,18 @@ export function NavBar({className = ""}: props) {
             setShow(false)
     })
 
-    const nextLocale: string = lang === "es" ? "en-US" : "es"
+    const nextLocale: string = locale === "es" ? "en-US" : "es"
     return (
         <aside ref={ref} className={`${className} ${styles.aside} ${show ? styles.show : ""}`}>
             <nav className={styles.navigation}>
                 <div className={styles.logo}>
-                    <Link href={`/${lang}`} className={styles.link}>
+                    <Link href={`/${locale}`} className={styles.link}>
                         <Image src={logo} alt={"logo"}/>
                     </Link>
                 </div>
                 {navItems.map(item => {
                     const label = t(item.label)
-                    const itemPath = `/${lang}${item.url}`
+                    const itemPath = `/${locale}${item.url}`
                     const isActive = pathname === itemPath || pathname.startsWith(itemPath + "/")
                     return (
                         <div
@@ -91,7 +102,7 @@ export function NavBar({className = ""}: props) {
 
 function SwitchThemeButton() {
     const [theme, setTheme] = useTheme();
-    const {t} = useTranslation("common");
+    const t = useTranslations("common");
     const themeLabel = t("theme")
     return (
         <div className={styles.item}>

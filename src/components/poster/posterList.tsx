@@ -9,7 +9,7 @@ import {Spinner} from "@/components/common/Spinner";
 import {useInView} from "react-intersection-observer";
 import {MediaType} from "@/models/MediaType";
 import styles from "./list.module.css"
-import useTranslation from "next-translate/useTranslation";
+import {useTranslations, useLocale} from "next-intl";
 
 export type props = {
     media:PosterType[],
@@ -38,7 +38,8 @@ type posterlist = {
 }
 
 export function DynamicPosterList({mediaType,api,enabled = true,parameters={},queryKey,isBackdrop,fallbackMessage}:posterlist){
-    const {t,lang} = useTranslation("common")
+    const t = useTranslations("common")
+    const locale = useLocale()
     if (!parameters.page)
         parameters.page = 1
     let {data,hasNextPage,isFetching,isFetchingNextPage,fetchNextPage,refetch,error,isError,isLoadingError,isRefetchError} = useInfiniteQuery<PopularMovieResponse | PopularTvShowResponse | TrendingResponseInterface>({
@@ -46,7 +47,7 @@ export function DynamicPosterList({mediaType,api,enabled = true,parameters={},qu
         enabled:enabled,
         queryFn: ({pageParam}) => {
             parameters.page = pageParam ?? parameters.page
-            parameters.locale = lang
+            parameters.locale = locale
             const params = new URLSearchParams(parameters).toString();
             return fetch(`/api/${api}?${params}`).then(v => v.json())
         },

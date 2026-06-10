@@ -1,7 +1,7 @@
 import {Section} from "@/components/Section/Section";
 import Link from "next/link";
 import styles from "./notFound.module.css"
-import useTranslation from "next-translate/useTranslation";
+import {useTranslations} from "next-intl";
 import {useTheme} from "@/global/ThemeContext";
 import {useLang} from "@/hooks/useLang";
 
@@ -10,7 +10,7 @@ type props = {
 }
 
 export function ErrorPageComponent({title}: props) {
-    const {t} = useTranslation("common");
+    const t = useTranslations("common");
     const [theme] = useTheme();
     const lang = useLang()
     const homeLabel = t("homeButtonLabel")

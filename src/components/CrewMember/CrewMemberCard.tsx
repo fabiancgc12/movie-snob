@@ -5,7 +5,7 @@ import Image from "next/image";
 import {generateImageUrl} from "@/utils/functions/generateImageUrl";
 import placeholder from "../../../public/noPhotographyPlaceholder.svg"
 import {PeopleDto} from "@/models/dto/Credit.dto";
-import useTranslation from "next-translate/useTranslation";
+import {useTranslations} from "next-intl";
 
 type props = {
     size:"sm" | "md",
@@ -15,7 +15,7 @@ type props = {
 }
 
 export function MemberCard({people,size,shadow = true}:props){
-    const {t} = useTranslation("movieortv")
+    const t = useTranslations("movieortv")
     let sizeStyle = size == "sm" ? styles.small : styles.medium;
     let shadowStyle = !shadow ? styles.noShadow : "";
     const image = people.profile_path ? generateImageUrl(people.profile_path) : placeholder;

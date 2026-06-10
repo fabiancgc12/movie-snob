@@ -1,9 +1,9 @@
 "use client"
 
 import {ErrorPageComponent} from "@/components/notFound/ErrorPageComponent";
-import useTranslation from "next-translate/useTranslation";
+import {useTranslations} from "next-intl";
 
 export default function TvNotFoundPage() {
-    const {t} = useTranslation("movieortv")
+    const t = useTranslations("movieortv")
     return <ErrorPageComponent title={t("tvNotFoundErrorMessage")}/>
 }

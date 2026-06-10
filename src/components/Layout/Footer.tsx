@@ -3,7 +3,7 @@
 import styles from "./Footer.module.css"
 import imdbLogo from "../../../public/tmdb.svg"
 import Image from "next/image"
-import useTranslation from "next-translate/useTranslation";
+import {useTranslations} from "next-intl";
 
 type props = {
     className?:string
@@ -11,7 +11,7 @@ type props = {
 
 export function Footer({className = ""}:props){
 
-    const { t } = useTranslation('common')
+    const t = useTranslations('common')
     const developedBy = t("developedby")
     const madeUsing = t("madeusing")
     return (

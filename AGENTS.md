@@ -12,13 +12,13 @@ Compact instructions for working on the `movie-snob` repository.
 - this projects uses pnpm
 
 ## Architecture & Conventions
-- **Framework:** Next.js (Pages Router).
+- **Framework:** Next.js (App Router).
 - **Styling:** CSS Modules (`*.module.css`).
 - **Data Fetching:** TanStack Query (`@tanstack/react-query`).
 - **Components:** Organized in `src/components`. Functional components with associated CSS modules.
 - **Models & Types:** Defined in `src/models` using interfaces.
 - **Services:** API wrappers in `src/services` mapping to `src/pages/api`.
-- **Localization:** `next-translate` (see `next-translate-plugin` in `package.json`).
+- **Localization:** `next-intl` (see `src/i18n/` directory).
 
 ## Operational Notes
 - This is a standard Next.js application structure using the Pages router.

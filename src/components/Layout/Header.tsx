@@ -6,21 +6,22 @@ import Image from "next/image"
 import wideLogo from "@public/logo-wide.png"
 import Link from "next/link";
 import {useRouter, useSearchParams} from "next/navigation";
-import useTranslation from 'next-translate/useTranslation'
+import {useTranslations, useLocale} from "next-intl";
 
 type props = {
     className?: string
 }
 
 export function Header({className = ""}: props) {
-    const {t, lang} = useTranslation('common')
+    const t = useTranslations('common')
+    const locale = useLocale()
     const [showNavBar, setShowNavBar] = useShowNavBarContext()
     const searchRef = useRef<HTMLInputElement>(null);
     const router = useRouter()
     const onSubmit = (e: FormEvent) => {
         e.preventDefault();
         if (searchRef.current?.value)
-            router.push(`/${lang}/search?title=${encodeURIComponent(searchRef.current.value)}`)
+            router.push(`/${locale}/search?title=${encodeURIComponent(searchRef.current.value)}`)
     }
     const placeholder = t("searchPlaceHolder")
     return (
@@ -32,7 +33,7 @@ export function Header({className = ""}: props) {
                 <CiMenuBurger size={20}/>
             </button>
             <div className={styles.logo}>
-                <Link href={`/${lang}`} className={styles.link}>
+                <Link href={`/${locale}`} className={styles.link}>
                     <Image src={wideLogo} alt={"wide logo"} fill/>
                 </Link>
             </div>

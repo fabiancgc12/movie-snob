@@ -6,23 +6,17 @@ import {useEffect, useState} from "react";
 import {ProductStore, StoreProductType} from "@/components/common/ActionButton/useCheckedButton";
 import {bookmarkStoreKey} from "@/components/common/ActionButton/chechMarkButton";
 import {PosterGrid} from "@/components/poster/PosterGrid";
-import {SkeletonCard} from "@/components/poster/posterCard";
-import {Tab, Tabs, TabList, TabPanel} from "react-tabs";
-import useTranslation from "next-translate/useTranslation";
+import {Tab, TabList, TabPanel, Tabs} from "react-tabs";
+import {useTranslations} from "next-intl";
 import {useTheme} from "@/global/ThemeContext";
-
-export const defaultPosters = [
-    <SkeletonCard key={"default-card-1"}/>,
-    <SkeletonCard key={"default-card-2"}/>,
-    <SkeletonCard key={"default-card-3"}/>,
-    <SkeletonCard key={"default-card-4"}/>
-]
+import {defaultPosters} from "@/app/[lang]/_components/defaultPosters";
 
 export default function BookMarkPage() {
     const [movies, setMovies] = useState<StoreProductType[]>([]);
     const [tv, setTv] = useState<StoreProductType[]>([]);
     const [ready, setReady] = useState(false);
-    const {t} = useTranslation("likedorbookmark")
+    const t = useTranslations("likedorbookmark")
+    const commonT = useTranslations("common")
     const [theme] = useTheme();
     useEffect(() => {
         const store = localStorage.getItem(bookmarkStoreKey)
@@ -34,29 +28,23 @@ export default function BookMarkPage() {
         setReady(true)
     }, []);
 
-    const title = t("bookmarkTitle")
-    const movieFallback = t("fallbackMovieMessage")
-    const movieLabel = t("common:mediaMovie")
-    const tvFallback = t("fallbackTvMessage")
-    const tvLabel = t("common:mediaTv")
-
     return (
         <div data-theme={theme} className={"full-h"}>
-            <Section title={title}>
+            <Section title={t("bookmarkTitle")}>
                 <Tabs>
                     <TabList>
-                        <Tab>{movieLabel}</Tab>
-                        <Tab>{tvLabel}</Tab>
+                        <Tab>{commonT("mediaMovie")}</Tab>
+                        <Tab>{commonT("mediaTv")}</Tab>
                     </TabList>
                     <TabPanel>
                         {ready
-                            ? <PosterGrid><PosterList media={movies} mediaType={"movie"} fallbackMessage={movieFallback}/></PosterGrid>
+                            ? <PosterGrid><PosterList media={movies} mediaType={"movie"} fallbackMessage={t("fallbackMovieMessage")}/></PosterGrid>
                             : <PosterGrid>{defaultPosters}</PosterGrid>
                         }
                     </TabPanel>
                     <TabPanel>
                         {ready
-                            ? <PosterGrid><PosterList media={tv} mediaType={"tv"} fallbackMessage={tvFallback}/></PosterGrid>
+                            ? <PosterGrid><PosterList media={tv} mediaType={"tv"} fallbackMessage={t("fallbackTvMessage")}/></PosterGrid>
                             : <PosterGrid>{defaultPosters}</PosterGrid>
                         }
                     </TabPanel>

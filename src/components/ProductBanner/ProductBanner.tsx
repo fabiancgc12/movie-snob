@@ -16,7 +16,7 @@ import {PeopleDto} from "@/models/dto/Credit.dto";
 import {generateUrlPage} from "@/utils/functions/generateUrlPage";
 import {CSSProperties, useMemo} from "react";
 import Link from "next/link";
-import useTranslation from "next-translate/useTranslation";
+import {useTranslations} from "next-intl";
 import {useLang} from "@/hooks/useLang";
 
 type props = {
@@ -31,7 +31,8 @@ type props = {
 })
 
 export function MediaBanner({product, trailer, credits, mediaType}: props) {
-    const {t} = useTranslation("common")
+    const t = useTranslations("movieortv")
+    const commonT = useTranslations("common")
     const lang = useLang()
     const bg = useMemo(() => ({
         "--bgImage": `url(${generateImageUrl(product.backdrop_path, 1280)})`
@@ -40,10 +41,8 @@ export function MediaBanner({product, trailer, credits, mediaType}: props) {
     const posterPath = generateImageUrl(product.poster_path);
     const title = mediaType == "movie" ? product.title : product.name
     const titleSize = title.length > 20 ? styles.titleSmall : "";
-    const videoLabel = mediaType == "movie" ? t("watchTrailer") : t("watchOpening")
+    const videoLabel = mediaType == "movie" ? commonT("watchTrailer") : commonT("watchOpening")
     //sorting so the director is always first
-    const overviewFallback = t("movieortv:overviewFallback")
-    const overviewTitle = t("movieortv:overview")
     return (
         <section className={styles.header} style={bg}>
             <div className={styles.poster}>
@@ -79,8 +78,8 @@ export function MediaBanner({product, trailer, credits, mediaType}: props) {
                     {trailer && <Video video={trailer}><a href={"#"}>{videoLabel}</a></Video>}
                 </div>
                 <div className={styles.overview}>
-                    <h4>{overviewTitle}</h4>
-                    <small>{product.overview || overviewFallback}</small>
+                    <h4>{t("overview")}</h4>
+                    <small>{product.overview || t("overviewFallback")}</small>
                 </div>
                 <div className={`${styles.flex}`}>
                     <Average value={product.vote_average}/>

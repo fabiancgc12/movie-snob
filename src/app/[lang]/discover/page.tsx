@@ -8,13 +8,15 @@ import {MediaType} from "@/models/MediaType";
 import {ChangeEvent, useCallback} from "react";
 import {MovieGenres, MovieGenresSpanish, TvGenres, TvGenresSpanish} from "@/utils/movieGenres";
 import styles from "@/styles/pages/discover.module.css";
-import useTranslation from "next-translate/useTranslation";
+import {useTranslations, useLocale} from "next-intl";
 import {useTheme} from "@/global/ThemeContext";
 
 export default function DiscoverPage() {
     const router = useRouter();
     const searchParams = useSearchParams()
-    const {t, lang} = useTranslation("discover");
+    const commonT = useTranslations("common");
+    const t = useTranslations("discover");
+    const locale = useLocale();
     const [theme] = useTheme();
 
     const media = (searchParams.get("media") as MediaType) ?? "movie";
@@ -46,36 +48,32 @@ export default function DiscoverPage() {
     }
 
     let apiRoute = "discoverMovies"
-    let genres = lang == "es" ? MovieGenresSpanish : MovieGenres
+    let genres = locale == "es" ? MovieGenresSpanish : MovieGenres
     let fallbackMessage = t("movieFallback")
     if (media == "tv") {
         apiRoute = "discoverTv"
-        genres = lang == "es" ? TvGenresSpanish : TvGenres
+        genres = locale == "es" ? TvGenresSpanish : TvGenres
         fallbackMessage = t("tvFallback")
     }
-    const title = t("discoverPageTitle")
-    const movieLabel = t("common:mediaMovie")
-    const tvLabel = t("common:mediaTv")
-    const allLabel = t("allOption")
     return (
         <>
             <form className={styles.form}>
                 <select value={media} onChange={handleMediaChange} name={"media"}>
-                    <option value={"movie"}>{movieLabel}</option>
-                    <option value={"tv"}>{tvLabel}</option>
+                    <option value={"movie"}>{commonT("mediaMovie")}</option>
+                    <option value={"tv"}>{commonT("mediaTv")}</option>
                 </select>
                 <select value={genre} onChange={handleGenreChange} name={"genre"}>
-                    <option value={""}>{allLabel}</option>
+                    <option value={""}>{t("allOption")}</option>
                     {genres.map(g => <option value={g.id} key={`${media}-genre-${g.id}`}>{g.name}</option>)}
                 </select>
             </form>
             <div data-theme={theme} className={"full-h"}>
-                <Section title={title}>
+                <Section title={t("discoverPageTitle")}>
                     <PosterGrid>
                         <DynamicPosterList
                             mediaType={media}
                             api={apiRoute}
-                            queryKey={[apiRoute, media, genre, lang]}
+                            queryKey={[apiRoute, media, genre, locale]}
                             parameters={{media: media, genre: genre}}
                             enabled={true}
                             fallbackMessage={fallbackMessage}

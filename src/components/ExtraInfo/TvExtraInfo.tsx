@@ -10,7 +10,7 @@ import {FullDate} from "@/components/common/FullDate";
 import React from "react";
 import {SiStatuspal} from "react-icons/si";
 import { MdLanguage } from "react-icons/md";
-import useTranslation from "next-translate/useTranslation";
+import {useTranslations} from "next-intl";
 
 type props = {
     show:TvShowInterface,
@@ -18,7 +18,7 @@ type props = {
 }
 
 export function TvExtraInfo({show,providers}:props){
-    const {t} = useTranslation("movieortv")
+    const t = useTranslations("movieortv")
     const releaseDateLabel = t("releaseDate")
     const languageLabel = t("language")
     const networksLabel = t("networks")

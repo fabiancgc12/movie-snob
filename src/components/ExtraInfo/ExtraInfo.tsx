@@ -3,14 +3,14 @@
 import {Section} from "@/components/Section/Section";
 import styles from "./ExtraInfo.module.css"
 import {ReactNode} from "react";
-import useTranslation from "next-translate/useTranslation";
+import {useTranslations} from "next-intl";
 
 type props = {
     children:ReactNode
 }
 
 export function ExtraInfo({children}:props){
-    const {t} = useTranslation("movieortv");
+    const t = useTranslations("movieortv");
     return (
         <Section title={t("moreLabel")}>
             <div className={styles.wrapper}>

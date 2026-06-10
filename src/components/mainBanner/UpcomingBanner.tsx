@@ -10,7 +10,7 @@ import {BsThreeDotsVertical} from "react-icons/bs";
 import {FullDate} from "@/components/common/FullDate";
 import {VideoTrailerInterface} from "@/models/Movies/VideoMedia.interface";
 import {Video} from "@/components/Video/Video";
-import useTranslation from "next-translate/useTranslation";
+import {useTranslations, useLocale} from "next-intl";
 import {useLang} from "@/hooks/useLang";
 
 type props = {
@@ -19,7 +19,8 @@ type props = {
 }
 
 export function UpcomingBanner({data, trailer}: props) {
-    const {t, lang} = useTranslation("common");
+    const t = useTranslations("common");
+    const locale = useLocale();
     const langPrefix = useLang();
     const bg = useMemo(() => ({
         "--bgImage": `url(${generateImageUrl(data.backdrop_path, 1280)})`
@@ -33,7 +34,7 @@ export function UpcomingBanner({data, trailer}: props) {
     return <div className={`${styles.mainShow} ${placeholderStyle}`} style={bg}>
         <div className={styles.info}>
             <h2 className={bigTitleStyle}>{data.title}</h2>
-            <FullDate date={data.release_date} lang={lang}/>
+            <FullDate date={data.release_date} lang={locale}/>
             <div className={styles.buttons}>
                 <Link className={"contrast"} role="button"
                       href={`/${langPrefix}/movie/${data.id}`}>{readMore}</Link>

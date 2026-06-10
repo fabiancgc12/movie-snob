@@ -9,19 +9,20 @@ import {VideoThumbnail} from "@/components/Video/VideoThumbnail";
 import {Section} from "@/components/Section/Section";
 import {Slider} from "@/components/Slider/Slider";
 import {SliderSection} from "@/components/Slider/SliderSection";
-import useTranslation from "next-translate/useTranslation";
+import {useTranslations} from "next-intl";
 
 type props = {
     videos:VideoTrailerInterface[],
     images:ImageMediaResponse
 }
 export function Media({videos,images}:props){
-    const {t} = useTranslation("common");
+    const t = useTranslations("common");
+    const movieOrTvT = useTranslations("movieortv");
     const backdrops = images.backdrops.slice(0,9);
-    const movieFallBackMessage = t("movieortv:noMediaFallbackMessage",{
+    const movieFallBackMessage = movieOrTvT("noMediaFallbackMessage",{
         media:t("videosLabel").toLowerCase()
     })
-    const tvFallBackMessage = t("movieortv:noMediaFallbackMessage",{
+    const tvFallBackMessage = movieOrTvT("noMediaFallbackMessage",{
         media:t("imagesLabel").toLowerCase()
     })
 

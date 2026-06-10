@@ -6,16 +6,16 @@ import {useEffect, useState} from "react";
 import {ProductStore, StoreProductType} from "@/components/common/ActionButton/useCheckedButton";
 import {PosterGrid} from "@/components/poster/PosterGrid";
 import {Tab, Tabs, TabList, TabPanel} from "react-tabs";
-import {defaultPosters} from "@/app/[lang]/bookmark/page";
 import {likedStoreKey} from "@/components/common/ActionButton/LikeButton";
-import useTranslation from "next-translate/useTranslation";
+import {useTranslations} from "next-intl";
 import {useTheme} from "@/global/ThemeContext";
+import {defaultPosters} from "@/app/[lang]/_components/defaultPosters";
 
 export default function LikedPage() {
     const [movies, setMovies] = useState<StoreProductType[]>([]);
     const [tv, setTv] = useState<StoreProductType[]>([]);
     const [ready, setReady] = useState(false);
-    const {t} = useTranslation("likedorbookmark")
+    const t = useTranslations("likedorbookmark")
     const [theme] = useTheme();
 
     useEffect(() => {

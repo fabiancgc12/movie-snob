@@ -3,12 +3,13 @@
 import {Section} from "@/components/Section/Section";
 import {PosterGrid} from "@/components/poster/PosterGrid";
 import {DynamicPosterList} from "@/components/poster/posterList";
-import useTranslation from "next-translate/useTranslation";
+import {useTranslations, useLocale} from "next-intl";
 import {useTheme} from "@/global/ThemeContext";
 import {useSearchParams} from "next/navigation";
 
 export default function FindPage() {
-    const {t, lang} = useTranslation("common")
+    const t = useTranslations("common")
+    const locale = useLocale()
     const [theme] = useTheme();
     const searchParams = useSearchParams()
     const title = searchParams.get("title") ?? undefined
@@ -20,7 +21,7 @@ export default function FindPage() {
                     <DynamicPosterList
                         mediaType={"movie"}
                         api={"search"}
-                        queryKey={["search", title, lang]}
+                        queryKey={["search", title, locale]}
                         parameters={{title}}
                         enabled={!!title}
                         fallbackMessage={t("notFoundMovieOrTvMessage")}

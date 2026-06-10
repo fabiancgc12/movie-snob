@@ -1,10 +1,10 @@
 "use client"
 
 import {ErrorPageComponent} from "@/components/notFound/ErrorPageComponent";
-import useTranslation from "next-translate/useTranslation";
+import {useTranslations} from "next-intl";
 
 export default function Error() {
-    const {t} = useTranslation("common");
+    const t = useTranslations("common");
     const title = t("serverErrorTitle")
     return <ErrorPageComponent title={title}/>
 }

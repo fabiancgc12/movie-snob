@@ -7,7 +7,7 @@ import Image from "next/image";
 import {generateImageUrl} from "@/utils/functions/generateImageUrl";
 import React, {ChangeEvent, useEffect, useState} from "react";
 import {formatYearDate} from "@/utils/functions/formatYearDate";
-import useTranslation from "next-translate/useTranslation";
+import {useTranslations} from "next-intl";
 
 
 type props = {
@@ -15,7 +15,7 @@ type props = {
 }
 
 export function SeasonsList({seasons}:props){
-    const {t} = useTranslation("movieortv")
+    const t = useTranslations("movieortv")
     const [selectedId,setSelectedId] = useState(seasons?.at(-1)?.id ?? 0 )
     useEffect(() => {
         setSelectedId(seasons?.at(-1)?.id ?? 0 )
@@ -40,7 +40,7 @@ type seasonComponentProp= {
     season:SeasonsEntity
 }
 function Season({season}:seasonComponentProp){
-    const {t} = useTranslation("movieortv")
+    const t = useTranslations("movieortv")
     const airedOnLabel = t("airedOnLabel")
     const notAnnouncedLabel = t("notAnnounced")
     const episodesLabel = t("episodes")

@@ -1,4 +1,5 @@
 allowBuilds:
-  next-translate-plugin: true
+  '@parcel/watcher': true
+  '@swc/core': true
   sharp: true
   unrs-resolver: true

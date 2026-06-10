@@ -3,15 +3,14 @@
 import styles from "@/components/ExtraInfo/ExtraInfo.module.css";
 import {ProvidersDto} from "@/models/dto/ProvidersDto";
 import {CompanyLogo} from "@/components/ExtraInfo/CompanyLogo";
-import useTranslation from "next-translate/useTranslation";
-import Trans from "next-translate/Trans";
+import {useTranslations} from "next-intl";
 
 type props = {
     providers:ProvidersDto
 }
 
 export function Providers({providers}:props){
-    const {t} = useTranslation("movieortv");
+    const t = useTranslations("movieortv");
     const availableLabel = t("availableOn")
     const notAvailableMessage = t("notAvailableMessage")
     return (
@@ -25,14 +24,7 @@ export function Providers({providers}:props){
                         logo_path={st.logo_path}
                     />)
                     : <div><small>{notAvailableMessage}</small></div>}
-                <small>
-                    <Trans
-                        i18nKey={"movieortv:justWatchMessage"}
-                        components={{
-                            a: <a href={"https://www.justwatch.com/"}/>
-                        }}
-                    />
-                </small>
+                <small>{t.rich("justWatchMessage", {a: (chunks) => <a href="https://www.justwatch.com/">{chunks}</a>})}</small>
             </div>
         </div>
     )

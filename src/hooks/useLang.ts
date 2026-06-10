@@ -1,8 +1,5 @@
 "use client"
-
-import {useParams} from "next/navigation";
-
+import {useLocale} from "next-intl";
 export function useLang(): string {
-    const params = useParams()
-    return (params?.lang as string) ?? "en-US"
+    return useLocale();
 }

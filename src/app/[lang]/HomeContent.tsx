@@ -11,7 +11,7 @@ import {MovieGenres, MovieGenresSpanish} from "@/utils/movieGenres";
 import {SliderSection} from "@/components/Slider/SliderSection";
 import styles from "@/styles/pages/index.module.css";
 import {VideoTrailerInterface} from "@/models/Movies/VideoMedia.interface";
-import useTranslation from "next-translate/useTranslation";
+import {useTranslations, useLocale} from "next-intl";
 import {Section} from "@/components/Section/Section";
 import {Slider} from "@/components/Slider/Slider";
 import {useTheme} from "@/global/ThemeContext";
@@ -24,7 +24,8 @@ type props = {
 }
 
 export function HomeContent({upcoming, upcomingTrailers}: props) {
-    const {t, lang} = useTranslation("home");
+    const t = useTranslations("home");
+    const locale = useLocale();
     const [theme] = useTheme();
     const trendingLabel = t("trendingLabel")
     const upcomingLabel = t("upcomingLabel")
@@ -47,7 +48,7 @@ export function HomeContent({upcoming, upcomingTrailers}: props) {
                         mediaType={"movie"}
                         enabled={false}
                         api={"trending"}
-                        queryKey={["trending", lang]}
+                        queryKey={["trending", locale]}
                         fallbackMessage={"There are not trending movies."}
                     />
                 </SliderSection>
@@ -69,7 +70,7 @@ export function HomeContent({upcoming, upcomingTrailers}: props) {
                         mediaType={"movie"}
                         enabled={false}
                         api={"popularMovies"}
-                        queryKey={["popularMovies", lang]}
+                        queryKey={["popularMovies", locale]}
                         fallbackMessage={"There are not popular movies."}
                     />
                 </SliderSection>
@@ -78,7 +79,7 @@ export function HomeContent({upcoming, upcomingTrailers}: props) {
                         mediaType={"tv"}
                         enabled={false}
                         api={"popularTv"}
-                        queryKey={["popularTv", lang]}
+                        queryKey={["popularTv", locale]}
                         fallbackMessage={"There are not popular tv shows."}
                     />
                 </SliderSection>
@@ -91,7 +92,8 @@ export function HomeContent({upcoming, upcomingTrailers}: props) {
 const genresLimit = 9;
 
 function GenreSection() {
-    const {t, lang} = useTranslation("home")
+    const t = useTranslations("home")
+    const locale = useLocale()
     const [genres, setGenres] = useState<typeof MovieGenres>([]);
     const [theme] = useTheme();
     const langPrefix = useLang();
@@ -101,7 +103,7 @@ function GenreSection() {
     });
     useEffect(() => {
         if (inView) {
-            const langGenres = lang == "es" ? MovieGenresSpanish : MovieGenres;
+            const langGenres = locale == "es" ? MovieGenresSpanish : MovieGenres;
             setGenres(current => {
                 if (langGenres.length > current.length && current.length <= (genresLimit - 1)) {
                     return langGenres.slice(0, current.length + 3)
@@ -109,7 +111,7 @@ function GenreSection() {
                 return [...current]
             })
         }
-    }, [inView, lang]);
+    }, [inView, locale]);
 
     const noMovies = t("noMovies")
 
@@ -130,7 +132,7 @@ function GenreSection() {
                                     genre: g.id
                                 }}
                                 isBackdrop={i % 3 == 0}
-                                queryKey={["discoverMovies", "movie", g.id.toString(), lang]}
+                                queryKey={["discoverMovies", "movie", g.id.toString(), locale]}
                                 fallbackMessage={noMovies}
                             />
                         </Slider>

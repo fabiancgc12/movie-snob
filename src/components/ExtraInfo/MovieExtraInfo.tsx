@@ -9,7 +9,7 @@ import {ProvidersDto} from "@/models/dto/ProvidersDto";
 import {CompanyLogo} from "@/components/ExtraInfo/CompanyLogo";
 import {FullDate} from "@/components/common/FullDate";
 import { MdLanguage } from "react-icons/md";
-import useTranslation from "next-translate/useTranslation";
+import {useTranslations, useLocale} from "next-intl";
 
 type props = {
     movie:MovieInterface,
@@ -17,7 +17,8 @@ type props = {
 }
 
 export function MovieExtraInfo({movie,providers}:props){
-    const {t,lang} = useTranslation("movieortv");
+    const t = useTranslations("movieortv");
+    const locale = useLocale();
     const releaseDateLabel = t("releaseDate")
     const languageLabel = t("language")
     const budgetLabel = t("budget")
@@ -26,7 +27,7 @@ export function MovieExtraInfo({movie,providers}:props){
         <ExtraInfo>
             <div className={`${styles.info} text`}>
                 <p>{releaseDateLabel}</p>
-                <FullDate date={movie.release_date} lang={lang}/>
+                <FullDate date={movie.release_date} lang={locale}/>
             </div>
             <div className={`${styles.info} text`}>
                 <p>{languageLabel}</p>
