@@ -1,24 +1,23 @@
-.form{
-    display:flex;
-    gap: 20px;
-    align-items: center;
-    padding: 1em;
-    margin:0;
-    /*background: hsl(240, 2%, 16%);*/
-    /*background: var(--primaryDarker)*/
-    /*box-shadow: 0 10px 10px 10px var(--primaryDark);*/
+.form {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  padding: 1em;
+  margin: 0;
+  /*background: hsl(240, 2%, 16%);*/
+  /*background: var(--primaryDarker)*/
+  /*box-shadow: 0 10px 10px 10px var(--primaryDark);*/
 }
 
-.form > *{
-    width: 100%;
-    padding: .25em;
-    margin: 0;
+.form > * {
+  width: 100%;
+  padding: 0.25em;
+  margin: 0;
 }
 
 /*big screen*/
-@media screen and (min-width: 768px){
-
-    .form > *{
-        width: 25%;
-    }
+@media screen and (min-width: 768px) {
+  .form > * {
+    width: 25%;
+  }
 }

@@ -1,62 +1,92 @@
 import styles from "./banner.module.css";
 import Link from "next/link";
-import {generateImageUrl} from "@/utils/functions/generateImageUrl";
-import {CSSProperties, useMemo} from "react";
-import {ActionToolTip} from "@/components/common/ActionToolTip";
-import {BookmarkButton} from "@/components/common/ActionButton/chechMarkButton";
-import {MovieResumeInterface} from "@/models/Movies/MovieResume.interface";
-import {LikeButton} from "@/components/common/ActionButton/LikeButton";
-import {BsThreeDotsVertical} from "react-icons/bs";
-import {FullDate} from "@/components/common/FullDate";
-import {VideoTrailerInterface} from "@/models/Movies/VideoMedia.interface";
-import {Video} from "@/components/Video/Video";
-import {useTranslations, useLocale} from "next-intl";
-import {useLang} from "@/hooks/useLang";
+import { generateImageUrl } from "@/utils/functions/generateImageUrl";
+import { CSSProperties, useMemo } from "react";
+import { ActionToolTip } from "@/components/common/ActionToolTip";
+import { BookmarkButton } from "@/components/common/ActionButton/chechMarkButton";
+import { MovieResumeInterface } from "@/models/Movies/MovieResume.interface";
+import { LikeButton } from "@/components/common/ActionButton/LikeButton";
+import { BsThreeDotsVertical } from "react-icons/bs";
+import { FullDate } from "@/components/common/FullDate";
+import { VideoTrailerInterface } from "@/models/Movies/VideoMedia.interface";
+import { Video } from "@/components/Video/Video";
+import { useTranslations, useLocale } from "next-intl";
+import { useLang } from "@/hooks/useLang";
 
 type props = {
-    data: MovieResumeInterface,
-    trailer?: VideoTrailerInterface
-}
+  data: MovieResumeInterface;
+  trailer?: VideoTrailerInterface;
+};
 
-export function UpcomingBanner({data, trailer}: props) {
-    const t = useTranslations("common");
-    const locale = useLocale();
-    const langPrefix = useLang();
-    const bg = useMemo(() => ({
-        "--bgImage": `url(${generateImageUrl(data.backdrop_path, 1280)})`
-    }) as CSSProperties, [data]);
-    const placeholderStyle = data.backdrop_path ? "" : `${styles.placeholderBanner} placeholderImage`;
-    const bigTitleStyle = data.title.length >= 20 ? styles.bigTitle : "";
-    const readMore = t("readMore")
-    const watchTrailer = t("watchTrailer")
-    const addToBookmark = t("addToBookmark")
-    const addToLiked = t("addToLiked")
-    return <div className={`${styles.mainShow} ${placeholderStyle}`} style={bg}>
-        <div className={styles.info}>
-            <h2 className={bigTitleStyle}>{data.title}</h2>
-            <FullDate date={data.release_date} lang={locale}/>
-            <div className={styles.buttons}>
-                <Link className={"contrast"} role="button"
-                      href={`/${langPrefix}/movie/${data.id}`}>{readMore}</Link>
-                {trailer &&
-                    <Video video={trailer}><a className={"contrast outline"} href={"#"} role="button">{watchTrailer}</a></Video>
-                }
-            </div>
-            <p>
-                <small>{data.overview}</small>
-            </p>
-            <div className={styles.actions}>
-                <ActionToolTip buttonContent={<BsThreeDotsVertical/>} buttonSize={"sm"}>
-                    <div className={styles.option}>
-                        <BookmarkButton media={data} mediaType={"movie"} size={"xs"} className={"outline noBorder"}/>
-                        <small>{addToBookmark}</small>
-                    </div>
-                    <div className={styles.option}>
-                        <LikeButton media={data} mediaType={"movie"} size={"xs"} className={"outline noBorder"}/>
-                        <small>{addToLiked}</small>
-                    </div>
-                </ActionToolTip>
-            </div>
+export function UpcomingBanner({ data, trailer }: props) {
+  const t = useTranslations("common");
+  const locale = useLocale();
+  const langPrefix = useLang();
+  const bg = useMemo(
+    () =>
+      ({
+        "--bgImage": `url(${generateImageUrl(data.backdrop_path, 1280)})`,
+      }) as CSSProperties,
+    [data],
+  );
+  const placeholderStyle = data.backdrop_path
+    ? ""
+    : `${styles.placeholderBanner} placeholderImage`;
+  const bigTitleStyle = data.title.length >= 20 ? styles.bigTitle : "";
+  const readMore = t("readMore");
+  const watchTrailer = t("watchTrailer");
+  const addToBookmark = t("addToBookmark");
+  const addToLiked = t("addToLiked");
+  return (
+    <div className={`${styles.mainShow} ${placeholderStyle}`} style={bg}>
+      <div className={styles.info}>
+        <h2 className={bigTitleStyle}>{data.title}</h2>
+        <FullDate date={data.release_date} lang={locale} />
+        <div className={styles.buttons}>
+          <Link
+            className={"contrast"}
+            role="button"
+            href={`/${langPrefix}/movie/${data.id}`}
+          >
+            {readMore}
+          </Link>
+          {trailer && (
+            <Video video={trailer}>
+              <a className={"contrast outline"} href={"#"} role="button">
+                {watchTrailer}
+              </a>
+            </Video>
+          )}
         </div>
-    </div>;
+        <p>
+          <small>{data.overview}</small>
+        </p>
+        <div className={styles.actions}>
+          <ActionToolTip
+            buttonContent={<BsThreeDotsVertical />}
+            buttonSize={"sm"}
+          >
+            <div className={styles.option}>
+              <BookmarkButton
+                media={data}
+                mediaType={"movie"}
+                size={"xs"}
+                className={"outline noBorder"}
+              />
+              <small>{addToBookmark}</small>
+            </div>
+            <div className={styles.option}>
+              <LikeButton
+                media={data}
+                mediaType={"movie"}
+                size={"xs"}
+                className={"outline noBorder"}
+              />
+              <small>{addToLiked}</small>
+            </div>
+          </ActionToolTip>
+        </div>
+      </div>
+    </div>
+  );
 }

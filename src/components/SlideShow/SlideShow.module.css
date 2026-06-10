@@ -1,7 +1,7 @@
-.wrapper{
-    isolation: isolate;
+.wrapper {
+  isolation: isolate;
 }
 
-.arrow{
-    transform: translateY(-75%);
+.arrow {
+  transform: translateY(-75%);
 }

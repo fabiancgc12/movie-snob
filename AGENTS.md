@@ -3,15 +3,17 @@
 Compact instructions for working on the `movie-snob` repository.
 
 ## Commands
+
 - **Dev:** `pnpm run dev`
 - **Build:** `pnpm run build`
 - **Lint:** `pnpm run lint`
 
-
 ## Development
+
 - this projects uses pnpm
 
 ## Architecture & Conventions
+
 - **Framework:** Next.js (App Router).
 - **Styling:** CSS Modules (`*.module.css`).
 - **Data Fetching:** TanStack Query (`@tanstack/react-query`).
@@ -21,6 +23,7 @@ Compact instructions for working on the `movie-snob` repository.
 - **Localization:** `next-intl` (see `src/i18n/` directory).
 
 ## Operational Notes
+
 - This is a standard Next.js application structure using the Pages router.
 - CSS modules are strictly used for component styling.
 - Ensure type definitions in `src/models` are kept in sync when updating API service responses.

@@ -1,45 +1,47 @@
-import {useShowNavBarContext} from "@/global/ShowNavbarContext";
-import {CiMenuBurger} from "react-icons/ci";
-import styles from "./header.module.css"
-import {FormEvent, useRef} from "react";
-import Image from "next/image"
-import wideLogo from "@public/logo-wide.png"
+import { useShowNavBarContext } from "@/global/ShowNavbarContext";
+import { CiMenuBurger } from "react-icons/ci";
+import styles from "./header.module.css";
+import { FormEvent, useRef } from "react";
+import Image from "next/image";
+import wideLogo from "@public/logo-wide.png";
 import Link from "next/link";
-import {useRouter, useSearchParams} from "next/navigation";
-import {useTranslations, useLocale} from "next-intl";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useTranslations, useLocale } from "next-intl";
 
 type props = {
-    className?: string
-}
+  className?: string;
+};
 
-export function Header({className = ""}: props) {
-    const t = useTranslations('common')
-    const locale = useLocale()
-    const [showNavBar, setShowNavBar] = useShowNavBarContext()
-    const searchRef = useRef<HTMLInputElement>(null);
-    const router = useRouter()
-    const onSubmit = (e: FormEvent) => {
-        e.preventDefault();
-        if (searchRef.current?.value)
-            router.push(`/${locale}/search?title=${encodeURIComponent(searchRef.current.value)}`)
-    }
-    const placeholder = t("searchPlaceHolder")
-    return (
-        <header className={`${className} ${styles.wrapper}`}>
-            <button
-                onClick={() => setShowNavBar(!showNavBar)}
-                className={`${styles.button} outline contrast`}
-            >
-                <CiMenuBurger size={20}/>
-            </button>
-            <div className={styles.logo}>
-                <Link href={`/${locale}`} className={styles.link}>
-                    <Image src={wideLogo} alt={"wide logo"} fill/>
-                </Link>
-            </div>
-            <form className={styles.search} onSubmit={onSubmit}>
-                <input type={"search"} placeholder={placeholder} ref={searchRef}/>
-            </form>
-        </header>
-    )
+export function Header({ className = "" }: props) {
+  const t = useTranslations("common");
+  const locale = useLocale();
+  const [showNavBar, setShowNavBar] = useShowNavBarContext();
+  const searchRef = useRef<HTMLInputElement>(null);
+  const router = useRouter();
+  const onSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    if (searchRef.current?.value)
+      router.push(
+        `/${locale}/search?title=${encodeURIComponent(searchRef.current.value)}`,
+      );
+  };
+  const placeholder = t("searchPlaceHolder");
+  return (
+    <header className={`${className} ${styles.wrapper}`}>
+      <button
+        onClick={() => setShowNavBar(!showNavBar)}
+        className={`${styles.button} outline contrast`}
+      >
+        <CiMenuBurger size={20} />
+      </button>
+      <div className={styles.logo}>
+        <Link href={`/${locale}`} className={styles.link}>
+          <Image src={wideLogo} alt={"wide logo"} fill />
+        </Link>
+      </div>
+      <form className={styles.search} onSubmit={onSubmit}>
+        <input type={"search"} placeholder={placeholder} ref={searchRef} />
+      </form>
+    </header>
+  );
 }

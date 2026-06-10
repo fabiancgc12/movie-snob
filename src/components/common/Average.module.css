@@ -1,62 +1,64 @@
-.average{
-    --fontSize:16px;
-    display: inline-grid;
-    place-items: center;
-    position: relative;
-    font-size: var(--fontSize);
-    width: 4em;
-    padding: 1em;
-    background: var(--dark);
-    border-radius: 100%;
-    color: whitesmoke;
-    aspect-ratio: 1 / 1;
-    isolation: isolate;
+.average {
+  --fontSize: 16px;
+  display: inline-grid;
+  place-items: center;
+  position: relative;
+  font-size: var(--fontSize);
+  width: 4em;
+  padding: 1em;
+  background: var(--dark);
+  border-radius: 100%;
+  color: whitesmoke;
+  aspect-ratio: 1 / 1;
+  isolation: isolate;
 }
 
-.small{
-    --fontSize: 14px;
-    padding: .25em;
+.small {
+  --fontSize: 14px;
+  padding: 0.25em;
 }
 
-.bg{
-    --fontSize: 18px;
+.bg {
+  --fontSize: 18px;
 }
 
 .average::before,
-.average::after{
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    border-radius: 100%;
-    aspect-ratio: 1/1;
+.average::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 100%;
+  aspect-ratio: 1/1;
 }
 
-.average::before{
-    --width: calc(var(--fontSize)/2);
-    background: conic-gradient(
-            var(--secondaryDark) var(--degree,0), transparent var(--degree,0));
-    width: calc(100% - var(--width));
-    z-index: -2;
+.average::before {
+  --width: calc(var(--fontSize)/2);
+  background: conic-gradient(
+    var(--secondaryDark) var(--degree, 0),
+    transparent var(--degree, 0)
+  );
+  width: calc(100% - var(--width));
+  z-index: -2;
 }
 
-.average.small{
-    --width: calc(var(--fontSize)/2 + 2px);
+.average.small {
+  --width: calc(var(--fontSize)/2 + 2px);
 }
 
-.average::after{
-    background: inherit;
-    z-index: -1;
-    width: calc(100% - var(--fontSize));
+.average::after {
+  background: inherit;
+  z-index: -1;
+  width: calc(100% - var(--fontSize));
 }
 
-.average span{
-    font-weight: bold;
+.average span {
+  font-weight: bold;
 }
 
 @media screen and (max-width: 768px) {
-    .bg{
-        font-size: 16px;
-    }
+  .bg {
+    font-size: 16px;
+  }
 }

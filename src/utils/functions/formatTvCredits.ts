@@ -1,16 +1,16 @@
-import {AgregateCastResponse} from "@/models/tv/TvCast.interface";
-import {CreditsDto, PeopleDto} from "@/models/dto/Credit.dto";
+import { AgregateCastResponse } from "@/models/tv/TvCast.interface";
+import { CreditsDto, PeopleDto } from "@/models/dto/Credit.dto";
 
-export function formatTvCredits(tvCredits:AgregateCastResponse):CreditsDto{
-    //just returning the first 12 member of the main cast and
-    // the director or screenplay members of the crew
-    //I use destructuring so next deserializes the object, if not it woulld throw an error
-    const cast = tvCredits.cast?.slice(0,12).map(c => ({
-        ...PeopleDto.formatTvCast(c)
-    }))
-    return {
-        // id:tvCredits.id,
-        cast,
-        crew:[]
-    }
+export function formatTvCredits(tvCredits: AgregateCastResponse): CreditsDto {
+  //just returning the first 12 member of the main cast and
+  // the director or screenplay members of the crew
+  //I use destructuring so next deserializes the object, if not it woulld throw an error
+  const cast = tvCredits.cast?.slice(0, 12).map((c) => ({
+    ...PeopleDto.formatTvCast(c),
+  }));
+  return {
+    // id:tvCredits.id,
+    cast,
+    crew: [],
+  };
 }
