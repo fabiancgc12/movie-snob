@@ -1,0 +1,4 @@
+allowBuilds:
+  next-translate-plugin: true
+  sharp: true
+  unrs-resolver: true
