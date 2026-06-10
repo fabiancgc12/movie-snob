@@ -12,11 +12,6 @@
     "@picocss/pico": "^1.5.7",
     "@react-hook/resize-observer": "^1.2.6",
     "@tanstack/react-query": "^4.24.10",
-    "@types/node": "18.11.18",
-    "@types/react": "18.0.27",
-    "@types/react-dom": "18.0.10",
-    "eslint": "8.32.0",
-    "eslint-config-next": "^16.2.7",
     "next": "^16.2.7",
     "next-intl": "^4.13.0",
     "next-seo": "^6.1.0",
@@ -28,8 +23,14 @@
     "react-share": "^4.4.1",
     "react-slideshow-image": "^4.2.1",
     "react-tabs": "^6.0.0",
-    "sharp": "^0.31.3",
-    "typescript": "~5.8.3"
+    "sharp": "^0.31.3"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@types/node": "18.11.18",
+    "@types/react": "18.0.27",
+    "@types/react-dom": "18.0.10",
+    "eslint": "8.32.0",
+    "eslint-config-next": "^16.2.7",
+    "typescript": "^6.0.3"
+  }
 }
