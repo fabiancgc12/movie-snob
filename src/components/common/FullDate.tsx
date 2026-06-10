@@ -1,3 +1,5 @@
+"use client"
+
 import {AiOutlineCalendar} from "react-icons/ai";
 import {formatDate} from "@/utils/functions/formatDate";
 import useTranslation from "next-translate/useTranslation";

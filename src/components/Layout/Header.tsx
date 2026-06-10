@@ -5,22 +5,22 @@ import {FormEvent, useRef} from "react";
 import Image from "next/image"
 import wideLogo from "@public/logo-wide.png"
 import Link from "next/link";
-import {useRouter} from "next/router";
+import {useRouter, useSearchParams} from "next/navigation";
 import useTranslation from 'next-translate/useTranslation'
 
 type props = {
-    className?:string
+    className?: string
 }
 
-export function Header({className = ""}:props){
-    const { t } = useTranslation('common')
-    const [showNavBar,setShowNavBar] = useShowNavBarContext()
+export function Header({className = ""}: props) {
+    const {t, lang} = useTranslation('common')
+    const [showNavBar, setShowNavBar] = useShowNavBarContext()
     const searchRef = useRef<HTMLInputElement>(null);
     const router = useRouter()
-    const onSubmit = (e:FormEvent) => {
+    const onSubmit = (e: FormEvent) => {
         e.preventDefault();
         if (searchRef.current?.value)
-            router.push(`/search?title=${searchRef.current.value}`)
+            router.push(`/${lang}/search?title=${encodeURIComponent(searchRef.current.value)}`)
     }
     const placeholder = t("searchPlaceHolder")
     return (
@@ -28,11 +28,11 @@ export function Header({className = ""}:props){
             <button
                 onClick={() => setShowNavBar(!showNavBar)}
                 className={`${styles.button} outline contrast`}
-                    >
+            >
                 <CiMenuBurger size={20}/>
             </button>
             <div className={styles.logo}>
-                <Link href={"/"} className={styles.link}>
+                <Link href={`/${lang}`} className={styles.link}>
                     <Image src={wideLogo} alt={"wide logo"} fill/>
                 </Link>
             </div>

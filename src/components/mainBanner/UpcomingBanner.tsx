@@ -11,16 +11,18 @@ import {FullDate} from "@/components/common/FullDate";
 import {VideoTrailerInterface} from "@/models/Movies/VideoMedia.interface";
 import {Video} from "@/components/Video/Video";
 import useTranslation from "next-translate/useTranslation";
+import {useLang} from "@/hooks/useLang";
 
 type props = {
-    data:MovieResumeInterface,
-    trailer?:VideoTrailerInterface
+    data: MovieResumeInterface,
+    trailer?: VideoTrailerInterface
 }
 
-export function UpcomingBanner({data,trailer}:props) {
-    const {t,lang} = useTranslation("common");
+export function UpcomingBanner({data, trailer}: props) {
+    const {t, lang} = useTranslation("common");
+    const langPrefix = useLang();
     const bg = useMemo(() => ({
-        "--bgImage":`url(${generateImageUrl(data.backdrop_path,1280)})`
+        "--bgImage": `url(${generateImageUrl(data.backdrop_path, 1280)})`
     }) as CSSProperties, [data]);
     const placeholderStyle = data.backdrop_path ? "" : `${styles.placeholderBanner} placeholderImage`;
     const bigTitleStyle = data.title.length >= 20 ? styles.bigTitle : "";
@@ -33,7 +35,8 @@ export function UpcomingBanner({data,trailer}:props) {
             <h2 className={bigTitleStyle}>{data.title}</h2>
             <FullDate date={data.release_date} lang={lang}/>
             <div className={styles.buttons}>
-                <Link className={"contrast"} role="button" href={`/movie/${data.id}`}>{readMore}</Link>
+                <Link className={"contrast"} role="button"
+                      href={`/${langPrefix}/movie/${data.id}`}>{readMore}</Link>
                 {trailer &&
                     <Video video={trailer}><a className={"contrast outline"} href={"#"} role="button">{watchTrailer}</a></Video>
                 }

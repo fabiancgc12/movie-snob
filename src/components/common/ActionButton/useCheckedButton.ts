@@ -1,3 +1,5 @@
+"use client"
+
 import {useEffect, useState} from "react";
 
 export type ProductStore = Record<"movie" | "tv", Record<number, {

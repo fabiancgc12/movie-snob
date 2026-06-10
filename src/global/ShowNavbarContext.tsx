@@ -1,3 +1,5 @@
+"use client"
+
 import {createContext, Dispatch, ReactNode, SetStateAction, useContext, useState} from "react";
 
 const ShowsNavbarContext = createContext([] as unknown as [boolean, Dispatch<SetStateAction<boolean>>])

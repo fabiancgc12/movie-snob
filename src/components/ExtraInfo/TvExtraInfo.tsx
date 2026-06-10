@@ -1,3 +1,5 @@
+"use client"
+
 import {TvShowInterface} from "@/models/tv/TvShow.interface";
 import styles from "@/components/ExtraInfo/ExtraInfo.module.css";
 import { ExtraInfo } from "./ExtraInfo";

@@ -1,3 +1,5 @@
+"use client"
+
 import {ReactNode} from "react";
 import {Footer} from "@/components/Layout/Footer";
 import { NavBar } from "./NavBar";

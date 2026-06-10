@@ -1,3 +1,5 @@
+"use client"
+
 import {ActionButton} from "@/components/common/ActionButton/ActionButton";
 import styles from "./LikeButton.module.css";
 import {useCheckedButton} from "@/components/common/ActionButton/useCheckedButton";

@@ -1,3 +1,5 @@
+"use client"
+
 import {Section} from "@/components/Section/Section";
 import styles from "./ExtraInfo.module.css"
 import {ReactNode} from "react";

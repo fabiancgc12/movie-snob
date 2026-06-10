@@ -1,3 +1,5 @@
+"use client"
+
 import styles from "@/components/ExtraInfo/ExtraInfo.module.css";
 import {ProvidersDto} from "@/models/dto/ProvidersDto";
 import {CompanyLogo} from "@/components/ExtraInfo/CompanyLogo";

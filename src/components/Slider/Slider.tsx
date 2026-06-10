@@ -1,3 +1,5 @@
+"use client"
+
 import styles from "./Slider.module.css"
 import {ReactNode, useCallback, useRef, useState} from "react";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";

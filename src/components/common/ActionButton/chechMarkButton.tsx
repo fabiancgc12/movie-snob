@@ -1,3 +1,5 @@
+"use client"
+
 import styles from "./checkMark.module.css"
 import {ActionButton} from "@/components/common/ActionButton/ActionButton";
 import {StoreProductType, useCheckedButton} from "@/components/common/ActionButton/useCheckedButton";

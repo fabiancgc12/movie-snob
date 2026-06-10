@@ -1,3 +1,5 @@
+"use client"
+
 import {VideoTrailerInterface} from "@/models/Movies/VideoMedia.interface";
 import style from "./Video.module.css"
 import {ReactNode, useState} from "react";

@@ -1,3 +1,5 @@
+"use client"
+
 import Image from "next/image";
 import {generateImageUrl} from "@/utils/functions/generateImageUrl";
 import {VideoTrailerInterface} from "@/models/Movies/VideoMedia.interface";

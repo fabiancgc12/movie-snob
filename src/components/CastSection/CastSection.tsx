@@ -1,3 +1,5 @@
+"use client"
+
 import styles from "./CastSection.module.css";
 import {MemberCard} from "@/components/CrewMember/CrewMemberCard";
 import {Section} from "@/components/Section/Section";

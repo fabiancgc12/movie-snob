@@ -1,3 +1,5 @@
+"use client"
+
 import {ReactNode, useRef, useState} from "react";
 import useOnClickOutside from "@/hooks/useClickOutside";
 import {ActionButton} from "@/components/common/ActionButton/ActionButton";

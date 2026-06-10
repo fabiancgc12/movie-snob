@@ -1,3 +1,5 @@
+"use client"
+
 import {SliderProps, Slider} from "@/components/Slider/Slider";
 import { Section } from "../Section/Section";
 

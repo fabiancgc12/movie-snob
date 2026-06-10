@@ -1,3 +1,5 @@
+"use client"
+
 import styles from "./Footer.module.css"
 import imdbLogo from "../../../public/tmdb.svg"
 import Image from "next/image"

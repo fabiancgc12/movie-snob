@@ -1,0 +1,88 @@
+"use client"
+
+import {PosterGrid} from "@/components/poster/PosterGrid";
+import {Section} from "@/components/Section/Section";
+import {DynamicPosterList} from "@/components/poster/posterList";
+import {useRouter, useSearchParams} from "next/navigation";
+import {MediaType} from "@/models/MediaType";
+import {ChangeEvent, useCallback} from "react";
+import {MovieGenres, MovieGenresSpanish, TvGenres, TvGenresSpanish} from "@/utils/movieGenres";
+import styles from "@/styles/pages/discover.module.css";
+import useTranslation from "next-translate/useTranslation";
+import {useTheme} from "@/global/ThemeContext";
+
+export default function DiscoverPage() {
+    const router = useRouter();
+    const searchParams = useSearchParams()
+    const {t, lang} = useTranslation("discover");
+    const [theme] = useTheme();
+
+    const media = (searchParams.get("media") as MediaType) ?? "movie";
+    const genre = searchParams.get("genre") ?? "";
+
+    const createQueryString = useCallback((name: string, value: string) => {
+        const params = new URLSearchParams(searchParams.toString())
+        if (value) {
+            params.set(name, value)
+        } else {
+            params.delete(name)
+        }
+        return params.toString()
+    }, [searchParams])
+
+    const handleMediaChange = (e: ChangeEvent<HTMLSelectElement>) => {
+        const value = e.target.value as MediaType
+        let genres = value == "movie" ? MovieGenres : TvGenres;
+        if (genres.findIndex(g => g.id.toString() == genre) < 0) {
+            router.replace(`?${createQueryString("media", value)}&${createQueryString("genre", "")}`)
+        } else {
+            router.replace(`?${createQueryString("media", value)}`)
+        }
+    }
+
+    const handleGenreChange = (e: ChangeEvent<HTMLSelectElement>) => {
+        const value = e.target.value
+        router.replace(`?${createQueryString("genre", value)}`)
+    }
+
+    let apiRoute = "discoverMovies"
+    let genres = lang == "es" ? MovieGenresSpanish : MovieGenres
+    let fallbackMessage = t("movieFallback")
+    if (media == "tv") {
+        apiRoute = "discoverTv"
+        genres = lang == "es" ? TvGenresSpanish : TvGenres
+        fallbackMessage = t("tvFallback")
+    }
+    const title = t("discoverPageTitle")
+    const movieLabel = t("common:mediaMovie")
+    const tvLabel = t("common:mediaTv")
+    const allLabel = t("allOption")
+    return (
+        <>
+            <form className={styles.form}>
+                <select value={media} onChange={handleMediaChange} name={"media"}>
+                    <option value={"movie"}>{movieLabel}</option>
+                    <option value={"tv"}>{tvLabel}</option>
+                </select>
+                <select value={genre} onChange={handleGenreChange} name={"genre"}>
+                    <option value={""}>{allLabel}</option>
+                    {genres.map(g => <option value={g.id} key={`${media}-genre-${g.id}`}>{g.name}</option>)}
+                </select>
+            </form>
+            <div data-theme={theme} className={"full-h"}>
+                <Section title={title}>
+                    <PosterGrid>
+                        <DynamicPosterList
+                            mediaType={media}
+                            api={apiRoute}
+                            queryKey={[apiRoute, media, genre, lang]}
+                            parameters={{media: media, genre: genre}}
+                            enabled={true}
+                            fallbackMessage={fallbackMessage}
+                        />
+                    </PosterGrid>
+                </Section>
+            </div>
+        </>
+    )
+}

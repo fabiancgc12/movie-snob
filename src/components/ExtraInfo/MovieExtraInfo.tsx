@@ -1,3 +1,5 @@
+"use client"
+
 import styles from "@/components/ExtraInfo/ExtraInfo.module.css";
 import {formatCurrency} from "@/utils/functions/formatCurrency";
 import {MovieInterface} from "@/models/Movies/Movie.interface";

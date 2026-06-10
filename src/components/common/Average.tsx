@@ -1,3 +1,5 @@
+"use client"
+
 import React, {CSSProperties, useMemo} from "react";
 import styles from "./Average.module.css";
 

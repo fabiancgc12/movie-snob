@@ -1,3 +1,5 @@
+"use client"
+
 import {Fade, SlideshowRef} from "react-slideshow-image";
 import arrowStyles from "@/components/Slider/Slider.module.css";
 import {NextArrow} from "@/components/Slider/Slider";

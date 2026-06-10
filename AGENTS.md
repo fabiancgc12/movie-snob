@@ -3,9 +3,13 @@
 Compact instructions for working on the `movie-snob` repository.
 
 ## Commands
-- **Dev:** `npm run dev`
-- **Build:** `npm run build`
-- **Lint:** `npm run lint`
+- **Dev:** `pnpm run dev`
+- **Build:** `pnpm run build`
+- **Lint:** `pnpm run lint`
+
+
+## Development
+- this projects uses pnpm
 
 ## Architecture & Conventions
 - **Framework:** Next.js (Pages Router).

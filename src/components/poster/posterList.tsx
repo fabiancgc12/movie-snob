@@ -1,3 +1,5 @@
+"use client"
+
 import {PosterCard, PosterType, SkeletonCard} from "@/components/poster/posterCard";
 import {useInfiniteQuery} from "@tanstack/react-query";
 import {PopularMovieResponse} from "@/models/popular/popularMovie.interface";
