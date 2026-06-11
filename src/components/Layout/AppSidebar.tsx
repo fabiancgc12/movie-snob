@@ -60,7 +60,6 @@ export const AppSidebar = () => {
           <SidebarMenuItem key={url}>
             <AppSidebarMenuButton
               isActive={pathname === url}
-              className={pathname === url ? "bg-primary/15 text-primary" : ""}
               render={(props) => {
                 return (
                   <Link {...props} href={url} title={label}>
@@ -93,7 +92,7 @@ const AppSidebarMenuButton: typeof SidebarMenuButton = (props) => {
       {...props}
       className={cn(
         "h-auto group relative flex flex-col items-center justify-center w-full py-2.5 rounded-lg transition-all duration-200 gap-1",
-        "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground text-muted-foreground cursor-pointer",
+        "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground text-muted-foreground cursor-pointer data-active:text-primary data-active:bg-primary/15",
         props.className,
       )}
     />
