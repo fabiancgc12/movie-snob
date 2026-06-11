@@ -1,4 +1,3 @@
-import styles from "./NavBar.module.css";
 import { FaBookmark } from "react-icons/fa";
 import { AiFillHeart } from "react-icons/ai";
 import {
@@ -16,6 +15,7 @@ import { ReactNode, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { useTranslations, useLocale } from "next-intl";
 import { useTheme } from "@/global/ThemeContext";
+import { cn } from "@/lib/utils";
 
 type props = {
   className?: string;
@@ -69,11 +69,15 @@ export function NavBar({ className = "" }: props) {
   return (
     <aside
       ref={ref}
-      className={`${className} ${styles.aside} ${show ? styles.show : ""}`}
+      className={cn(
+        "fixed top-0 left-0 z-10 h-screen w-[var(--navBarWidth)] bg-[var(--primaryDark)] p-2.5 transition-transform duration-300 max-md:text-[21px]",
+        show ? "translate-x-0" : "max-md:-translate-x-full",
+        className,
+      )}
     >
-      <nav className={styles.navigation}>
-        <div className={styles.logo}>
-          <Link href={`/${locale}`} className={styles.link}>
+      <nav className="flex h-full flex-col items-stretch justify-evenly gap-5">
+        <div className="relative border-b border-white/50 pb-1.5">
+          <Link href={`/${locale}`} className="grid place-items-center p-0">
             <Image src={logo} alt={"logo"} />
           </Link>
         </div>
@@ -85,21 +89,27 @@ export function NavBar({ className = "" }: props) {
           return (
             <div
               key={`nav-item-${item.label}`}
-              className={`${styles.item} ${isActive && !item.switchLanguage ? styles.active : ""}`}
+              className={cn(
+                "rounded-[0.5em] p-1.5 transition-colors hover:bg-white hover:text-[var(--primaryDark)]",
+                isActive && !item.switchLanguage && "bg-white text-[var(--primaryDark)]",
+              )}
             >
               {item.switchLanguage ? (
                 <Link
                   href={pathname}
-                  className={styles.link}
+                  className="grid place-items-center p-0 flex-grow-0 flex-shrink-0 text-inherit"
                   locale={nextLocale}
                 >
                   {item.icon}
-                  <p className={styles.label}>{label}</p>
+                  <p className="text-sm capitalize">{label}</p>
                 </Link>
               ) : (
-                <Link href={itemPath} className={styles.link}>
+                <Link
+                  href={itemPath}
+                  className="grid place-items-center p-0 flex-grow-0 flex-shrink-0 text-inherit"
+                >
                   {item.icon}
-                  <p className={styles.label}>{label}</p>
+                  <p className="text-sm capitalize">{label}</p>
                 </Link>
               )}
             </div>
@@ -116,18 +126,30 @@ function SwitchThemeButton() {
   const t = useTranslations("common");
   const themeLabel = t("theme");
   return (
-    <div className={styles.item}>
+    <div className="mt-auto">
       <div
         onClick={setTheme}
-        className={`${styles.link} ${styles.switchLanguageButton}`}
+        className="grid place-items-center cursor-pointer p-0 flex-grow-0 flex-shrink-0 text-inherit"
       >
-        <div
-          className={`${styles.witchLanguageIcons} ${theme == "dark" ? styles.showDarkModeIcon : ""}`}
-        >
-          <MdModeNight />
-          <MdSunny />
+        <div className="grid grid-cols-[100%_100%] overflow-hidden">
+          <div
+            className={cn(
+              "w-full transition-transform duration-300",
+              theme === "dark" ? "-translate-x-full" : "translate-x-0",
+            )}
+          >
+            <MdModeNight />
+          </div>
+          <div
+            className={cn(
+              "w-full transition-transform duration-300",
+              theme === "dark" ? "-translate-x-full" : "translate-x-0",
+            )}
+          >
+            <MdSunny />
+          </div>
         </div>
-        <p className={styles.label}>{themeLabel}</p>
+        <p className="text-sm capitalize">{themeLabel}</p>
       </div>
     </div>
   );

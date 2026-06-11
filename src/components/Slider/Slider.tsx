@@ -1,6 +1,6 @@
 "use client";
 
-import styles from "./Slider.module.css";
+import { cn } from "@/lib/utils";
 import { ReactNode, useCallback, useRef, useState } from "react";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import useResizeObserver from "@react-hook/resize-observer";
@@ -19,12 +19,8 @@ export function Slider({ className = "", children, speed = 200 }: SliderProps) {
 
   const onScroll = useCallback(() => {
     if (sliderRef?.current) {
-      //if scrollLeft is 0 then hide the left arrow
       setShowPrevArrow(!!sliderRef.current.scrollLeft);
       let { scrollWidth, offsetWidth } = sliderRef.current;
-
-      // calculating if scroll has reached the end
-      //the -10 is to give it a margin of error
       setShowNextArrow(
         sliderRef.current.scrollLeft < scrollWidth - offsetWidth - 10,
       );
@@ -42,20 +38,22 @@ export function Slider({ className = "", children, speed = 200 }: SliderProps) {
     [onScroll],
   );
 
-  const fadeLeftArrow = showPrevArrow ? styles.fadeIn : styles.fadeOut;
-  const fadeRightArrow = showNextArrow ? styles.fadeIn : styles.fadeOut;
-
   return (
-    <div className={`${className} ${styles.slider}`}>
+    <div className={cn("relative flex items-center", className)}>
       <PrevArrow
-        className={`${styles.arrowsInContent} ${fadeLeftArrow}`}
+        className={cn("absolute", showPrevArrow ? "animate-[fadeIn_0.35s_forwards]" : "animate-[fadeOut_0.35s_forwards]")}
         onClick={() => moveSlider(speed * -1)}
       />
-      <figure className={styles.track} ref={sliderRef} onScroll={onScroll}>
+      <figure
+        className="w-full text-xl flex flex-row flex-nowrap items-stretch py-2 px-0 gap-[var(--gap)] scroll-smooth snap-x snap-mandatory scroll-pl-[var(--gap)] overflow-x-auto overscroll-x-contain snap-always [&>*]:shrink-0 [&>*:not(.loader)]:snap-start [&>*:not(.loader)]:items-start"
+        style={{ "--gap": "10px" } as React.CSSProperties}
+        ref={sliderRef}
+        onScroll={onScroll}
+      >
         {children}
       </figure>
       <NextArrow
-        className={`${styles.arrowsInContent} ${fadeRightArrow}`}
+        className={cn("absolute", showNextArrow ? "animate-[fadeIn_0.35s_forwards]" : "animate-[fadeOut_0.35s_forwards]")}
         onClick={() => moveSlider(speed)}
       />
     </div>
@@ -67,18 +65,20 @@ type ArrowProps = {
   className?: string;
 };
 
+const arrowBase = "h-16 w-12 flex items-center justify-center py-2 px-1 bg-[var(--primaryColor-60)] rounded-md border border-[whitesmoke] m-0 z-10 hover:bg-[var(--primaryColor-60)]";
+
 export const NextArrow = ({ onClick, className = "" }: ArrowProps) => {
   return (
-    <button className={`${styles.nextArrow} ${className}`} onClick={onClick}>
-      <AiOutlineRight size={32} />
+    <button className={cn(arrowBase, "right-0", className)} onClick={onClick}>
+      <AiOutlineRight size={32} className="w-full text-[whitesmoke] hover:text-[var(--primaryLight)]" />
     </button>
   );
 };
 
 export function PrevArrow({ onClick, className = "" }: ArrowProps) {
   return (
-    <button className={`${styles.prevArrow} ${className}`} onClick={onClick}>
-      <AiOutlineLeft size={32} />
+    <button className={cn(arrowBase, "left-0", className)} onClick={onClick}>
+      <AiOutlineLeft size={32} className="w-full text-[whitesmoke] hover:text-[var(--primaryLight)]" />
     </button>
   );
 }

@@ -1,6 +1,5 @@
 import { VideoTrailerInterface } from "@/models/Movies/VideoMedia.interface";
 import { Video } from "./Video";
-import styles from "@/components/Video/Video.module.css";
 import Image from "next/image";
 
 type props = {
@@ -12,16 +11,21 @@ export function VideoThumbnail({ video }: props) {
 
   return (
     <Video video={video}>
-      <div className={styles.thumbnail}>
-        <Image src={videoThumbnail} alt={`${video.name} thumbnail`} fill />
-        <div className={styles.overlay}>
+      <div className="relative w-[80vw] max-w-[450px] aspect-[16/9]">
+        <Image
+          src={videoThumbnail}
+          alt={`${video.name} thumbnail`}
+          fill
+          className="rounded-lg hover:brightness-50"
+        />
+        <div className="absolute flex justify-center items-center gap-[5px] top-0 left-0 w-full h-full z-[1] cursor-pointer hover:text-[whitesmoke]">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-6 h-6"
+            className="w-[25%] h-[25%] transition-colors duration-350"
           >
             <path
               strokeLinecap="round"
@@ -36,7 +40,9 @@ export function VideoThumbnail({ video }: props) {
           </svg>
         </div>
       </div>
-      <small className={styles.title}>{video.name}</small>
+      <small className="block w-[80vw] max-w-[450px] whitespace-nowrap overflow-hidden text-ellipsis font-bold">
+        {video.name}
+      </small>
     </Video>
   );
 }

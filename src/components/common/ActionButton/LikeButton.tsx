@@ -1,7 +1,6 @@
 "use client";
 
 import { ActionButton } from "@/components/common/ActionButton/ActionButton";
-import styles from "./LikeButton.module.css";
 import { useCheckedButton } from "@/components/common/ActionButton/useCheckedButton";
 import { props } from "./chechMarkButton";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
@@ -17,7 +16,7 @@ export function Button({ mediaType, media, size, className = "" }: props) {
 
   return (
     <ActionButton
-      className={`${styles.like} secondary ${className}`}
+      className={`text-darkred ${className}`}
       size={size}
       onClick={onClick}
     >

@@ -1,6 +1,5 @@
 "use client";
 import { generateImageUrl } from "@/utils/functions/generateImageUrl";
-import styles from "./ProductBanner.module.css";
 import Image from "next/image";
 import { calculateRunTime } from "@/utils/functions/calculateRunTime";
 import { Video } from "@/components/Video/Video";
@@ -18,6 +17,7 @@ import { CSSProperties, useMemo } from "react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { useLang } from "@/hooks/useLang";
+import { cn } from "@/lib/utils";
 
 type props = {
   trailer?: VideoTrailerInterface;
@@ -47,23 +47,33 @@ export function MediaBanner({ product, trailer, credits, mediaType }: props) {
 
   const posterPath = generateImageUrl(product.poster_path);
   const title = mediaType == "movie" ? product.title : product.name;
-  const titleSize = title.length > 20 ? styles.titleSmall : "";
+  const titleSize = title.length > 20 ? "text-2xl" : "";
   const videoLabel =
     mediaType == "movie" ? commonT("watchTrailer") : commonT("watchOpening");
-  //sorting so the director is always first
   return (
-    <section className={styles.header} style={bg}>
-      <div className={styles.poster}>
-        <div>
-          <Image src={posterPath} alt={`${title} poster`} priority fill />
+    <section
+      className={cn(
+        "relative grid grid-cols-[minmax(125px,1fr)_2fr] place-items-center bg-no-repeat max-md:bg-[position:top_right] max-md:bg-[length:82%] max-md:bg-[linear-gradient(to_right,var(--primaryDarker)_0%,transparent_50%),var(--bgImage)] md:p-4 md:place-items-stretch md:bg-[position:top_center] md:bg-cover",
+      )}
+      style={bg}
+    >
+      <div className="w-full p-4 md:p-4">
+        <div className="relative left-[10%] grid aspect-[1/1.5] max-w-[300px] max-md:left-[10%] md:left-0">
+          <Image
+            src={posterPath}
+            alt={`${title} poster`}
+            priority
+            fill
+            className="rounded-[0.5em]"
+          />
         </div>
       </div>
-      <div className={styles.generalInfo}>
-        <div className={styles.flex}>
-          <div className={styles.genres}>
+      <div className="px-4 grid-column-1/-1 md:z-[1] md:flex md:flex-col md:justify-evenly md:p-4">
+        <div className="flex items-center justify-between py-1 max-md:flex-row">
+          <div className="flex gap-1.5">
             {product.genres?.slice(0, 3).map((g) => (
               <Link
-                className={"badge"}
+                className="badge"
                 href={`/${lang}/discover?media=${mediaType}&genre=${g.id}`}
                 key={`genre-${g.id}`}
               >
@@ -75,11 +85,11 @@ export function MediaBanner({ product, trailer, credits, mediaType }: props) {
             <div>{calculateRunTime(product.runtime)}</div>
           )}
         </div>
-        <div className={`${styles.flex} ${styles.titleWrapper}`}>
-          <h1 className={`${styles.title} ${titleSize}`}>
+        <div className="flex items-center justify-between py-1 max-md:flex-col max-md:items-start">
+          <h1 className={cn("text-center max-md:text-2xl md:text-start", titleSize)}>
             {title}
             {mediaType === "movie" && product.release_date.length != 0 && (
-              <small className={styles.year}>
+              <small className="font-light text-xl max-md:text-lg">
                 {" "}
                 ({product.release_date.slice(0, 4)})
               </small>
@@ -91,11 +101,13 @@ export function MediaBanner({ product, trailer, credits, mediaType }: props) {
             </Video>
           )}
         </div>
-        <div className={styles.overview}>
+        <div className="text-justify py-1 border-b border-[var(--primaryLight)]">
           <h4>{t("overview")}</h4>
-          <small>{product.overview || t("overviewFallback")}</small>
+          <small className="block rounded-lg bg-slate-700/45 p-1 md:overflow-auto md:scrollbar-gutter-stable">
+            {product.overview || t("overviewFallback")}
+          </small>
         </div>
-        <div className={`${styles.flex}`}>
+        <div className="flex justify-start gap-8 items-center py-1">
           <Average value={product.vote_average} />
           <BookmarkButton mediaType={mediaType} media={product} />
           <LikeButton mediaType={mediaType} media={product} />
@@ -104,7 +116,7 @@ export function MediaBanner({ product, trailer, credits, mediaType }: props) {
             title={title}
           />
         </div>
-        <div className={styles.crew}>
+        <div className="grid grid-cols-2 justify-between gap-2.5 py-1">
           {credits &&
             credits
               .slice(0, 2)

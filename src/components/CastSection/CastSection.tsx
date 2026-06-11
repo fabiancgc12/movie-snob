@@ -1,6 +1,5 @@
 "use client";
 
-import styles from "./CastSection.module.css";
 import { MemberCard } from "@/components/CrewMember/CrewMemberCard";
 import { Section } from "@/components/Section/Section";
 import { Slider } from "@/components/Slider/Slider";
@@ -16,10 +15,12 @@ export function Cast({ children }: props) {
   const castTitle = t("castLabel");
   return (
     <Section title={castTitle}>
-      <Slider className={styles.castSm} speed={250}>
+      <Slider className="md:hidden" speed={250}>
         {children}
       </Slider>
-      <div className={styles.castMd}>{children}</div>
+      <div className="hidden md:grid md:grid-cols-[repeat(auto-fit,minmax(220px,1fr))] md:gap-2 md:p-4">
+        {children}
+      </div>
     </Section>
   );
 }

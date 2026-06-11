@@ -1,6 +1,5 @@
 import { Section } from "@/components/Section/Section";
 import Link from "next/link";
-import styles from "./notFound.module.css";
 import { useTranslations } from "next-intl";
 import { useTheme } from "@/global/ThemeContext";
 import { useLang } from "@/hooks/useLang";
@@ -18,7 +17,7 @@ export function ErrorPageComponent({ title }: props) {
   return (
     <div data-theme={theme} className={"full-h"}>
       <Section title={title}>
-        <div className={styles.links}>
+        <div className="p-2.5 [&>*]:text-xs [&>*]:py-3 [&>*]:px-4 [&>*:not(:first-child)]:ml-2.5">
           <Link href={`/${lang}`} role={"button"}>
             {homeLabel}
           </Link>

@@ -12,7 +12,6 @@ import { TrendingResponseInterface } from "@/models/trending/TrendingMovieRespon
 import { Spinner } from "@/components/common/Spinner";
 import { useInView } from "react-intersection-observer";
 import { MediaType } from "@/models/MediaType";
-import styles from "./list.module.css";
 import { useTranslations, useLocale } from "next-intl";
 
 export type props = {
@@ -106,9 +105,9 @@ export function DynamicPosterList({
     const retry = t("retry");
     const message = t("errorConnectingToServer");
     return (
-      <div className={styles.error}>
+      <div className="self-start">
         <p>{message}</p>
-        <button onClick={() => refetch()}>{retry}</button>
+        <button onClick={() => refetch()} className="text-xs">{retry}</button>
       </div>
     );
   }

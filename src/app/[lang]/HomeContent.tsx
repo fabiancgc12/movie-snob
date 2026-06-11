@@ -9,7 +9,6 @@ import { Spinner } from "@/components/common/Spinner";
 import { useEffect, useState } from "react";
 import { MovieGenres, MovieGenresSpanish } from "@/utils/movieGenres";
 import { SliderSection } from "@/components/Slider/SliderSection";
-import styles from "@/styles/pages/index.module.css";
 import { VideoTrailerInterface } from "@/models/Movies/VideoMedia.interface";
 import { useTranslations, useLocale } from "next-intl";
 import { Section } from "@/components/Section/Section";
@@ -152,7 +151,7 @@ function GenreSection() {
         );
       })}
       {genres.length <= genresLimit - 1 && (
-        <div ref={loadMoreRef} className={styles.loading}>
+        <div ref={loadMoreRef} className="p-4">
           <Spinner />
         </div>
       )}

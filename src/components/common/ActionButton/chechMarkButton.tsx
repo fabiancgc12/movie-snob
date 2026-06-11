@@ -1,6 +1,5 @@
 "use client";
 
-import styles from "./checkMark.module.css";
 import { ActionButton } from "@/components/common/ActionButton/ActionButton";
 import {
   StoreProductType,
@@ -29,7 +28,7 @@ function Button({ mediaType, media, size, className = "" }: props) {
   );
   return (
     <ActionButton
-      className={`${styles.checkmark} secondary ${className}`}
+      className={`text-[var(--secondaryDark)] ${className}`}
       onClick={onClick}
       size={size}
     >

@@ -2,7 +2,6 @@
 
 import { SeasonsEntity } from "@/models/tv/TvShow.interface";
 import { Section } from "@/components/Section/Section";
-import styles from "./Season.module.css";
 import Image from "next/image";
 import { generateImageUrl } from "@/utils/functions/generateImageUrl";
 import React, { ChangeEvent, useEffect, useState } from "react";
@@ -27,7 +26,11 @@ export function SeasonsList({ seasons }: props) {
   if (!selectedSeason) return null;
   return (
     <Section title={t("seasonsLabel")}>
-      <select className={styles.select} value={selectedId} onChange={onChange}>
+      <select
+        className="w-[40%] max-w-[300px]"
+        value={selectedId}
+        onChange={onChange}
+      >
         {seasons.map((s) => (
           <option value={s.id} key={`season-${s.id}`}>
             {s.name}
@@ -48,31 +51,32 @@ function Season({ season }: seasonComponentProp) {
   const notAnnouncedLabel = t("notAnnounced");
   const episodesLabel = t("episodes");
   return (
-    <div className={styles.season}>
-      <div className={styles.posterWrapper}>
+    <div className="grid grid-cols-[auto_1fr] gap-x-2.5 pr-2">
+      <div className="relative w-[125px] aspect-[1/1.5]">
         <Image
           src={generateImageUrl(season.poster_path)}
           alt={`${season.name} poster`}
           fill
+          className="rounded"
         />
       </div>
       <div>
-        <h6 className={styles.title}>{season.name}</h6>
+        <h6 className="pt-1">{season.name}</h6>
         <p>
-          <small className={styles.date}>
+          <small className="font-light">
             {airedOnLabel}:{" "}
             {season.air_date
               ? formatYearDate(season.air_date)
               : notAnnouncedLabel}
           </small>
           {season.episode_count && (
-            <small className={styles.date}>
+            <small className="font-light pb-1">
               {" "}
               | {season.episode_count} {episodesLabel}
             </small>
           )}
         </p>
-        <p className={styles.plot}>
+        <p className="text-justify">
           <small>{season.overview}</small>
         </p>
       </div>

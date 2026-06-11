@@ -1,5 +1,5 @@
 import { getTvShow } from "@/services/tv/getTv";
-import styles from "@/styles/pages/id.module.css";
+
 import { CastSection } from "@/components/CastSection/CastSection";
 import { PosterList } from "@/components/poster/posterList";
 import { MediaBanner } from "@/components/ProductBanner/ProductBanner";
@@ -70,9 +70,9 @@ export default async function TvPage({ params }: Props) {
           credits={createdBy}
           mediaType={"tv"}
         />
-        <div className={styles.tvContent}>
+        <div className="flex flex-col md:grid md:grid-cols-[75%_1fr] md:[&>*:nth-child(n+4)]:col-span-full">
           <CastSection cast={cast} />
-          <div className={styles.info}>
+          <div className="order-10 md:order-none">
             <TvExtraInfo show={show} providers={providers} />
           </div>
           <SeasonsList seasons={show.seasons} />

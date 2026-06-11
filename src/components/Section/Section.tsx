@@ -1,5 +1,4 @@
 import { ReactNode } from "react";
-import styles from "./Section.module.css";
 import Link from "next/link";
 
 export type TitleLinksProps =
@@ -28,17 +27,31 @@ export function Section({
   className = "",
   size = "md",
 }: props) {
-  const sizeStyle = size == "sm" ? styles.small : "";
-  let titleContent: string | ReactNode = title;
+  const sizeStyle = size == "sm" ? "text-xl" : "";
+  let titleContent: ReactNode = title;
   if (titleAsLink)
     titleContent = (
-      <Link href={url} className={styles.link}>
+      <Link
+        href={url}
+        className="relative !text-inherit group/title"
+      >
         {title}
+        <span
+          className="absolute grid place-content-center text-[50px] left-[calc(100%+10px)] top-[45%] -translate-y-[55%] no-underline h-full transition-transform duration-300 group-hover/title:translate-x-2.5 group-hover/title:-translate-y-[55%]"
+        >
+          &rsaquo;
+        </span>
       </Link>
     );
   return (
-    <section className={`${styles.wrapper} ${className}`}>
-      <h3 className={`${styles.title} ${sizeStyle}`}>{titleContent}</h3>
+    <section className={`p-4 ${className}`}>
+      <h3 className={`relative pl-8 capitalize ${sizeStyle}`}>
+        <span
+          className="absolute top-1/2 left-0 h-[70%] w-[5px] bg-[#8b0000] -translate-y-1/2 rounded-md"
+          style={{ content: '""' }}
+        />
+        {titleContent}
+      </h3>
       {children}
     </section>
   );

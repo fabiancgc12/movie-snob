@@ -1,7 +1,6 @@
 "use client";
 
 import { TvShowInterface } from "@/models/tv/TvShow.interface";
-import styles from "@/components/ExtraInfo/ExtraInfo.module.css";
 import { ExtraInfo } from "./ExtraInfo";
 import { Providers } from "@/components/ExtraInfo/Providers";
 import { ProvidersDto } from "@/models/dto/ProvidersDto";
@@ -27,24 +26,24 @@ export function TvExtraInfo({ show, providers }: props) {
 
   return (
     <ExtraInfo>
-      <div className={styles.info}>
-        <p>{releaseDateLabel}</p>
+      <div>
+        <p className="capitalize text-sm">{releaseDateLabel}</p>
         <FullDate date={show.first_air_date} />
       </div>
-      <div className={styles.info}>
-        <p>{lastAirDateLabel}</p>
+      <div>
+        <p className="capitalize text-sm">{lastAirDateLabel}</p>
         <FullDate date={show.last_air_date} />
       </div>
       <div>
-        <p>{statusLabel}</p>
-        <small className={"alignCenter"}>
+        <p className="capitalize text-sm">{statusLabel}</p>
+        <small className="flex items-center gap-1.5">
           <SiStatuspal />
           {show.status}
         </small>
       </div>
-      <div className={styles.info}>
-        <p>{languageLabel}</p>
-        <small className={"alignCenter"}>
+      <div>
+        <p className="capitalize text-sm">{languageLabel}</p>
+        <small className="flex items-center gap-1.5">
           <MdLanguage />
           {show.spoken_languages
             ?.slice(0, 4)
@@ -53,8 +52,8 @@ export function TvExtraInfo({ show, providers }: props) {
         </small>
       </div>
       <div>
-        <p>{networksLabel}</p>
-        <div className={styles.logos}>
+        <p className="capitalize text-sm">{networksLabel}</p>
+        <div className="flex flex-row flex-wrap items-center gap-[5px_2.5%]">
           {show.networks?.map((network) => (
             <CompanyLogo
               key={`${network.name} logo`}

@@ -1,9 +1,9 @@
 "use client";
 
-import styles from "./Footer.module.css";
 import imdbLogo from "../../../public/tmdb.svg";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
+import { cn } from "@/lib/utils";
 
 type props = {
   className?: string;
@@ -14,8 +14,13 @@ export function Footer({ className = "" }: props) {
   const developedBy = t("developedby");
   const madeUsing = t("madeusing");
   return (
-    <footer className={`${styles.footer} ${className}`}>
-      <div>
+    <footer
+      className={cn(
+        "grid grid-cols-2 justify-between justify-items-center bg-[var(--primaryDarker)] p-4 md:justify-start",
+        className,
+      )}
+    >
+      <div className="flex flex-col gap-1.5">
         <p>{developedBy}</p>
         <a
           href="https://github.com/fabiancgc12"
@@ -25,7 +30,7 @@ export function Footer({ className = "" }: props) {
           Fabian Graterol
         </a>
       </div>
-      <div className={styles.tmdbLogo}>
+      <div className="flex flex-col items-center gap-1.5">
         {madeUsing}
         <Image
           src={imdbLogo}

@@ -4,7 +4,6 @@ import Image from "next/image";
 import { generateImageUrl } from "@/utils/functions/generateImageUrl";
 import { VideoTrailerInterface } from "@/models/Movies/VideoMedia.interface";
 import { ImageMediaResponse } from "@/models/Movies/ImageMedia.interface";
-import styles from "./Media.module.css";
 import { VideoThumbnail } from "@/components/Video/VideoThumbnail";
 import { Section } from "@/components/Section/Section";
 import { Slider } from "@/components/Slider/Slider";
@@ -41,17 +40,21 @@ export function Media({ videos, images }: props) {
         )}
       </Section>
       <SliderSection
-        className={styles.wrapper}
+        className="isolate"
         title={t("imagesLabel")}
         speed={450}
       >
         {backdrops.length > 0 ? (
           backdrops.map((b, i) => (
-            <div className={styles.backdrop} key={`backdrop-${i}`}>
+            <div
+              className="relative w-[80vw] max-w-[450px] aspect-[16/9]"
+              key={`backdrop-${i}`}
+            >
               <Image
                 src={generateImageUrl(b.file_path)}
                 alt={`movie backdrop ${i}`}
                 fill
+                className="rounded-lg"
               />
             </div>
           ))

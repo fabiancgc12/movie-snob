@@ -1,7 +1,10 @@
-import "@picocss/pico";
 import "react-loading-skeleton/dist/skeleton.css";
 import "react-tabs/style/react-tabs.css";
 import "@/styles/globals.css";
+import { Figtree } from "next/font/google";
+import { cn } from "@/lib/utils";
+
+const figtree = Figtree({subsets:['latin'],variable:'--font-sans'});
 
 export const metadata = {
   title: "Movie Snob",
@@ -14,8 +17,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html>
-      <body data-theme="dark">{children}</body>
+    <html className={cn("dark font-sans", figtree.variable)} lang="en">
+      <body>{children}</body>
     </html>
   );
 }

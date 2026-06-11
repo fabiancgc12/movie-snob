@@ -1,6 +1,5 @@
 "use client";
 
-import styles from "@/components/ExtraInfo/ExtraInfo.module.css";
 import { formatCurrency } from "@/utils/functions/formatCurrency";
 import { MovieInterface } from "@/models/Movies/Movie.interface";
 import { ExtraInfo } from "./ExtraInfo";
@@ -25,13 +24,13 @@ export function MovieExtraInfo({ movie, providers }: props) {
   const productionLabel = t("production");
   return (
     <ExtraInfo>
-      <div className={`${styles.info} text`}>
-        <p>{releaseDateLabel}</p>
+      <div className="text">
+        <p className="capitalize text-sm">{releaseDateLabel}</p>
         <FullDate date={movie.release_date} lang={locale} />
       </div>
-      <div className={`${styles.info} text`}>
-        <p>{languageLabel}</p>
-        <small className={"alignCenter"}>
+      <div className="text">
+        <p className="capitalize text-sm">{languageLabel}</p>
+        <small className="flex items-center gap-1.5">
           <MdLanguage />
           {movie.spoken_languages
             ?.slice(0, 4)
@@ -39,13 +38,13 @@ export function MovieExtraInfo({ movie, providers }: props) {
             ?.join(", ")}
         </small>
       </div>
-      <div className={`${styles.info} text`}>
-        <p>{budgetLabel}</p>
+      <div className="text">
+        <p className="capitalize text-sm">{budgetLabel}</p>
         <small>{formatCurrency.format(movie.budget)}</small>
       </div>
-      <div className={`${styles.info} text`}>
-        <p>{productionLabel}</p>
-        <div className={styles.logos}>
+      <div className="text">
+        <p className="capitalize text-sm">{productionLabel}</p>
+        <div className="flex flex-row flex-wrap items-center gap-[5px_2.5%]">
           {movie.production_companies?.map((company) => (
             <CompanyLogo
               key={`${company.name} logo`}

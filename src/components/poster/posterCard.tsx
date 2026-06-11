@@ -1,4 +1,3 @@
-import styles from "./movieCard.module.css";
 import Image from "next/image";
 import React from "react";
 import { Average } from "@/components/common/Average";
@@ -7,6 +6,7 @@ import Link from "next/link";
 import Skeleton from "react-loading-skeleton";
 import { MediaType } from "@/models/MediaType";
 import { useLang } from "@/hooks/useLang";
+import { cn } from "@/lib/utils";
 
 export type PosterType = {
   id: number;
@@ -32,20 +32,32 @@ export function PosterCard({ data, mediaType, isBackdrop = false }: props) {
   const title = data.title ?? (data.name as string);
   return (
     <article
-      className={`${styles.posterCard} ${isBackdrop ? styles.backdropCard : ""}`}
+      className={cn(
+        "relative w-[200px] p-0 m-0 isolate rounded-[0.5em] max-md:w-[40vw] max-md:min-w-[160px] max-md:max-w-[200px]",
+        isBackdrop && "w-[300px] max-md:w-[35vw] max-md:min-w-[220px] max-md:max-w-[300px]",
+      )}
     >
-      <Link
-        href={`/${lang}/${type}/${data.id}`}
-        className={styles.posterWrapper}
-      >
-        <div className={styles.poster}>
-          <Image src={poster} alt={"title poster"} fill />
+      <Link href={`/${lang}/${type}/${data.id}`} className="no-underline">
+        <div
+          className={cn(
+            "relative w-full overflow-hidden",
+            isBackdrop ? "aspect-video" : "aspect-[1/1.5]",
+          )}
+        >
+          <Image
+            src={poster}
+            alt={"title poster"}
+            fill
+            className={cn(
+              isBackdrop ? "" : "rounded-t-[0.5em]",
+            )}
+          />
         </div>
-        <div className={styles.rating}>
+        <div className="absolute -translate-y-[60%] z-[4] px-[5px]">
           <Average value={data.vote_average} size={"sm"} />
         </div>
       </Link>
-      <div className={styles.title}>
+      <div className="mt-3.5 p-1.5 text-inherit line-clamp-2">
         <small>{title}</small>
       </div>
     </article>
@@ -59,10 +71,13 @@ type SkeletonProps = {
 export function SkeletonCard({ isBackdrop }: SkeletonProps) {
   return (
     <article
-      className={`${styles.posterCard} ${isBackdrop ? styles.backdropCard : ""}`}
+      className={cn(
+        "relative w-[200px] p-0 m-0 isolate rounded-[0.5em] max-md:w-[40vw] max-md:min-w-[160px] max-md:max-w-[200px]",
+        isBackdrop && "w-[300px] max-md:w-[35vw] max-md:min-w-[220px] max-md:max-w-[300px]",
+      )}
     >
-      <Skeleton className={styles.poster} containerClassName={"skeleton"} />
-      <div className={styles.title}>
+      <Skeleton className="relative w-full aspect-[1/1.5]" containerClassName={"skeleton"} />
+      <div className="mt-3.5 p-1.5">
         <Skeleton containerClassName={"skeleton"} />
       </div>
     </article>

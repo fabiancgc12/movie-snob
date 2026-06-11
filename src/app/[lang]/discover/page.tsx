@@ -12,7 +12,7 @@ import {
   TvGenres,
   TvGenresSpanish,
 } from "@/utils/movieGenres";
-import styles from "@/styles/pages/discover.module.css";
+
 import { useTranslations, useLocale } from "next-intl";
 import { useTheme } from "@/global/ThemeContext";
 
@@ -67,7 +67,7 @@ export default function DiscoverPage() {
   }
   return (
     <>
-      <form className={styles.form}>
+      <form className="flex gap-5 items-center p-4 m-0 [&>*]:w-full [&>*]:p-1 [&>*]:m-0 md:[&>*]:w-1/4">
         <select value={media} onChange={handleMediaChange} name={"media"}>
           <option value={"movie"}>{commonT("mediaMovie")}</option>
           <option value={"tv"}>{commonT("mediaTv")}</option>

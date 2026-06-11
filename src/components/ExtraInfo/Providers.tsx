@@ -1,6 +1,5 @@
 "use client";
 
-import styles from "@/components/ExtraInfo/ExtraInfo.module.css";
 import { ProvidersDto } from "@/models/dto/ProvidersDto";
 import { CompanyLogo } from "@/components/ExtraInfo/CompanyLogo";
 import { useTranslations } from "next-intl";
@@ -14,9 +13,9 @@ export function Providers({ providers }: props) {
   const availableLabel = t("availableOn");
   const notAvailableMessage = t("notAvailableMessage");
   return (
-    <div className={`${styles.info} text`}>
-      <p>{availableLabel}</p>
-      <div className={styles.logos}>
+    <div className="text">
+      <p className="capitalize text-sm">{availableLabel}</p>
+      <div className="flex flex-row flex-wrap items-center gap-[5px_2.5%]">
         {providers.results.US.flatrate &&
         providers.results.US.flatrate.length > 0 ? (
           providers.results.US.flatrate?.map((st) => (

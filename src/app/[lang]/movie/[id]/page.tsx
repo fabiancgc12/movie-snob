@@ -1,5 +1,5 @@
 import { getMovie } from "@/services/movies/getMovie";
-import styles from "@/styles/pages/id.module.css";
+
 import { CastSection } from "@/components/CastSection/CastSection";
 import { PosterList } from "@/components/poster/posterList";
 import { MediaBanner } from "@/components/ProductBanner/ProductBanner";
@@ -71,7 +71,7 @@ export default async function MoviePage({ params }: Props) {
           credits={crew}
           mediaType={"movie"}
         />
-        <div className={styles.movieContent}>
+        <div className="flex flex-col md:grid md:grid-cols-[75%_1fr] md:[&>*:nth-child(n+3)]:col-span-full">
           <CastSection cast={cast} />
           <MovieExtraInfo movie={movie} providers={providers} />
           <Media videos={videos} images={images} />
