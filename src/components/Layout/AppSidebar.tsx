@@ -1,0 +1,169 @@
+"use client";
+
+import {
+  Bookmark,
+  Compass,
+  Heart,
+  Home,
+  Sun01Icon,
+  Moon02Icon,
+  GlobeIcon,
+} from "@hugeicons/core-free-icons";
+import { HugeiconsIcon } from "@hugeicons/react";
+
+import { cn } from "@/lib/utils";
+import { Link, usePathname } from "@/i18n/navigation";
+import { useLocale, useTranslations } from "next-intl";
+import Image from "next/image";
+import logo from "@public/logo.png";
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarHeader,
+  SidebarMenuButton,
+  SidebarMenuItem,
+} from "@/components/ui/sidebar";
+import { useTheme } from "@/global/ThemeContext";
+import { useSearchParams } from "next/navigation";
+
+type NavItem = {
+  icon: typeof Home;
+  label: string;
+  url: string;
+};
+
+const NAV_ITEMS = [
+  { icon: Compass, label: "discover", url: "/discover" },
+  // { icon: Film, label: "Movies", url: "/movies" },
+  // { icon: Tv, label: "TV Shows", url: "/tv" },
+  // { icon: Star, label: "Top Rated", url: "/toprated" },
+  // { icon: Users, label: "Cast & Crew", url: "/actors" },
+  { icon: Bookmark, label: "watchlist", url: "/bookmark" },
+  { icon: Heart, label: "favorites", url: "/liked" },
+] as const satisfies NavItem[];
+
+export const AppSidebar = () => {
+  const pathname = usePathname();
+  const t = useTranslations("common");
+  return (
+    <Sidebar collapsible={"icon"} variant="sidebar">
+      <SidebarHeader>
+        <div className="w-15 h-15 rounded-xl flex items-center justify-center mx-auto">
+          <Link href={`/`} className="grid place-items-center p-0">
+            <Image src={logo} alt={"logo"} />
+          </Link>
+        </div>
+      </SidebarHeader>
+      <SidebarContent className={"p-1 px-2"}>
+        {NAV_ITEMS.map(({ icon: Icon, label, url }) => (
+          <SidebarMenuItem key={url}>
+            <AppSidebarMenuButton
+              isActive={pathname === url}
+              className={pathname === url ? "bg-primary/15 text-primary" : ""}
+              render={(props) => {
+                return (
+                  <Link {...props} href={url} title={label}>
+                    <AppSidebarContent icon={Icon} text={t(label)} />
+                    {pathname === url && (
+                      <span className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-8 bg-primary rounded-r-full" />
+                    )}
+                  </Link>
+                );
+              }}
+            />
+          </SidebarMenuItem>
+        ))}
+      </SidebarContent>
+      <SidebarFooter>
+        <SidebarMenuItem>
+          <SwitchLanguage />
+        </SidebarMenuItem>
+        <SidebarMenuItem>
+          <SwitchThemeButton />
+        </SidebarMenuItem>
+      </SidebarFooter>
+    </Sidebar>
+  );
+};
+
+const AppSidebarMenuButton: typeof SidebarMenuButton = (props) => {
+  return (
+    <SidebarMenuButton
+      {...props}
+      className={cn(
+        "h-auto group relative flex flex-col items-center justify-center w-full py-2.5 rounded-lg transition-all duration-200 gap-1",
+        "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground text-muted-foreground cursor-pointer",
+        props.className,
+      )}
+    />
+  );
+};
+
+type AppSidebarContentProps = {
+  icon: typeof Home;
+  text: string;
+};
+
+const AppSidebarContent = ({ icon, text }: AppSidebarContentProps) => {
+  return (
+    <>
+      <HugeiconsIcon icon={icon} className={"w-6! h-6!"} />
+      <span className="text-xs font-medium tracking-wide leading-none first-letter:capitalize">
+        {text}
+      </span>
+    </>
+  );
+};
+
+const SwitchLanguage = () => {
+  const t = useTranslations("common");
+  const locale = useLocale();
+  const nextLocale = locale == "es" ? "en-US" : "es";
+  const pathname = usePathname();
+  const params = useSearchParams();
+  return (
+    <AppSidebarMenuButton
+      render={(props) => (
+        <Link
+          {...props}
+          href={`${pathname}?${params.toString()}`}
+          locale={nextLocale}
+          title={t("language")}
+        >
+          <AppSidebarContent icon={GlobeIcon} text={t("language")} />
+        </Link>
+      )}
+    />
+  );
+};
+
+const SwitchThemeButton = () => {
+  const [theme, switchTheme] = useTheme();
+  const t = useTranslations("common");
+  return (
+    <AppSidebarMenuButton onClick={switchTheme}>
+      <div className="grid grid-cols-[100%_100%] overflow-hidden">
+        <div
+          className={cn(
+            "w-full transition-transform duration-300",
+            theme === "dark" ? "-translate-x-full" : "translate-x-0",
+          )}
+        >
+          <HugeiconsIcon icon={Moon02Icon} className={"w-6! h-6! mx-auto"} />
+        </div>
+        <div
+          className={cn(
+            "w-full transition-transform duration-300",
+            theme === "dark" ? "-translate-x-full" : "translate-x-0",
+          )}
+        >
+          <HugeiconsIcon icon={Sun01Icon} className={"w-6! h-6! mx-auto"} />
+        </div>
+      </div>
+      <span className="text-xs font-medium tracking-wide leading-none first-letter:capitalize">
+        {t("theme")}
+      </span>
+    </AppSidebarMenuButton>
+  );
+};

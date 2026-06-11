@@ -2,9 +2,12 @@ import { ReactNode } from "react";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { Providers } from "./providers";
-import { Layout } from "@/components/Layout/Layout";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
+import { Header } from "@/components/Layout/Header";
+import { Footer } from "@/components/Layout/Footer";
+import { AppSidebar } from "@/components/Layout/AppSidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
 
 type Props = {
   children: ReactNode;
@@ -20,7 +23,16 @@ export default async function LangLayout({ children, params }: Props) {
   return (
     <NextIntlClientProvider locale={lang} messages={messages}>
       <Providers>
-        <Layout>{children}</Layout>
+        <SidebarProvider>
+          <div className="min-h-screen bg-background flex">
+            <AppSidebar />
+            <div className="min-h-screen">
+              <Header />
+              <main className="isolate">{children}</main>
+              <Footer />
+            </div>
+          </div>
+        </SidebarProvider>
       </Providers>
     </NextIntlClientProvider>
   );

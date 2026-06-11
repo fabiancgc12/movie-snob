@@ -1,5 +1,4 @@
-import { useShowNavBarContext } from "@/global/ShowNavbarContext";
-import { CiMenuBurger } from "react-icons/ci";
+"use client";
 import { FormEvent, useRef } from "react";
 import Image from "next/image";
 import wideLogo from "@public/logo-wide.png";
@@ -7,6 +6,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useTranslations, useLocale } from "next-intl";
 import { cn } from "@/lib/utils";
+import { SidebarTrigger } from "@/components/ui/sidebar";
 
 type props = {
   className?: string;
@@ -15,7 +15,6 @@ type props = {
 export function Header({ className = "" }: props) {
   const t = useTranslations("common");
   const locale = useLocale();
-  const [showNavBar, setShowNavBar] = useShowNavBarContext();
   const searchRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
   const onSubmit = (e: FormEvent) => {
@@ -29,17 +28,13 @@ export function Header({ className = "" }: props) {
   return (
     <header
       className={cn(
-        "sticky top-0 z-[9] flex items-center justify-between gap-2.5 bg-[var(--primaryDarker-90)] p-2.5 backdrop-blur-[5px]",
+        "sticky top-0 z-9 flex items-center justify-between gap-2.5 bg-(--primaryDarker-90) p-2.5 backdrop-blur-[5px]",
         className,
       )}
     >
-      <button
-        onClick={() => setShowNavBar(!showNavBar)}
-        className="grid place-items-center rounded-full border-0 bg-transparent p-3 outline-0 md:hidden"
-      >
-        <CiMenuBurger size={20} />
-      </button>
-      <div className="relative h-full aspect-[2.4/1] max-md:hidden">
+      <SidebarTrigger className="grid place-items-center rounded-full border-0 bg-transparent outline-0 md:hidden" />
+
+      <div className="relative h-10 aspect-[2.4/1] md:hidden">
         <Link href={`/${locale}`} className="grid place-items-center p-0">
           <Image src={wideLogo} alt={"wide logo"} fill />
         </Link>
