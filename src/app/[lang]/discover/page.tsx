@@ -81,7 +81,7 @@ export default function DiscoverPage() {
           ))}
         </select>
       </form>
-      <div data-theme={theme} className={"full-h"}>
+      <div data-theme={theme} className={"h-full"}>
         <Section title={t("discoverPageTitle")}>
           <PosterGrid>
             <DynamicPosterList

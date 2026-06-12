@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { generateImageUrl } from "@/utils/functions/generateImageUrl";
 import { CSSProperties, useMemo } from "react";
 import { ActionToolTip } from "@/components/common/ActionToolTip";
@@ -10,8 +9,12 @@ import { FullDate } from "@/components/common/FullDate";
 import { VideoTrailerInterface } from "@/models/Movies/VideoMedia.interface";
 import { Video } from "@/components/Video/Video";
 import { useTranslations, useLocale } from "next-intl";
-import { useLang } from "@/hooks/useLang";
 import { cn } from "@/lib/utils";
+import { RatingAverage } from "@/components/common/Average";
+import { Button } from "@/components/ui/button";
+import { Link } from "@/i18n/navigation";
+import { InformationCircleIcon, PlayIcon } from "@hugeicons/core-free-icons";
+import { HugeiconsIcon } from "@hugeicons/react";
 
 type props = {
   data: MovieResumeInterface;
@@ -21,7 +24,6 @@ type props = {
 export function UpcomingBanner({ data, trailer }: props) {
   const t = useTranslations("common");
   const locale = useLocale();
-  const langPrefix = useLang();
   const bg = useMemo(
     () =>
       ({
@@ -29,11 +31,6 @@ export function UpcomingBanner({ data, trailer }: props) {
       }) as CSSProperties,
     [data],
   );
-  const bigTitleStyle = data.title.length >= 20 ? "text-xl" : "";
-  const readMore = t("readMore");
-  const watchTrailer = t("watchTrailer");
-  const addToBookmark = t("addToBookmark");
-  const addToLiked = t("addToLiked");
   return (
     <div
       className={cn(
@@ -44,52 +41,51 @@ export function UpcomingBanner({ data, trailer }: props) {
       style={bg}
     >
       <div className="flex flex-col gap-1.5 z-[2] max-lg:w-full lg:w-2/5">
-        <h2 className={cn("overflow-hidden line-clamp-2", bigTitleStyle)}>
+        <h2
+          className={cn(
+            "overflow-hidden line-clamp-2 text-2xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground mb-2 sm:mb-3 leading-tight",
+            data.title.length >= 20 && "text-xl",
+          )}
+        >
           {data.title}
         </h2>
-        <FullDate date={data.release_date} lang={locale} />
+        <div
+          className={
+            "flex flex-wrap items-center gap-1.5 sm:gap-3 mb-2 sm:mb-4 text-[12px] sm:text-base"
+          }
+        >
+          <RatingAverage rating={data.vote_average} size={40} />
+          <p className={"text-muted-foreground "}>
+            <FullDate date={data.release_date} lang={locale} />
+          </p>
+        </div>
+        <p className="text-muted-foreground text-[12px] sm:text-sm leading-snug mb-3 sm:mb-6 line-clamp-2 sm:line-clamp-3">
+          {data.overview}
+        </p>
         <div className="flex items-start gap-1.5">
-          <Link
-            className="rounded bg-primary text-primary-foreground px-3 py-2 no-underline"
-            href={`/${langPrefix}/movie/${data.id}`}
-          >
-            {readMore}
-          </Link>
           {trailer && (
             <Video video={trailer}>
-              <a className="rounded border border-border bg-input/30 px-3 py-2 text-foreground no-underline" href={"#"}>
-                {watchTrailer}
-              </a>
+              {(props) => {
+                return (
+                  <Button {...props} className={"rounded-md"}>
+                    <HugeiconsIcon icon={PlayIcon} />
+                    {t("watchTrailer")}
+                  </Button>
+                );
+              }}
             </Video>
           )}
-        </div>
-        <p className="max-lg:hidden">
-          <small className="block rounded-lg bg-slate-700/40 p-1 line-clamp-3">{data.overview}</small>
-        </p>
-        <div className="absolute top-4 right-4">
-          <ActionToolTip
-            buttonContent={<BsThreeDotsVertical />}
-            buttonSize={"sm"}
-          >
-            <div className="flex items-center gap-1.5">
-              <BookmarkButton
-                media={data}
-                mediaType={"movie"}
-                size={"xs"}
-                className="border-0"
-              />
-              <small>{addToBookmark}</small>
-            </div>
-            <div className="flex items-center gap-1.5">
-              <LikeButton
-                media={data}
-                mediaType={"movie"}
-                size={"xs"}
-                className="border-0"
-              />
-              <small>{addToLiked}</small>
-            </div>
-          </ActionToolTip>
+          <Button
+            variant={"outline"}
+            className={"rounded-md"}
+            nativeButton={false}
+            render={(props) => (
+              <Link {...props} href={`/movie/${data.id}`}>
+                <HugeiconsIcon icon={InformationCircleIcon} />
+                {t("readMore")}
+              </Link>
+            )}
+          ></Button>
         </div>
       </div>
     </div>

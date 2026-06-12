@@ -32,7 +32,7 @@ export default function BookMarkPage() {
   }, []);
 
   return (
-    <div data-theme={theme} className={"full-h"}>
+    <div data-theme={theme} className={"h-full"}>
       <Section title={t("bookmarkTitle")}>
         <Tabs>
           <TabList>

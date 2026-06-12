@@ -36,7 +36,7 @@ export default function LikedPage() {
   const tvFallback = t("fallbackTvMessage");
 
   return (
-    <div data-theme={theme} className={"full-h"}>
+    <div data-theme={theme} className={"h-full"}>
       <Section title={title}>
         <Tabs>
           <TabList>

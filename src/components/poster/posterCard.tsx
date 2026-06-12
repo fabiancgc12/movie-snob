@@ -33,8 +33,9 @@ export function PosterCard({ data, mediaType, isBackdrop = false }: props) {
   return (
     <article
       className={cn(
-        "relative w-[200px] p-0 m-0 isolate rounded-[0.5em] max-md:w-[40vw] max-md:min-w-[160px] max-md:max-w-[200px]",
-        isBackdrop && "w-[300px] max-md:w-[35vw] max-md:min-w-[220px] max-md:max-w-[300px]",
+        "m-0 p-0 bg-transparent relative w-[200px] p-0 m-0 isolate rounded-[0.5em] max-md:w-[40vw] max-md:min-w-[160px] max-md:max-w-[200px]",
+        isBackdrop &&
+          "w-[300px] max-md:w-[35vw] max-md:min-w-[220px] max-md:max-w-[300px]",
       )}
     >
       <Link href={`/${lang}/${type}/${data.id}`} className="no-underline">
@@ -48,9 +49,7 @@ export function PosterCard({ data, mediaType, isBackdrop = false }: props) {
             src={poster}
             alt={"title poster"}
             fill
-            className={cn(
-              isBackdrop ? "" : "rounded-t-[0.5em]",
-            )}
+            className={cn(isBackdrop ? "" : "rounded-t-[0.5em]")}
           />
         </div>
         <div className="absolute -translate-y-[60%] z-[4] px-[5px]">
@@ -73,10 +72,14 @@ export function SkeletonCard({ isBackdrop }: SkeletonProps) {
     <article
       className={cn(
         "relative w-[200px] p-0 m-0 isolate rounded-[0.5em] max-md:w-[40vw] max-md:min-w-[160px] max-md:max-w-[200px]",
-        isBackdrop && "w-[300px] max-md:w-[35vw] max-md:min-w-[220px] max-md:max-w-[300px]",
+        isBackdrop &&
+          "w-[300px] max-md:w-[35vw] max-md:min-w-[220px] max-md:max-w-[300px]",
       )}
     >
-      <Skeleton className="relative w-full aspect-[1/1.5]" containerClassName={"skeleton"} />
+      <Skeleton
+        className="relative w-full aspect-[1/1.5]"
+        containerClassName={"skeleton"}
+      />
       <div className="mt-3.5 p-1.5">
         <Skeleton containerClassName={"skeleton"} />
       </div>

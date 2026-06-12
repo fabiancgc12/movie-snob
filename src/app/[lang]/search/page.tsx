@@ -15,7 +15,7 @@ export default function FindPage() {
   const title = searchParams.get("title") ?? undefined;
 
   return (
-    <div data-theme={theme} className={"full-h"}>
+    <div data-theme={theme} className={"h-full"}>
       <Section title={t("find")}>
         <PosterGrid>
           <DynamicPosterList

@@ -7,7 +7,7 @@ import { notFound } from "next/navigation";
 import { Header } from "@/components/Layout/Header";
 import { Footer } from "@/components/Layout/Footer";
 import { AppSidebar } from "@/components/Layout/AppSidebar";
-import { SidebarProvider } from "@/components/ui/sidebar";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 
 type Props = {
   children: ReactNode;
@@ -23,16 +23,16 @@ export default async function LangLayout({ children, params }: Props) {
   return (
     <NextIntlClientProvider locale={lang} messages={messages}>
       <Providers>
-        <SidebarProvider>
-          <div className="min-h-screen bg-background flex">
+        <div className="min-h-screen bg-background">
+          <SidebarProvider>
             <AppSidebar />
-            <div className="min-h-screen min-w-0 w-full">
+            <div className="min-h-screen grid-rows-[auto_1fr_auto] flex-1 min-w-0">
               <Header />
-              <main className="isolate">{children}</main>
+              <main className="isolate h-full">{children}</main>
               <Footer />
             </div>
-          </div>
-        </SidebarProvider>
+          </SidebarProvider>
+        </div>
       </Providers>
     </NextIntlClientProvider>
   );

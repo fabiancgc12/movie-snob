@@ -6,7 +6,7 @@ import { MovieResumeInterface } from "@/models/Movies/MovieResume.interface";
 import { UpcomingBanner } from "@/components/mainBanner/UpcomingBanner";
 import { useInView } from "react-intersection-observer";
 import { Spinner } from "@/components/common/Spinner";
-import { useEffect, useState } from "react";
+import { ComponentProps, useEffect, useState } from "react";
 import { MovieGenres, MovieGenresSpanish } from "@/utils/movieGenres";
 import { SliderSection } from "@/components/Slider/SliderSection";
 import { VideoTrailerInterface } from "@/models/Movies/VideoMedia.interface";
@@ -15,11 +15,22 @@ import { Section } from "@/components/Section/Section";
 import { Slider } from "@/components/Slider/Slider";
 import { useTheme } from "@/global/ThemeContext";
 import { useLang } from "@/hooks/useLang";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 type props = {
   upcoming: MovieResumeInterface[];
   upcomingTrailers: VideoTrailerInterface[];
   dehydratedState: unknown;
+};
+
+const carouselOptions: ComponentProps<typeof Carousel>["opts"] = {
+  loop: true,
 };
 
 export function HomeContent({ upcoming, upcomingTrailers }: props) {
@@ -31,16 +42,20 @@ export function HomeContent({ upcoming, upcomingTrailers }: props) {
   const popularMoviesLabel = t("popularMoviesLabel");
   const popularTvLabel = t("popularTvLabel");
   return (
-    <>
-      <SlideShow>
-        {upcoming.slice(0, 8).map((u, i) => (
-          <UpcomingBanner
-            key={`banner-${u.id}`}
-            data={u}
-            trailer={upcomingTrailers[i]}
-          />
-        ))}
-      </SlideShow>
+    <div className={"w-full"}>
+      <Carousel opts={carouselOptions}>
+        <CarouselContent className={"z-10"}>
+          {upcoming.slice(0, 8).map((u, i) => (
+            <CarouselItem key={u.id}>
+              <UpcomingBanner data={u} trailer={upcomingTrailers[i]} />
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <CarouselPrevious
+          className={"left-4 z-50 translate-y-0 hidden md:flex"}
+        />
+        <CarouselNext className={"right-4 z-50 translate-y-0 hidden md:flex"} />
+      </Carousel>
       <div data-theme={theme}>
         <SliderSection title={trendingLabel} speed={450}>
           <DynamicPosterList
@@ -83,7 +98,7 @@ export function HomeContent({ upcoming, upcomingTrailers }: props) {
         </SliderSection>
       </div>
       <GenreSection />
-    </>
+    </div>
   );
 }
 

@@ -46,93 +46,9 @@ div[data-theme="dark"] .react-loading-skeleton,
   border-radius: 15px;
 }
 
-section,
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin: 0;
-}
-
-article {
-  margin: 0;
-  padding: 0;
-  background: transparent;
-}
-
-.badge {
-  background: var(--primaryLight);
-  color: inherit;
-  padding: 0.15em 0.35em;
-  border-radius: 0.45em;
-}
-
-.badge:hover,
-.badge:focus {
-  background: var(--primaryColor);
-  text-decoration: none;
-}
-
-.placeholderImage {
-  background: var(--primaryLight);
-  padding: 0.5em;
-}
-
-[aria-roledescription="carousel"] {
-  position: relative;
-}
-
-[aria-roledescription="carousel"] .indicators {
-  position: absolute;
-  width: 100%;
-  bottom: 0;
-  z-index: 2;
-}
-
-@media screen and (min-width: 768px) {
-  .badge {
-    font-size: 0.75em;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  [aria-roledescription="carousel"] .indicators.indicators {
-    display: none;
-  }
-}
-
-.noBorder {
-  border: 0;
-}
-
-.fa-spin {
-  animation: fa-spin 2s infinite linear;
-}
-
-@keyframes fa-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(359deg);
-  }
-}
 
 .skeleton[aria-busy="true"]::before {
   content: none;
-}
-
-.alignCenter {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-:where(dl, ol, ul) li {
-  margin: 0;
 }
 
 .react-tabs__tab--selected {
@@ -141,10 +57,6 @@ article {
 
 .react-tabs__tab:focus:after {
   background: var(--background);
-}
-
-.full-h {
-  height: 100%;
 }
 
 /*  ---break---*/
@@ -287,4 +199,40 @@ article {
   html {
     @apply font-sans;
   }
+
+  section,
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 0;
+  }
+
+  .badge {
+    background: var(--primaryLight);
+    color: inherit;
+    padding: 0.15em 0.35em;
+    border-radius: 0.45em;
+  }
+
+  .badge:hover,
+  .badge:focus {
+    background: var(--primaryColor);
+    text-decoration: none;
+  }
+
+  .placeholderImage {
+    background: var(--primaryLight);
+    padding: 0.5em;
+  }
+
+  @media screen and (min-width: 768px) {
+    .badge {
+      font-size: 0.75em;
+    }
+  }
+
 }
