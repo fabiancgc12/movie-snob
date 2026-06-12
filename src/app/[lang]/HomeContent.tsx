@@ -1,12 +1,11 @@
 "use client";
 
 import { DynamicPosterList, PosterList } from "@/components/poster/posterList";
-import { SlideShow } from "@/components/SlideShow/SlideShow";
 import { MovieResumeInterface } from "@/models/Movies/MovieResume.interface";
 import { UpcomingBanner } from "@/components/mainBanner/UpcomingBanner";
 import { useInView } from "react-intersection-observer";
 import { Spinner } from "@/components/common/Spinner";
-import { ComponentProps, useEffect, useState } from "react";
+import { ComponentProps, useEffect, useRef, useState } from "react";
 import { MovieGenres, MovieGenresSpanish } from "@/utils/movieGenres";
 import { SliderSection } from "@/components/Slider/SliderSection";
 import { VideoTrailerInterface } from "@/models/Movies/VideoMedia.interface";
@@ -22,6 +21,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
 
 type props = {
   upcoming: MovieResumeInterface[];
@@ -41,9 +41,10 @@ export function HomeContent({ upcoming, upcomingTrailers }: props) {
   const upcomingLabel = t("upcomingLabel");
   const popularMoviesLabel = t("popularMoviesLabel");
   const popularTvLabel = t("popularTvLabel");
+  const plugin = useRef([Autoplay({ delay: 8000, stopOnInteraction: true })]);
   return (
     <div className={"w-full"}>
-      <Carousel opts={carouselOptions}>
+      <Carousel opts={carouselOptions} plugins={plugin.current}>
         <CarouselContent className={"z-10"}>
           {upcoming.slice(0, 8).map((u, i) => (
             <CarouselItem key={u.id}>
