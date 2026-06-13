@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 
 export type TitleLinksProps =
   | {
@@ -28,29 +28,25 @@ export function Section({
   size = "md",
 }: props) {
   const sizeStyle = size == "sm" ? "text-xl" : "";
-  let titleContent: ReactNode = title;
-  if (titleAsLink)
-    titleContent = (
-      <Link
-        href={url}
-        className="relative !text-inherit group/title"
-      >
-        {title}
-        <span
-          className="absolute grid place-content-center text-[50px] left-[calc(100%+10px)] top-[45%] -translate-y-[55%] no-underline h-full transition-transform duration-300 group-hover/title:translate-x-2.5 group-hover/title:-translate-y-[55%]"
-        >
-          &rsaquo;
-        </span>
-      </Link>
-    );
   return (
-    <section className={`p-4 ${className}`}>
-      <h3 className={`relative pl-8 capitalize ${sizeStyle}`}>
+    <section className={`p-4 group/title ${className}`}>
+      <h3
+        className={`relative pl-8 capitalize text-lg font-bold text-foreground tracking-tight ${sizeStyle}`}
+      >
         <span
-          className="absolute top-1/2 left-0 h-[70%] w-[5px] bg-[#8b0000] -translate-y-1/2 rounded-md"
+          className="absolute top-1/2 left-0 h-[90%] w-1 bg-primary -translate-y-1/2 rounded-md"
           style={{ content: '""' }}
         />
-        {titleContent}
+        {titleAsLink ? (
+          <Link href={url} className="relative !text-inherit">
+            {title}
+            <span className="absolute grid place-content-center text-[50px] left-[calc(100%+10px)] top-[45%] -translate-y-[55%] no-underline h-full transition-transform duration-300 group-hover/title:translate-x-2.5 group-hover/title:-translate-y-[55%]">
+              &rsaquo;
+            </span>
+          </Link>
+        ) : (
+          title
+        )}
       </h3>
       {children}
     </section>

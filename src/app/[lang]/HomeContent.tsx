@@ -136,7 +136,7 @@ function GenreSection() {
   const noMovies = t("noMovies");
 
   return (
-    <div>
+    <div className={"space-y-10"}>
       {genres.map((g, i) => {
         return (
           <div
@@ -146,7 +146,7 @@ function GenreSection() {
             <Section
               title={g.name}
               titleAsLink={true}
-              url={`/${langPrefix}/discover?media=movie&genre=${g.id}`}
+              url={`/discover?media=movie&genre=${g.id}`}
             >
               <Slider speed={450}>
                 <InfinitePosterList
