@@ -2,7 +2,7 @@
 
 import { Section } from "@/components/Section/Section";
 import { PosterGrid } from "@/components/poster/PosterGrid";
-import { DynamicPosterList } from "@/components/poster/posterList";
+import { InfinitePosterList } from "@/components/poster/infinitePosterListProps";
 import { useTranslations, useLocale } from "next-intl";
 import { useTheme } from "@/global/ThemeContext";
 import { useSearchParams } from "next/navigation";
@@ -18,7 +18,7 @@ export default function FindPage() {
     <div data-theme={theme} className={"h-full"}>
       <Section title={t("find")}>
         <PosterGrid>
-          <DynamicPosterList
+          <InfinitePosterList
             mediaType={"movie"}
             api={"search"}
             queryKey={["search", title, locale]}

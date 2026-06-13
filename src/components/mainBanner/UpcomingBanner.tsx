@@ -1,10 +1,6 @@
 import { generateImageUrl } from "@/utils/functions/generateImageUrl";
 import { CSSProperties, useMemo } from "react";
-import { ActionToolTip } from "@/components/common/ActionToolTip";
-import { BookmarkButton } from "@/components/common/ActionButton/chechMarkButton";
 import { MovieResumeInterface } from "@/models/Movies/MovieResume.interface";
-import { LikeButton } from "@/components/common/ActionButton/LikeButton";
-import { BsThreeDotsVertical } from "react-icons/bs";
 import { FullDate } from "@/components/common/FullDate";
 import { VideoTrailerInterface } from "@/models/Movies/VideoMedia.interface";
 import { Video } from "@/components/Video/Video";

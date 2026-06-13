@@ -5,22 +5,28 @@ import {
   StoreProductType,
   useCheckedButton,
 } from "@/components/common/ActionButton/useCheckedButton";
-import { FaRegBookmark, FaBookmark } from "react-icons/fa";
+import { Bookmark02Icon, HugeiconsFreeIcons } from "@hugeicons/core-free-icons";
+import { HugeiconsIcon } from "@hugeicons/react";
 
-export type props = {
+export type BookmarkButtonProps = {
   mediaType: "movie" | "tv";
   media: StoreProductType;
   className?: string;
   size?: "xs" | "sm" | "md";
 };
 
-export function BookmarkButton(props: props) {
+export function BookmarkButton(props: BookmarkButtonProps) {
   return <Button key={`${props.mediaType}-${props.media}`} {...props} />;
 }
 
 export const bookmarkStoreKey = "checked";
 
-function Button({ mediaType, media, size, className = "" }: props) {
+function Button({
+  mediaType,
+  media,
+  size,
+  className = "",
+}: BookmarkButtonProps) {
   const [checked, onClick] = useCheckedButton(
     bookmarkStoreKey,
     mediaType,
@@ -28,11 +34,15 @@ function Button({ mediaType, media, size, className = "" }: props) {
   );
   return (
     <ActionButton
-      className={`text-[var(--secondaryDark)] ${className}`}
+      className={"hover:bg-primary hover:text-primary-foreground"}
       onClick={onClick}
       size={size}
     >
-      {checked ? <FaBookmark size={24} /> : <FaRegBookmark size={24} />}
+      {checked ? (
+        <HugeiconsIcon icon={Bookmark02Icon} size={16} />
+      ) : (
+        <HugeiconsIcon icon={Bookmark02Icon} size={16} />
+      )}
     </ActionButton>
   );
 }

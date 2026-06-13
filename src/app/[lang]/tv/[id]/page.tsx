@@ -1,7 +1,7 @@
 import { getTvShow } from "@/services/tv/getTv";
 
 import { CastSection } from "@/components/CastSection/CastSection";
-import { PosterList } from "@/components/poster/posterList";
+import { PosterList } from "@/components/poster/infinitePosterListProps";
 import { MediaBanner } from "@/components/ProductBanner/ProductBanner";
 import { TvExtraInfo } from "@/components/ExtraInfo/TvExtraInfo";
 import { SeasonsList } from "@/components/Seasons/SeasonsList";

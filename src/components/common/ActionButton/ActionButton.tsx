@@ -15,14 +15,14 @@ export function ActionButton({
   children,
 }: props) {
   const sizeStyles = {
-    sm: "text-sm w-10 p-2",
-    xs: "text-sm w-10 p-1",
-    md: "text-base w-14 p-3.5",
+    sm: "text-sm w-7 h-7 p-2",
+    xs: "text-sm w-7 h-7 p-1",
+    md: "text-base w-14 h-14 p-3.5",
   };
   return (
     <button
       className={cn(
-        "inline-block rounded-full bg-[hsl(205deg,15%,41%,0.4)] mb-0",
+        "cursor-pointer aspect-square rounded-full bg-background/80 backdrop-blur-sm flex items-center justify-center transition-colors",
         sizeStyles[size],
         className,
       )}

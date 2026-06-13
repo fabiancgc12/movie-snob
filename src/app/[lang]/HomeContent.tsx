@@ -1,6 +1,9 @@
 "use client";
 
-import { DynamicPosterList, PosterList } from "@/components/poster/posterList";
+import {
+  InfinitePosterList,
+  PosterList,
+} from "@/components/poster/infinitePosterListProps";
 import { MovieResumeInterface } from "@/models/Movies/MovieResume.interface";
 import { UpcomingBanner } from "@/components/mainBanner/UpcomingBanner";
 import { useInView } from "react-intersection-observer";
@@ -59,7 +62,7 @@ export function HomeContent({ upcoming, upcomingTrailers }: props) {
       </Carousel>
       <div data-theme={theme}>
         <SliderSection title={trendingLabel} speed={450}>
-          <DynamicPosterList
+          <InfinitePosterList
             mediaType={"movie"}
             enabled={false}
             api={"trending"}
@@ -80,7 +83,7 @@ export function HomeContent({ upcoming, upcomingTrailers }: props) {
       </div>
       <div data-theme={theme}>
         <SliderSection title={popularMoviesLabel} speed={450}>
-          <DynamicPosterList
+          <InfinitePosterList
             mediaType={"movie"}
             enabled={false}
             api={"popularMovies"}
@@ -89,7 +92,7 @@ export function HomeContent({ upcoming, upcomingTrailers }: props) {
           />
         </SliderSection>
         <SliderSection title={popularTvLabel} speed={450}>
-          <DynamicPosterList
+          <InfinitePosterList
             mediaType={"tv"}
             enabled={false}
             api={"popularTv"}
@@ -146,7 +149,7 @@ function GenreSection() {
               url={`/${langPrefix}/discover?media=movie&genre=${g.id}`}
             >
               <Slider speed={450}>
-                <DynamicPosterList
+                <InfinitePosterList
                   mediaType={"movie"}
                   api={`discoverMovies`}
                   parameters={{

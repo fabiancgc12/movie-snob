@@ -2,8 +2,9 @@
 
 import { cn } from "@/lib/utils";
 import { ReactNode, useCallback, useRef, useState } from "react";
-import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import useResizeObserver from "@react-hook/resize-observer";
+import { ArrowLeft01Icon, ArrowRight01Icon } from "@hugeicons/core-free-icons";
+import { HugeiconsIcon } from "@hugeicons/react";
 
 export type SliderProps = {
   className?: string;
@@ -41,7 +42,7 @@ export function Slider({ className = "", children, speed = 200 }: SliderProps) {
   return (
     <div className={cn("relative flex items-center", className)}>
       <PrevArrow
-        className={cn("absolute", showPrevArrow ? "animate-[fadeIn_0.35s_forwards]" : "animate-[fadeOut_0.35s_forwards]")}
+        showArrow={showPrevArrow}
         onClick={() => moveSlider(speed * -1)}
       />
       <figure
@@ -52,33 +53,49 @@ export function Slider({ className = "", children, speed = 200 }: SliderProps) {
       >
         {children}
       </figure>
-      <NextArrow
-        className={cn("absolute", showNextArrow ? "animate-[fadeIn_0.35s_forwards]" : "animate-[fadeOut_0.35s_forwards]")}
-        onClick={() => moveSlider(speed)}
-      />
+      <NextArrow showArrow={showNextArrow} onClick={() => moveSlider(speed)} />
     </div>
   );
 }
 
 type ArrowProps = {
   onClick: () => void;
-  className?: string;
+  showArrow: boolean;
 };
 
-const arrowBase = "h-16 w-12 flex items-center justify-center py-2 px-1 bg-[var(--primaryColor-60)] rounded-md border border-[whitesmoke] m-0 z-10 hover:bg-[var(--primaryColor-60)]";
+const arrowBase =
+  "absolute h-16 w-12 flex items-center justify-center py-2 px-1 bg-[var(--primaryColor-60)] rounded-md border border-[whitesmoke] m-0 z-10 hover:bg-[var(--primaryColor-60)] cursor-pointer text-muted-foreground hover:text-white transition-all";
 
-export const NextArrow = ({ onClick, className = "" }: ArrowProps) => {
+export const NextArrow = ({ onClick, showArrow }: ArrowProps) => {
   return (
-    <button className={cn(arrowBase, "right-0", className)} onClick={onClick}>
-      <AiOutlineRight size={32} className="w-full text-[whitesmoke] hover:text-[var(--primaryLight)]" />
+    <button
+      className={cn(
+        arrowBase,
+        showArrow
+          ? "animate-[fadeIn_0.35s_forwards]"
+          : "animate-[fadeOut_0.35s_forwards]",
+        "right-0",
+      )}
+      onClick={onClick}
+    >
+      <HugeiconsIcon icon={ArrowRight01Icon} />
     </button>
   );
 };
 
-export function PrevArrow({ onClick, className = "" }: ArrowProps) {
+const PrevArrow = ({ onClick, showArrow }: ArrowProps) => {
   return (
-    <button className={cn(arrowBase, "left-0", className)} onClick={onClick}>
-      <AiOutlineLeft size={32} className="w-full text-[whitesmoke] hover:text-[var(--primaryLight)]" />
+    <button
+      className={cn(
+        arrowBase,
+        showArrow
+          ? "animate-[fadeIn_0.35s_forwards]"
+          : "animate-[fadeOut_0.35s_forwards]",
+        "left-0",
+      )}
+      onClick={onClick}
+    >
+      <HugeiconsIcon icon={ArrowLeft01Icon} />
     </button>
   );
-}
+};

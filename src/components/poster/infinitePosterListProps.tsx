@@ -42,7 +42,7 @@ export function PosterList({
   );
 }
 
-type posterlist = {
+type InfinitePosterListProps = {
   mediaType: MediaType;
   api: string;
   parameters?: Record<string, any>;
@@ -52,7 +52,7 @@ type posterlist = {
   fallbackMessage: string;
 };
 
-export function DynamicPosterList({
+export function InfinitePosterList({
   mediaType,
   api,
   enabled = true,
@@ -60,7 +60,7 @@ export function DynamicPosterList({
   queryKey,
   isBackdrop,
   fallbackMessage,
-}: posterlist) {
+}: InfinitePosterListProps) {
   const t = useTranslations("common");
   const locale = useLocale();
   if (!parameters.page) parameters.page = 1;
@@ -107,7 +107,9 @@ export function DynamicPosterList({
     return (
       <div className="self-start">
         <p>{message}</p>
-        <button onClick={() => refetch()} className="text-xs">{retry}</button>
+        <button onClick={() => refetch()} className="text-xs">
+          {retry}
+        </button>
       </div>
     );
   }

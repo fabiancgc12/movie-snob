@@ -1,7 +1,7 @@
 "use client";
 
 import { Section } from "@/components/Section/Section";
-import { PosterList } from "@/components/poster/posterList";
+import { PosterList } from "@/components/poster/infinitePosterListProps";
 import { useEffect, useState } from "react";
 import {
   ProductStore,

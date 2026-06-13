@@ -9,7 +9,7 @@ export type ProductStore = Record<
     {
       id: number;
       vote_average: number;
-      poster_path: string;
+      poster_path: string | undefined;
       title?: string;
       name?: string;
     }
@@ -24,7 +24,7 @@ const defaultValue: ProductStore = {
 export type StoreProductType = {
   id: number;
   vote_average: number;
-  poster_path: string;
+  poster_path?: string;
   name?: string;
   title?: string;
 };
