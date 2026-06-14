@@ -106,9 +106,19 @@ export function SkeletonCard({ isBackdrop }: SkeletonProps) {
           "w-[300px] max-md:w-[35vw] max-md:min-w-[220px] max-md:max-w-[300px]",
       )}
     >
-      <Skeleton className="relative w-full aspect-[1/1.5]" />
-      <div className="mt-3.5 p-1.5">
-        <Skeleton className="w-full h-4" />
+      <div
+        className={cn(
+          "relative w-full overflow-hidden rounded-[0.5em]",
+          isBackdrop ? "aspect-video" : "aspect-[1/1.5]",
+        )}
+      >
+        <Skeleton className="absolute inset-0 w-full h-full" />
+      </div>
+      <div className="mt-2.5 px-0.5">
+        <div className="flex items-start justify-between gap-1">
+          <Skeleton className="h-4 flex-1" />
+          <Skeleton className="h-3 w-6" />
+        </div>
       </div>
     </article>
   );
