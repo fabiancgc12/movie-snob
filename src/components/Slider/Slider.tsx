@@ -45,8 +45,7 @@ export function Slider({ className = "", children, speed = 200 }: SliderProps) {
         onClick={() => moveSlider(speed * -1)}
       />
       <figure
-        className="w-full text-xl flex flex-row flex-nowrap items-stretch py-2 px-0 gap-[var(--gap)] scroll-smooth snap-x snap-mandatory scroll-pl-[var(--gap)] overflow-x-auto overscroll-x-contain snap-always [&>*]:shrink-0 [&>*:not(.loader)]:snap-start [&>*:not(.loader)]:items-start"
-        style={{ "--gap": "10px" } as React.CSSProperties}
+        className="w-full text-xl flex flex-row flex-nowrap items-stretch py-2 px-0 gap-2.5 scroll-smooth snap-x snap-mandatory scroll-pl-[var(--gap)] overflow-x-auto overscroll-x-contain snap-always [&>*]:shrink-0 [&>*:not(.loader)]:snap-start [&>*:not(.loader)]:items-start"
         ref={sliderRef}
         onScroll={onScroll}
       >
