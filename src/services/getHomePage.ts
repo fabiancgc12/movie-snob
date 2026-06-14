@@ -9,7 +9,7 @@ import { getUpcoming } from "@/services/movies/getUpcoming";
 import { getMovieVideos } from "@/services/movies/getMovieVideos";
 import { VideoTrailerInterface } from "@/models/Movies/VideoMedia.interface";
 
-export async function getHomePage(locale?: string): Promise<{
+export async function getHomePage(locale: string): Promise<{
   upcoming: MovieResumeInterface[];
   upcomingTrailers: VideoTrailerInterface[];
   popular: {

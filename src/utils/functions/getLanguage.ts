@@ -1,4 +1,4 @@
-export function getImdbLocale(locale?: string | string[]) {
+export const getImdbLocale = (locale: string) => {
   if (locale == "es") return "es-mx";
   return locale;
-}
+};

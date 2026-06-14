@@ -3,11 +3,15 @@ import { getImdbLocale } from "@/utils/functions/getLanguage";
 import { env } from "../../../env";
 
 export async function getUpcoming(
-  locale?: string | string[],
+  locale: string,
 ): Promise<UpcomingMoviesResponse> {
   locale = getImdbLocale(locale);
+  const params = new URLSearchParams({
+    api_key: env.TMDB_KEY,
+    language: locale,
+  });
   const response = await fetch(
-    `https://api.themoviedb.org/3/movie/upcoming?api_key=${env.TMDB_KEY}&language=${locale}`,
+    `https://api.themoviedb.org/3/movie/upcoming?${params}`,
   );
   return response.json();
 }

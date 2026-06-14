@@ -5,7 +5,7 @@ import { env } from "../../../env";
 type options = {
   genre?: string | string[];
   page?: number;
-  locale?: string | string[];
+  locale: string;
 };
 export async function getMovieDiscover({
   genre,

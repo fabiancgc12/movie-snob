@@ -7,7 +7,7 @@ export async function GET(request: NextRequest) {
   const parameters = {
     genre: searchParams.get("genre") ?? undefined,
     page: Number(searchParams.get("page")),
-    locale: searchParams.get("locale") ?? undefined,
+    locale: searchParams.get("locale") ?? "en",
   };
   const data = await getMovieDiscover(parameters);
   return NextResponse.json<DiscoverMovieResponseInterface>(data);

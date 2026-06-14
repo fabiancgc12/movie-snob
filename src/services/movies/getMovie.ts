@@ -20,7 +20,6 @@ import { CreditsDto } from "@/models/dto/Credit.dto";
 import { getImdbLocale } from "@/utils/functions/getLanguage";
 import { extractLanguageFromLocale } from "@/utils/functions/extractLanguageFromLocale";
 import { env } from "../../../env";
-import { SearchParamsContext } from "next/dist/shared/lib/hooks-client-context.shared-runtime";
 
 type ApiResponse = MovieInterface & {
   videos: VideoMediaResponse;
@@ -31,7 +30,7 @@ type ApiResponse = MovieInterface & {
 };
 export async function getMovie(
   id: number,
-  locale?: string | string[],
+  locale: string,
 ): Promise<{
   movie: MovieInterface;
   credits: CreditsDto;
@@ -42,10 +41,15 @@ export async function getMovie(
 }> {
   locale = getImdbLocale(locale);
   const languageWithoutCountry = extractLanguageFromLocale(locale);
+  const params = new URLSearchParams({
+    api_key: env.TMDB_KEY,
+    language: locale,
+    append_to_response: "videos,images,credits,watch/providers,recommendations",
+    include_image_language: `${languageWithoutCountry},null`,
+    include_video_language: locale,
+  });
   const response = await fetch(
-    `https://api.themoviedb.org/3/movie/${id}?api_key=${env.TMDB_KEY}&language=${locale}&` +
-      `append_to_response=videos,images,credits,watch/providers,recommendations&` +
-      `include_image_language=${languageWithoutCountry},null&include_video_language=${locale}`,
+    `https://api.themoviedb.org/3/movie/${id}?${params}`,
   );
   const data: ApiResponse = await response.json();
   try {

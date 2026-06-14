@@ -58,21 +58,24 @@ export function Slider({ className = "", children, speed = 200 }: SliderProps) {
 
 type ArrowProps = {
   onClick: () => void;
-  showArrow: boolean;
+  showArrow?: boolean;
+  className?: string;
 };
 
 const arrowBase =
   "absolute h-16 w-12 flex items-center justify-center py-2 px-1 bg-[var(--primaryColor-60)] rounded-md border border-[whitesmoke] m-0 z-10 hover:bg-[var(--primaryColor-60)] cursor-pointer text-muted-foreground hover:text-white transition-all";
 
-export const NextArrow = ({ onClick, showArrow }: ArrowProps) => {
+export const NextArrow = ({ onClick, showArrow, className }: ArrowProps) => {
   return (
     <button
       className={cn(
         arrowBase,
-        showArrow
-          ? "animate-[fadeIn_0.35s_forwards]"
-          : "animate-[fadeOut_0.35s_forwards]",
+        showArrow !== undefined &&
+          (showArrow
+            ? "animate-[fadeIn_0.35s_forwards]"
+            : "animate-[fadeOut_0.35s_forwards]"),
         "right-0",
+        className,
       )}
       onClick={onClick}
     >

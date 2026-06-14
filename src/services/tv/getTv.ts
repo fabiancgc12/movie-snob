@@ -31,7 +31,7 @@ type ApiResponse = TvShowInterface & {
 
 export async function getTvShow(
   id: number,
-  locale?: string | string[],
+  locale: string,
 ): Promise<{
   show: TvShowInterface;
   credits: CreditsDto;
@@ -42,10 +42,16 @@ export async function getTvShow(
 }> {
   locale = getImdbLocale(locale);
   const languageWithoutCountry = extractLanguageFromLocale(locale);
+  const params = new URLSearchParams({
+    api_key: env.TMDB_KEY,
+    language: locale,
+    include_image_language: `${languageWithoutCountry},null`,
+    append_to_response:
+      "videos,recommendations,aggregate_credits,images,watch/providers",
+    include_video_language: locale,
+  });
   const response = await fetch(
-    `https://api.themoviedb.org/3/tv/${id}?api_key=${env.TMDB_KEY}&language=${locale}&` +
-      `include_image_language=${languageWithoutCountry},null&append_to_response=videos,recommendations,aggregate_credits,images,watch/providers&` +
-      `include_video_language=${locale}`,
+    `https://api.themoviedb.org/3/tv/${id}?${params}`,
   );
   const data: ApiResponse = await response.json();
   try {
