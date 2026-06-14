@@ -23,12 +23,6 @@ body,
   --secondaryDark: #002171;
 }
 
-div[data-theme="dark"] .react-loading-skeleton,
-.dark .react-loading-skeleton {
-  --base-color: #313131 !important;
-  --highlight-color: #525252 !important;
-}
-
 :is(*, *::before, *::after)::-webkit-scrollbar {
   --size: 0.3em;
   height: var(--size);
@@ -46,10 +40,6 @@ div[data-theme="dark"] .react-loading-skeleton,
   border-radius: 15px;
 }
 
-
-.skeleton[aria-busy="true"]::before {
-  content: none;
-}
 
 .react-tabs__tab--selected {
   background: var(--background);

@@ -1,4 +1,3 @@
-import "react-loading-skeleton/dist/skeleton.css";
 import "react-tabs/style/react-tabs.css";
 import "@/styles/globals.css";
 import { Figtree } from "next/font/google";

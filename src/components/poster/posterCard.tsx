@@ -1,16 +1,12 @@
 import Image from "next/image";
-import React from "react";
-import { Average, RatingAverage } from "@/components/common/Average";
+import { RatingAverage } from "@/components/common/Average";
 import { generateImageUrl } from "@/utils/functions/generateImageUrl";
-import Skeleton from "react-loading-skeleton";
+import { Skeleton } from "@/components/ui/skeleton";
 import { MediaType } from "@/models/MediaType";
 import { cn } from "@/lib/utils";
 import { Link } from "@/i18n/navigation";
 import { Star } from "lucide-react";
-import {
-  Button,
-  LikeButton,
-} from "@/components/common/ActionButton/LikeButton";
+import { LikeButton } from "@/components/common/ActionButton/LikeButton";
 import { BookmarkButton } from "@/components/common/ActionButton/chechMarkButton";
 
 export type PosterType = {
@@ -110,12 +106,9 @@ export function SkeletonCard({ isBackdrop }: SkeletonProps) {
           "w-[300px] max-md:w-[35vw] max-md:min-w-[220px] max-md:max-w-[300px]",
       )}
     >
-      <Skeleton
-        className="relative w-full aspect-[1/1.5]"
-        containerClassName={"skeleton"}
-      />
+      <Skeleton className="relative w-full aspect-[1/1.5]" />
       <div className="mt-3.5 p-1.5">
-        <Skeleton containerClassName={"skeleton"} />
+        <Skeleton className="w-full h-4" />
       </div>
     </article>
   );
