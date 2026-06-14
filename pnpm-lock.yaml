@@ -18,8 +18,8 @@ importers:
         specifier: ^4.3.0
         version: 4.3.0
       '@tanstack/react-query':
-        specifier: ^4.24.10
-        version: 4.44.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+        specifier: ^5.101.0
+        version: 5.101.0(react@19.2.7)
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -990,20 +990,13 @@ packages:
   '@tailwindcss/postcss@4.3.0':
     resolution: {integrity: sha512-Jm05Tjx+9yCLGv5qw1c+84Psds8MnyrEQYCB+FFk2lgGiUjlRqdxke4mVTuYrj2xnVZqKim2Apr5ySuQRYAw/w==}
 
-  '@tanstack/query-core@4.44.0':
-    resolution: {integrity: sha512-swSgb7OiPRR3UuIL7NuDrZNSMGmQD+wdtHxPD7j60SvBEnxbXurl5XOirtGEX2gm2hbK6mC8kMV1I+uO3l0UOw==}
+  '@tanstack/query-core@5.101.0':
+    resolution: {integrity: sha512-cQetA74EB+seWySv1TTKr828TnP0u39m6LykwDXIo84SNortpDkp30TMEjkqtYCNP9c40uT/iwl6MLiufEt0Ow==}
 
-  '@tanstack/react-query@4.44.0':
-    resolution: {integrity: sha512-RuIqHYrS98LrK/8kJJOJMMSQ/BCpojwsXDh7p0fBmp38ZOz6dlk+uyFRRusH+V+t3POoCsDOQ2zhomEYOeReXw==}
+  '@tanstack/react-query@5.101.0':
+    resolution: {integrity: sha512-rLlJXSpkqfizLWgkR5+eLeIk0MvTx/meEIR7LRjxic+qxiQP8zVjq7BqQkiCMNLQBlLfuOLqqr6KO5GtrDlmSg==}
     peerDependencies:
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-      react-native: '*'
-    peerDependenciesMeta:
-      react-dom:
-        optional: true
-      react-native:
-        optional: true
+      react: ^18 || ^19
 
   '@ts-morph/common@0.27.0':
     resolution: {integrity: sha512-Wf29UqxWDpc+i61k3oIOzcUfQt79PIT9y/MWfAGlrkjg6lBC1hwDECLXPVJAhWjiGbfBCxZd65F/LIZF3+jeJQ==}
@@ -4360,15 +4353,12 @@ snapshots:
       postcss: 8.5.15
       tailwindcss: 4.3.0
 
-  '@tanstack/query-core@4.44.0': {}
+  '@tanstack/query-core@5.101.0': {}
 
-  '@tanstack/react-query@4.44.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7)':
+  '@tanstack/react-query@5.101.0(react@19.2.7)':
     dependencies:
-      '@tanstack/query-core': 4.44.0
+      '@tanstack/query-core': 5.101.0
       react: 19.2.7
-      use-sync-external-store: 1.6.0(react@19.2.7)
-    optionalDependencies:
-      react-dom: 19.2.7(react@19.2.7)
 
   '@ts-morph/common@0.27.0':
     dependencies:

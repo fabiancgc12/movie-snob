@@ -17,6 +17,7 @@ import { Section } from "@/components/Section/Section";
 import { Slider } from "@/components/Slider/Slider";
 import { useTheme } from "@/global/ThemeContext";
 import { useLang } from "@/hooks/useLang";
+import { DehydratedState, HydrationBoundary } from "@tanstack/react-query";
 import {
   Carousel,
   CarouselContent,
@@ -29,14 +30,14 @@ import Autoplay from "embla-carousel-autoplay";
 type props = {
   upcoming: MovieResumeInterface[];
   upcomingTrailers: VideoTrailerInterface[];
-  dehydratedState: unknown;
+  dehydratedState: DehydratedState;
 };
 
 const carouselOptions: ComponentProps<typeof Carousel>["opts"] = {
   loop: true,
 };
 
-export function HomeContent({ upcoming, upcomingTrailers }: props) {
+export function HomeContent({ upcoming, upcomingTrailers, dehydratedState }: props) {
   const t = useTranslations("home");
   const locale = useLocale();
   const [theme] = useTheme();
@@ -46,6 +47,7 @@ export function HomeContent({ upcoming, upcomingTrailers }: props) {
   const popularTvLabel = t("popularTvLabel");
   const plugin = useRef([Autoplay({ delay: 8000, stopOnInteraction: true })]);
   return (
+    <HydrationBoundary state={dehydratedState}>
     <div className={"w-full"}>
       <Carousel opts={carouselOptions} plugins={plugin.current}>
         <CarouselContent className={"z-10"}>
@@ -103,6 +105,7 @@ export function HomeContent({ upcoming, upcomingTrailers }: props) {
       </div>
       <GenreSection />
     </div>
+    </HydrationBoundary>
   );
 }
 

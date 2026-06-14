@@ -1,21 +1,11 @@
 "use client";
 
-import {
-  Hydrate,
-  QueryClient,
-  QueryClientProvider,
-} from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useState } from "react";
 import { ThemeProvider } from "@/global/ThemeContext";
 import { ShowNavBarProvider } from "@/global/ShowNavbarContext";
 
-export function Providers({
-  children,
-  dehydratedState,
-}: {
-  children: React.ReactNode;
-  dehydratedState?: unknown;
-}) {
+export function Providers({ children }: { children: React.ReactNode }) {
   const [queryClient] = useState(
     () =>
       new QueryClient({
@@ -30,11 +20,9 @@ export function Providers({
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Hydrate state={dehydratedState}>
-        <ThemeProvider>
-          <ShowNavBarProvider>{children}</ShowNavBarProvider>
-        </ThemeProvider>
-      </Hydrate>
+      <ThemeProvider>
+        <ShowNavBarProvider>{children}</ShowNavBarProvider>
+      </ThemeProvider>
     </QueryClientProvider>
   );
 }

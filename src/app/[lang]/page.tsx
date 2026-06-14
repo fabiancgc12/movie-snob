@@ -12,18 +12,21 @@ export default async function HomePage({ params }: Props) {
   const queryClient = new QueryClient();
   try {
     const data = await getHomePage(lang);
-    await queryClient.prefetchInfiniteQuery(
-      ["trending", lang],
-      () => data.trending,
-    );
-    await queryClient.prefetchInfiniteQuery(
-      ["popularMovies", lang],
-      () => data.popular.movie,
-    );
-    await queryClient.prefetchInfiniteQuery(
-      ["popularTv", lang],
-      () => data.popular.tv,
-    );
+    await queryClient.prefetchInfiniteQuery({
+      queryKey: ["trending", lang],
+      queryFn: () => data.trending,
+      initialPageParam: 1,
+    });
+    await queryClient.prefetchInfiniteQuery({
+      queryKey: ["popularMovies", lang],
+      queryFn: () => data.popular.movie,
+      initialPageParam: 1,
+    });
+    await queryClient.prefetchInfiniteQuery({
+      queryKey: ["popularTv", lang],
+      queryFn: () => data.popular.tv,
+      initialPageParam: 1,
+    });
 
     return (
       <HomeContent

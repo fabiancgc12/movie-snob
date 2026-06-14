@@ -87,9 +87,10 @@ export function InfinitePosterList({
       return fetch(`/api/${api}?${params}`).then((v) => v.json());
     },
     getNextPageParam: (lastPage) => {
-      if (lastPage.total_pages == lastPage.page) return false;
+      if (lastPage.total_pages == lastPage.page) return undefined;
       return lastPage.page + 1;
     },
+    initialPageParam: 1,
   });
   const [endElementRef] = useInView({
     threshold: 0.5,
