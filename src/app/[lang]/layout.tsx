@@ -28,7 +28,7 @@ export default async function LangLayout({ children, params }: Props) {
             <AppSidebar />
             <div className="min-h-screen grid-rows-[auto_1fr_auto] flex-1 min-w-0">
               <Header />
-              <main className="isolate h-full">{children}</main>
+              <main className="isolate">{children}</main>
               <Footer />
             </div>
           </SidebarProvider>
