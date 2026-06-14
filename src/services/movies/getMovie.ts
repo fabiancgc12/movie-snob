@@ -17,8 +17,10 @@ import { ProvidersDto } from "@/models/dto/ProvidersDto";
 import { formatRecommendations } from "@/utils/functions/formatRecommendations";
 import { formatMovieCredits } from "@/utils/functions/formatMovieCredits";
 import { CreditsDto } from "@/models/dto/Credit.dto";
-import { getLocale } from "@/utils/functions/getLanguage";
+import { getImdbLocale } from "@/utils/functions/getLanguage";
 import { extractLanguageFromLocale } from "@/utils/functions/extractLanguageFromLocale";
+import { env } from "../../../env";
+import { SearchParamsContext } from "next/dist/shared/lib/hooks-client-context.shared-runtime";
 
 type ApiResponse = MovieInterface & {
   videos: VideoMediaResponse;
@@ -38,10 +40,10 @@ export async function getMovie(
   providers: ProvidersDto;
   recommendations: RecommendationInterface[];
 }> {
-  locale = getLocale(locale);
+  locale = getImdbLocale(locale);
   const languageWithoutCountry = extractLanguageFromLocale(locale);
   const response = await fetch(
-    `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.TMDB_KEY}&language=${locale}&` +
+    `https://api.themoviedb.org/3/movie/${id}?api_key=${env.TMDB_KEY}&language=${locale}&` +
       `append_to_response=videos,images,credits,watch/providers,recommendations&` +
       `include_image_language=${languageWithoutCountry},null&include_video_language=${locale}`,
   );

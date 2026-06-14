@@ -1,13 +1,14 @@
 import { PopularMovieResponse } from "@/models/popular/popularMovie.interface";
-import { getLocale } from "@/utils/functions/getLanguage";
+import { getImdbLocale } from "@/utils/functions/getLanguage";
+import { env } from "../../../env";
 
 export async function getPopularMovies(
   page: number = 1,
   locale?: string | string[],
 ): Promise<PopularMovieResponse> {
-  locale = getLocale(locale);
+  locale = getImdbLocale(locale);
   const response = await fetch(
-    `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.TMDB_KEY}&page=${page}&language=${locale}`,
+    `https://api.themoviedb.org/3/movie/popular?api_key=${env.TMDB_KEY}&page=${page}&language=${locale}`,
   );
   return response.json();
 }

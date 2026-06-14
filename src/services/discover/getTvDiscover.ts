@@ -1,5 +1,6 @@
 import { DiscoverTvResponseInterface } from "@/models/discover/discoverTvResponse.interface";
-import { getLocale } from "@/utils/functions/getLanguage";
+import { getImdbLocale } from "@/utils/functions/getLanguage";
+import { env } from "../../../env";
 
 type options = {
   genre?: string | string[];
@@ -13,7 +14,7 @@ export async function getTvDiscover({
 }: options): Promise<DiscoverTvResponseInterface> {
   let parameters: Record<string, any> = {};
   parameters.page = page;
-  parameters.language = getLocale(locale);
+  parameters.language = getImdbLocale(locale);
   if (genre) {
     if (Array.isArray(genre)) parameters.with_genres = genre.join(",");
     else parameters.with_genres = genre;
@@ -22,7 +23,7 @@ export async function getTvDiscover({
   const params = new URLSearchParams(parameters).toString();
 
   const response = await fetch(
-    `https://api.themoviedb.org/3/discover/tv?api_key=${process.env.TMDB_KEY}&${params}`,
+    `https://api.themoviedb.org/3/discover/tv?api_key=${env.TMDB_KEY}&${params}`,
   );
   return (await response.json()) as DiscoverTvResponseInterface;
 }
