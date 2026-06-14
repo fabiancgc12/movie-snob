@@ -11,7 +11,7 @@ import {
   WhatsappShareButton,
 } from "react-share";
 import { ActionToolTip } from "@/components/common/ActionToolTip";
-import { AiOutlineShareAlt } from "react-icons/ai";
+import { Share2 } from "lucide-react";
 
 type props = {
   title: string;
@@ -20,7 +20,7 @@ type props = {
 
 export function ShareButton({ url, title }: props) {
   return (
-    <ActionToolTip buttonContent={<AiOutlineShareAlt size={24} />}>
+    <ActionToolTip buttonContent={<Share2 size={24} />}>
       <WhatsappShareButton url={url} title={title}>
         <WhatsappIcon size={32} round={true} />
       </WhatsappShareButton>

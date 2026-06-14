@@ -7,8 +7,7 @@ import { ProvidersDto } from "@/models/dto/ProvidersDto";
 import { CompanyLogo } from "@/components/ExtraInfo/CompanyLogo";
 import { FullDate } from "@/components/common/FullDate";
 import React from "react";
-import { SiStatuspal } from "react-icons/si";
-import { MdLanguage } from "react-icons/md";
+import { Info, Languages } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 type props = {
@@ -37,14 +36,14 @@ export function TvExtraInfo({ show, providers }: props) {
       <div>
         <p className="capitalize text-sm">{statusLabel}</p>
         <small className="flex items-center gap-1.5">
-          <SiStatuspal />
+          <Info />
           {show.status}
         </small>
       </div>
       <div>
         <p className="capitalize text-sm">{languageLabel}</p>
         <small className="flex items-center gap-1.5">
-          <MdLanguage />
+          <Languages />
           {show.spoken_languages
             ?.slice(0, 4)
             .map((sp) => sp.english_name)

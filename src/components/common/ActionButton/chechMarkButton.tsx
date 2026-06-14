@@ -5,8 +5,7 @@ import {
   StoreProductType,
   useCheckedButton,
 } from "@/components/common/ActionButton/useCheckedButton";
-import { Bookmark02Icon, HugeiconsFreeIcons } from "@hugeicons/core-free-icons";
-import { HugeiconsIcon } from "@hugeicons/react";
+import { Bookmark } from "lucide-react";
 
 export type BookmarkButtonProps = {
   mediaType: "movie" | "tv";
@@ -39,9 +38,9 @@ function Button({
       size={size}
     >
       {checked ? (
-        <HugeiconsIcon icon={Bookmark02Icon} size={16} />
+        <Bookmark size={16} />
       ) : (
-        <HugeiconsIcon icon={Bookmark02Icon} size={16} />
+        <Bookmark size={16} />
       )}
     </ActionButton>
   );

@@ -6,8 +6,7 @@ import Skeleton from "react-loading-skeleton";
 import { MediaType } from "@/models/MediaType";
 import { cn } from "@/lib/utils";
 import { Link } from "@/i18n/navigation";
-import { Star } from "@hugeicons/core-free-icons";
-import { HugeiconsIcon } from "@hugeicons/react";
+import { Star } from "lucide-react";
 import {
   Button,
   LikeButton,
@@ -88,10 +87,7 @@ export function PosterCard({ data, mediaType, isBackdrop = false }: props) {
             {data.title}
           </p>
           <div className="flex items-center gap-0.5 mt-0.5 flex-shrink-0">
-            <HugeiconsIcon
-              icon={Star}
-              className="w-3 h-3 text-primary fill-primary"
-            />
+            <Star className="w-3 h-3 text-primary fill-primary" />
             <span className="text-[10px] text-primary font-semibold">
               {(data.vote_average / 10).toFixed(1)}
             </span>

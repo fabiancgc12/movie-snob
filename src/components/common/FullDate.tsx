@@ -1,6 +1,6 @@
 "use client";
 
-import { AiOutlineCalendar } from "react-icons/ai";
+import { Calendar } from "lucide-react";
 import { formatDate } from "@/utils/functions/formatDate";
 import { useTranslations } from "next-intl";
 
@@ -13,7 +13,7 @@ export function FullDate({ date, lang = "en-Us" }: props) {
   const fallbackMessage = t("notAvailable");
   return (
     <small className={"flex items-center gap-5"}>
-      <AiOutlineCalendar />
+      <Calendar />
       {date?.length > 0 ? formatDate(date, lang) : fallbackMessage}
     </small>
   );

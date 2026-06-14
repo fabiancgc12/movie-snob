@@ -3,8 +3,7 @@
 import { cn } from "@/lib/utils";
 import { ReactNode, useCallback, useRef, useState } from "react";
 import useResizeObserver from "@react-hook/resize-observer";
-import { ArrowLeft01Icon, ArrowRight01Icon } from "@hugeicons/core-free-icons";
-import { HugeiconsIcon } from "@hugeicons/react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 export type SliderProps = {
   className?: string;
@@ -78,7 +77,7 @@ export const NextArrow = ({ onClick, showArrow }: ArrowProps) => {
       )}
       onClick={onClick}
     >
-      <HugeiconsIcon icon={ArrowRight01Icon} />
+      <ArrowRight />
     </button>
   );
 };
@@ -95,7 +94,7 @@ const PrevArrow = ({ onClick, showArrow }: ArrowProps) => {
       )}
       onClick={onClick}
     >
-      <HugeiconsIcon icon={ArrowLeft01Icon} />
+      <ArrowLeft />
     </button>
   );
 };

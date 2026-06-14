@@ -3,9 +3,7 @@
 import { ActionButton } from "@/components/common/ActionButton/ActionButton";
 import { useCheckedButton } from "@/components/common/ActionButton/useCheckedButton";
 import { BookmarkButtonProps } from "./chechMarkButton";
-import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
-import { HugeiconsIcon } from "@hugeicons/react";
-import { HeartIcon } from "@hugeicons/core-free-icons";
+import { Heart } from "lucide-react";
 
 export function LikeButton(props: BookmarkButtonProps) {
   return <Button key={`${props.mediaType}-${props.media.id}`} {...props} />;
@@ -28,9 +26,9 @@ export function Button({
       onClick={onClick}
     >
       {checked ? (
-        <HugeiconsIcon icon={HeartIcon} size={16} />
+        <Heart size={16} />
       ) : (
-        <HugeiconsIcon icon={HeartIcon} size={16} />
+        <Heart size={16} />
       )}
     </ActionButton>
   );

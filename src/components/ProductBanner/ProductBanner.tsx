@@ -18,6 +18,7 @@ import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { useLang } from "@/hooks/useLang";
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
 type props = {
   trailer?: VideoTrailerInterface;
@@ -86,7 +87,12 @@ export function MediaBanner({ product, trailer, credits, mediaType }: props) {
           )}
         </div>
         <div className="flex items-center justify-between py-1 max-md:flex-col max-md:items-start">
-          <h1 className={cn("text-center max-md:text-2xl md:text-start", titleSize)}>
+          <h1
+            className={cn(
+              "text-center max-md:text-2xl md:text-start",
+              titleSize,
+            )}
+          >
             {title}
             {mediaType === "movie" && product.release_date.length != 0 && (
               <small className="font-light text-xl max-md:text-lg">
@@ -97,7 +103,11 @@ export function MediaBanner({ product, trailer, credits, mediaType }: props) {
           </h1>
           {trailer && (
             <Video video={trailer}>
-              <a href={"#"}>{videoLabel}</a>
+              {(props) => (
+                <Button variant={"link"} {...props}>
+                  {videoLabel}
+                </Button>
+              )}
             </Video>
           )}
         </div>

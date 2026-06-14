@@ -4,12 +4,11 @@ import {
   Bookmark,
   Compass,
   Heart,
-  Home,
-  Sun01Icon,
-  Moon02Icon,
-  GlobeIcon,
-} from "@hugeicons/core-free-icons";
-import { HugeiconsIcon } from "@hugeicons/react";
+  Sun,
+  Moon,
+  Globe,
+} from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { Link, usePathname } from "@/i18n/navigation";
@@ -28,7 +27,7 @@ import { useTheme } from "@/global/ThemeContext";
 import { useSearchParams } from "next/navigation";
 
 type NavItem = {
-  icon: typeof Home;
+  icon: LucideIcon;
   label: string;
   url: string;
 };
@@ -100,14 +99,14 @@ const AppSidebarMenuButton: typeof SidebarMenuButton = (props) => {
 };
 
 type AppSidebarContentProps = {
-  icon: typeof Home;
+  icon: LucideIcon;
   text: string;
 };
 
-const AppSidebarContent = ({ icon, text }: AppSidebarContentProps) => {
+const AppSidebarContent = ({ icon: Icon, text }: AppSidebarContentProps) => {
   return (
     <>
-      <HugeiconsIcon icon={icon} className={"w-6! h-6!"} />
+      <Icon className={"w-6! h-6!"} />
       <span className="text-xs font-medium tracking-wide leading-none first-letter:capitalize">
         {text}
       </span>
@@ -130,7 +129,7 @@ const SwitchLanguage = () => {
           locale={nextLocale}
           title={t("language")}
         >
-          <AppSidebarContent icon={GlobeIcon} text={t("language")} />
+          <AppSidebarContent icon={Globe} text={t("language")} />
         </Link>
       )}
     />
@@ -149,7 +148,7 @@ const SwitchThemeButton = () => {
             theme === "dark" ? "-translate-x-full" : "translate-x-0",
           )}
         >
-          <HugeiconsIcon icon={Moon02Icon} className={"w-6! h-6! mx-auto"} />
+          <Moon className={"w-6! h-6! mx-auto"} />
         </div>
         <div
           className={cn(
@@ -157,7 +156,7 @@ const SwitchThemeButton = () => {
             theme === "dark" ? "-translate-x-full" : "translate-x-0",
           )}
         >
-          <HugeiconsIcon icon={Sun01Icon} className={"w-6! h-6! mx-auto"} />
+          <Sun className={"w-6! h-6! mx-auto"} />
         </div>
       </div>
       <span className="text-xs font-medium tracking-wide leading-none first-letter:capitalize">

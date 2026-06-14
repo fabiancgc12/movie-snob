@@ -7,7 +7,7 @@ import { Providers } from "./Providers";
 import { ProvidersDto } from "@/models/dto/ProvidersDto";
 import { CompanyLogo } from "@/components/ExtraInfo/CompanyLogo";
 import { FullDate } from "@/components/common/FullDate";
-import { MdLanguage } from "react-icons/md";
+import { Languages } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
 
 type props = {
@@ -31,7 +31,7 @@ export function MovieExtraInfo({ movie, providers }: props) {
       <div className="text">
         <p className="capitalize text-sm">{languageLabel}</p>
         <small className="flex items-center gap-1.5">
-          <MdLanguage />
+          <Languages />
           {movie.spoken_languages
             ?.slice(0, 4)
             .map((sp) => sp.english_name)

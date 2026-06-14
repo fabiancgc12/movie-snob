@@ -9,8 +9,7 @@ import { cn } from "@/lib/utils";
 import { RatingAverage } from "@/components/common/Average";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
-import { InformationCircleIcon, PlayIcon } from "@hugeicons/core-free-icons";
-import { HugeiconsIcon } from "@hugeicons/react";
+import { Info, Play } from "lucide-react";
 
 type props = {
   data: MovieResumeInterface;
@@ -64,7 +63,7 @@ export function UpcomingBanner({ data, trailer }: props) {
               {(props) => {
                 return (
                   <Button {...props} className={"rounded-md"}>
-                    <HugeiconsIcon icon={PlayIcon} />
+                    <Play />
                     {t("watchTrailer")}
                   </Button>
                 );
@@ -77,7 +76,7 @@ export function UpcomingBanner({ data, trailer }: props) {
             nativeButton={false}
             render={(props) => (
               <Link {...props} href={`/movie/${data.id}`}>
-                <HugeiconsIcon icon={InformationCircleIcon} />
+                <Info />
                 {t("readMore")}
               </Link>
             )}

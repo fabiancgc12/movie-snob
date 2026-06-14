@@ -23,8 +23,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { HugeiconsIcon } from "@hugeicons/react";
-import { Menu01Icon, SidebarLeftIcon } from "@hugeicons/core-free-icons";
+import { Menu } from "lucide-react";
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state";
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
@@ -274,7 +273,7 @@ function SidebarTrigger({
       }}
       {...props}
     >
-      <HugeiconsIcon icon={Menu01Icon} strokeWidth={2} />
+      <Menu strokeWidth={2} />
       <span className="sr-only">Toggle Sidebar</span>
     </Button>
   );
