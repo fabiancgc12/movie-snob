@@ -56,9 +56,8 @@ export function PosterCard({ data, mediaType, isBackdrop = false }: props) {
               alt={"title poster"}
               fill
               className={cn(
-                isBackdrop
-                  ? ""
-                  : "rounded-t-[0.5em] group-hover:scale-105 transition-all duration-300",
+                "group-hover:scale-105 transition-all duration-300",
+                isBackdrop ? "" : "rounded-t-[0.5em]",
               )}
             />
           </div>
