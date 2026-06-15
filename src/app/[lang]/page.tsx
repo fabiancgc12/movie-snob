@@ -1,6 +1,7 @@
 import { getHomePage } from "@/services/getHomePage";
 import { dehydrate, QueryClient } from "@tanstack/react-query";
 import { HomeContent } from "./HomeContent";
+import { getTrendingMediaQueryOptions } from "@/features/trending/queries/getTrendingMediaQueryOptions";
 
 type Props = {
   params: Promise<{ lang: string }>;
@@ -12,9 +13,8 @@ export default async function HomePage({ params }: Props) {
   try {
     const data = await getHomePage(lang);
     await queryClient.prefetchInfiniteQuery({
-      queryKey: ["trending", lang],
+      ...getTrendingMediaQueryOptions(lang),
       queryFn: () => data.trending,
-      initialPageParam: 1,
     });
     await queryClient.prefetchInfiniteQuery({
       queryKey: ["popularMovies", lang],

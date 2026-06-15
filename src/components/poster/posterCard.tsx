@@ -8,18 +8,7 @@ import { Link } from "@/i18n/navigation";
 import { Star } from "lucide-react";
 import { LikeButton } from "@/components/common/ActionButton/LikeButton";
 import { BookmarkButton } from "@/components/common/ActionButton/chechMarkButton";
-
-export type PosterType = {
-  id: number;
-  poster_path?: string | null;
-  backdrop_path?: string | null;
-  vote_average: number;
-  release_date?: string;
-  first_air_date?: string;
-  media_type?: MediaType;
-  title?: string;
-  name?: string;
-};
+import { PosterType } from "@/features/common/types/Poster.type";
 
 type props = {
   data: PosterType;

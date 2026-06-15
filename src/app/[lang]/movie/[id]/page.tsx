@@ -1,7 +1,7 @@
 import { getMovie } from "@/services/movies/getMovie";
 
 import { CastSection } from "@/components/CastSection/CastSection";
-import { PosterList } from "@/components/poster/infinitePosterListProps";
+import { PosterList } from "@/components/poster/oldInfinitePosterListProps";
 import { MediaBanner } from "@/components/ProductBanner/ProductBanner";
 import { MovieExtraInfo } from "@/components/ExtraInfo/MovieExtraInfo";
 import { Media } from "@/components/media/Media";

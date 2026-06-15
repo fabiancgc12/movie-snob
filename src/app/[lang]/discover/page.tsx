@@ -2,7 +2,7 @@
 
 import { PosterGrid } from "@/components/poster/PosterGrid";
 import { Section } from "@/components/Section/Section";
-import { InfinitePosterList } from "@/components/poster/infinitePosterListProps";
+import { OldInfinitePosterList } from "@/components/poster/oldInfinitePosterListProps";
 import { useRouter, useSearchParams } from "next/navigation";
 import { MediaType } from "@/models/MediaType";
 import { ChangeEvent, useCallback } from "react";
@@ -84,7 +84,7 @@ export default function DiscoverPage() {
       <div data-theme={theme} className={"h-full"}>
         <Section title={t("discoverPageTitle")}>
           <PosterGrid>
-            <InfinitePosterList
+            <OldInfinitePosterList
               mediaType={media}
               api={apiRoute}
               queryKey={[apiRoute, media, genre, locale]}

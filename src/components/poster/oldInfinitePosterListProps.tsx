@@ -1,10 +1,6 @@
 "use client";
 
-import {
-  PosterCard,
-  PosterType,
-  SkeletonCard,
-} from "@/components/poster/posterCard";
+import { PosterCard, SkeletonCard } from "@/components/poster/posterCard";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { PopularMovieResponse } from "@/models/popular/popularMovie.schema";
 import { PopularTvShowResponse } from "@/models/popular/popularTv.schema";
@@ -13,6 +9,7 @@ import { Spinner } from "@/components/common/Spinner";
 import { useInView } from "react-intersection-observer";
 import { MediaType } from "@/models/MediaType";
 import { useTranslations, useLocale } from "next-intl";
+import { PosterType } from "@/features/common/types/Poster.type";
 
 export type props = {
   media: PosterType[];
@@ -42,7 +39,7 @@ export function PosterList({
   );
 }
 
-type InfinitePosterListProps = {
+type OldInfinitePosterListProps = {
   mediaType: MediaType;
   api: string;
   parameters?: Record<string, any>;
@@ -52,7 +49,10 @@ type InfinitePosterListProps = {
   fallbackMessage: string;
 };
 
-export function InfinitePosterList({
+/**
+ * @deprecated use InfinitePosterList
+ */
+export function OldInfinitePosterList({
   mediaType,
   api,
   enabled = true,
@@ -60,7 +60,7 @@ export function InfinitePosterList({
   queryKey,
   isBackdrop,
   fallbackMessage,
-}: InfinitePosterListProps) {
+}: OldInfinitePosterListProps) {
   const t = useTranslations("common");
   const locale = useLocale();
   if (!parameters.page) parameters.page = 1;
@@ -143,3 +143,82 @@ export function InfinitePosterList({
     </>
   );
 }
+
+type InfinitePosterListProps = {
+  media: PosterType[] | undefined;
+  isPending: boolean;
+  isError: boolean;
+  isLoadingError: boolean;
+  isRefetchError: boolean;
+  refetch: () => void;
+  fallbackMessage: string;
+  mediaType: MediaType;
+  shouldFetch: boolean;
+  fetchNextPage: () => void;
+  isBackdrop?: boolean;
+};
+
+export const InfinitePosterList = ({
+  media,
+  isPending,
+  isBackdrop,
+  isError,
+  isLoadingError,
+  isRefetchError,
+  refetch,
+  fallbackMessage,
+  mediaType,
+  shouldFetch,
+  fetchNextPage,
+}: InfinitePosterListProps) => {
+  const t = useTranslations("common");
+  const [endElementRef] = useInView({
+    threshold: 0.5,
+    rootMargin: "700px 700px",
+    onChange: (inView) => {
+      if (inView)
+        if (shouldFetch) {
+          fetchNextPage();
+        }
+    },
+  });
+  if (isError || isLoadingError || isRefetchError) {
+    const retry = t("retry");
+    const message = t("errorConnectingToServer");
+    return (
+      <div className="self-start">
+        <p>{message}</p>
+        <button onClick={() => refetch()} className="text-xs">
+          {retry}
+        </button>
+      </div>
+    );
+  }
+  if (isPending)
+    return (
+      <>
+        <SkeletonCard isBackdrop={isBackdrop} />
+        <SkeletonCard isBackdrop={isBackdrop} />
+        <SkeletonCard isBackdrop={isBackdrop} />
+        <SkeletonCard isBackdrop={isBackdrop} />
+        <SkeletonCard isBackdrop={isBackdrop} />
+        <SkeletonCard isBackdrop={isBackdrop} />
+      </>
+    );
+  // by the time we hit this if, media is already defined
+  return (
+    <>
+      <PosterList
+        mediaType={mediaType}
+        media={media ?? []}
+        isBackdrop={isBackdrop}
+        fallbackMessage={fallbackMessage}
+      />
+      {
+        <div ref={endElementRef} className={"loader"}>
+          <Spinner />
+        </div>
+      }
+    </>
+  );
+};

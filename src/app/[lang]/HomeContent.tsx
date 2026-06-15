@@ -1,9 +1,9 @@
 "use client";
 
 import {
-  InfinitePosterList,
+  OldInfinitePosterList,
   PosterList,
-} from "@/components/poster/infinitePosterListProps";
+} from "@/components/poster/oldInfinitePosterListProps";
 import { MovieResumeSchema } from "@/models/Movies/MovieResume.schema";
 import { UpcomingBanner } from "@/components/mainBanner/UpcomingBanner";
 import { useInView } from "react-intersection-observer";
@@ -26,6 +26,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
+import { InfiniteTrendingPosterListSection } from "@/features/trending/components/InfiniteTrendingPosterListSection";
 
 type props = {
   upcoming: MovieResumeSchema[];
@@ -69,15 +70,7 @@ export function HomeContent({
           />
         </Carousel>
         <div data-theme={theme}>
-          <SliderSection title={trendingLabel} speed={450}>
-            <InfinitePosterList
-              mediaType={"movie"}
-              enabled={false}
-              api={"trending"}
-              queryKey={["trending", locale]}
-              fallbackMessage={"There are not trending movies."}
-            />
-          </SliderSection>
+          <InfiniteTrendingPosterListSection />
         </div>
         <div data-theme="dark">
           <SliderSection title={upcomingLabel} speed={450}>
@@ -91,7 +84,7 @@ export function HomeContent({
         </div>
         <div data-theme={theme}>
           <SliderSection title={popularMoviesLabel} speed={450}>
-            <InfinitePosterList
+            <OldInfinitePosterList
               mediaType={"movie"}
               enabled={false}
               api={"popularMovies"}
@@ -100,7 +93,7 @@ export function HomeContent({
             />
           </SliderSection>
           <SliderSection title={popularTvLabel} speed={450}>
-            <InfinitePosterList
+            <OldInfinitePosterList
               mediaType={"tv"}
               enabled={false}
               api={"popularTv"}
@@ -158,7 +151,7 @@ function GenreSection() {
               url={`/discover?media=movie&genre=${g.id}`}
             >
               <Slider speed={450}>
-                <InfinitePosterList
+                <OldInfinitePosterList
                   mediaType={"movie"}
                   api={`discoverMovies`}
                   parameters={{
