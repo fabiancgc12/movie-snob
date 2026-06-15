@@ -23,6 +23,7 @@ export const InfiniteDiscoverMoviesPosterListSection = ({ genre }: Props) => {
     isError,
     isLoadingError,
     isRefetchError,
+    isLoading,
   } = useInfiniteQuery({
     ...getInfiniteDiscoverMoviesQuery({ locale, genre: genre.id }),
     select: (data) => {
@@ -52,9 +53,10 @@ export const InfiniteDiscoverMoviesPosterListSection = ({ genre }: Props) => {
         isLoadingError={isLoadingError}
         isRefetchError={isRefetchError}
         fetchNextPage={fetchNextPage}
-        shouldFetch={hasNextPage || isFetching || isFetchingNextPage}
+        shouldFetch={hasNextPage && !isFetching && !isFetchingNextPage}
         media={data}
-        isPending={isFetching}
+        isPending={isLoading}
+        hasNextPage={hasNextPage}
       />
     </SliderSection>
   );

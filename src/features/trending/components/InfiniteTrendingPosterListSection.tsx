@@ -19,6 +19,7 @@ export const InfiniteTrendingPosterListSection = () => {
     isError,
     isLoadingError,
     isRefetchError,
+    isLoading,
   } = useInfiniteQuery({
     ...getTrendingMediaQueryOptions(locale),
     select: (data) => {
@@ -48,9 +49,10 @@ export const InfiniteTrendingPosterListSection = () => {
         isLoadingError={isLoadingError}
         isRefetchError={isRefetchError}
         fetchNextPage={fetchNextPage}
-        shouldFetch={hasNextPage || isFetching || isFetchingNextPage}
+        shouldFetch={hasNextPage && !isFetching && !isFetchingNextPage}
         media={data}
-        isPending={isFetching}
+        isPending={isLoading}
+        hasNextPage={hasNextPage}
       />
     </SliderSection>
   );

@@ -18,6 +18,7 @@ export const InfinitePopularTvShowPosterListSection = () => {
     isError,
     isLoadingError,
     isRefetchError,
+    isLoading,
   } = useInfiniteQuery({
     ...getInfinitePopularTvShowsQueryOptions(locale),
     select: (data) => {
@@ -47,9 +48,10 @@ export const InfinitePopularTvShowPosterListSection = () => {
         isLoadingError={isLoadingError}
         isRefetchError={isRefetchError}
         fetchNextPage={fetchNextPage}
-        shouldFetch={hasNextPage || isFetching || isFetchingNextPage}
+        shouldFetch={hasNextPage && !isFetching && !isFetchingNextPage}
         media={data}
-        isPending={isFetching}
+        isPending={isLoading}
+        hasNextPage={hasNextPage}
       />
     </SliderSection>
   );

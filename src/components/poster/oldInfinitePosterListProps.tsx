@@ -155,6 +155,7 @@ type InfinitePosterListProps = {
   mediaType: MediaType;
   shouldFetch: boolean;
   fetchNextPage: () => void;
+  hasNextPage: boolean;
   isBackdrop?: boolean;
 };
 
@@ -169,6 +170,7 @@ export const InfinitePosterList = ({
   fallbackMessage,
   mediaType,
   shouldFetch,
+  hasNextPage,
   fetchNextPage,
 }: InfinitePosterListProps) => {
   const t = useTranslations("common");
@@ -214,11 +216,11 @@ export const InfinitePosterList = ({
         isBackdrop={isBackdrop}
         fallbackMessage={fallbackMessage}
       />
-      {
+      {hasNextPage && (
         <div ref={endElementRef} className={"loader"}>
           <Spinner />
         </div>
-      }
+      )}
     </>
   );
 };

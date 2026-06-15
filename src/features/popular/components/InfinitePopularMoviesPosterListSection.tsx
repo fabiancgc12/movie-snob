@@ -18,6 +18,7 @@ export const InfinitePopularMoviesPosterListSection = () => {
     isError,
     isLoadingError,
     isRefetchError,
+    isLoading,
   } = useInfiniteQuery({
     ...getInfinitePopularMoviesQueryOptions(locale),
     select: (data) => {
@@ -47,9 +48,10 @@ export const InfinitePopularMoviesPosterListSection = () => {
         isLoadingError={isLoadingError}
         isRefetchError={isRefetchError}
         fetchNextPage={fetchNextPage}
-        shouldFetch={hasNextPage || isFetching || isFetchingNextPage}
+        shouldFetch={hasNextPage && !isFetching && !isFetchingNextPage}
         media={data}
-        isPending={isFetching}
+        isPending={isLoading}
+        hasNextPage={hasNextPage}
       />
     </SliderSection>
   );
