@@ -32,7 +32,6 @@ export const InfinitePopularTvShowPosterListSection = () => {
             release_date: media.release_date,
             media_type: "tv",
             title: media.name,
-            name: media.name,
           };
         });
       });

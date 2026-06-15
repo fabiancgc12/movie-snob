@@ -37,7 +37,6 @@ export const InfiniteDiscoverMoviesPosterListSection = ({ genre }: Props) => {
             release_date: media.release_date,
             media_type: "movie",
             title: media.title,
-            name: media.title,
           };
         });
       });

@@ -33,7 +33,6 @@ export const InfiniteTrendingPosterListSection = () => {
             release_date: media.release_date,
             media_type: media.media_type,
             title: media.title,
-            name: media.name,
           };
         });
       });

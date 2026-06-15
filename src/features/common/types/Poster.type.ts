@@ -8,6 +8,6 @@ export type PosterType = {
   release_date?: string | null;
   first_air_date?: string;
   media_type?: MediaType;
-  title?: string;
-  name?: string;
+  title?: string | null;
+  name?: string | null;
 };

@@ -53,10 +53,14 @@ export function PosterCard({ data, mediaType, isBackdrop = false }: props) {
           <LikeButton
             mediaType={type}
             size={"xs"}
-            media={data}
+            media={{ ...data, title: data.title ?? data.name ?? "Untitled" }}
             className={"ml-auto"}
           />
-          <BookmarkButton mediaType={type} size={"xs"} media={data} />
+          <BookmarkButton
+            mediaType={type}
+            size={"xs"}
+            media={{ ...data, title: data.title ?? data.name ?? "Untitled" }}
+          />
         </div>
       </div>
 

@@ -118,8 +118,24 @@ export function MediaBanner({ product, trailer, credits, mediaType }: props) {
         </div>
         <div className="flex justify-start gap-8 items-center py-1">
           <Average value={product.vote_average} />
-          <BookmarkButton mediaType={mediaType} media={product} />
-          <LikeButton mediaType={mediaType} media={product} />
+          <BookmarkButton
+            mediaType={mediaType}
+            media={{
+              id: product.id,
+              vote_average: product.vote_average,
+              poster_path: product.poster_path,
+              title: "title" in product ? product.title : product.name,
+            }}
+          />
+          <LikeButton
+            mediaType={mediaType}
+            media={{
+              id: product.id,
+              vote_average: product.vote_average,
+              poster_path: product.poster_path,
+              title: "title" in product ? product.title : product.name,
+            }}
+          />
           <ShareButton
             url={generateUrlPage(product, mediaType)}
             title={title}

@@ -10,8 +10,7 @@ export type ProductStore = Record<
       id: number;
       vote_average: number;
       poster_path: string | null | undefined;
-      title?: string;
-      name?: string;
+      title: string;
     }
   >
 >;
@@ -24,9 +23,8 @@ const defaultValue: ProductStore = {
 export type StoreProductType = {
   id: number;
   vote_average: number;
+  title: string;
   poster_path?: string | null;
-  name?: string;
-  title?: string;
 };
 
 export function useCheckedButton(
@@ -50,7 +48,6 @@ export function useCheckedButton(
           vote_average: product.vote_average,
           poster_path: product.poster_path,
           title: product.title,
-          name: product.name,
         };
         setChecked(true);
       }
