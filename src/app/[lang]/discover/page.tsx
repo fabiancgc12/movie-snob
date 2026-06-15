@@ -5,7 +5,7 @@ import { Section } from "@/components/Section/Section";
 import { OldInfinitePosterList } from "@/components/poster/oldInfinitePosterListProps";
 import { useRouter, useSearchParams } from "next/navigation";
 import { MediaType } from "@/models/MediaType";
-import { ChangeEvent, useCallback } from "react";
+import { useCallback } from "react";
 import {
   MovieGenres,
   MovieGenresSpanish,
@@ -15,6 +15,13 @@ import {
 
 import { useTranslations, useLocale } from "next-intl";
 import { useTheme } from "@/global/ThemeContext";
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from "@/components/ui/select";
 
 export default function DiscoverPage() {
   const router = useRouter();
@@ -40,21 +47,21 @@ export default function DiscoverPage() {
     [searchParams],
   );
 
-  const handleMediaChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    const value = e.target.value as MediaType;
-    let genres = value == "movie" ? MovieGenres : TvGenres;
+  const handleMediaChange = (value: string | null) => {
+    if (!value) return;
+    const newMedia = value as MediaType;
+    let genres = newMedia == "movie" ? MovieGenres : TvGenres;
     if (genres.findIndex((g) => g.id.toString() == genre) < 0) {
       router.replace(
-        `?${createQueryString("media", value)}&${createQueryString("genre", "")}`,
+        `?${createQueryString("media", newMedia)}&${createQueryString("genre", "")}`,
       );
     } else {
-      router.replace(`?${createQueryString("media", value)}`);
+      router.replace(`?${createQueryString("media", newMedia)}`);
     }
   };
 
-  const handleGenreChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    const value = e.target.value;
-    router.replace(`?${createQueryString("genre", value)}`);
+  const handleGenreChange = (value: string | null) => {
+    router.replace(`?${createQueryString("genre", value ?? "")}`);
   };
 
   let apiRoute = "discoverMovies";
@@ -67,20 +74,30 @@ export default function DiscoverPage() {
   }
   return (
     <>
-      <form className="flex gap-5 items-center p-4 m-0 [&>*]:w-full [&>*]:p-1 [&>*]:m-0 md:[&>*]:w-1/4">
-        <select value={media} onChange={handleMediaChange} name={"media"}>
-          <option value={"movie"}>{commonT("mediaMovie")}</option>
-          <option value={"tv"}>{commonT("mediaTv")}</option>
-        </select>
-        <select value={genre} onChange={handleGenreChange} name={"genre"}>
-          <option value={""}>{t("allOption")}</option>
-          {genres.map((g) => (
-            <option value={g.id} key={`${media}-genre-${g.id}`}>
-              {g.name}
-            </option>
-          ))}
-        </select>
-      </form>
+      <div className="flex gap-5 items-center p-4 m-0">
+        <Select value={media} onValueChange={handleMediaChange}>
+          <SelectTrigger className="w-full md:w-1/4">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="movie">{commonT("mediaMovie")}</SelectItem>
+            <SelectItem value="tv">{commonT("mediaTv")}</SelectItem>
+          </SelectContent>
+        </Select>
+        <Select value={genre} onValueChange={handleGenreChange}>
+          <SelectTrigger className="w-full md:w-1/4">
+            <SelectValue placeholder={t("allOption")} />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="">{t("allOption")}</SelectItem>
+            {genres.map((g) => (
+              <SelectItem value={g.id.toString()} key={`${media}-genre-${g.id}`}>
+                {g.name}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
       <div data-theme={theme} className={"h-full"}>
         <Section title={t("discoverPageTitle")}>
           <PosterGrid>
