@@ -15,8 +15,7 @@ import { PeopleDto } from "@/models/dto/Credit.dto";
 import { generateUrlPage } from "@/utils/functions/generateUrlPage";
 import { CSSProperties, useMemo } from "react";
 import Link from "next/link";
-import { useTranslations } from "next-intl";
-import { useLang } from "@/hooks/useLang";
+import { useLocale, useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
@@ -37,7 +36,7 @@ type props = {
 export function MediaBanner({ product, trailer, credits, mediaType }: props) {
   const t = useTranslations("movieortv");
   const commonT = useTranslations("common");
-  const lang = useLang();
+  const lang = useLocale();
   const bg = useMemo(
     () =>
       ({

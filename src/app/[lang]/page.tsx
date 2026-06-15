@@ -1,7 +1,13 @@
 import { getHomePage } from "@/services/getHomePage";
-import { dehydrate, QueryClient } from "@tanstack/react-query";
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from "@tanstack/react-query";
 import { HomeContent } from "./HomeContent";
 import { getTrendingMediaQueryOptions } from "@/features/trending/queries/getTrendingMediaQueryOptions";
+import { getInfinitePopularMoviesQueryOptions } from "@/features/popular/queries/getInfinitePopularMoviesQuery.options";
+import { getInfinitePopularTvShowsQueryOptions } from "@/features/popular/queries/getInfinitePopularTvShowsQuery.options";
 
 type Props = {
   params: Promise<{ lang: string }>;
@@ -10,33 +16,28 @@ type Props = {
 export default async function HomePage({ params }: Props) {
   const { lang } = await params;
   const queryClient = new QueryClient();
-  try {
-    const data = await getHomePage(lang);
-    await queryClient.prefetchInfiniteQuery({
-      ...getTrendingMediaQueryOptions(lang),
-      queryFn: () => data.trending,
-    });
-    await queryClient.prefetchInfiniteQuery({
-      queryKey: ["popularMovies", lang],
-      queryFn: () => data.popular.movie,
-      initialPageParam: 1,
-    });
-    await queryClient.prefetchInfiniteQuery({
-      queryKey: ["popularTv", lang],
-      queryFn: () => data.popular.tv,
-      initialPageParam: 1,
-    });
+  const data = await getHomePage(lang);
+  await queryClient.prefetchInfiniteQuery({
+    ...getTrendingMediaQueryOptions(lang),
+    queryFn: () => data.trending,
+  });
+  await queryClient.prefetchInfiniteQuery({
+    ...getInfinitePopularMoviesQueryOptions(lang),
+    queryFn: () => data.popular.movie,
+  });
+  await queryClient.prefetchInfiniteQuery({
+    ...getInfinitePopularTvShowsQueryOptions(lang),
+    queryFn: () => data.popular.tv,
+  });
 
-    return (
+  return (
+    <HydrationBoundary state={dehydrate(queryClient)}>
       <HomeContent
         upcoming={data.upcoming}
         upcomingTrailers={data.upcomingTrailers}
-        dehydratedState={JSON.parse(JSON.stringify(dehydrate(queryClient)))}
       />
-    );
-  } catch (e) {
-    throw e;
-  }
+    </HydrationBoundary>
+  );
 }
 
 export const revalidate = 1200;

@@ -1,9 +1,6 @@
 "use client";
 
-import {
-  OldInfinitePosterList,
-  PosterList,
-} from "@/components/poster/oldInfinitePosterListProps";
+import { PosterList } from "@/components/poster/oldInfinitePosterListProps";
 import { MovieResumeSchema } from "@/models/Movies/MovieResume.schema";
 import { UpcomingBanner } from "@/components/mainBanner/UpcomingBanner";
 import { useInView } from "react-intersection-observer";
@@ -13,11 +10,7 @@ import { MovieGenres, MovieGenresSpanish } from "@/utils/movieGenres";
 import { SliderSection } from "@/components/Slider/SliderSection";
 import { VideoTrailer } from "@/models/Movies/VideoMedia.schema";
 import { useTranslations, useLocale } from "next-intl";
-import { Section } from "@/components/Section/Section";
-import { Slider } from "@/components/Slider/Slider";
 import { useTheme } from "@/global/ThemeContext";
-import { useLang } from "@/hooks/useLang";
-import { DehydratedState, HydrationBoundary } from "@tanstack/react-query";
 import {
   Carousel,
   CarouselContent,
@@ -27,95 +20,62 @@ import {
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import { InfiniteTrendingPosterListSection } from "@/features/trending/components/InfiniteTrendingPosterListSection";
+import { InfinitePopularMoviesPosterListSection } from "@/features/popular/components/InfinitePopularMoviesPosterListSection";
+import { InfinitePopularTvShowPosterListSection } from "@/features/popular/components/InfinitePopularTvShowsPosterListSection";
+import { InfiniteDiscoverMoviesPosterListSection } from "@/features/genres/components/InfiniteDiscoverMoviesPosterListSection";
 
 type props = {
   upcoming: MovieResumeSchema[];
   upcomingTrailers: VideoTrailer[];
-  dehydratedState: DehydratedState;
 };
 
 const carouselOptions: ComponentProps<typeof Carousel>["opts"] = {
   loop: true,
 };
 
-export function HomeContent({
-  upcoming,
-  upcomingTrailers,
-  dehydratedState,
-}: props) {
+export function HomeContent({ upcoming, upcomingTrailers }: props) {
   const t = useTranslations("home");
-  const locale = useLocale();
   const [theme] = useTheme();
-  const trendingLabel = t("trendingLabel");
-  const upcomingLabel = t("upcomingLabel");
-  const popularMoviesLabel = t("popularMoviesLabel");
-  const popularTvLabel = t("popularTvLabel");
   const plugin = useRef([Autoplay({ delay: 8000, stopOnInteraction: true })]);
   return (
-    <HydrationBoundary state={dehydratedState}>
-      <div className={"w-full"}>
-        <Carousel opts={carouselOptions} plugins={plugin.current}>
-          <CarouselContent className={"z-10"}>
-            {upcoming.slice(0, 8).map((u, i) => (
-              <CarouselItem key={u.id}>
-                <UpcomingBanner data={u} trailer={upcomingTrailers[i]} />
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious
-            className={"left-4 z-50 translate-y-0 hidden md:flex"}
-          />
-          <CarouselNext
-            className={"right-4 z-50 translate-y-0 hidden md:flex"}
-          />
-        </Carousel>
-        <div data-theme={theme}>
-          <InfiniteTrendingPosterListSection />
-        </div>
-        <div data-theme="dark">
-          <SliderSection title={upcomingLabel} speed={450}>
-            <PosterList
-              isBackdrop={true}
-              media={upcoming}
-              mediaType={"movie"}
-              fallbackMessage={"There are not upcoming movies."}
-            />
-          </SliderSection>
-        </div>
-        <div data-theme={theme}>
-          <SliderSection title={popularMoviesLabel} speed={450}>
-            <OldInfinitePosterList
-              mediaType={"movie"}
-              enabled={false}
-              api={"popularMovies"}
-              queryKey={["popularMovies", locale]}
-              fallbackMessage={"There are not popular movies."}
-            />
-          </SliderSection>
-          <SliderSection title={popularTvLabel} speed={450}>
-            <OldInfinitePosterList
-              mediaType={"tv"}
-              enabled={false}
-              api={"popularTv"}
-              queryKey={["popularTv", locale]}
-              fallbackMessage={"There are not popular tv shows."}
-            />
-          </SliderSection>
-        </div>
-        <GenreSection />
+    <div className={"w-full"}>
+      <Carousel opts={carouselOptions} plugins={plugin.current}>
+        <CarouselContent className={"z-10"}>
+          {upcoming.slice(0, 8).map((u, i) => (
+            <CarouselItem key={u.id}>
+              <UpcomingBanner data={u} trailer={upcomingTrailers[i]} />
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <CarouselPrevious
+          className={"left-4 z-50 translate-y-0 hidden md:flex"}
+        />
+        <CarouselNext className={"right-4 z-50 translate-y-0 hidden md:flex"} />
+      </Carousel>
+      <InfiniteTrendingPosterListSection />
+      <SliderSection title={t("upcomingLabel")} speed={450}>
+        <PosterList
+          isBackdrop={true}
+          media={upcoming}
+          mediaType={"movie"}
+          fallbackMessage={"There are not upcoming movies."}
+        />
+      </SliderSection>
+      <div data-theme={theme}>
+        <InfinitePopularMoviesPosterListSection />
+        <InfinitePopularTvShowPosterListSection />
       </div>
-    </HydrationBoundary>
+      <GenreSection />
+    </div>
   );
 }
 
 const genresLimit = 9;
 
 function GenreSection() {
-  const t = useTranslations("home");
   const locale = useLocale();
   const [genres, setGenres] = useState<typeof MovieGenres>([]);
   const [theme] = useTheme();
-  const langPrefix = useLang();
   const [loadMoreRef, inView] = useInView({
     threshold: 1,
     rootMargin: "300px",
@@ -135,39 +95,12 @@ function GenreSection() {
     }
   }, [inView, locale]);
 
-  const noMovies = t("noMovies");
-
   return (
     <div className={"space-y-10"}>
-      {genres.map((g, i) => {
+      {genres.map((genre, i) => {
         return (
-          <div
-            key={`genre-section-${g.id}`}
-            data-theme={i % 3 == 0 ? "dark" : theme}
-          >
-            <Section
-              title={g.name}
-              titleAsLink={true}
-              url={`/discover?media=movie&genre=${g.id}`}
-            >
-              <Slider speed={450}>
-                <OldInfinitePosterList
-                  mediaType={"movie"}
-                  api={`discoverMovies`}
-                  parameters={{
-                    genre: g.id,
-                  }}
-                  isBackdrop={i % 3 == 0}
-                  queryKey={[
-                    "discoverMovies",
-                    "movie",
-                    g.id.toString(),
-                    locale,
-                  ]}
-                  fallbackMessage={noMovies}
-                />
-              </Slider>
-            </Section>
+          <div key={genre.id} data-theme={i % 3 == 0 ? "dark" : theme}>
+            <InfiniteDiscoverMoviesPosterListSection genre={genre} />
           </div>
         );
       })}
