@@ -1,7 +1,6 @@
 import { getHomePage } from "@/services/getHomePage";
 import { dehydrate, QueryClient } from "@tanstack/react-query";
 import { HomeContent } from "./HomeContent";
-import { notFound } from "next/navigation";
 
 type Props = {
   params: Promise<{ lang: string }>;
@@ -36,7 +35,7 @@ export default async function HomePage({ params }: Props) {
       />
     );
   } catch (e) {
-    notFound();
+    throw e;
   }
 }
 

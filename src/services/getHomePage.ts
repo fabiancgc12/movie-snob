@@ -1,23 +1,11 @@
-import { MovieResumeSchema } from "@/models/Movies/MovieResume.schema";
 import { getPopularMovies } from "@/services/movies/getPopularMovies";
-import { PopularMovieResponse } from "@/models/popular/popularMovie.schema";
 import { getPopularTv } from "@/services/tv/getPopularTv";
-import { PopularTvShowResponse } from "@/models/popular/popularTv.schema";
 import { getTrending } from "@/services/trending/getTrending";
-import { TrendingResponse } from "@/models/trending/TrendingMovieResponse.schema";
 import { getUpcoming } from "@/services/movies/getUpcoming";
 import { getMovieVideos } from "@/services/movies/getMovieVideos";
 import { VideoTrailer } from "@/models/Movies/VideoMedia.schema";
 
-export async function getHomePage(locale: string): Promise<{
-  upcoming: MovieResumeSchema[];
-  upcomingTrailers: VideoTrailer[];
-  popular: {
-    movie: PopularMovieResponse;
-    tv: PopularTvShowResponse;
-  };
-  trending: TrendingResponse;
-}> {
+export async function getHomePage(locale: string) {
   const [upcoming, popularMovies, popularTv, trending] = await Promise.all([
     getUpcoming(locale),
     getPopularMovies(1, locale),

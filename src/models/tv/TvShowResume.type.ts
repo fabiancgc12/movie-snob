@@ -14,7 +14,7 @@ export const tvShowResumeSchema = z.object({
   poster_path: z.string(),
   vote_average: z.number(),
   vote_count: z.number(),
-  release_date: z.string(),
+  release_date: z.string().nullish(),
 });
 
 export type TvShowResumeType = z.infer<typeof tvShowResumeSchema>;
