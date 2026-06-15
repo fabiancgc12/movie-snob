@@ -1,6 +1,6 @@
 "use client";
 
-import { TvShowInterface } from "@/models/tv/TvShow.interface";
+import { TvShowType } from "@/models/tv/TvShow.type";
 import { ExtraInfo } from "./ExtraInfo";
 import { Providers } from "@/components/ExtraInfo/Providers";
 import { ProvidersDto } from "@/models/dto/ProvidersDto";
@@ -11,7 +11,7 @@ import { Info, Languages } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 type props = {
-  show: TvShowInterface;
+  show: TvShowType;
   providers: ProvidersDto;
 };
 

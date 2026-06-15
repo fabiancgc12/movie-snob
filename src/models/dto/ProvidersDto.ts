@@ -1,4 +1,4 @@
-import { CountryProviders } from "@/models/Movies/Providers.interface";
+import { CountryProviders } from "@/models/Movies/Providers.type";
 
 export interface ProvidersDto {
   results: {

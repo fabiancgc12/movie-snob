@@ -1,6 +1,6 @@
 "use client";
 
-import { SeasonsEntity } from "@/models/tv/TvShow.interface";
+import { SeasonsEntity } from "@/models/tv/TvShow.type";
 import { Section } from "@/components/Section/Section";
 import Image from "next/image";
 import { generateImageUrl } from "@/utils/functions/generateImageUrl";

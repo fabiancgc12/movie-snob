@@ -1,12 +1,6 @@
-import {
-  CastEntity,
-  CrewEntity,
-} from "@/models/Movies/CreditsResponse.interface";
-import {
-  AggregateCastEntity,
-  TvCrewEntity,
-} from "@/models/tv/TvCast.interface";
-import { CreatedByEntity } from "@/models/tv/TvShow.interface";
+import { CastEntity, CrewEntity } from "@/models/Movies/CreditsResponse.type";
+import { AggregateCastEntity, TvCrewEntity } from "@/models/tv/TvCast.type";
+import { CreatedByEntity } from "@/models/tv/TvShow.type";
 
 export interface CreditsDto {
   // id: number;

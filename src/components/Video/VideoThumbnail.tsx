@@ -1,4 +1,4 @@
-import { VideoTrailerInterface } from "@/models/Movies/VideoMedia.interface";
+import { VideoTrailerInterface } from "@/models/Movies/VideoMedia.type";
 import { Video } from "./Video";
 import Image from "next/image";
 

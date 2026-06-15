@@ -1,17 +1,17 @@
-export interface UpcomingMoviesResponse {
+export type UpcomingMoviesResponseType = {
   dates: Dates;
   page: number;
   results: UpcomingMovie[];
   total_pages: number;
   total_results: number;
-}
+};
 
-export interface Dates {
+export type Dates = {
   maximum: string;
   minimum: string;
-}
+};
 
-export interface UpcomingMovie {
+export type UpcomingMovie = {
   adult: boolean;
   backdrop_path: string;
   genre_ids: number[];
@@ -26,9 +26,4 @@ export interface UpcomingMovie {
   video: boolean;
   vote_average: number;
   vote_count: number;
-}
-
-export interface Dates {
-  maximum: string;
-  minimum: string;
-}
+};

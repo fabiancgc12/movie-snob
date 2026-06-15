@@ -1,5 +1,5 @@
-import { TvShowInterface } from "@/models/tv/TvShow.interface";
-import { MovieInterface } from "@/models/Movies/Movie.interface";
+import { TvShowType } from "@/models/tv/TvShow.type";
+import { MovieType } from "@/models/Movies/Movie.type";
 import { generateUrlPage } from "@/utils/functions/generateUrlPage";
 import { generateImageUrl } from "@/utils/functions/generateImageUrl";
 import { PeopleDto } from "@/models/dto/Credit.dto";
@@ -12,11 +12,11 @@ type props = {
   crew: PeopleDto[];
 } & (
   | {
-      media: TvShowInterface;
+      media: TvShowType;
       mediaType: "tv";
     }
   | {
-      media: MovieInterface;
+      media: MovieType;
       mediaType: "movie";
     }
 );
@@ -83,7 +83,7 @@ export function ProductHead({ media, mediaType, cast, crew }: props) {
   );
 }
 
-function tvJsonLd(show: TvShowInterface, cast: PeopleDto[], crew: PeopleDto[]) {
+function tvJsonLd(show: TvShowType, cast: PeopleDto[], crew: PeopleDto[]) {
   const productions = show.production_companies || [];
   const [castInfo, itemListElement] = handleCastList(cast);
   const structuredData = {
@@ -115,11 +115,7 @@ function tvJsonLd(show: TvShowInterface, cast: PeopleDto[], crew: PeopleDto[]) {
   };
 }
 
-function movieJsonLd(
-  movie: MovieInterface,
-  cast: PeopleDto[],
-  crew: PeopleDto[],
-) {
+function movieJsonLd(movie: MovieType, cast: PeopleDto[], crew: PeopleDto[]) {
   const directors = crew.filter((a) => a.role.toLowerCase() === "director");
   const productions = movie.production_companies || [];
   const [castInfo, itemListElement] = handleCastList(cast);

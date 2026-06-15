@@ -1,4 +1,4 @@
-import { ImageMediaResponse } from "@/models/Movies/ImageMedia.interface";
+import { ImageMediaResponse } from "@/models/Movies/ImageMedia.type";
 
 export function formatImagesResponse(images: ImageMediaResponse) {
   // returning only the first 10 backdrops for now

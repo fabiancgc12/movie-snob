@@ -1,9 +1,9 @@
-export interface AgregateCastResponse {
+export type AgregateCastResponse = {
   cast?: AggregateCastEntity[] | null;
   crew?: TvCrewEntity[] | null;
   id: number;
-}
-export interface AggregateCastEntity {
+};
+export type AggregateCastEntity = {
   adult: boolean;
   gender: number;
   id: number;
@@ -15,13 +15,13 @@ export interface AggregateCastEntity {
   roles?: RolesEntity[] | null;
   total_episode_count: number;
   order: number;
-}
-export interface RolesEntity {
+};
+export type RolesEntity = {
   credit_id: string;
   character: string;
   episode_count: number;
-}
-export interface TvCrewEntity {
+};
+export type TvCrewEntity = {
   adult: boolean;
   gender: number;
   id: number;
@@ -33,9 +33,9 @@ export interface TvCrewEntity {
   jobs?: JobsEntity[] | null;
   department: string;
   total_episode_count: number;
-}
-export interface JobsEntity {
+};
+export type JobsEntity = {
   credit_id: string;
   job: string;
   episode_count: number;
-}
+};

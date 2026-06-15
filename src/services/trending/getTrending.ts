@@ -1,18 +1,24 @@
-import { TrendingResponseInterface } from "@/models/trending/TrendingMovieResponse";
+import {
+  TrendingResponse,
+  trendingResponseInterfaceSchema,
+} from "@/models/trending/TrendingMovieResponse.schema";
 import { env } from "../../../env";
+import { getImdbLocale } from "@/utils/functions/getLanguage";
 
 export async function getTrending(
   media: "all" | "movie" | "tv",
   page = 1,
-  locale?: string | string[],
-): Promise<TrendingResponseInterface> {
+  locale: string,
+): Promise<TrendingResponse> {
+  locale = getImdbLocale(locale);
   const params = new URLSearchParams({
     api_key: env.TMDB_KEY,
     page: String(page),
-    language: Array.isArray(locale) ? locale[0] : locale ?? "",
+    language: locale,
   });
   const response = await fetch(
     `https://api.themoviedb.org/3/trending/${media}/week?${params}`,
   );
-  return response.json();
+  const data = await response.json();
+  return trendingResponseInterfaceSchema.parse(data);
 }

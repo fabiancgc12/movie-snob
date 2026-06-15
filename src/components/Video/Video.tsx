@@ -1,4 +1,4 @@
-import { VideoTrailerInterface } from "@/models/Movies/VideoMedia.interface";
+import { VideoTrailerInterface } from "@/models/Movies/VideoMedia.type";
 import { cn } from "@/lib/utils";
 import { ReactNode, useState } from "react";
 import { createPortal } from "react-dom";

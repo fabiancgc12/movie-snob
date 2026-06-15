@@ -1,9 +1,9 @@
-export interface CreditsResponseInterface {
+export type CreditsResponseType = {
   id: number;
   cast?: CastEntity[] | null;
   crew?: CrewEntity[] | null;
-}
-export interface CastEntity {
+};
+export type CastEntity = {
   adult: boolean;
   gender: number;
   id: number;
@@ -16,8 +16,8 @@ export interface CastEntity {
   character: string;
   credit_id: string;
   order: number;
-}
-export interface CrewEntity {
+};
+export type CrewEntity = {
   adult: boolean;
   gender: number;
   id: number;
@@ -29,6 +29,6 @@ export interface CrewEntity {
   credit_id: string;
   department: string;
   job: string;
-}
+};
 
 export type CrewDto = Pick<CrewEntity, "id" | "job" | "name" | "profile_path">;

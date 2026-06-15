@@ -1,4 +1,4 @@
-import { VideoMediaResponse } from "@/models/Movies/VideoMedia.interface";
+import { VideoMediaResponse } from "@/models/Movies/VideoMedia.type";
 import { getImdbLocale } from "@/utils/functions/getLanguage";
 import { env } from "../../../env";
 

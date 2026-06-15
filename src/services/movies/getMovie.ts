@@ -1,15 +1,15 @@
-import { CreditsResponseInterface } from "@/models/Movies/CreditsResponse.interface";
-import { MovieInterface } from "@/models/Movies/Movie.interface";
+import { CreditsResponseType } from "@/models/Movies/CreditsResponse.type";
+import { MovieType } from "@/models/Movies/Movie.type";
 import {
   VideoMediaResponse,
   VideoTrailerInterface,
-} from "@/models/Movies/VideoMedia.interface";
-import { ImageMediaResponse } from "@/models/Movies/ImageMedia.interface";
-import { ProvidersResponseInterface } from "@/models/Movies/Providers.interface";
+} from "@/models/Movies/VideoMedia.type";
+import { ImageMediaResponse } from "@/models/Movies/ImageMedia.type";
+import { ProvidersResponseInterface } from "@/models/Movies/Providers.type";
 import {
   RecommendationInterface,
   RecommendationResponseInterface,
-} from "@/models/Movies/RecomendationResponse.interface";
+} from "@/models/Movies/RecomendationResponse.type";
 import { formatVideoResponse } from "@/utils/functions/formatVideoResponse";
 import { formatImagesResponse } from "@/utils/functions/formatImagesResponse";
 import { formatProvidersResponse } from "@/utils/functions/formatProvidersResponse";
@@ -21,18 +21,19 @@ import { getImdbLocale } from "@/utils/functions/getLanguage";
 import { extractLanguageFromLocale } from "@/utils/functions/extractLanguageFromLocale";
 import { env } from "../../../env";
 
-type ApiResponse = MovieInterface & {
+type ApiResponse = MovieType & {
   videos: VideoMediaResponse;
   images: ImageMediaResponse;
-  credits: CreditsResponseInterface;
+  credits: CreditsResponseType;
   recommendations: RecommendationResponseInterface;
   ["watch/providers"]: ProvidersResponseInterface;
 };
+
 export async function getMovie(
   id: number,
   locale: string,
 ): Promise<{
-  movie: MovieInterface;
+  movie: MovieType;
   credits: CreditsDto;
   videos: VideoTrailerInterface[];
   images: ImageMediaResponse;

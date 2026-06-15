@@ -1,11 +1,11 @@
-export interface ImageMediaResponse {
+export type ImageMediaResponse = {
   backdrops: ImagePoster[];
   id: number;
   logos: ImagePoster[];
   posters: ImagePoster[];
-}
+};
 
-export interface ImagePoster {
+export type ImagePoster = {
   aspect_ratio: number;
   height: number;
   iso_639_1: null | string;
@@ -13,4 +13,4 @@ export interface ImagePoster {
   vote_average: number;
   vote_count: number;
   width: number;
-}
+};

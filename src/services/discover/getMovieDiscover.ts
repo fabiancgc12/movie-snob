@@ -1,4 +1,4 @@
-import { DiscoverMovieResponseInterface } from "@/models/discover/discoverMovieResponse.Interface";
+import { discoverMovieResponseSchema } from "@/models/discover/discoverMovieResponse.schema";
 import { getImdbLocale } from "@/utils/functions/getLanguage";
 import { env } from "../../../env";
 
@@ -7,11 +7,7 @@ type options = {
   page?: number;
   locale: string;
 };
-export async function getMovieDiscover({
-  genre,
-  page = 1,
-  locale,
-}: options): Promise<DiscoverMovieResponseInterface> {
+export async function getMovieDiscover({ genre, page = 1, locale }: options) {
   let parameters: Record<string, any> = {};
   parameters.page = page;
   parameters.language = getImdbLocale(locale);
@@ -25,5 +21,6 @@ export async function getMovieDiscover({
   const response = await fetch(
     `https://api.themoviedb.org/3/discover/movie?api_key=${env.TMDB_KEY}&${params}`,
   );
-  return (await response.json()) as DiscoverMovieResponseInterface;
+  const data = await response.json();
+  return discoverMovieResponseSchema.parse(data);
 }

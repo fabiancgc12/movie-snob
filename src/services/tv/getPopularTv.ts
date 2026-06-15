@@ -1,11 +1,11 @@
-import { PopularTvShowResponse } from "@/models/popular/popularTv.interface";
+import {
+  PopularTvShowResponse,
+  popularTvShowResponseSchema,
+} from "@/models/popular/popularTv.schema";
 import { getImdbLocale } from "@/utils/functions/getLanguage";
 import { env } from "../../../env";
 
-export async function getPopularTv(
-  page: number = 1,
-  locale: string,
-): Promise<PopularTvShowResponse> {
+export async function getPopularTv(page: number = 1, locale: string) {
   locale = getImdbLocale(locale);
   const params = new URLSearchParams({
     api_key: env.TMDB_KEY,
@@ -15,5 +15,6 @@ export async function getPopularTv(
   const response = await fetch(
     `https://api.themoviedb.org/3/tv/popular?${params}`,
   );
-  return response.json();
+  const data = await response.json();
+  return popularTvShowResponseSchema.parse(data);
 }

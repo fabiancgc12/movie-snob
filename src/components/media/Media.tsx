@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import { generateImageUrl } from "@/utils/functions/generateImageUrl";
-import { VideoTrailerInterface } from "@/models/Movies/VideoMedia.interface";
-import { ImageMediaResponse } from "@/models/Movies/ImageMedia.interface";
+import { VideoTrailerInterface } from "@/models/Movies/VideoMedia.type";
+import { ImageMediaResponse } from "@/models/Movies/ImageMedia.type";
 import { VideoThumbnail } from "@/components/Video/VideoThumbnail";
 import { Section } from "@/components/Section/Section";
 import { Slider } from "@/components/Slider/Slider";
@@ -39,11 +39,7 @@ export function Media({ videos, images }: props) {
           <p>{movieFallBackMessage}</p>
         )}
       </Section>
-      <SliderSection
-        className="isolate"
-        title={t("imagesLabel")}
-        speed={450}
-      >
+      <SliderSection className="isolate" title={t("imagesLabel")} speed={450}>
         {backdrops.length > 0 ? (
           backdrops.map((b, i) => (
             <div

@@ -1,13 +1,13 @@
 import { MediaType } from "@/models/MediaType";
 
-export interface RecommendationResponseInterface {
+export type RecommendationResponseInterface = {
   page: number;
   results: RecommendationInterface[];
   total_pages: number;
   total_results: number;
-}
+};
 
-export interface RecommendationInterface {
+export type RecommendationInterface = {
   adult: boolean;
   backdrop_path?: string | null;
   id: number;
@@ -23,9 +23,4 @@ export interface RecommendationInterface {
   video: boolean;
   vote_average: number;
   vote_count: number;
-}
-
-export enum OriginalLanguage {
-  En = "en",
-  Nl = "nl",
-}
+};

@@ -8,9 +8,9 @@ import { BookmarkButton } from "@/components/common/ActionButton/chechMarkButton
 import { LikeButton } from "@/components/common/ActionButton/LikeButton";
 import { ShareButton } from "@/components/common/ActionButton/ShareButton";
 import { MemberCard } from "@/components/CrewMember/CrewMemberCard";
-import { MovieInterface } from "@/models/Movies/Movie.interface";
-import { VideoTrailerInterface } from "@/models/Movies/VideoMedia.interface";
-import { TvShowInterface } from "@/models/tv/TvShow.interface";
+import { MovieType } from "@/models/Movies/Movie.type";
+import { VideoTrailerInterface } from "@/models/Movies/VideoMedia.type";
+import { TvShowType } from "@/models/tv/TvShow.type";
 import { PeopleDto } from "@/models/dto/Credit.dto";
 import { generateUrlPage } from "@/utils/functions/generateUrlPage";
 import { CSSProperties, useMemo } from "react";
@@ -25,11 +25,11 @@ type props = {
   credits?: PeopleDto[] | null;
 } & (
   | {
-      product: MovieInterface;
+      product: MovieType;
       mediaType: "movie";
     }
   | {
-      product: TvShowInterface;
+      product: TvShowType;
       mediaType: "tv";
     }
 );

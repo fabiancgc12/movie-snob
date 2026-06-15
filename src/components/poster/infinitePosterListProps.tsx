@@ -6,9 +6,9 @@ import {
   SkeletonCard,
 } from "@/components/poster/posterCard";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { PopularMovieResponse } from "@/models/popular/popularMovie.interface";
-import { PopularTvShowResponse } from "@/models/popular/popularTv.interface";
-import { TrendingResponseInterface } from "@/models/trending/TrendingMovieResponse";
+import { PopularMovieResponse } from "@/models/popular/popularMovie.schema";
+import { PopularTvShowResponse } from "@/models/popular/popularTv.schema";
+import { TrendingResponse } from "@/models/trending/TrendingMovieResponse.schema";
 import { Spinner } from "@/components/common/Spinner";
 import { useInView } from "react-intersection-observer";
 import { MediaType } from "@/models/MediaType";
@@ -76,7 +76,7 @@ export function InfinitePosterList({
     isLoadingError,
     isRefetchError,
   } = useInfiniteQuery<
-    PopularMovieResponse | PopularTvShowResponse | TrendingResponseInterface
+    PopularMovieResponse | PopularTvShowResponse | TrendingResponse
   >({
     queryKey: queryKey,
     enabled: enabled,

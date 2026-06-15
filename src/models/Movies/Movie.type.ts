@@ -1,4 +1,4 @@
-export interface MovieInterface {
+export type MovieType = {
   adult: boolean;
   backdrop_path: string;
   belongs_to_collection?: null;
@@ -24,11 +24,11 @@ export interface MovieInterface {
   video: boolean;
   vote_average: number;
   vote_count: number;
-}
-export interface GenresEntity {
+};
+export type GenresEntity = {
   id: number;
   name: string;
-}
+};
 export interface ProductionCompaniesEntity {
   id: number;
   logo_path?: string | null;

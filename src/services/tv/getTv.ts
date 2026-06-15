@@ -1,15 +1,15 @@
 import {
   VideoMediaResponse,
   VideoTrailerInterface,
-} from "@/models/Movies/VideoMedia.interface";
-import { TvShowInterface } from "@/models/tv/TvShow.interface";
-import { ImageMediaResponse } from "@/models/Movies/ImageMedia.interface";
+} from "@/models/Movies/VideoMedia.type";
+import { TvShowType } from "@/models/tv/TvShow.type";
+import { ImageMediaResponse } from "@/models/Movies/ImageMedia.type";
 import {
   RecommendationInterface,
   RecommendationResponseInterface,
-} from "@/models/Movies/RecomendationResponse.interface";
-import { ProvidersResponseInterface } from "@/models/Movies/Providers.interface";
-import { AgregateCastResponse } from "@/models/tv/TvCast.interface";
+} from "@/models/Movies/RecomendationResponse.type";
+import { ProvidersResponseInterface } from "@/models/Movies/Providers.type";
+import { AgregateCastResponse } from "@/models/tv/TvCast.type";
 import { formatVideoResponse } from "@/utils/functions/formatVideoResponse";
 import { formatImagesResponse } from "@/utils/functions/formatImagesResponse";
 import { formatProvidersResponse } from "@/utils/functions/formatProvidersResponse";
@@ -21,7 +21,7 @@ import { extractLanguageFromLocale } from "@/utils/functions/extractLanguageFrom
 import { getImdbLocale } from "@/utils/functions/getLanguage";
 import { env } from "../../../env";
 
-type ApiResponse = TvShowInterface & {
+type ApiResponse = TvShowType & {
   videos: VideoMediaResponse;
   images: ImageMediaResponse;
   aggregate_credits: AgregateCastResponse;
@@ -33,7 +33,7 @@ export async function getTvShow(
   id: number,
   locale: string,
 ): Promise<{
-  show: TvShowInterface;
+  show: TvShowType;
   credits: CreditsDto;
   videos: VideoTrailerInterface[];
   images: ImageMediaResponse;

@@ -1,8 +1,8 @@
-import { TvShowInterface } from "@/models/tv/TvShow.interface";
-import { MovieInterface } from "@/models/Movies/Movie.interface";
+import { TvShowType } from "@/models/tv/TvShow.type";
+import { MovieType } from "@/models/Movies/Movie.type";
 
 export function generateUrlPage(
-  media: TvShowInterface | MovieInterface,
+  media: TvShowType | MovieType,
   mediaType: "tv" | "movie",
 ) {
   return `https://moviesnob.vercel.app/${mediaType}/${media.id}`;

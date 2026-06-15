@@ -1,22 +1,22 @@
-import { MovieResumeInterface } from "@/models/Movies/MovieResume.interface";
+import { MovieResumeSchema } from "@/models/Movies/MovieResume.schema";
 import { getPopularMovies } from "@/services/movies/getPopularMovies";
-import { PopularMovieResponse } from "@/models/popular/popularMovie.interface";
+import { PopularMovieResponse } from "@/models/popular/popularMovie.schema";
 import { getPopularTv } from "@/services/tv/getPopularTv";
-import { PopularTvShowResponse } from "@/models/popular/popularTv.interface";
+import { PopularTvShowResponse } from "@/models/popular/popularTv.schema";
 import { getTrending } from "@/services/trending/getTrending";
-import { TrendingResponseInterface } from "@/models/trending/TrendingMovieResponse";
+import { TrendingResponse } from "@/models/trending/TrendingMovieResponse.schema";
 import { getUpcoming } from "@/services/movies/getUpcoming";
 import { getMovieVideos } from "@/services/movies/getMovieVideos";
-import { VideoTrailerInterface } from "@/models/Movies/VideoMedia.interface";
+import { VideoTrailerInterface } from "@/models/Movies/VideoMedia.type";
 
 export async function getHomePage(locale: string): Promise<{
-  upcoming: MovieResumeInterface[];
+  upcoming: MovieResumeSchema[];
   upcomingTrailers: VideoTrailerInterface[];
   popular: {
     movie: PopularMovieResponse;
     tv: PopularTvShowResponse;
   };
-  trending: TrendingResponseInterface;
+  trending: TrendingResponse;
 }> {
   const [upcoming, popularMovies, popularTv, trending] = await Promise.all([
     getUpcoming(locale),

@@ -1,8 +1,8 @@
 import { generateImageUrl } from "@/utils/functions/generateImageUrl";
 import { CSSProperties, useMemo } from "react";
-import { MovieResumeInterface } from "@/models/Movies/MovieResume.interface";
+import { MovieResumeSchema } from "@/models/Movies/MovieResume.schema";
 import { FullDate } from "@/components/common/FullDate";
-import { VideoTrailerInterface } from "@/models/Movies/VideoMedia.interface";
+import { VideoTrailerInterface } from "@/models/Movies/VideoMedia.type";
 import { Video } from "@/components/Video/Video";
 import { useTranslations, useLocale } from "next-intl";
 import { cn } from "@/lib/utils";
@@ -12,7 +12,7 @@ import { Link } from "@/i18n/navigation";
 import { Info, Play } from "lucide-react";
 
 type props = {
-  data: MovieResumeInterface;
+  data: MovieResumeSchema;
   trailer?: VideoTrailerInterface;
 };
 

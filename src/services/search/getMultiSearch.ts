@@ -1,18 +1,17 @@
-import { MultiSearchResponseInterface } from "@/models/search/MultiSearchResponse.interface";
+import {
+  multiSearchResponseSchema,
+  MultiSearchResponseSchema,
+} from "@/models/search/MultiSearchResponse.schema";
 import { getImdbLocale } from "@/utils/functions/getLanguage";
 import { env } from "../../../env";
 
 type options = {
   title?: string;
   page?: number;
-  locale?: string | string[];
+  locale: string;
 };
 
-export async function getMultiSearch({
-  page = 1,
-  title,
-  locale,
-}: options): Promise<MultiSearchResponseInterface> {
+export async function getMultiSearch({ page = 1, title, locale }: options) {
   let parameters: Record<string, any> = {};
   parameters.page = page;
   parameters.language = getImdbLocale(locale);
@@ -25,10 +24,11 @@ export async function getMultiSearch({
   const response = await fetch(
     `https://api.themoviedb.org/3/search/multi?api_key=${env.TMDB_KEY}&${paramsString}`,
   );
-  const data = (await response.json()) as MultiSearchResponseInterface;
+  const data = await response.json();
+  const result = multiSearchResponseSchema.parse(data);
   //filtering anything that is not a movie or tv show
-  data.results = data.results.filter(
+  result.results = result.results.filter(
     (r) => r.media_type == "movie" || r.media_type == "tv",
   );
-  return data;
+  return result;
 }

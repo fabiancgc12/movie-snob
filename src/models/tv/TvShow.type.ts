@@ -3,9 +3,9 @@ import {
   ProductionCompaniesEntity,
   ProductionCountriesEntity,
   SpokenLanguagesEntity,
-} from "@/models/Movies/Movie.interface";
+} from "@/models/Movies/Movie.type";
 
-export interface TvShowInterface {
+export type TvShowType = {
   adult: boolean;
   backdrop_path: string;
   created_by?: CreatedByEntity[] | null;
@@ -38,15 +38,15 @@ export interface TvShowInterface {
   type: string;
   vote_average: number;
   vote_count: number;
-}
-export interface CreatedByEntity {
+};
+export type CreatedByEntity = {
   id: number;
   credit_id: string;
   name: string;
   gender: number;
   profile_path: string;
-}
-export interface LastEpisodeToAirOrNextEpisodeToAir {
+};
+export type LastEpisodeToAirOrNextEpisodeToAir = {
   air_date: string;
   episode_number: number;
   id: number;
@@ -59,14 +59,14 @@ export interface LastEpisodeToAirOrNextEpisodeToAir {
   still_path: string;
   vote_average: number;
   vote_count: number;
-}
-export interface NetworksEntity {
+};
+export type NetworksEntity = {
   id: number;
   name: string;
   logo_path: string;
   origin_country: string;
-}
-export interface SeasonsEntity {
+};
+export type SeasonsEntity = {
   air_date?: string;
   episode_count?: number;
   id: number;
@@ -74,4 +74,4 @@ export interface SeasonsEntity {
   overview: string;
   poster_path: string;
   season_number: number;
-}
+};

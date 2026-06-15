@@ -1,9 +1,9 @@
-export interface ProvidersResponseInterface {
+export type ProvidersResponseInterface = {
   id: number;
   results: Results;
-}
+};
 
-export interface Results {
+export type Results = {
   AE: CountryProviders;
   AR: CountryProviders;
   AT: CountryProviders;
@@ -87,20 +87,20 @@ export interface Results {
   VE: CountryProviders;
   ZA: CountryProviders;
   ZM: CountryProviders;
-}
+};
 
-export interface CountryProviders {
+export type CountryProviders = {
   link: string;
   flatrate?: Provider[];
   buy: Provider[];
   rent?: Provider[];
   ads?: Provider[];
   free?: Provider[];
-}
+};
 
-export interface Provider {
+export type Provider = {
   logo_path: string;
   provider_id: number;
   provider_name: string;
   display_priority: number;
-}
+};

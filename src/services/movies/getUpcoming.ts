@@ -1,10 +1,10 @@
-import { UpcomingMoviesResponse } from "@/models/Movies/UpcomingMoviesResponse";
+import { UpcomingMoviesResponseType } from "@/models/Movies/UpcomingMoviesResponse.type";
 import { getImdbLocale } from "@/utils/functions/getLanguage";
 import { env } from "../../../env";
 
 export async function getUpcoming(
   locale: string,
-): Promise<UpcomingMoviesResponse> {
+): Promise<UpcomingMoviesResponseType> {
   locale = getImdbLocale(locale);
   const params = new URLSearchParams({
     api_key: env.TMDB_KEY,

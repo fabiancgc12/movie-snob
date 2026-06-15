@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getMovieDiscover } from "@/services/discover/getMovieDiscover";
-import { DiscoverMovieResponseInterface } from "@/models/discover/discoverMovieResponse.Interface";
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
@@ -10,5 +9,5 @@ export async function GET(request: NextRequest) {
     locale: searchParams.get("locale") ?? "en",
   };
   const data = await getMovieDiscover(parameters);
-  return NextResponse.json<DiscoverMovieResponseInterface>(data);
+  return NextResponse.json(data);
 }

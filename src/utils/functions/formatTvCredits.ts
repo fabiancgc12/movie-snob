@@ -1,4 +1,4 @@
-import { AgregateCastResponse } from "@/models/tv/TvCast.interface";
+import { AgregateCastResponse } from "@/models/tv/TvCast.type";
 import { CreditsDto, PeopleDto } from "@/models/dto/Credit.dto";
 
 export function formatTvCredits(tvCredits: AgregateCastResponse): CreditsDto {

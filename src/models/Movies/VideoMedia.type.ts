@@ -1,9 +1,9 @@
-export interface VideoMediaResponse {
+export type VideoMediaResponse = {
   id: number;
   results: VideoTrailerInterface[];
-}
+};
 
-export interface VideoTrailerInterface {
+export type VideoTrailerInterface = {
   iso_639_1: string;
   iso_3166_1: string;
   name: string;
@@ -14,4 +14,4 @@ export interface VideoTrailerInterface {
   official: boolean;
   published_at: string;
   id: string;
-}
+};
