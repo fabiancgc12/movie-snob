@@ -41,14 +41,6 @@ body,
 }
 
 
-.react-tabs__tab--selected {
-  background: var(--background);
-}
-
-.react-tabs__tab:focus:after {
-  background: var(--background);
-}
-
 /*  ---break---*/
 
 @theme inline {

@@ -8,7 +8,7 @@ import {
   StoreProductType,
 } from "@/components/common/ActionButton/useCheckedButton";
 import { PosterGrid } from "@/components/poster/PosterGrid";
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { likedStoreKey } from "@/components/common/ActionButton/LikeButton";
 import { useTranslations } from "next-intl";
 import { useTheme } from "@/global/ThemeContext";
@@ -38,12 +38,12 @@ export default function LikedPage() {
   return (
     <div data-theme={theme} className={"h-full"}>
       <Section title={title}>
-        <Tabs>
-          <TabList>
-            <Tab>Movie</Tab>
-            <Tab>Tv</Tab>
-          </TabList>
-          <TabPanel>
+        <Tabs defaultValue="movie">
+          <TabsList>
+            <TabsTrigger value="movie">Movie</TabsTrigger>
+            <TabsTrigger value="tv">Tv</TabsTrigger>
+          </TabsList>
+          <TabsContent value="movie">
             {ready ? (
               <PosterGrid>
                 <PosterList
@@ -55,8 +55,8 @@ export default function LikedPage() {
             ) : (
               <PosterGrid>{defaultPosters}</PosterGrid>
             )}
-          </TabPanel>
-          <TabPanel>
+          </TabsContent>
+          <TabsContent value="tv">
             {ready ? (
               <PosterGrid>
                 <PosterList
@@ -68,7 +68,7 @@ export default function LikedPage() {
             ) : (
               <PosterGrid>{defaultPosters}</PosterGrid>
             )}
-          </TabPanel>
+          </TabsContent>
         </Tabs>
       </Section>
     </div>
