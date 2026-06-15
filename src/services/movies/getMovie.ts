@@ -16,7 +16,7 @@ import {
 } from "@/models/Movies/ImageMedia.schema";
 import {
   ProvidersResponseInterface,
-  providersResponseInterfaceSchema,
+  providersResponseSchema,
 } from "@/models/Movies/Providers.type";
 import {
   RecommendationInterface,
@@ -40,7 +40,7 @@ const apiResponseSchema = movieTypeSchema.extend({
   images: imageMediaResponseSchema,
   credits: creditsResponseTypeSchema,
   recommendations: recommendationResponseInterfaceSchema,
-  ["watch/providers"]: providersResponseInterfaceSchema,
+  ["watch/providers"]: providersResponseSchema,
 });
 
 type ApiResponse = z.infer<typeof apiResponseSchema>;

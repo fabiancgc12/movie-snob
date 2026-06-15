@@ -9,14 +9,16 @@ export const providerSchema = z.object({
 
 export type Provider = z.infer<typeof providerSchema>;
 
-export const countryProvidersSchema = z.object({
-  link: z.string(),
-  flatrate: providerSchema.array().optional(),
-  buy: z.array(providerSchema),
-  rent: providerSchema.array().optional(),
-  ads: providerSchema.array().optional(),
-  free: providerSchema.array().optional(),
-});
+export const countryProvidersSchema = z
+  .object({
+    link: z.string(),
+    flatrate: providerSchema.array().optional(),
+    buy: z.array(providerSchema),
+    rent: providerSchema.array().optional(),
+    ads: providerSchema.array().optional(),
+    free: providerSchema.array().optional(),
+  })
+  .nullish();
 
 export type CountryProviders = z.infer<typeof countryProvidersSchema>;
 
@@ -108,11 +110,11 @@ export const resultsSchema = z.object({
 
 export type Results = z.infer<typeof resultsSchema>;
 
-export const providersResponseInterfaceSchema = z.object({
-  id: z.number(),
+export const providersResponseSchema = z.object({
+  id: z.number().nullish(),
   results: resultsSchema,
 });
 
 export type ProvidersResponseInterface = z.infer<
-  typeof providersResponseInterfaceSchema
+  typeof providersResponseSchema
 >;

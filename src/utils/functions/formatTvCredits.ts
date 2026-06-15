@@ -1,7 +1,7 @@
-import { AgregateCastResponse } from "@/models/tv/TvCast.type";
+import { AggregateCastResponse } from "@/models/tv/TvCast.type";
 import { CreditsDto, PeopleDto } from "@/models/dto/Credit.dto";
 
-export function formatTvCredits(tvCredits: AgregateCastResponse): CreditsDto {
+export function formatTvCredits(tvCredits: AggregateCastResponse): CreditsDto {
   //just returning the first 12 member of the main cast and
   // the director or screenplay members of the crew
   //I use destructuring so next deserializes the object, if not it woulld throw an error

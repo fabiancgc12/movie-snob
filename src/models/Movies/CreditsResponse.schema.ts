@@ -12,7 +12,7 @@ export const castEntitySchema = z.object({
   cast_id: z.number(),
   character: z.string(),
   credit_id: z.string(),
-  order: z.number(),
+  order: z.number().nullish(),
 });
 
 export type CastEntity = z.infer<typeof castEntitySchema>;

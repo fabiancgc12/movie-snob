@@ -1,77 +1,92 @@
-import {
-  MovieGenresType,
-  ProductionCompaniesEntity,
-  ProductionCountriesEntity,
-  SpokenLanguagesEntity,
-} from "@/models/Movies/Movie.schema";
+import z from "zod";
+import { spokenLanguagesSchema } from "@/features/ImdbLanguages/schemas/SpokenLanguagesSchema";
+import { productionCompaniesSchema } from "@/features/productionCompanies/schema/ProductionCompaniesType";
+import { productionCountriesSchema } from "@/features/ProductionCountries/schemas/ProductionCountries.schema";
+import { movieGenresSchema } from "@/features/movieGenres/schemas/MovieGenresSchema";
 
-export type TvShowType = {
-  adult: boolean;
-  backdrop_path: string;
-  created_by?: CreatedByEntity[] | null;
-  episode_run_time?: number[] | null;
-  first_air_date: string;
-  genres?: MovieGenresType[] | null;
-  homepage: string;
-  id: number;
-  in_production: boolean;
-  languages?: string[] | null;
-  last_air_date: string;
-  last_episode_to_air: LastEpisodeToAirOrNextEpisodeToAir;
-  name: string;
-  next_episode_to_air: LastEpisodeToAirOrNextEpisodeToAir;
-  networks?: NetworksEntity[] | null;
-  number_of_episodes: number;
-  number_of_seasons: number;
-  origin_country?: string[] | null;
-  original_language: string;
-  original_name: string;
-  overview: string;
-  popularity: number;
-  poster_path: string;
-  production_companies?: ProductionCompaniesEntity[] | null;
-  production_countries?: ProductionCountriesEntity[] | null;
-  seasons?: SeasonsEntity[] | null;
-  spoken_languages?: SpokenLanguagesEntity[] | null;
-  status: string;
-  tagline: string;
-  type: string;
-  vote_average: number;
-  vote_count: number;
-};
-export type CreatedByEntity = {
-  id: number;
-  credit_id: string;
-  name: string;
-  gender: number;
-  profile_path: string;
-};
-export type LastEpisodeToAirOrNextEpisodeToAir = {
-  air_date: string;
-  episode_number: number;
-  id: number;
-  name: string;
-  overview: string;
-  production_code: string;
-  runtime: number;
-  season_number: number;
-  show_id: number;
-  still_path: string;
-  vote_average: number;
-  vote_count: number;
-};
-export type NetworksEntity = {
-  id: number;
-  name: string;
-  logo_path: string;
-  origin_country: string;
-};
-export type SeasonsEntity = {
-  air_date?: string;
-  episode_count?: number;
-  id: number;
-  name: string;
-  overview: string;
-  poster_path: string;
-  season_number: number;
-};
+export const createdByEntitySchema = z.object({
+  id: z.number(),
+  credit_id: z.string(),
+  name: z.string(),
+  gender: z.number(),
+  profile_path: z.string(),
+});
+
+export type CreatedByEntity = z.infer<typeof createdByEntitySchema>;
+
+export const lastEpisodeToAirOrNextEpisodeToAirSchema = z.object({
+  air_date: z.string(),
+  episode_number: z.number(),
+  id: z.number(),
+  name: z.string(),
+  overview: z.string(),
+  production_code: z.string(),
+  runtime: z.number(),
+  season_number: z.number(),
+  show_id: z.number(),
+  still_path: z.string(),
+  vote_average: z.number(),
+  vote_count: z.number(),
+});
+
+export type LastEpisodeToAirOrNextEpisodeToAir = z.infer<
+  typeof lastEpisodeToAirOrNextEpisodeToAirSchema
+>;
+
+export const networksEntitySchema = z.object({
+  id: z.number(),
+  name: z.string(),
+  logo_path: z.string(),
+  origin_country: z.string(),
+});
+
+export type NetworksEntity = z.infer<typeof networksEntitySchema>;
+
+export const seasonsEntitySchema = z.object({
+  air_date: z.string().optional(),
+  episode_count: z.number().optional(),
+  id: z.number(),
+  name: z.string(),
+  overview: z.string(),
+  poster_path: z.string(),
+  season_number: z.number(),
+});
+
+export type SeasonsEntity = z.infer<typeof seasonsEntitySchema>;
+
+export const tvShowSchema = z.object({
+  adult: z.boolean(),
+  backdrop_path: z.string(),
+  created_by: z.array(createdByEntitySchema).optional().nullable(),
+  episode_run_time: z.array(z.number()).optional().nullable(),
+  first_air_date: z.string(),
+  genres: movieGenresSchema.array().optional().nullable(),
+  homepage: z.string(),
+  id: z.number(),
+  in_production: z.boolean(),
+  languages: z.array(z.string()).optional().nullable(),
+  last_air_date: z.string(),
+  last_episode_to_air: lastEpisodeToAirOrNextEpisodeToAirSchema,
+  name: z.string(),
+  next_episode_to_air: lastEpisodeToAirOrNextEpisodeToAirSchema,
+  networks: z.array(networksEntitySchema).optional().nullable(),
+  number_of_episodes: z.number(),
+  number_of_seasons: z.number(),
+  origin_country: z.array(z.string()).optional().nullable(),
+  original_language: z.string(),
+  original_name: z.string(),
+  overview: z.string(),
+  popularity: z.number(),
+  poster_path: z.string(),
+  production_companies: productionCompaniesSchema.array().optional().nullable(),
+  production_countries: productionCountriesSchema.array().optional().nullable(),
+  seasons: z.array(seasonsEntitySchema).optional().nullable(),
+  spoken_languages: spokenLanguagesSchema.array().optional().nullable(),
+  status: z.string(),
+  tagline: z.string(),
+  type: z.string(),
+  vote_average: z.number(),
+  vote_count: z.number(),
+});
+
+export type TvShowType = z.infer<typeof tvShowSchema>;

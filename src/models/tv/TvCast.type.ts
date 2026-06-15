@@ -1,41 +1,57 @@
-export type AgregateCastResponse = {
-  cast?: AggregateCastEntity[] | null;
-  crew?: TvCrewEntity[] | null;
-  id: number;
-};
-export type AggregateCastEntity = {
-  adult: boolean;
-  gender: number;
-  id: number;
-  known_for_department: string;
-  name: string;
-  original_name: string;
-  popularity: number;
-  profile_path?: string | null;
-  roles?: RolesEntity[] | null;
-  total_episode_count: number;
-  order: number;
-};
-export type RolesEntity = {
-  credit_id: string;
-  character: string;
-  episode_count: number;
-};
-export type TvCrewEntity = {
-  adult: boolean;
-  gender: number;
-  id: number;
-  known_for_department: string;
-  name: string;
-  original_name: string;
-  popularity: number;
-  profile_path?: string | null;
-  jobs?: JobsEntity[] | null;
-  department: string;
-  total_episode_count: number;
-};
-export type JobsEntity = {
-  credit_id: string;
-  job: string;
-  episode_count: number;
-};
+import { z } from "zod";
+
+export const rolesEntitySchema = z.object({
+  credit_id: z.string(),
+  character: z.string(),
+  episode_count: z.number(),
+});
+
+export type RolesEntity = z.infer<typeof rolesEntitySchema>;
+
+export const jobsEntitySchema = z.object({
+  credit_id: z.string(),
+  job: z.string(),
+  episode_count: z.number(),
+});
+
+export type JobsEntity = z.infer<typeof jobsEntitySchema>;
+
+export const aggregateCastEntitySchema = z.object({
+  adult: z.boolean(),
+  gender: z.number(),
+  id: z.number(),
+  known_for_department: z.string(),
+  name: z.string(),
+  original_name: z.string(),
+  popularity: z.number(),
+  profile_path: z.string().optional().nullable(),
+  roles: z.array(rolesEntitySchema).optional().nullable(),
+  total_episode_count: z.number(),
+  order: z.number(),
+});
+
+export type AggregateCastEntity = z.infer<typeof aggregateCastEntitySchema>;
+
+export const tvCrewEntitySchema = z.object({
+  adult: z.boolean(),
+  gender: z.number(),
+  id: z.number(),
+  known_for_department: z.string(),
+  name: z.string(),
+  original_name: z.string(),
+  popularity: z.number(),
+  profile_path: z.string().optional().nullable(),
+  jobs: z.array(jobsEntitySchema).optional().nullable(),
+  department: z.string(),
+  total_episode_count: z.number(),
+});
+
+export type TvCrewEntity = z.infer<typeof tvCrewEntitySchema>;
+
+export const aggregateCastResponseSchema = z.object({
+  cast: z.array(aggregateCastEntitySchema).optional().nullable(),
+  crew: z.array(tvCrewEntitySchema).optional().nullable(),
+  id: z.number(),
+});
+
+export type AggregateCastResponse = z.infer<typeof aggregateCastResponseSchema>;

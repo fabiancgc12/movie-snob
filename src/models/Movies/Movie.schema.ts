@@ -1,46 +1,15 @@
 import { z } from "zod";
-
-export const genresEntitySchema = z.object({
-  id: z.number(),
-  name: z.string(),
-});
-
-export type MovieGenresType = z.infer<typeof genresEntitySchema>;
-
-export const productionCompaniesEntitySchema = z.object({
-  id: z.number(),
-  logo_path: z.string().optional().nullable(),
-  name: z.string(),
-  origin_country: z.string(),
-});
-
-export type ProductionCompaniesEntity = z.infer<
-  typeof productionCompaniesEntitySchema
->;
-
-export const productionCountriesEntitySchema = z.object({
-  iso_3166_1: z.string(),
-  name: z.string(),
-});
-
-export type ProductionCountriesEntity = z.infer<
-  typeof productionCountriesEntitySchema
->;
-
-export const spokenLanguagesEntitySchema = z.object({
-  english_name: z.string(),
-  iso_639_1: z.string(),
-  name: z.string(),
-});
-
-export type SpokenLanguagesEntity = z.infer<typeof spokenLanguagesEntitySchema>;
+import { spokenLanguagesSchema } from "@/features/ImdbLanguages/schemas/SpokenLanguagesSchema";
+import { productionCompaniesSchema } from "@/features/productionCompanies/schema/ProductionCompaniesType";
+import { productionCountriesSchema } from "@/features/ProductionCountries/schemas/ProductionCountries.schema";
+import { movieGenresSchema } from "@/features/movieGenres/schemas/MovieGenresSchema";
 
 export const movieTypeSchema = z.object({
   adult: z.boolean(),
   backdrop_path: z.string(),
   belongs_to_collection: z.null().optional(),
   budget: z.number(),
-  genres: z.array(genresEntitySchema).optional().nullable(),
+  genres: movieGenresSchema.array().optional().nullable(),
   homepage: z.string(),
   id: z.number(),
   imdb_id: z.string(),
@@ -49,18 +18,12 @@ export const movieTypeSchema = z.object({
   overview: z.string(),
   popularity: z.number(),
   poster_path: z.string(),
-  production_companies: z
-    .array(productionCompaniesEntitySchema)
-    .optional()
-    .nullable(),
-  production_countries: z
-    .array(productionCountriesEntitySchema)
-    .optional()
-    .nullable(),
+  production_companies: productionCompaniesSchema.array().optional().nullable(),
+  production_countries: productionCountriesSchema.array().optional().nullable(),
   release_date: z.string(),
   revenue: z.number(),
   runtime: z.number(),
-  spoken_languages: z.array(spokenLanguagesEntitySchema).optional().nullable(),
+  spoken_languages: spokenLanguagesSchema.array().optional().nullable(),
   status: z.string(),
   tagline: z.string(),
   title: z.string(),

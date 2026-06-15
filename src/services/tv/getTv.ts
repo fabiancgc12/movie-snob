@@ -1,12 +1,18 @@
-import { VideoMedia, VideoTrailer } from "@/models/Movies/VideoMedia.schema";
-import { TvShowType } from "@/models/tv/TvShow.type";
-import { ImageMedia } from "@/models/Movies/ImageMedia.schema";
+import {
+  videoMediaResponseSchema,
+  VideoTrailer,
+} from "@/models/Movies/VideoMedia.schema";
+import { TvShowType, tvShowSchema } from "@/models/tv/TvShow.type";
+import {
+  ImageMedia,
+  imageMediaResponseSchema,
+} from "@/models/Movies/ImageMedia.schema";
 import {
   RecommendationInterface,
-  RecommendationResponseInterface,
+  recommendationResponseInterfaceSchema,
 } from "@/models/Movies/RecomendationResponse.schema";
-import { ProvidersResponseInterface } from "@/models/Movies/Providers.type";
-import { AgregateCastResponse } from "@/models/tv/TvCast.type";
+import { providersResponseSchema } from "@/models/Movies/Providers.type";
+import { aggregateCastResponseSchema } from "@/models/tv/TvCast.type";
 import { formatVideoResponse } from "@/utils/functions/formatVideoResponse";
 import { formatImagesResponse } from "@/utils/functions/formatImagesResponse";
 import { formatProvidersResponse } from "@/utils/functions/formatProvidersResponse";
@@ -17,14 +23,17 @@ import { CreditsDto } from "@/models/dto/Credit.dto";
 import { extractLanguageFromLocale } from "@/utils/functions/extractLanguageFromLocale";
 import { getImdbLocale } from "@/utils/functions/getLanguage";
 import { env } from "../../../env";
+import { z } from "zod";
 
-type ApiResponse = TvShowType & {
-  videos: VideoMedia;
-  images: ImageMedia;
-  aggregate_credits: AgregateCastResponse;
-  recommendations: RecommendationResponseInterface;
-  ["watch/providers"]: ProvidersResponseInterface;
-};
+const apiResponseSchema = tvShowSchema.extend({
+  images: imageMediaResponseSchema,
+  videos: videoMediaResponseSchema,
+  aggregate_credits: aggregateCastResponseSchema,
+  recommendations: recommendationResponseInterfaceSchema,
+  ["watch/providers"]: providersResponseSchema,
+});
+
+type ApiResponse = z.infer<typeof apiResponseSchema>;
 
 export async function getTvShow(
   id: number,
