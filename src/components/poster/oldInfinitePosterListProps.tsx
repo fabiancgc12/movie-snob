@@ -1,6 +1,6 @@
 "use client";
 
-import { PosterCard, SkeletonCard } from "@/components/poster/posterCard";
+import { SkeletonCard } from "@/components/poster/posterCard";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { PopularMovieResponse } from "@/models/popular/popularMovie.schema";
 import { PopularTvShowResponse } from "@/models/popular/popularTv.schema";
@@ -8,36 +8,9 @@ import { TrendingResponse } from "@/models/trending/TrendingMovieResponse.schema
 import { Spinner } from "@/components/common/Spinner";
 import { useInView } from "react-intersection-observer";
 import { MediaType } from "@/models/MediaType";
-import { useTranslations, useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { PosterType } from "@/features/common/types/Poster.type";
-
-export type props = {
-  media: PosterType[];
-  mediaType: MediaType;
-  isBackdrop?: boolean;
-  fallbackMessage: string;
-};
-
-export function PosterList({
-  media,
-  mediaType,
-  isBackdrop,
-  fallbackMessage,
-}: props) {
-  if (!media || media.length === 0) return <p>{fallbackMessage}</p>;
-  return (
-    <>
-      {media.map((e, i) => (
-        <PosterCard
-          isBackdrop={isBackdrop}
-          data={e}
-          mediaType={mediaType}
-          key={`card-${i}`}
-        />
-      ))}
-    </>
-  );
-}
+import { PosterList } from "@/components/poster/posterList";
 
 type OldInfinitePosterListProps = {
   mediaType: MediaType;

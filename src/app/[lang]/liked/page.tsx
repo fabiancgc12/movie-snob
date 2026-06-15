@@ -1,7 +1,6 @@
 "use client";
 
 import { Section } from "@/components/Section/Section";
-import { PosterList } from "@/components/poster/oldInfinitePosterListProps";
 import { useEffect, useState } from "react";
 import {
   ProductStore,
@@ -13,6 +12,7 @@ import { likedStoreKey } from "@/components/common/ActionButton/LikeButton";
 import { useTranslations } from "next-intl";
 import { useTheme } from "@/global/ThemeContext";
 import { defaultPosters } from "@/app/[lang]/_components/defaultPosters";
+import { PosterList } from "@/components/poster/posterList";
 
 export default function LikedPage() {
   const [movies, setMovies] = useState<StoreProductType[]>([]);

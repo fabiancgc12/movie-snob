@@ -1,3 +1,4 @@
+"use client";
 import { generateImageUrl } from "@/utils/functions/generateImageUrl";
 import { CSSProperties, useMemo } from "react";
 import { MovieResumeSchema } from "@/models/Movies/MovieResume.schema";

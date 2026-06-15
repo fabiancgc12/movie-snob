@@ -1,3 +1,5 @@
+"use client";
+
 import { SliderSection } from "@/components/Slider/SliderSection";
 import { useLocale, useTranslations } from "next-intl";
 import { InfinitePosterList } from "@/components/poster/oldInfinitePosterListProps";

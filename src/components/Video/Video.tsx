@@ -1,3 +1,4 @@
+"use client";
 import { VideoTrailer } from "@/models/Movies/VideoMedia.schema";
 import { cn } from "@/lib/utils";
 import { ReactNode, useState } from "react";

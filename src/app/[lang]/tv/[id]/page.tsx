@@ -1,7 +1,6 @@
 import { getTvShow } from "@/services/tv/getTv";
 
 import { CastSection } from "@/components/CastSection/CastSection";
-import { PosterList } from "@/components/poster/oldInfinitePosterListProps";
 import { MediaBanner } from "@/components/ProductBanner/ProductBanner";
 import { TvExtraInfo } from "@/components/ExtraInfo/TvExtraInfo";
 import { SeasonsList } from "@/components/Seasons/SeasonsList";
@@ -13,6 +12,7 @@ import { Metadata } from "next";
 import { generateImageUrl } from "@/utils/functions/generateImageUrl";
 import { PeopleDto } from "@/models/dto/Credit.dto";
 import { ProductHeadScript } from "@/components/Layout/ProductHeadScript";
+import { PosterList } from "@/components/poster/posterList";
 
 type Props = {
   params: Promise<{ lang: string; id: string }>;

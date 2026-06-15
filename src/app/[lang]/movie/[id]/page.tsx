@@ -1,7 +1,6 @@
 import { getMovie } from "@/services/movies/getMovie";
 
 import { CastSection } from "@/components/CastSection/CastSection";
-import { PosterList } from "@/components/poster/oldInfinitePosterListProps";
 import { MediaBanner } from "@/components/ProductBanner/ProductBanner";
 import { MovieExtraInfo } from "@/components/ExtraInfo/MovieExtraInfo";
 import { Media } from "@/components/media/Media";
@@ -12,6 +11,7 @@ import { Metadata } from "next";
 import { generateImageUrl } from "@/utils/functions/generateImageUrl";
 import { PeopleDto } from "@/models/dto/Credit.dto";
 import { ProductHeadScript } from "@/components/Layout/ProductHeadScript";
+import { PosterList } from "@/components/poster/posterList";
 
 type Props = {
   params: Promise<{ lang: string; id: string }>;
