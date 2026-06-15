@@ -43,9 +43,9 @@ export const crewDtoSchema = crewEntitySchema.pick({
 export type CrewDto = z.infer<typeof crewDtoSchema>;
 
 export const creditsResponseTypeSchema = z.object({
-  id: z.number(),
+  id: z.number().nullish(),
   cast: castEntitySchema.array().optional().nullable(),
-  crew: castEntitySchema.array().optional().nullable(),
+  crew: crewEntitySchema.array().optional().nullable(),
 });
 
 export type CreditsResponseSchema = z.infer<typeof creditsResponseTypeSchema>;

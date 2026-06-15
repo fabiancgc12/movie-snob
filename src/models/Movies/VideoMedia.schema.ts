@@ -16,7 +16,7 @@ export const videoTrailerSchema = z.object({
 export type VideoTrailer = z.infer<typeof videoTrailerSchema>;
 
 export const videoMediaResponseSchema = z.object({
-  id: z.number(),
+  id: z.number().nullish(),
   results: videoTrailerSchema.array(),
 });
 

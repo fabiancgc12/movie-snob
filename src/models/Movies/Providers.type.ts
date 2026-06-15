@@ -13,7 +13,7 @@ export const countryProvidersSchema = z
   .object({
     link: z.string(),
     flatrate: providerSchema.array().optional(),
-    buy: z.array(providerSchema),
+    buy: providerSchema.array().optional(),
     rent: providerSchema.array().optional(),
     ads: providerSchema.array().optional(),
     free: providerSchema.array().optional(),

@@ -82,7 +82,7 @@ export function MediaBanner({ product, trailer, credits, mediaType }: props) {
               </Link>
             ))}
           </div>
-          {mediaType == "movie" && (
+          {mediaType == "movie" && product.runtime != null && (
             <div>{calculateRunTime(product.runtime)}</div>
           )}
         </div>

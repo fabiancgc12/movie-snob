@@ -51,7 +51,7 @@ export type TvCrewEntity = z.infer<typeof tvCrewEntitySchema>;
 export const aggregateCastResponseSchema = z.object({
   cast: z.array(aggregateCastEntitySchema).optional().nullable(),
   crew: z.array(tvCrewEntitySchema).optional().nullable(),
-  id: z.number(),
+  id: z.number().nullish(),
 });
 
 export type AggregateCastResponse = z.infer<typeof aggregateCastResponseSchema>;

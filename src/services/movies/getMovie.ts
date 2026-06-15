@@ -21,7 +21,7 @@ import {
 import {
   RecommendationInterface,
   RecommendationResponseInterface,
-  recommendationResponseInterfaceSchema,
+  recommendationResponseSchema,
 } from "@/models/Movies/RecomendationResponse.schema";
 import { formatVideoResponse } from "@/utils/functions/formatVideoResponse";
 import { formatImagesResponse } from "@/utils/functions/formatImagesResponse";
@@ -39,7 +39,7 @@ const apiResponseSchema = movieTypeSchema.extend({
   videos: videoMediaResponseSchema,
   images: imageMediaResponseSchema,
   credits: creditsResponseTypeSchema,
-  recommendations: recommendationResponseInterfaceSchema,
+  recommendations: recommendationResponseSchema,
   ["watch/providers"]: providersResponseSchema,
 });
 

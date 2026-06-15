@@ -26,7 +26,7 @@ export function ProductHead({ media, mediaType, cast, crew }: props) {
   const type = mediaType == "movie" ? "video.movie" : "video.tv_show";
   const duration =
     mediaType == "movie"
-      ? media.runtime.toString()
+      ? media.runtime?.toString()
       : media.episode_run_time?.at(0)?.toString();
   const title = `${mediaTitle} - Movie Snob`;
   const jsonDl =

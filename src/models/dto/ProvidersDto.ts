@@ -2,6 +2,6 @@ import { CountryProviders } from "@/models/Movies/Providers.type";
 
 export interface ProvidersDto {
   results: {
-    US: CountryProviders;
+    US: CountryProviders | null | undefined;
   };
 }

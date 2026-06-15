@@ -14,7 +14,7 @@ export type ImagePoster = z.infer<typeof imagePosterSchema>;
 
 export const imageMediaResponseSchema = z.object({
   backdrops: imagePosterSchema.array(),
-  id: z.number(),
+  id: z.number().nullish(),
   logos: imagePosterSchema.array(),
   posters: imagePosterSchema.array(),
 });

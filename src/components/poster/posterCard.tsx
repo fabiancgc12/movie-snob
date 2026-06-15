@@ -11,7 +11,7 @@ import { BookmarkButton } from "@/components/common/ActionButton/chechMarkButton
 
 export type PosterType = {
   id: number;
-  poster_path?: string;
+  poster_path?: string | null;
   backdrop_path?: string | null;
   vote_average: number;
   release_date?: string;

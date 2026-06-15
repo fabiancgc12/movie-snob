@@ -6,23 +6,31 @@ import { movieGenresSchema } from "@/features/movieGenres/schemas/MovieGenresSch
 
 export const movieTypeSchema = z.object({
   adult: z.boolean(),
-  backdrop_path: z.string(),
-  belongs_to_collection: z.null().optional(),
+  backdrop_path: z.string().nullable(),
+  belongs_to_collection: z
+    .object({
+      id: z.number(),
+      name: z.string(),
+      poster_path: z.string().nullable().optional(),
+      backdrop_path: z.string().nullable().optional(),
+    })
+    .nullable()
+    .optional(),
   budget: z.number(),
   genres: movieGenresSchema.array().optional().nullable(),
-  homepage: z.string(),
+  homepage: z.string().nullable(),
   id: z.number(),
-  imdb_id: z.string(),
+  imdb_id: z.string().nullable(),
   original_language: z.string(),
   original_title: z.string(),
   overview: z.string(),
   popularity: z.number(),
-  poster_path: z.string(),
+  poster_path: z.string().nullable(),
   production_companies: productionCompaniesSchema.array().optional().nullable(),
   production_countries: productionCountriesSchema.array().optional().nullable(),
   release_date: z.string(),
   revenue: z.number(),
-  runtime: z.number(),
+  runtime: z.number().nullable(),
   spoken_languages: spokenLanguagesSchema.array().optional().nullable(),
   status: z.string(),
   tagline: z.string(),

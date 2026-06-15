@@ -9,7 +9,7 @@ import {
 } from "@/models/Movies/ImageMedia.schema";
 import {
   RecommendationInterface,
-  recommendationResponseInterfaceSchema,
+  recommendationResponseSchema,
 } from "@/models/Movies/RecomendationResponse.schema";
 import { providersResponseSchema } from "@/models/Movies/Providers.type";
 import { aggregateCastResponseSchema } from "@/models/tv/TvCast.type";
@@ -29,7 +29,7 @@ const apiResponseSchema = tvShowSchema.extend({
   images: imageMediaResponseSchema,
   videos: videoMediaResponseSchema,
   aggregate_credits: aggregateCastResponseSchema,
-  recommendations: recommendationResponseInterfaceSchema,
+  recommendations: recommendationResponseSchema,
   ["watch/providers"]: providersResponseSchema,
 });
 
@@ -59,7 +59,8 @@ export async function getTvShow(
   const response = await fetch(
     `https://api.themoviedb.org/3/tv/${id}?${params}`,
   );
-  const data: ApiResponse = await response.json();
+  const raw = await response.json();
+  const data = apiResponseSchema.parse(raw);
   try {
     // @ts-ignore
     if (data?.success == false) {

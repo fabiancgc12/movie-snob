@@ -21,10 +21,10 @@ export const lastEpisodeToAirOrNextEpisodeToAirSchema = z.object({
   name: z.string(),
   overview: z.string(),
   production_code: z.string(),
-  runtime: z.number(),
+  runtime: z.number().nullish(),
   season_number: z.number(),
   show_id: z.number(),
-  still_path: z.string(),
+  still_path: z.string().nullish(),
   vote_average: z.number(),
   vote_count: z.number(),
 });
@@ -48,7 +48,7 @@ export const seasonsEntitySchema = z.object({
   id: z.number(),
   name: z.string(),
   overview: z.string(),
-  poster_path: z.string(),
+  poster_path: z.string().nullish(),
   season_number: z.number(),
 });
 
@@ -68,7 +68,9 @@ export const tvShowSchema = z.object({
   last_air_date: z.string(),
   last_episode_to_air: lastEpisodeToAirOrNextEpisodeToAirSchema,
   name: z.string(),
-  next_episode_to_air: lastEpisodeToAirOrNextEpisodeToAirSchema,
+  next_episode_to_air: lastEpisodeToAirOrNextEpisodeToAirSchema
+    .nullable()
+    .optional(),
   networks: z.array(networksEntitySchema).optional().nullable(),
   number_of_episodes: z.number(),
   number_of_seasons: z.number(),
@@ -80,7 +82,7 @@ export const tvShowSchema = z.object({
   poster_path: z.string(),
   production_companies: productionCompaniesSchema.array().optional().nullable(),
   production_countries: productionCountriesSchema.array().optional().nullable(),
-  seasons: z.array(seasonsEntitySchema).optional().nullable(),
+  seasons: seasonsEntitySchema.array().optional().nullable(),
   spoken_languages: spokenLanguagesSchema.array().optional().nullable(),
   status: z.string(),
   tagline: z.string(),

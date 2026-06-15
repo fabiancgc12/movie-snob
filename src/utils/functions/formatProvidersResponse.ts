@@ -6,6 +6,6 @@ export function formatProvidersResponse(
 ): ProvidersDto {
   // just returning the us providers
   return {
-    results: { US: providers.results.US ?? [] },
+    results: { US: providers.results.US ?? null },
   };
 }
