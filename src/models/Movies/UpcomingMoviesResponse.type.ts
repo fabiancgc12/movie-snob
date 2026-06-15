@@ -1,29 +1,39 @@
-export type UpcomingMoviesResponseType = {
-  dates: Dates;
-  page: number;
-  results: UpcomingMovie[];
-  total_pages: number;
-  total_results: number;
-};
+import { z } from "zod";
 
-export type Dates = {
-  maximum: string;
-  minimum: string;
-};
+export const datesSchema = z.object({
+  maximum: z.string(),
+  minimum: z.string(),
+});
 
-export type UpcomingMovie = {
-  adult: boolean;
-  backdrop_path: string;
-  genre_ids: number[];
-  id: number;
-  original_language: string;
-  original_title: string;
-  overview: string;
-  popularity: number;
-  poster_path: string;
-  release_date: string;
-  title: string;
-  video: boolean;
-  vote_average: number;
-  vote_count: number;
-};
+export type Dates = z.infer<typeof datesSchema>;
+
+export const upcomingMovieSchema = z.object({
+  adult: z.boolean(),
+  backdrop_path: z.string(),
+  genre_ids: z.array(z.number()),
+  id: z.number(),
+  original_language: z.string(),
+  original_title: z.string(),
+  overview: z.string(),
+  popularity: z.number(),
+  poster_path: z.string(),
+  release_date: z.string(),
+  title: z.string(),
+  video: z.boolean(),
+  vote_average: z.number(),
+  vote_count: z.number(),
+});
+
+export type UpcomingMovie = z.infer<typeof upcomingMovieSchema>;
+
+export const upcomingMoviesResponseTypeSchema = z.object({
+  dates: datesSchema,
+  page: z.number(),
+  results: z.array(upcomingMovieSchema),
+  total_pages: z.number(),
+  total_results: z.number(),
+});
+
+export type UpcomingMoviesResponseType = z.infer<
+  typeof upcomingMoviesResponseTypeSchema
+>;

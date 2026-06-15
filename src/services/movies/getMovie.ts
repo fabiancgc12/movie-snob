@@ -1,15 +1,28 @@
-import { CreditsResponseType } from "@/models/Movies/CreditsResponse.type";
-import { MovieType } from "@/models/Movies/Movie.type";
 import {
-  VideoMediaResponse,
-  VideoTrailerInterface,
-} from "@/models/Movies/VideoMedia.type";
-import { ImageMediaResponse } from "@/models/Movies/ImageMedia.type";
-import { ProvidersResponseInterface } from "@/models/Movies/Providers.type";
+  CreditsResponseSchema,
+  creditsResponseTypeSchema,
+} from "@/models/Movies/CreditsResponse.schema";
+import { MovieSchema, movieTypeSchema } from "@/models/Movies/Movie.schema";
+import {
+  VideoMedia,
+  videoMediaResponseSchema,
+  VideoTrailer,
+  videoTrailerSchema,
+} from "@/models/Movies/VideoMedia.schema";
+import {
+  ImageMedia,
+  imageMediaResponseSchema,
+  imagePosterSchema,
+} from "@/models/Movies/ImageMedia.schema";
+import {
+  ProvidersResponseInterface,
+  providersResponseInterfaceSchema,
+} from "@/models/Movies/Providers.type";
 import {
   RecommendationInterface,
   RecommendationResponseInterface,
-} from "@/models/Movies/RecomendationResponse.type";
+  recommendationResponseInterfaceSchema,
+} from "@/models/Movies/RecomendationResponse.schema";
 import { formatVideoResponse } from "@/utils/functions/formatVideoResponse";
 import { formatImagesResponse } from "@/utils/functions/formatImagesResponse";
 import { formatProvidersResponse } from "@/utils/functions/formatProvidersResponse";
@@ -20,23 +33,26 @@ import { CreditsDto } from "@/models/dto/Credit.dto";
 import { getImdbLocale } from "@/utils/functions/getLanguage";
 import { extractLanguageFromLocale } from "@/utils/functions/extractLanguageFromLocale";
 import { env } from "../../../env";
+import { z } from "zod";
 
-type ApiResponse = MovieType & {
-  videos: VideoMediaResponse;
-  images: ImageMediaResponse;
-  credits: CreditsResponseType;
-  recommendations: RecommendationResponseInterface;
-  ["watch/providers"]: ProvidersResponseInterface;
-};
+const apiResponseSchema = movieTypeSchema.extend({
+  videos: videoMediaResponseSchema,
+  images: imageMediaResponseSchema,
+  credits: creditsResponseTypeSchema,
+  recommendations: recommendationResponseInterfaceSchema,
+  ["watch/providers"]: providersResponseInterfaceSchema,
+});
+
+type ApiResponse = z.infer<typeof apiResponseSchema>;
 
 export async function getMovie(
   id: number,
   locale: string,
 ): Promise<{
-  movie: MovieType;
+  movie: MovieSchema;
   credits: CreditsDto;
-  videos: VideoTrailerInterface[];
-  images: ImageMediaResponse;
+  videos: VideoTrailer[];
+  images: ImageMedia;
   providers: ProvidersDto;
   recommendations: RecommendationInterface[];
 }> {
@@ -52,7 +68,8 @@ export async function getMovie(
   const response = await fetch(
     `https://api.themoviedb.org/3/movie/${id}?${params}`,
   );
-  const data: ApiResponse = await response.json();
+  const responseData = await response.json();
+  const data = apiResponseSchema.parse(responseData);
   try {
     // @ts-ignore
     if (data?.success == false) {

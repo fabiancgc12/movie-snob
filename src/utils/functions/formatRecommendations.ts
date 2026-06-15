@@ -1,4 +1,4 @@
-import { RecommendationResponseInterface } from "@/models/Movies/RecomendationResponse.type";
+import { RecommendationResponseInterface } from "@/models/Movies/RecomendationResponse.schema";
 
 export function formatRecommendations(
   recommendations: RecommendationResponseInterface,

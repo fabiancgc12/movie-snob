@@ -1,9 +1,9 @@
 import {
-  GenresEntity,
+  MovieGenresType,
   ProductionCompaniesEntity,
   ProductionCountriesEntity,
   SpokenLanguagesEntity,
-} from "@/models/Movies/Movie.type";
+} from "@/models/Movies/Movie.schema";
 
 export type TvShowType = {
   adult: boolean;
@@ -11,7 +11,7 @@ export type TvShowType = {
   created_by?: CreatedByEntity[] | null;
   episode_run_time?: number[] | null;
   first_air_date: string;
-  genres?: GenresEntity[] | null;
+  genres?: MovieGenresType[] | null;
   homepage: string;
   id: number;
   in_production: boolean;

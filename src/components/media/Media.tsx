@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import { generateImageUrl } from "@/utils/functions/generateImageUrl";
-import { VideoTrailerInterface } from "@/models/Movies/VideoMedia.type";
-import { ImageMediaResponse } from "@/models/Movies/ImageMedia.type";
+import { VideoTrailer } from "@/models/Movies/VideoMedia.schema";
+import { ImageMedia } from "@/models/Movies/ImageMedia.schema";
 import { VideoThumbnail } from "@/components/Video/VideoThumbnail";
 import { Section } from "@/components/Section/Section";
 import { Slider } from "@/components/Slider/Slider";
@@ -11,8 +11,8 @@ import { SliderSection } from "@/components/Slider/SliderSection";
 import { useTranslations } from "next-intl";
 
 type props = {
-  videos: VideoTrailerInterface[];
-  images: ImageMediaResponse;
+  videos: VideoTrailer[];
+  images: ImageMedia;
 };
 export function Media({ videos, images }: props) {
   const t = useTranslations("common");

@@ -1,9 +1,9 @@
-import { VideoTrailerInterface } from "@/models/Movies/VideoMedia.type";
+import { VideoTrailer } from "@/models/Movies/VideoMedia.schema";
 import { Video } from "./Video";
 import Image from "next/image";
 
 type props = {
-  video: VideoTrailerInterface;
+  video: VideoTrailer;
 };
 
 export function VideoThumbnail({ video }: props) {

@@ -8,8 +8,8 @@ import { BookmarkButton } from "@/components/common/ActionButton/chechMarkButton
 import { LikeButton } from "@/components/common/ActionButton/LikeButton";
 import { ShareButton } from "@/components/common/ActionButton/ShareButton";
 import { MemberCard } from "@/components/CrewMember/CrewMemberCard";
-import { MovieType } from "@/models/Movies/Movie.type";
-import { VideoTrailerInterface } from "@/models/Movies/VideoMedia.type";
+import { MovieSchema } from "@/models/Movies/Movie.schema";
+import { VideoTrailer } from "@/models/Movies/VideoMedia.schema";
 import { TvShowType } from "@/models/tv/TvShow.type";
 import { PeopleDto } from "@/models/dto/Credit.dto";
 import { generateUrlPage } from "@/utils/functions/generateUrlPage";
@@ -21,11 +21,11 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
 type props = {
-  trailer?: VideoTrailerInterface;
+  trailer?: VideoTrailer;
   credits?: PeopleDto[] | null;
 } & (
   | {
-      product: MovieType;
+      product: MovieSchema;
       mediaType: "movie";
     }
   | {

@@ -1,7 +1,7 @@
 "use client";
 
 import { formatCurrency } from "@/utils/functions/formatCurrency";
-import { MovieType } from "@/models/Movies/Movie.type";
+import { MovieSchema } from "@/models/Movies/Movie.schema";
 import { ExtraInfo } from "./ExtraInfo";
 import { Providers } from "./Providers";
 import { ProvidersDto } from "@/models/dto/ProvidersDto";
@@ -11,7 +11,7 @@ import { Languages } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
 
 type props = {
-  movie: MovieType;
+  movie: MovieSchema;
   providers: ProvidersDto;
 };
 

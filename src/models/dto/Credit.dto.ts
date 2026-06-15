@@ -1,4 +1,4 @@
-import { CastEntity, CrewEntity } from "@/models/Movies/CreditsResponse.type";
+import { CastEntity, CrewEntity } from "@/models/Movies/CreditsResponse.schema";
 import { AggregateCastEntity, TvCrewEntity } from "@/models/tv/TvCast.type";
 import { CreatedByEntity } from "@/models/tv/TvShow.type";
 

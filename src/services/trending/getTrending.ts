@@ -1,7 +1,4 @@
-import {
-  TrendingResponse,
-  trendingResponseInterfaceSchema,
-} from "@/models/trending/TrendingMovieResponse.schema";
+import { trendingResponseInterfaceSchema } from "@/models/trending/TrendingMovieResponse.schema";
 import { env } from "../../../env";
 import { getImdbLocale } from "@/utils/functions/getLanguage";
 
@@ -9,7 +6,7 @@ export async function getTrending(
   media: "all" | "movie" | "tv",
   page = 1,
   locale: string,
-): Promise<TrendingResponse> {
+) {
   locale = getImdbLocale(locale);
   const params = new URLSearchParams({
     api_key: env.TMDB_KEY,

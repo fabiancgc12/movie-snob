@@ -11,7 +11,7 @@ import { Spinner } from "@/components/common/Spinner";
 import { ComponentProps, useEffect, useRef, useState } from "react";
 import { MovieGenres, MovieGenresSpanish } from "@/utils/movieGenres";
 import { SliderSection } from "@/components/Slider/SliderSection";
-import { VideoTrailerInterface } from "@/models/Movies/VideoMedia.type";
+import { VideoTrailer } from "@/models/Movies/VideoMedia.schema";
 import { useTranslations, useLocale } from "next-intl";
 import { Section } from "@/components/Section/Section";
 import { Slider } from "@/components/Slider/Slider";
@@ -29,7 +29,7 @@ import Autoplay from "embla-carousel-autoplay";
 
 type props = {
   upcoming: MovieResumeSchema[];
-  upcomingTrailers: VideoTrailerInterface[];
+  upcomingTrailers: VideoTrailer[];
   dehydratedState: DehydratedState;
 };
 

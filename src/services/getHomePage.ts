@@ -7,11 +7,11 @@ import { getTrending } from "@/services/trending/getTrending";
 import { TrendingResponse } from "@/models/trending/TrendingMovieResponse.schema";
 import { getUpcoming } from "@/services/movies/getUpcoming";
 import { getMovieVideos } from "@/services/movies/getMovieVideos";
-import { VideoTrailerInterface } from "@/models/Movies/VideoMedia.type";
+import { VideoTrailer } from "@/models/Movies/VideoMedia.schema";
 
 export async function getHomePage(locale: string): Promise<{
   upcoming: MovieResumeSchema[];
-  upcomingTrailers: VideoTrailerInterface[];
+  upcomingTrailers: VideoTrailer[];
   popular: {
     movie: PopularMovieResponse;
     tv: PopularTvShowResponse;
@@ -41,7 +41,7 @@ export async function getHomePage(locale: string): Promise<{
   };
 }
 
-function isTrailer(video: VideoTrailerInterface) {
+function isTrailer(video: VideoTrailer) {
   const name = video.name.toLowerCase();
   return (
     video.site == "YouTube" &&

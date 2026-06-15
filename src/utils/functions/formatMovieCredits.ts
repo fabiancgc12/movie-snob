@@ -1,8 +1,8 @@
-import { CreditsResponseType } from "@/models/Movies/CreditsResponse.type";
+import { CreditsResponseSchema } from "@/models/Movies/CreditsResponse.schema";
 import { CreditsDto, PeopleDto } from "@/models/dto/Credit.dto";
 
 export function formatMovieCredits(
-  movieCredits: CreditsResponseType,
+  movieCredits: CreditsResponseSchema,
 ): CreditsDto {
   //just returning the first 12 member of the main cast and
   // the director or screenplay members of the crew

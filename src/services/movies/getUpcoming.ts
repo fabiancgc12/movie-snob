@@ -1,4 +1,7 @@
-import { UpcomingMoviesResponseType } from "@/models/Movies/UpcomingMoviesResponse.type";
+import {
+  UpcomingMoviesResponseType,
+  upcomingMoviesResponseTypeSchema,
+} from "@/models/Movies/UpcomingMoviesResponse.type";
 import { getImdbLocale } from "@/utils/functions/getLanguage";
 import { env } from "../../../env";
 
@@ -13,5 +16,6 @@ export async function getUpcoming(
   const response = await fetch(
     `https://api.themoviedb.org/3/movie/upcoming?${params}`,
   );
-  return response.json();
+  const data = await response.json();
+  return upcomingMoviesResponseTypeSchema.parse(data);
 }

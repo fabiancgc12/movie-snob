@@ -2,7 +2,7 @@ import { generateImageUrl } from "@/utils/functions/generateImageUrl";
 import { CSSProperties, useMemo } from "react";
 import { MovieResumeSchema } from "@/models/Movies/MovieResume.schema";
 import { FullDate } from "@/components/common/FullDate";
-import { VideoTrailerInterface } from "@/models/Movies/VideoMedia.type";
+import { VideoTrailer } from "@/models/Movies/VideoMedia.schema";
 import { Video } from "@/components/Video/Video";
 import { useTranslations, useLocale } from "next-intl";
 import { cn } from "@/lib/utils";
@@ -13,7 +13,7 @@ import { Info, Play } from "lucide-react";
 
 type props = {
   data: MovieResumeSchema;
-  trailer?: VideoTrailerInterface;
+  trailer?: VideoTrailer;
 };
 
 export function UpcomingBanner({ data, trailer }: props) {

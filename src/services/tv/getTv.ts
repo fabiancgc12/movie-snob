@@ -1,13 +1,10 @@
-import {
-  VideoMediaResponse,
-  VideoTrailerInterface,
-} from "@/models/Movies/VideoMedia.type";
+import { VideoMedia, VideoTrailer } from "@/models/Movies/VideoMedia.schema";
 import { TvShowType } from "@/models/tv/TvShow.type";
-import { ImageMediaResponse } from "@/models/Movies/ImageMedia.type";
+import { ImageMedia } from "@/models/Movies/ImageMedia.schema";
 import {
   RecommendationInterface,
   RecommendationResponseInterface,
-} from "@/models/Movies/RecomendationResponse.type";
+} from "@/models/Movies/RecomendationResponse.schema";
 import { ProvidersResponseInterface } from "@/models/Movies/Providers.type";
 import { AgregateCastResponse } from "@/models/tv/TvCast.type";
 import { formatVideoResponse } from "@/utils/functions/formatVideoResponse";
@@ -22,8 +19,8 @@ import { getImdbLocale } from "@/utils/functions/getLanguage";
 import { env } from "../../../env";
 
 type ApiResponse = TvShowType & {
-  videos: VideoMediaResponse;
-  images: ImageMediaResponse;
+  videos: VideoMedia;
+  images: ImageMedia;
   aggregate_credits: AgregateCastResponse;
   recommendations: RecommendationResponseInterface;
   ["watch/providers"]: ProvidersResponseInterface;
@@ -35,8 +32,8 @@ export async function getTvShow(
 ): Promise<{
   show: TvShowType;
   credits: CreditsDto;
-  videos: VideoTrailerInterface[];
-  images: ImageMediaResponse;
+  videos: VideoTrailer[];
+  images: ImageMedia;
   recommendations: RecommendationInterface[];
   providers: ProvidersDto;
 }> {
