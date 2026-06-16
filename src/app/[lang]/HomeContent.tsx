@@ -11,7 +11,6 @@ import {
 } from "react";
 import { MovieGenres, MovieGenresSpanish } from "@/utils/movieGenres";
 import { useLocale } from "next-intl";
-import { useTheme } from "@/global/ThemeContext";
 import { Carousel } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import { InfiniteDiscoverMoviesPosterListSection } from "@/features/genres/components/InfiniteDiscoverMoviesPosterListSection";
@@ -36,7 +35,6 @@ const genresLimit = 9;
 export const HomePageGenreSection = () => {
   const locale = useLocale();
   const [genres, setGenres] = useState<typeof MovieGenres>([]);
-  const [theme] = useTheme();
   const [loadMoreRef, inView] = useInView({
     threshold: 1,
     rootMargin: "300px",
@@ -60,7 +58,7 @@ export const HomePageGenreSection = () => {
     <div className={"space-y-10"}>
       {genres.map((genre, i) => {
         return (
-          <div key={genre.id} data-theme={i % 3 == 0 ? "dark" : theme}>
+          <div key={genre.id}>
             <InfiniteDiscoverMoviesPosterListSection genre={genre} />
           </div>
         );

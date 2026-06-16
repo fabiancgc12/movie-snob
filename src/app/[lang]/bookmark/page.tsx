@@ -10,7 +10,6 @@ import { bookmarkStoreKey } from "@/components/common/ActionButton/chechMarkButt
 import { PosterGrid } from "@/components/poster/PosterGrid";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { useTranslations } from "next-intl";
-import { useTheme } from "@/global/ThemeContext";
 import { defaultPosters } from "@/app/[lang]/_components/defaultPosters";
 import { PosterList } from "@/components/poster/posterList";
 
@@ -20,7 +19,6 @@ export default function BookMarkPage() {
   const [ready, setReady] = useState(false);
   const t = useTranslations("likedorbookmark");
   const commonT = useTranslations("common");
-  const [theme] = useTheme();
   useEffect(() => {
     const store = localStorage.getItem(bookmarkStoreKey);
     if (store) {
@@ -32,7 +30,7 @@ export default function BookMarkPage() {
   }, []);
 
   return (
-    <div data-theme={theme} className={"h-full"}>
+    <div className={"h-full"}>
       <Section title={t("bookmarkTitle")}>
         <Tabs defaultValue="movie">
           <TabsList>

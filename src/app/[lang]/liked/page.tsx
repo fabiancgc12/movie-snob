@@ -10,7 +10,6 @@ import { PosterGrid } from "@/components/poster/PosterGrid";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { likedStoreKey } from "@/components/common/ActionButton/LikeButton";
 import { useTranslations } from "next-intl";
-import { useTheme } from "@/global/ThemeContext";
 import { defaultPosters } from "@/app/[lang]/_components/defaultPosters";
 import { PosterList } from "@/components/poster/posterList";
 
@@ -19,7 +18,6 @@ export default function LikedPage() {
   const [tv, setTv] = useState<StoreProductType[]>([]);
   const [ready, setReady] = useState(false);
   const t = useTranslations("likedorbookmark");
-  const [theme] = useTheme();
 
   useEffect(() => {
     const store = localStorage.getItem(likedStoreKey);
@@ -36,7 +34,7 @@ export default function LikedPage() {
   const tvFallback = t("fallbackTvMessage");
 
   return (
-    <div data-theme={theme} className={"h-full"}>
+    <div className={"h-full"}>
       <Section title={title}>
         <Tabs defaultValue="movie">
           <TabsList>

@@ -1,13 +1,6 @@
 "use client";
 
-import {
-  Bookmark,
-  Compass,
-  Heart,
-  Sun,
-  Moon,
-  Globe,
-} from "lucide-react";
+import { Bookmark, Compass, Heart, Sun, Globe, Moon, Monitor } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -23,8 +16,14 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { useTheme } from "@/global/ThemeContext";
 import { useSearchParams } from "next/navigation";
+import { useTheme } from "next-themes";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 type NavItem = {
   icon: LucideIcon;
@@ -137,31 +136,31 @@ const SwitchLanguage = () => {
 };
 
 const SwitchThemeButton = () => {
-  const [theme, switchTheme] = useTheme();
+  const { setTheme } = useTheme();
   const t = useTranslations("common");
   return (
-    <AppSidebarMenuButton onClick={switchTheme}>
-      <div className="grid grid-cols-[100%_100%] overflow-hidden">
-        <div
-          className={cn(
-            "w-full transition-transform duration-300",
-            theme === "dark" ? "-translate-x-full" : "translate-x-0",
-          )}
-        >
-          <Moon className={"w-6! h-6! mx-auto"} />
-        </div>
-        <div
-          className={cn(
-            "w-full transition-transform duration-300",
-            theme === "dark" ? "-translate-x-full" : "translate-x-0",
-          )}
-        >
-          <Sun className={"w-6! h-6! mx-auto"} />
-        </div>
-      </div>
-      <span className="text-xs font-medium tracking-wide leading-none first-letter:capitalize">
-        {t("theme")}
-      </span>
-    </AppSidebarMenuButton>
+    <DropdownMenu>
+      <DropdownMenuTrigger
+        render={(props) => (
+          <AppSidebarMenuButton {...props} title={t("theme")}>
+            <AppSidebarContent icon={Sun} text={t("theme")} />
+          </AppSidebarMenuButton>
+        )}
+      ></DropdownMenuTrigger>
+      <DropdownMenuContent align="end">
+        <DropdownMenuItem onClick={() => setTheme("light")}>
+          <Sun className="size-4" />
+          Light
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme("dark")}>
+          <Moon className="size-4" />
+          Dark
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme("system")}>
+          <Monitor className="size-4" />
+          System
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 };
