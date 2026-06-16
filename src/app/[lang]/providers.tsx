@@ -2,7 +2,7 @@
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useState } from "react";
-import { OldThemeProvider, ThemeProvider } from "@/global/ThemeContext";
+import { ThemeProvider } from "@/global/ThemeContext";
 import { ShowNavBarProvider } from "@/global/ShowNavbarContext";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 

@@ -18,9 +18,9 @@ export function PosterList({
   if (!media || media.length === 0) return <p>{fallbackMessage}</p>;
   return (
     <>
-      {media.map((e) => (
+      {media.map((e, i) => (
         <PosterCard
-          key={e.id}
+          key={`${e.id}-${i}`}
           isBackdrop={isBackdrop}
           data={e}
           mediaType={mediaType}

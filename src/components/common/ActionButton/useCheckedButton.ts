@@ -61,7 +61,7 @@ export function useCheckedButton(
       const store = localStorage.getItem(key);
       if (store) {
         const parsedStore = JSON.parse(store) as ProductStore;
-        const itemExist = parsedStore[media][product.id];
+        const itemExist = parsedStore[media]?.[product.id];
         setChecked(!!itemExist);
       } else {
         localStorage.setItem(key, JSON.stringify(defaultValue));
