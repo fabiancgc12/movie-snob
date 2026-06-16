@@ -1,5 +1,5 @@
 import { infiniteQueryOptions } from "@tanstack/react-query";
-import { popularMovieResponseSchema } from "@/models/popular/popularMovie.schema";
+import { discoverMovieResponseSchema } from "@/models/discover/discoverMovieResponse.schema";
 
 type GetDiscoverTvShowsQueryProps = {
   locale: string;
@@ -24,7 +24,7 @@ export const getDiscoverMoviesInfiniteQuery = ({
       const raw = await fetch(`/api/discoverMovies?${searchParams}`).then((v) =>
         v.json(),
       );
-      return popularMovieResponseSchema.parse(raw);
+      return discoverMovieResponseSchema.parse(raw);
     },
     getNextPageParam: (lastPage) => {
       if (lastPage.total_pages == lastPage.page) return undefined;
