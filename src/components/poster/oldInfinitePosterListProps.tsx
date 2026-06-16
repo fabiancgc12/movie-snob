@@ -130,6 +130,8 @@ type InfinitePosterListProps = {
   fetchNextPage: () => void;
   hasNextPage: boolean;
   isBackdrop?: boolean;
+  loaderClassName?: string;
+  numberOfLoadingCards?: number;
 };
 
 export const InfinitePosterList = ({
@@ -145,6 +147,8 @@ export const InfinitePosterList = ({
   shouldFetch,
   hasNextPage,
   fetchNextPage,
+  loaderClassName,
+  numberOfLoadingCards,
 }: InfinitePosterListProps) => {
   const t = useTranslations("common");
   const [endElementRef] = useInView({
@@ -190,10 +194,25 @@ export const InfinitePosterList = ({
         fallbackMessage={fallbackMessage}
       />
       {hasNextPage && (
-        <div ref={endElementRef} className={"loader"}>
+        <div ref={endElementRef} className={loaderClassName}>
           <Spinner />
         </div>
       )}
     </>
+  );
+};
+
+export const InfinitePosterGrid = (
+  props: Omit<
+    InfinitePosterListProps,
+    "loaderClassName" | "numberOfLoadingCards"
+  >,
+) => {
+  return (
+    <InfinitePosterList
+      {...props}
+      loaderClassName={"col-span-full"}
+      numberOfLoadingCards={10}
+    />
   );
 };

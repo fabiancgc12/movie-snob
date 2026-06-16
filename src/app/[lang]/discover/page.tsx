@@ -2,7 +2,6 @@
 
 import { PosterGrid } from "@/components/poster/PosterGrid";
 import { Section } from "@/components/Section/Section";
-import { OldInfinitePosterList } from "@/components/poster/oldInfinitePosterListProps";
 import { useSearchParams } from "next/navigation";
 import { MediaType } from "@/models/MediaType";
 import { useState } from "react";
@@ -23,6 +22,8 @@ import {
 } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { MovieGenresType } from "@/features/movieGenres/schemas/MovieGenresSchema";
+import { DiscoverTvShowsInfiniteGrid } from "@/features/discover/components/DiscoverTvShowsInfiniteGrid";
+import { DiscoverMoviesInfiniteGrid } from "@/features/discover/components/DiscoverMoviesInfiniteGrid";
 
 export default function DiscoverPage() {
   const searchParams = useSearchParams();
@@ -31,7 +32,7 @@ export default function DiscoverPage() {
   const locale = useLocale();
 
   const [media, setMedia] = useState<MediaType>(
-    (searchParams.get("media") as MediaType) ?? "movies"
+    (searchParams.get("media") as MediaType) ?? "movies",
   );
   const [genre, setGenre] = useState(searchParams.get("genre") ?? "");
 
@@ -63,13 +64,9 @@ export default function DiscoverPage() {
     updateUrlParams({ genre: newGenre });
   };
 
-  let apiRoute = "discoverMovies";
   let genres = locale == "es" ? MovieGenresSpanish : MovieGenres;
-  let fallbackMessage = t("movieFallback");
   if (media == "tv") {
-    apiRoute = "discoverTv";
     genres = locale == "es" ? TvGenresSpanish : TvGenres;
-    fallbackMessage = t("tvFallback");
   }
   return (
     <div className={"p-4"}>
@@ -91,26 +88,12 @@ export default function DiscoverPage() {
 
           <TabsContent value={"movies"} className={"h-full"}>
             <PosterGrid>
-              <OldInfinitePosterList
-                mediaType={media}
-                api={apiRoute}
-                queryKey={[apiRoute, media, genre, locale]}
-                parameters={{ media: media, genre: genre }}
-                enabled={true}
-                fallbackMessage={fallbackMessage}
-              />
+              <DiscoverMoviesInfiniteGrid genre={genre} />
             </PosterGrid>
           </TabsContent>
           <TabsContent value={"tv"} className={"h-full"}>
             <PosterGrid>
-              <OldInfinitePosterList
-                mediaType={media}
-                api={apiRoute}
-                queryKey={[apiRoute, media, genre, locale]}
-                parameters={{ media: media, genre: genre }}
-                enabled={true}
-                fallbackMessage={fallbackMessage}
-              />
+              <DiscoverTvShowsInfiniteGrid genre={genre} />
             </PosterGrid>
           </TabsContent>
         </Section>

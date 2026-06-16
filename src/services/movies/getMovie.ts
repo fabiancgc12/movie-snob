@@ -2,7 +2,7 @@ import {
   CreditsResponseSchema,
   creditsResponseTypeSchema,
 } from "@/models/Movies/CreditsResponse.schema";
-import { MovieSchema, movieTypeSchema } from "@/models/Movies/Movie.schema";
+import { MovieType, movieSchema } from "@/models/Movies/MovieType";
 import {
   VideoMedia,
   videoMediaResponseSchema,
@@ -35,7 +35,7 @@ import { extractLanguageFromLocale } from "@/utils/functions/extractLanguageFrom
 import { env } from "../../../env";
 import { z } from "zod";
 
-const apiResponseSchema = movieTypeSchema.extend({
+const apiResponseSchema = movieSchema.extend({
   videos: videoMediaResponseSchema,
   images: imageMediaResponseSchema,
   credits: creditsResponseTypeSchema,
@@ -49,7 +49,7 @@ export async function getMovie(
   id: number,
   locale: string,
 ): Promise<{
-  movie: MovieSchema;
+  movie: MovieType;
   credits: CreditsDto;
   videos: VideoTrailer[];
   images: ImageMedia;

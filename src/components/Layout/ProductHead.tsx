@@ -1,5 +1,5 @@
 import { TvShowType } from "@/models/tv/TvShow.type";
-import { MovieSchema } from "@/models/Movies/Movie.schema";
+import { MovieType } from "@/models/Movies/MovieType";
 import { generateUrlPage } from "@/utils/functions/generateUrlPage";
 import { generateImageUrl } from "@/utils/functions/generateImageUrl";
 import { PeopleDto } from "@/models/dto/Credit.dto";
@@ -16,7 +16,7 @@ type props = {
       mediaType: "tv";
     }
   | {
-      media: MovieSchema;
+      media: MovieType;
       mediaType: "movie";
     }
 );
@@ -115,7 +115,7 @@ function tvJsonLd(show: TvShowType, cast: PeopleDto[], crew: PeopleDto[]) {
   };
 }
 
-function movieJsonLd(movie: MovieSchema, cast: PeopleDto[], crew: PeopleDto[]) {
+function movieJsonLd(movie: MovieType, cast: PeopleDto[], crew: PeopleDto[]) {
   const directors = crew.filter((a) => a.role.toLowerCase() === "director");
   const productions = movie.production_companies || [];
   const [castInfo, itemListElement] = handleCastList(cast);

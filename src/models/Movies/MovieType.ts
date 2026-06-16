@@ -4,7 +4,7 @@ import { productionCompaniesSchema } from "@/features/productionCompanies/schema
 import { productionCountriesSchema } from "@/features/ProductionCountries/schemas/ProductionCountries.schema";
 import { movieGenresSchema } from "@/features/movieGenres/schemas/MovieGenresSchema";
 
-export const movieTypeSchema = z.object({
+export const movieSchema = z.object({
   adult: z.boolean(),
   backdrop_path: z.string().nullable(),
   belongs_to_collection: z
@@ -40,4 +40,4 @@ export const movieTypeSchema = z.object({
   vote_count: z.number(),
 });
 
-export type MovieSchema = z.infer<typeof movieTypeSchema>;
+export type MovieType = z.infer<typeof movieSchema>;

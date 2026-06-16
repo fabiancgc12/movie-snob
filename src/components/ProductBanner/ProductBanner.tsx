@@ -8,7 +8,7 @@ import { BookmarkButton } from "@/components/common/ActionButton/chechMarkButton
 import { LikeButton } from "@/components/common/ActionButton/LikeButton";
 import { ShareButton } from "@/components/common/ActionButton/ShareButton";
 import { MemberCard } from "@/components/CrewMember/CrewMemberCard";
-import { MovieSchema } from "@/models/Movies/Movie.schema";
+import { MovieType } from "@/models/Movies/MovieType";
 import { VideoTrailer } from "@/models/Movies/VideoMedia.schema";
 import { TvShowType } from "@/models/tv/TvShow.type";
 import { PeopleDto } from "@/models/dto/Credit.dto";
@@ -24,7 +24,7 @@ type props = {
   credits?: PeopleDto[] | null;
 } & (
   | {
-      product: MovieSchema;
+      product: MovieType;
       mediaType: "movie";
     }
   | {
