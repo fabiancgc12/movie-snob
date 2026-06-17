@@ -166,7 +166,7 @@ export const InfinitePosterList = ({
     onChange: (inView) => {
       if (inView)
         if (shouldFetch) {
-          fetchNextPage();
+          // fetchNextPage();
         }
     },
   });
