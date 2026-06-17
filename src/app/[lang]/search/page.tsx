@@ -1,57 +1,36 @@
-"use client";
-
-import { Section } from "@/components/Section/Section";
-import { PosterGrid } from "@/components/poster/PosterGrid";
-import { useTranslations } from "next-intl";
-import { useSearchParams } from "next/navigation";
-import { SearchMediaInfiniteGrid } from "@/features/search/components/SearchMediaInfiniteGrid";
-import { Input } from "@/components/ui/input";
-import { Search } from "lucide-react";
-import { useState, useEffect, useCallback } from "react";
-import { useDebounce } from "@/lib/useDebounce";
 import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupInput,
-} from "@/components/ui/input-group";
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from "@tanstack/react-query";
+import { getSearchInfiniteQuery } from "@/features/search/queries/getSearchInfiniteQuery";
+import { searchByTitle } from "@/services/search/searchByTitle";
+import { SearchContent } from "./SearchContent";
 
-export default function FindPage() {
-  const t = useTranslations("common");
-  const searchParams = useSearchParams();
-  const initialTitle = searchParams.get("title") ?? "";
+type Props = {
+  params: Promise<{ lang: string }>;
+  searchParams: Promise<{ title?: string }>;
+};
 
-  const [inputValue, setInputValue] = useState(initialTitle);
-  const debouncedTitle = useDebounce(inputValue, 300);
+export default async function SearchPage({ params, searchParams }: Props) {
+  const { lang } = await params;
+  const { title = "" } = await searchParams;
 
-  const onTitleChange = (title: string) => {
-    setInputValue(title);
-    const params = new URLSearchParams(window.location.search);
-    if (title) {
-      params.set("title", title);
-    } else {
-      params.delete("title");
-    }
-    window.history.replaceState(null, "", `?${params.toString()}`);
-  };
-  const title = debouncedTitle || undefined;
+  const queryClient = new QueryClient();
+
+  if (title) {
+    const data = await searchByTitle({ title, locale: lang, page: 1 });
+    await queryClient.prefetchInfiniteQuery({
+      ...getSearchInfiniteQuery({ locale: lang, title }),
+      queryFn: () => data,
+    });
+  }
 
   return (
-    <div className={"h-full"}>
-      <Section title={t("find")} className={"space-y-4"}>
-        <InputGroup>
-          <InputGroupAddon>
-            <Search className="size-4 text-muted-foreground" />
-          </InputGroupAddon>
-          <InputGroupInput
-            placeholder={t("serchFor")}
-            value={inputValue}
-            onChange={(e) => onTitleChange(e.target.value)}
-          />
-        </InputGroup>
-        <PosterGrid>
-          <SearchMediaInfiniteGrid title={title} />
-        </PosterGrid>
-      </Section>
-    </div>
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <SearchContent initialTitle={title} />
+    </HydrationBoundary>
   );
 }
+
+export const revalidate = 1200;
