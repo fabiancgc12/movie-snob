@@ -102,12 +102,9 @@ export function OldInfinitePosterList({
   if (!data)
     return (
       <>
-        <SkeletonCard isBackdrop={isBackdrop} />
-        <SkeletonCard isBackdrop={isBackdrop} />
-        <SkeletonCard isBackdrop={isBackdrop} />
-        <SkeletonCard isBackdrop={isBackdrop} />
-        <SkeletonCard isBackdrop={isBackdrop} />
-        <SkeletonCard isBackdrop={isBackdrop} />
+        {Array.from({ length: 6 }).map((_, i) => (
+          <SkeletonCard key={i} isBackdrop={isBackdrop} />
+        ))}
       </>
     );
 
@@ -160,7 +157,7 @@ export const InfinitePosterList = ({
   hasNextPage,
   fetchNextPage,
   loaderClassName,
-  numberOfLoadingCards,
+  numberOfLoadingCards = 6,
 }: InfinitePosterListProps) => {
   const t = useTranslations("common");
   const [endElementRef] = useInView({
@@ -184,12 +181,9 @@ export const InfinitePosterList = ({
   if (isPending)
     return (
       <>
-        <SkeletonCard isBackdrop={isBackdrop} />
-        <SkeletonCard isBackdrop={isBackdrop} />
-        <SkeletonCard isBackdrop={isBackdrop} />
-        <SkeletonCard isBackdrop={isBackdrop} />
-        <SkeletonCard isBackdrop={isBackdrop} />
-        <SkeletonCard isBackdrop={isBackdrop} />
+        {Array.from({ length: numberOfLoadingCards }).map((_, i) => (
+          <SkeletonCard key={i} isBackdrop={isBackdrop} />
+        ))}
       </>
     );
   // by the time we hit this if, media is already defined
@@ -220,7 +214,7 @@ export const InfinitePosterGrid = (
     <InfinitePosterList
       {...props}
       loaderClassName={"col-span-full"}
-      numberOfLoadingCards={10}
+      numberOfLoadingCards={20}
     />
   );
 };
