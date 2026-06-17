@@ -15,7 +15,7 @@ export const getDiscoverMoviesInfiniteQuery = ({
     genre: genre.toString(),
   };
   return infiniteQueryOptions({
-    queryKey: ["discover-tv", params],
+    queryKey: ["discover-movie", params],
     queryFn: async ({ pageParam }) => {
       const searchParams = new URLSearchParams({
         ...params,
