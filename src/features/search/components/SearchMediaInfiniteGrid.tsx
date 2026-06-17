@@ -2,7 +2,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { PosterType } from "@/features/common/types/Poster.type";
 import { searchResultToPosterType } from "@/features/common/utils/mediaToPosterType";
-import { InfinitePosterGrid } from "@/components/poster/oldInfinitePosterListProps";
+import { InfinitePosterGrid } from "@/components/poster/InfinitePosterListProps";
 import { getSearchInfiniteQuery } from "@/features/search/queries/getSearchInfiniteQuery";
 
 type DiscoverGridProps = {

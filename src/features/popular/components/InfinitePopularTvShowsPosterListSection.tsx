@@ -1,6 +1,6 @@
 "use client";
 
-import { InfinitePosterList } from "@/components/poster/oldInfinitePosterListProps";
+import { InfinitePosterList } from "@/components/poster/InfinitePosterListProps";
 import { SliderSection } from "@/components/Slider/SliderSection";
 import { useLocale, useTranslations } from "next-intl";
 import { useInfiniteQuery } from "@tanstack/react-query";

@@ -2,7 +2,7 @@
 
 import { SliderSection } from "@/components/Slider/SliderSection";
 import { useLocale, useTranslations } from "next-intl";
-import { InfinitePosterList } from "@/components/poster/oldInfinitePosterListProps";
+import { InfinitePosterList } from "@/components/poster/InfinitePosterListProps";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { PosterType } from "@/features/common/types/Poster.type";
 import { getTrendingMediaQueryOptions } from "@/features/trending/queries/getTrendingMediaQueryOptions";

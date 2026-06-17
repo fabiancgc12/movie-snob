@@ -3,7 +3,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { getDiscoverTvShowsInfiniteQuery } from "@/features/discover/queries/getDiscoverTvShowsInfiniteQuery";
 import { PosterType } from "@/features/common/types/Poster.type";
 import { tvToPosterType } from "@/features/common/utils/mediaToPosterType";
-import { InfinitePosterGrid } from "@/components/poster/oldInfinitePosterListProps";
+import { InfinitePosterGrid } from "@/components/poster/InfinitePosterListProps";
 
 type DiscoverGridProps = {
   genre: string | number;

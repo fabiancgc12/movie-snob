@@ -6,7 +6,7 @@ import {
   movieToPosterType,
   tvToPosterType,
 } from "@/features/common/utils/mediaToPosterType";
-import { InfinitePosterGrid } from "@/components/poster/oldInfinitePosterListProps";
+import { InfinitePosterGrid } from "@/components/poster/InfinitePosterListProps";
 import { getDiscoverMoviesInfiniteQuery } from "@/features/discover/queries/getDiscoverMoviesInfiniteQuery";
 
 type DiscoverGridProps = {

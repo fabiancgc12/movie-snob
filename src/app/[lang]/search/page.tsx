@@ -2,7 +2,6 @@
 
 import { Section } from "@/components/Section/Section";
 import { PosterGrid } from "@/components/poster/PosterGrid";
-import { OldInfinitePosterList } from "@/components/poster/oldInfinitePosterListProps";
 import { useTranslations, useLocale } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { SearchMediaInfiniteGrid } from "@/features/search/components/SearchMediaInfiniteGrid";
