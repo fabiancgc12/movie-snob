@@ -3,10 +3,10 @@ import { FormEvent, useRef } from "react";
 import Image from "next/image";
 import wideLogo from "@public/logo-wide.png";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useTranslations, useLocale } from "next-intl";
 import { cn } from "@/lib/utils";
 import { SidebarTrigger } from "@/components/ui/sidebar";
+import { useRouter } from "@/i18n/navigation";
 
 type props = {
   className?: string;
