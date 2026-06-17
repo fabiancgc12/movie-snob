@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getMultiSearch } from "@/services/search/getMultiSearch";
+import { searchByTitle } from "@/services/search/searchByTitle";
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
@@ -8,6 +8,6 @@ export async function GET(request: NextRequest) {
     page: Number(searchParams.get("page")),
     locale: searchParams.get("locale") ?? "en",
   };
-  const data = await getMultiSearch(parameters);
+  const data = await searchByTitle(parameters);
   return NextResponse.json(data);
 }

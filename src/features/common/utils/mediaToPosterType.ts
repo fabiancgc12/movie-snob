@@ -48,8 +48,8 @@ export const searchResultToPosterType = (search: SearchResult) => {
     poster_path: search.poster_path,
     backdrop_path: search.backdrop_path,
     vote_average: search.vote_average,
-    release_date: search.release_date,
+    release_date: search.media_type === "tv" ? search.first_air_date : search.release_date,
     media_type: search.media_type,
-    title: search.title,
+    title: search.media_type === "tv" ? search.name : search.title,
   };
 };
