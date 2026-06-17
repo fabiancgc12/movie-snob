@@ -12,8 +12,8 @@ export function FullDate({ date, lang = "en-Us" }: props) {
   const t = useTranslations("common");
   const fallbackMessage = t("notAvailable");
   return (
-    <small className={"flex items-center gap-5"}>
-      <Calendar />
+    <small className={"flex items-center gap-1"}>
+      <Calendar className={"size-5"} />
       {date?.length > 0 ? formatDate(date, lang) : fallbackMessage}
     </small>
   );

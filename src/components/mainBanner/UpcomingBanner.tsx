@@ -51,7 +51,7 @@ export function UpcomingBanner({ data, trailer }: props) {
           }
         >
           <RatingAverage rating={data.vote_average} size={40} />
-          <p className={"text-muted-foreground "}>
+          <p className={"text-muted-foreground"}>
             <FullDate date={data.release_date} lang={locale} />
           </p>
         </div>
