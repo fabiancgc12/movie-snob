@@ -5,7 +5,6 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { PopularMovieResponse } from "@/models/popular/popularMovie.schema";
 import { PopularTvShowResponse } from "@/models/popular/popularTv.schema";
 import { TrendingResponse } from "@/models/trending/TrendingMovieResponse.schema";
-import { Spinner } from "@/components/common/Spinner";
 import { useInView } from "react-intersection-observer";
 import { MediaType } from "@/models/MediaType";
 import { useLocale, useTranslations } from "next-intl";
@@ -117,11 +116,11 @@ export function OldInfinitePosterList({
         isBackdrop={isBackdrop}
         fallbackMessage={fallbackMessage}
       />
-      {
-        <div ref={endElementRef} className={"loader"}>
-          <Spinner />
+      {hasNextPage && (
+        <div ref={endElementRef}>
+          <SkeletonCard isBackdrop={isBackdrop} />
         </div>
-      }
+      )}
     </>
   );
 }
@@ -139,7 +138,6 @@ type InfinitePosterListProps = {
   fetchNextPage: () => void;
   hasNextPage: boolean;
   isBackdrop?: boolean;
-  loaderClassName?: string;
   numberOfLoadingCards?: number;
 };
 
@@ -156,7 +154,6 @@ export const InfinitePosterList = ({
   shouldFetch,
   hasNextPage,
   fetchNextPage,
-  loaderClassName,
   numberOfLoadingCards = 6,
 }: InfinitePosterListProps) => {
   const t = useTranslations("common");
@@ -166,7 +163,7 @@ export const InfinitePosterList = ({
     onChange: (inView) => {
       if (inView)
         if (shouldFetch) {
-          // fetchNextPage();
+          fetchNextPage();
         }
     },
   });
@@ -196,8 +193,8 @@ export const InfinitePosterList = ({
         fallbackMessage={fallbackMessage}
       />
       {hasNextPage && (
-        <div ref={endElementRef} className={loaderClassName}>
-          <Spinner />
+        <div ref={endElementRef}>
+          <SkeletonCard isBackdrop={isBackdrop} />
         </div>
       )}
     </>
@@ -205,16 +202,7 @@ export const InfinitePosterList = ({
 };
 
 export const InfinitePosterGrid = (
-  props: Omit<
-    InfinitePosterListProps,
-    "loaderClassName" | "numberOfLoadingCards"
-  >,
+  props: Omit<InfinitePosterListProps, "numberOfLoadingCards">,
 ) => {
-  return (
-    <InfinitePosterList
-      {...props}
-      loaderClassName={"col-span-full"}
-      numberOfLoadingCards={20}
-    />
-  );
+  return <InfinitePosterList {...props} numberOfLoadingCards={20} />;
 };
