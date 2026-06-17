@@ -8,8 +8,13 @@ import { getDiscoverTvShowsInfiniteQuery } from "@/features/discover/queries/get
 import { getMovieDiscover } from "@/services/discover/getMovieDiscover";
 import { getTvDiscover } from "@/services/discover/getTvDiscover";
 import { DiscoverContent } from "./DiscoverContent";
-import { MovieType } from "@/models/Movies/MovieType";
 import { MediaType, mediaTypeSchema } from "@/models/MediaType";
+import {
+  MovieGenres,
+  MovieGenresSpanish,
+  TvGenres,
+  TvGenresSpanish,
+} from "@/utils/movieGenres";
 
 type Props = {
   params: Promise<{ lang: string }>;
@@ -40,10 +45,18 @@ export default async function DiscoverPage({ params, searchParams }: Props) {
       queryFn: () => data,
     });
   }
-
+  const movieGenres = lang == "es" ? MovieGenresSpanish : MovieGenres;
+  const tvGenres = lang == "es" ? TvGenresSpanish : TvGenres;
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <DiscoverContent initialMedia={media} initialGenre={genre} />
+      <div className={"p-4"}>
+        <DiscoverContent
+          initialMedia={media}
+          initialGenre={genre}
+          movieGenres={movieGenres}
+          tvGenres={tvGenres}
+        />
+      </div>
     </HydrationBoundary>
   );
 }
