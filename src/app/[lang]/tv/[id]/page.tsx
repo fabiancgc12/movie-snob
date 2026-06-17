@@ -13,6 +13,8 @@ import { generateImageUrl } from "@/utils/functions/generateImageUrl";
 import { PeopleDto } from "@/models/dto/Credit.dto";
 import { ProductHeadScript } from "@/components/Layout/ProductHeadScript";
 import { PosterList } from "@/components/poster/posterList";
+import { MemberCard } from "@/components/CrewMember/CrewMemberCard";
+import { CrewSection } from "@/components/CrewSection/CrewSection";
 
 type Props = {
   params: Promise<{ lang: string; id: string }>;
@@ -67,11 +69,13 @@ export default async function TvPage({ params }: Props) {
         <MediaBanner
           product={show}
           trailer={openingSequence}
-          credits={createdBy}
           mediaType={"tv"}
         />
         <div className="flex flex-col md:grid md:grid-cols-[75%_1fr] md:[&>*:nth-child(n+4)]:col-span-full">
-          <CastSection cast={cast} />
+          <div>
+            <CrewSection crew={createdBy} />
+            <CastSection cast={cast} />
+          </div>
           <div className="order-10 md:order-none">
             <TvExtraInfo show={show} providers={providers} />
           </div>

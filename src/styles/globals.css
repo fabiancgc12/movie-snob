@@ -193,28 +193,8 @@ body,
     margin: 0;
   }
 
-  .badge {
-    background: var(--primaryLight);
-    color: inherit;
-    padding: 0.15em 0.35em;
-    border-radius: 0.45em;
-  }
-
-  .badge:hover,
-  .badge:focus {
-    background: var(--primaryColor);
-    text-decoration: none;
-  }
-
   .placeholderImage {
     background: var(--primaryLight);
     padding: 0.5em;
   }
-
-  @media screen and (min-width: 768px) {
-    .badge {
-      font-size: 0.75em;
-    }
-  }
-
 }

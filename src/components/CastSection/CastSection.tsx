@@ -1,6 +1,6 @@
 "use client";
 
-import { MemberCard } from "@/components/CrewMember/CrewMemberCard";
+import { MemberCard, MemberItem } from "@/components/CrewMember/CrewMemberCard";
 import { Section } from "@/components/Section/Section";
 import { Slider } from "@/components/Slider/Slider";
 import { ReactNode } from "react";
@@ -10,7 +10,7 @@ import { useTranslations } from "next-intl";
 type props = {
   children: ReactNode;
 };
-export function Cast({ children }: props) {
+const Cast = ({ children }: props) => {
   const t = useTranslations("movieortv");
   const castTitle = t("castLabel");
   return (
@@ -18,12 +18,12 @@ export function Cast({ children }: props) {
       <Slider className="md:hidden" speed={250}>
         {children}
       </Slider>
-      <div className="hidden md:grid md:grid-cols-[repeat(auto-fit,minmax(220px,1fr))] md:gap-2 md:p-4">
+      <div className="hidden md:grid md:grid-cols-[repeat(auto-fit,minmax(220px,1fr))] md:gap-2 md:gap-y-4 md:p-4">
         {children}
       </div>
     </Section>
   );
-}
+};
 
 type movieProps = {
   cast?: PeopleDto[] | null;
@@ -42,8 +42,8 @@ export function CastSection({ cast }: movieProps) {
   }
   return (
     <Cast>
-      {cast.slice(0, 12).map((c) => (
-        <MemberCard size={"md"} people={c} key={`cast-${c.id}`} />
+      {cast.slice(0, 12).map((people) => (
+        <MemberItem people={people} key={people.id} />
       ))}
     </Cast>
   );

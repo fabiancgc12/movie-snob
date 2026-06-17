@@ -4,7 +4,7 @@ import { generateImageUrl } from "@/utils/functions/generateImageUrl";
 import Image from "next/image";
 import { calculateRunTime } from "@/utils/functions/calculateRunTime";
 import { Video } from "@/components/Video/Video";
-import { Average } from "@/components/common/Average";
+import { RatingAverage } from "@/components/common/Average";
 import { BookmarkButton } from "@/components/common/ActionButton/chechMarkButton";
 import { LikeButton } from "@/components/common/ActionButton/LikeButton";
 import { ShareButton } from "@/components/common/ActionButton/ShareButton";
@@ -19,6 +19,7 @@ import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
+import { Badge } from "@/components/ui/badge";
 
 type props = {
   trailer?: VideoTrailer;
@@ -68,17 +69,24 @@ export function MediaBanner({ product, trailer, credits, mediaType }: props) {
           />
         </div>
       </div>
-      <div className="px-4 grid-column-1/-1 md:z-[1] md:flex md:flex-col md:justify-evenly md:p-4">
+      <div className="px-4 grid-column-1/-1 md:z-[1] md:flex md:flex-col md:p-4">
         <div className="flex items-center justify-between py-1 max-md:flex-row">
           <div className="flex gap-1.5">
             {product.genres?.slice(0, 3).map((g) => (
-              <Link
-                className="badge"
-                href={`/discover?media=${mediaType}&genre=${g.id}`}
-                key={`genre-${g.id}`}
-              >
-                {g.name}
-              </Link>
+              <Badge
+                key={g.id}
+                variant={"secondary"}
+                render={(props) => {
+                  return (
+                    <Link
+                      {...props}
+                      href={`/discover?media=${mediaType}&genre=${g.id}`}
+                    >
+                      {g.name}
+                    </Link>
+                  );
+                }}
+              />
             ))}
           </div>
           {mediaType == "movie" && product.runtime != null && (
@@ -88,16 +96,15 @@ export function MediaBanner({ product, trailer, credits, mediaType }: props) {
         <div className="flex items-center justify-between py-1 max-md:flex-col max-md:items-start">
           <h1
             className={cn(
-              "text-center max-md:text-2xl md:text-start",
+              "text-3xl sm:text-4xl font-bold tracking-tight text-foreground mb-1",
               titleSize,
             )}
           >
             {title}
             {mediaType === "movie" && product.release_date.length != 0 && (
-              <small className="font-light text-xl max-md:text-lg">
-                {" "}
+              <span className="text-xl font-normal text-muted-foreground">
                 ({product.release_date.slice(0, 4)})
-              </small>
+              </span>
             )}
           </h1>
           {trailer && (
@@ -110,14 +117,16 @@ export function MediaBanner({ product, trailer, credits, mediaType }: props) {
             </Video>
           )}
         </div>
-        <div className="text-justify py-1 border-b border-[var(--primaryLight)]">
-          <h4>{t("overview")}</h4>
-          <small className="block rounded-lg bg-slate-700/45 p-1 md:overflow-auto md:scrollbar-gutter-stable">
+        <div className="space-y-4">
+          <h4 className={"text-muted-foreground text-base font-medium mb-4"}>
+            {t("overview")}
+          </h4>
+          <p className="text-sm text-foreground/80 leading-relaxed max-w-2xl">
             {product.overview || t("overviewFallback")}
-          </small>
+          </p>
         </div>
         <div className="flex justify-start gap-8 items-center py-1">
-          <Average value={product.vote_average} />
+          <RatingAverage rating={product.vote_average} size={48} />
           <BookmarkButton
             mediaType={mediaType}
             media={{
@@ -140,19 +149,6 @@ export function MediaBanner({ product, trailer, credits, mediaType }: props) {
             url={generateUrlPage(product, mediaType)}
             title={title}
           />
-        </div>
-        <div className="grid grid-cols-2 justify-between gap-2.5 py-1">
-          {credits &&
-            credits
-              .slice(0, 2)
-              .map((c) => (
-                <MemberCard
-                  key={`crew-${c.id}-${c.role}`}
-                  size={"sm"}
-                  people={c}
-                  shadow={false}
-                />
-              ))}
         </div>
       </div>
     </section>

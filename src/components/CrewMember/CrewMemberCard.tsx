@@ -64,3 +64,31 @@ export function MemberCard({ people, size, shadow = true }: props) {
     </article>
   );
 }
+
+type MemberItemProps = {
+  people: Pick<
+    PeopleDto,
+    "name" | "profile_path" | "role" | "total_episode_count"
+  >;
+};
+
+export const MemberItem = ({ people }: MemberItemProps) => {
+  const image = people.profile_path
+    ? generateImageUrl(people.profile_path)
+    : placeholder;
+  return (
+    <div className="flex items-center gap-4 p-4 rounded-xl bg-card border border-border/40">
+      <img
+        src={image}
+        alt={`${people.name} profile`}
+        className="w-14 h-14 rounded-md object-cover border-2 border-border/40"
+      />
+      <div>
+        <p className="font-semibold text-foreground text-base">{people.name}</p>
+        <p className="text-muted-foreground text-sm line-clamp-2">
+          {people.role}
+        </p>
+      </div>
+    </div>
+  );
+};

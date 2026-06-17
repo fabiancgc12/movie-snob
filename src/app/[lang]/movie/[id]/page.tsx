@@ -12,6 +12,8 @@ import { generateImageUrl } from "@/utils/functions/generateImageUrl";
 import { PeopleDto } from "@/models/dto/Credit.dto";
 import { ProductHeadScript } from "@/components/Layout/ProductHeadScript";
 import { PosterList } from "@/components/poster/posterList";
+import { MemberCard } from "@/components/CrewMember/CrewMemberCard";
+import { CrewSection } from "@/components/CrewSection/CrewSection";
 
 type Props = {
   params: Promise<{ lang: string; id: string }>;
@@ -65,13 +67,9 @@ export default async function MoviePage({ params }: Props) {
     return (
       <>
         <ProductHeadScript jsonLd={jsonLd} />
-        <MediaBanner
-          product={movie}
-          trailer={trailer}
-          credits={crew}
-          mediaType={"movie"}
-        />
+        <MediaBanner product={movie} trailer={trailer} mediaType={"movie"} />
         <div className="flex flex-col md:grid md:grid-cols-[75%_1fr] md:[&>*:nth-child(n+3)]:col-span-full">
+          <CrewSection crew={crew} />
           <CastSection cast={cast} />
           <MovieExtraInfo movie={movie} providers={providers} />
           <Media videos={videos} images={images} />
