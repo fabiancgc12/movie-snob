@@ -5,7 +5,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { MediaType } from "@/models/MediaType";
 import { cn } from "@/lib/utils";
 import { Link } from "@/i18n/navigation";
-import { Star } from "lucide-react";
+import { Star, ImageOff } from "lucide-react";
 import { LikeButton } from "@/components/common/ActionButton/LikeButton";
 import { BookmarkButton } from "@/components/common/ActionButton/chechMarkButton";
 import { PosterType } from "@/features/common/types/Poster.type";
@@ -32,19 +32,25 @@ export function PosterCard({ data, mediaType, isBackdrop = false }: props) {
         <Link href={`/${type}/${data.id}`} className="no-underline">
           <div
             className={cn(
-              "relative w-full overflow-hidden rounded-[0.5em]",
+              "relative w-full overflow-hidden rounded-[0.5em] bg-muted",
               isBackdrop ? "aspect-video" : "aspect-[1/1.5]",
             )}
           >
-            <Image
-              src={poster}
-              alt={"title poster"}
-              fill
-              className={cn(
-                "group-hover:scale-105 transition-all duration-300",
-                isBackdrop ? "" : "rounded-t-[0.5em]",
-              )}
-            />
+            {poster ? (
+              <Image
+                src={poster}
+                alt={"title poster"}
+                fill
+                className={cn(
+                  "group-hover:scale-105 transition-all duration-300",
+                  isBackdrop ? "" : "rounded-t-[0.5em]",
+                )}
+              />
+            ) : (
+              <div className="absolute inset-0 flex items-center justify-center">
+                <ImageOff className="size-10 text-muted-foreground/50" />
+              </div>
+            )}
           </div>
           <div className="absolute inset-0 bg-linear-to-t from-background/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         </Link>
