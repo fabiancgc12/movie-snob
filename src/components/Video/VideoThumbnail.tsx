@@ -15,13 +15,13 @@ export function VideoThumbnail({ video }: props) {
         <>
           <button
             {...props}
-            className="relative w-[80vw] max-w-[450px] aspect-[16/9]"
+            className="relative w-[80vw] max-w-[450px] aspect-[16/9] overflow-hidden rounded-lg group"
           >
             <Image
               src={videoThumbnail}
               alt={`${video.name} thumbnail`}
               fill
-              className="rounded-lg hover:brightness-50"
+              className="rounded-lg hover:brightness-50 transition-transform duration-300 group-hover:scale-105"
             />
             <div className="absolute flex justify-center items-center gap-[5px] top-0 left-0 w-full h-full z-[1] cursor-pointer hover:text-[whitesmoke]">
               <svg

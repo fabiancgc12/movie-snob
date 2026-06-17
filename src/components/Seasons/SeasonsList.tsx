@@ -7,6 +7,13 @@ import { generateImageUrl } from "@/utils/functions/generateImageUrl";
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { formatYearDate } from "@/utils/functions/formatYearDate";
 import { useTranslations } from "next-intl";
+import {
+  Select,
+  SelectContent,
+  SelectTrigger,
+  SelectValue,
+  SelectItem,
+} from "@/components/ui/select";
 
 type props = {
   seasons?: SeasonsEntity[] | null;
@@ -14,29 +21,37 @@ type props = {
 
 export function SeasonsList({ seasons }: props) {
   const t = useTranslations("movieortv");
-  const [selectedId, setSelectedId] = useState(seasons?.at(-1)?.id ?? 0);
+  const [selectedId, setSelectedId] = useState<number | null>(
+    seasons?.at(-1)?.id ?? 0,
+  );
   useEffect(() => {
     setSelectedId(seasons?.at(-1)?.id ?? 0);
   }, [seasons]);
   if (!seasons || seasons.length == 0) return null;
-  const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setSelectedId(Number(e.target.value));
+  const onChange = (value: number | null) => {
+    setSelectedId(value);
   };
   const selectedSeason = seasons.find((s) => s.id == selectedId);
   if (!selectedSeason) return null;
   return (
-    <Section title={t("seasonsLabel")}>
-      <select
-        className="w-[40%] max-w-[300px]"
-        value={selectedId}
-        onChange={onChange}
-      >
-        {seasons.map((s) => (
-          <option value={s.id} key={`season-${s.id}`}>
-            {s.name}
-          </option>
-        ))}
-      </select>
+    <Section
+      title={t("seasonsLabel")}
+      className="border-t border-input pt-4 space-y-2"
+    >
+      <Select value={selectedId} onValueChange={onChange}>
+        <SelectTrigger>
+          <SelectValue>
+            {seasons.find((s) => s.id == selectedId)?.name}
+          </SelectValue>
+        </SelectTrigger>
+        <SelectContent>
+          {seasons.map((s) => (
+            <SelectItem value={s.id} key={s.id}>
+              {s.name}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
       <Season season={selectedSeason} />
     </Section>
   );
@@ -47,9 +62,6 @@ type seasonComponentProp = {
 };
 function Season({ season }: seasonComponentProp) {
   const t = useTranslations("movieortv");
-  const airedOnLabel = t("airedOnLabel");
-  const notAnnouncedLabel = t("notAnnounced");
-  const episodesLabel = t("episodes");
   return (
     <div className="grid grid-cols-[auto_1fr] gap-x-2.5 pr-2">
       <div className="relative w-[125px] aspect-[1/1.5]">
@@ -61,23 +73,23 @@ function Season({ season }: seasonComponentProp) {
         />
       </div>
       <div>
-        <h6 className="pt-1">{season.name}</h6>
-        <p>
-          <small className="font-light">
-            {airedOnLabel}:{" "}
+        <h4 className="font-bold text-lg">{season.name}</h4>
+        <p className="font-light text-sm mb-3">
+          <span>
+            {t("airedOnLabel")}:{" "}
             {season.air_date
               ? formatYearDate(season.air_date)
-              : notAnnouncedLabel}
-          </small>
+              : t("notAnnounced")}
+          </span>
           {season.episode_count && (
-            <small className="font-light pb-1">
+            <span>
               {" "}
-              | {season.episode_count} {episodesLabel}
-            </small>
+              | {season.episode_count} {t("episodes")}
+            </span>
           )}
         </p>
-        <p className="text-justify">
-          <small>{season.overview}</small>
+        <p className="text-justify text-base text-muted-foreground">
+          {season.overview}
         </p>
       </div>
     </div>

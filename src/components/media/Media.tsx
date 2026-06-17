@@ -27,7 +27,7 @@ export function Media({ videos, images }: props) {
 
   return (
     <>
-      <Section title={t("videosLabel")}>
+      <Section title={t("videosLabel")} className="border-t border-input pt-4">
         {videos.length > 0 ? (
           <Slider speed={450}>
             {videos &&
@@ -39,18 +39,18 @@ export function Media({ videos, images }: props) {
           <p>{movieFallBackMessage}</p>
         )}
       </Section>
-      <SliderSection className="isolate" title={t("imagesLabel")} speed={450}>
+      <SliderSection className="isolate border-t border-input pt-4" title={t("imagesLabel")} speed={450}>
         {backdrops.length > 0 ? (
           backdrops.map((b, i) => (
             <div
-              className="relative w-[80vw] max-w-[450px] aspect-[16/9]"
+              className="relative w-[80vw] max-w-[450px] aspect-[16/9] overflow-hidden rounded-lg group"
               key={`backdrop-${i}`}
             >
               <Image
                 src={generateImageUrl(b.file_path)}
                 alt={`movie backdrop ${i}`}
                 fill
-                className="rounded-lg"
+                className="rounded-lg transition-transform duration-300 group-hover:scale-105"
               />
             </div>
           ))
