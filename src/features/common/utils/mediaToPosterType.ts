@@ -1,6 +1,7 @@
 import { TvShowType } from "@/models/tv/TvShow.type";
 import { PosterType } from "@/features/common/types/Poster.type";
 import { MovieType } from "@/models/Movies/MovieType";
+import { SearchResult } from "@/models/search/MultiSearchResponse.schema";
 
 type TvPosterDTO = Pick<
   TvShowType,
@@ -38,5 +39,17 @@ export const movieToPosterType = (media: MoviePosterDTO): PosterType => {
     release_date: media.release_date,
     media_type: "movie",
     title: media.title,
+  };
+};
+
+export const searchResultToPosterType = (search: SearchResult) => {
+  return {
+    id: search.id,
+    poster_path: search.poster_path,
+    backdrop_path: search.backdrop_path,
+    vote_average: search.vote_average,
+    release_date: search.release_date,
+    media_type: search.media_type,
+    title: search.title,
   };
 };

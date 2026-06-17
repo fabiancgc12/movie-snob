@@ -1,15 +1,15 @@
 import { mediaTypeSchema } from "@/models/MediaType";
 import z from "zod";
 
-export const resultSchema = z.object({
+export const searchResultSchema = z.object({
   adult: z.boolean(),
-  backdrop_path: z.string(),
+  backdrop_path: z.string().nullish(),
   id: z.number(),
   name: z.string().optional(),
   original_language: z.string(),
   original_name: z.string().optional(),
   overview: z.string(),
-  poster_path: z.string(),
+  poster_path: z.string().nullish(),
   media_type: mediaTypeSchema,
   genre_ids: z.array(z.number()),
   popularity: z.number(),
@@ -23,11 +23,11 @@ export const resultSchema = z.object({
   video: z.boolean().optional(),
 });
 
-export type Result = z.infer<typeof resultSchema>;
+export type SearchResult = z.infer<typeof searchResultSchema>;
 
 export const multiSearchResponseSchema = z.object({
   page: z.number(),
-  results: resultSchema.array(),
+  results: searchResultSchema.array(),
   total_pages: z.number(),
   total_results: z.number(),
 });
