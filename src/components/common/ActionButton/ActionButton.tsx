@@ -1,8 +1,8 @@
-import { ReactNode } from "react";
+import { MouseEventHandler, ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 type props = {
-  onClick: () => void;
+  onClick?: MouseEventHandler<any>;
   className?: string;
   children: ReactNode;
   size?: "xs" | "sm" | "md";
