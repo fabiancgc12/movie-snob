@@ -11,6 +11,9 @@ import { MediaType } from "@/models/MediaType";
 import { useLocale, useTranslations } from "next-intl";
 import { PosterType } from "@/features/common/types/Poster.type";
 import { PosterList } from "@/components/poster/posterList";
+import { Button } from "@/components/ui/button";
+import { AlertCircle, RefreshCw } from "lucide-react";
+import { ErrorComponent } from "@/components/Layout/ErrorComponent";
 
 type OldInfinitePosterListProps = {
   mediaType: MediaType;
@@ -79,11 +82,20 @@ export function OldInfinitePosterList({
     const retry = t("retry");
     const message = t("errorConnectingToServer");
     return (
-      <div className="self-start">
-        <p>{message}</p>
-        <button onClick={() => refetch()} className="text-xs">
+      <div className="col-span-full flex flex-col items-center justify-center gap-4 rounded-lg border border-destructive/20 bg-destructive/5 py-16 text-center">
+        <AlertCircle className="size-12 text-destructive/60" />
+        <div className="space-y-1">
+          <p className="text-sm font-medium text-foreground">{message}</p>
+        </div>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => refetch()}
+          className="gap-2"
+        >
+          <RefreshCw className="size-4" />
           {retry}
-        </button>
+        </Button>
       </div>
     );
   }
@@ -162,15 +174,11 @@ export const InfinitePosterList = ({
     },
   });
   if (isError || isLoadingError || isRefetchError) {
-    const retry = t("retry");
-    const message = t("errorConnectingToServer");
     return (
-      <div className="self-start">
-        <p>{message}</p>
-        <button onClick={() => refetch()} className="text-xs">
-          {retry}
-        </button>
-      </div>
+      <ErrorComponent
+        title={t("errorConnectingToServer")}
+        onRetry={() => refetch()}
+      />
     );
   }
   if (isPending)
