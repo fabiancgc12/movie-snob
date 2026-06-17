@@ -2,18 +2,52 @@
 
 import { Section } from "@/components/Section/Section";
 import { PosterGrid } from "@/components/poster/PosterGrid";
-import { useTranslations, useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { SearchMediaInfiniteGrid } from "@/features/search/components/SearchMediaInfiniteGrid";
+import { Input } from "@/components/ui/input";
+import { Search } from "lucide-react";
+import { useState, useEffect, useCallback } from "react";
+import { useDebounce } from "@/lib/useDebounce";
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput,
+} from "@/components/ui/input-group";
 
 export default function FindPage() {
   const t = useTranslations("common");
   const searchParams = useSearchParams();
-  const title = searchParams.get("title") ?? undefined;
+  const initialTitle = searchParams.get("title") ?? "";
+
+  const [inputValue, setInputValue] = useState(initialTitle);
+  const debouncedTitle = useDebounce(inputValue, 300);
+
+  const onTitleChange = (title: string) => {
+    setInputValue(title);
+    const params = new URLSearchParams(window.location.search);
+    if (title) {
+      params.set("title", title);
+    } else {
+      params.delete("title");
+    }
+    window.history.replaceState(null, "", `?${params.toString()}`);
+  };
+  const title = debouncedTitle || undefined;
 
   return (
     <div className={"h-full"}>
-      <Section title={t("find")}>
+      <Section title={t("find")} className={"space-y-4"}>
+        <InputGroup>
+          <InputGroupAddon>
+            <Search className="size-4 text-muted-foreground" />
+          </InputGroupAddon>
+          <InputGroupInput
+            placeholder={t("serchFor")}
+            value={inputValue}
+            onChange={(e) => onTitleChange(e.target.value)}
+          />
+        </InputGroup>
         <PosterGrid>
           <SearchMediaInfiniteGrid title={title} />
         </PosterGrid>
