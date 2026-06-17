@@ -4,8 +4,8 @@ import { SliderSection } from "@/components/Slider/SliderSection";
 import { useLocale, useTranslations } from "next-intl";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { PosterType } from "@/features/common/types/Poster.type";
-import { getInfiniteDiscoverMoviesQuery } from "@/features/genres/queries/getInfiniteDiscoverMoviesQuery";
 import { MovieGenresType } from "@/features/movieGenres/schemas/MovieGenresSchema";
+import { getDiscoverMoviesInfiniteQuery } from "@/features/discover/queries/getDiscoverMoviesInfiniteQuery";
 
 type Props = {
   genre: MovieGenresType;
@@ -26,7 +26,7 @@ export const InfiniteDiscoverMoviesPosterListSection = ({ genre }: Props) => {
     isRefetchError,
     isLoading,
   } = useInfiniteQuery({
-    ...getInfiniteDiscoverMoviesQuery({ locale, genre: genre.id }),
+    ...getDiscoverMoviesInfiniteQuery({ locale, genre: genre.id }),
     select: (data) => {
       return data?.pages.flatMap((page): PosterType[] => {
         return page.results.map((media): PosterType => {
