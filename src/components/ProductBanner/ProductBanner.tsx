@@ -1,4 +1,5 @@
 "use client";
+
 import { generateImageUrl } from "@/utils/functions/generateImageUrl";
 import Image from "next/image";
 import { calculateRunTime } from "@/utils/functions/calculateRunTime";
@@ -14,10 +15,10 @@ import { TvShowType } from "@/models/tv/TvShow.type";
 import { PeopleDto } from "@/models/dto/Credit.dto";
 import { generateUrlPage } from "@/utils/functions/generateUrlPage";
 import { CSSProperties, useMemo } from "react";
-import Link from "next/link";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { Link } from "@/i18n/navigation";
 
 type props = {
   trailer?: VideoTrailer;
@@ -36,7 +37,6 @@ type props = {
 export function MediaBanner({ product, trailer, credits, mediaType }: props) {
   const t = useTranslations("movieortv");
   const commonT = useTranslations("common");
-  const lang = useLocale();
   const bg = useMemo(
     () =>
       ({
@@ -53,7 +53,7 @@ export function MediaBanner({ product, trailer, credits, mediaType }: props) {
   return (
     <section
       className={cn(
-        "relative grid grid-cols-[minmax(125px,1fr)_2fr] place-items-center bg-no-repeat max-md:bg-[position:top_right] max-md:bg-[length:82%] max-md:bg-[linear-gradient(to_right,var(--primaryDarker)_0%,transparent_50%),var(--bgImage)] md:p-4 md:place-items-stretch md:bg-[position:top_center] md:bg-cover",
+        "relative grid grid-cols-[minmax(125px,1fr)_2fr] place-items-center bg-no-repeat max-md:bg-[position:top_right] max-md:bg-[length:82%] max-md:bg-[linear-gradient(to_right,var(--primaryDarker)_0%,transparent_50%),var(--bgImage)] md:p-4 md:place-items-stretch md:bg-[position:top_center] md:bg-[linear-gradient(to_right,var(--primaryDarker)_0%,transparent_50%),var(--bgImage)] md:bg-cover",
       )}
       style={bg}
     >
@@ -74,7 +74,7 @@ export function MediaBanner({ product, trailer, credits, mediaType }: props) {
             {product.genres?.slice(0, 3).map((g) => (
               <Link
                 className="badge"
-                href={`/${lang}/discover?media=${mediaType}&genre=${g.id}`}
+                href={`/discover?media=${mediaType}&genre=${g.id}`}
                 key={`genre-${g.id}`}
               >
                 {g.name}

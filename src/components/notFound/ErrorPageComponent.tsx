@@ -1,5 +1,5 @@
 import { Section } from "@/components/Section/Section";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { useLocale, useTranslations } from "next-intl";
 
 type props = {
