@@ -3,10 +3,11 @@
 import { SkeletonCard } from "@/components/poster/posterCard";
 import { useInView } from "react-intersection-observer";
 import { MediaType } from "@/models/MediaType";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { PosterType } from "@/features/common/types/Poster.type";
 import { PosterList } from "@/components/poster/posterList";
 import { ErrorComponent } from "@/components/Layout/ErrorComponent";
+import { EmptyState } from "@/components/Layout/EmptyState";
 
 type InfinitePosterListProps = {
   media: PosterType[] | undefined;
@@ -66,6 +67,9 @@ export const InfinitePosterList = ({
         ))}
       </>
     );
+  if (media && media.length === 0) {
+    return <EmptyState title={fallbackMessage} />;
+  }
   // by the time we hit this if, media is already defined
   return (
     <>
