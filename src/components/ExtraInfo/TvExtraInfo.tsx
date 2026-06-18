@@ -1,14 +1,16 @@
 "use client";
 
 import { TvShowType } from "@/models/tv/TvShow.type";
-import { ExtraInfo } from "./ExtraInfo";
-import { Providers } from "@/components/ExtraInfo/Providers";
+import { DetailInfo, DetailInfoItem } from "./DetailInfo";
+import { MediaDetailsProviders } from "@/components/ExtraInfo/MediaDetailsProviders";
 import { ProvidersDto } from "@/models/dto/ProvidersDto";
 import { CompanyLogo } from "@/components/ExtraInfo/CompanyLogo";
 import { FullDate } from "@/components/common/FullDate";
 import React from "react";
-import { Info, Languages } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { Calendar, Info, Languages, TvIcon } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
+import { cn } from "@/lib/utils";
+import { formatDate } from "@/utils/functions/formatDate";
 
 type props = {
   show: TvShowType;
@@ -17,42 +19,26 @@ type props = {
 
 export function TvExtraInfo({ show, providers }: props) {
   const t = useTranslations("movieortv");
-  const releaseDateLabel = t("releaseDate");
-  const languageLabel = t("language");
-  const networksLabel = t("networks");
-  const statusLabel = t("status");
-  const lastAirDateLabel = t("lastAirDate");
-
+  const locale = useLocale();
   return (
-    <ExtraInfo>
-      <div>
-        <p className="capitalize text-sm">{releaseDateLabel}</p>
-        <FullDate date={show.first_air_date} />
-      </div>
-      <div>
-        <p className="capitalize text-sm">{lastAirDateLabel}</p>
-        <FullDate date={show.last_air_date} />
-      </div>
-      <div>
-        <p className="capitalize text-sm">{statusLabel}</p>
-        <small className="flex items-center gap-1.5">
-          <Info />
-          {show.status}
-        </small>
-      </div>
-      <div>
-        <p className="capitalize text-sm">{languageLabel}</p>
-        <small className="flex items-center gap-1.5">
-          <Languages />
-          {show.spoken_languages
-            ?.slice(0, 4)
-            .map((sp) => sp.english_name)
-            ?.join(", ")}
-        </small>
-      </div>
-      <div>
-        <p className="capitalize text-sm">{networksLabel}</p>
-        <div className="flex flex-row flex-wrap items-center gap-[5px_2.5%]">
+    <DetailInfo>
+      <DetailInfoItem title={t("releaseDate")} icon={Calendar}>
+        {formatDate(show.first_air_date, locale)}
+      </DetailInfoItem>
+      <DetailInfoItem title={t("lastAirDate")} icon={Calendar}>
+        {formatDate(show.last_air_date, locale)}
+      </DetailInfoItem>
+      <DetailInfoItem title={t("status")} icon={Info}>
+        {show.status}
+      </DetailInfoItem>
+      <DetailInfoItem title={t("language")} icon={Languages}>
+        {show.spoken_languages
+          ?.slice(0, 4)
+          .map((sp) => sp.english_name)
+          ?.join(", ")}
+      </DetailInfoItem>
+      <DetailInfoItem title={t("networks")} icon={TvIcon}>
+        <div className="flex flex-row flex-wrap items-center gap-[5px_2.5%] mt-1">
           {show.networks?.map((network) => (
             <CompanyLogo
               key={`${network.name} logo`}
@@ -61,8 +47,8 @@ export function TvExtraInfo({ show, providers }: props) {
             />
           ))}
         </div>
-      </div>
-      <Providers providers={providers} />
-    </ExtraInfo>
+      </DetailInfoItem>
+      <MediaDetailsProviders providers={providers} />
+    </DetailInfo>
   );
 }

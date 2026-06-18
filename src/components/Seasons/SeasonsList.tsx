@@ -4,7 +4,7 @@ import { SeasonsEntity } from "@/models/tv/TvShow.type";
 import { Section } from "@/components/Section/Section";
 import Image from "next/image";
 import { generateImageUrl } from "@/utils/functions/generateImageUrl";
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { formatYearDate } from "@/utils/functions/formatYearDate";
 import { useTranslations } from "next-intl";
 import {
@@ -36,22 +36,24 @@ export function SeasonsList({ seasons }: props) {
   return (
     <Section
       title={t("seasonsLabel")}
-      className="border-t border-input pt-4 space-y-2"
+      className="border-t border-input pt-4"
+      header={
+        <Select value={selectedId} onValueChange={onChange}>
+          <SelectTrigger>
+            <SelectValue>
+              {seasons.find((s) => s.id == selectedId)?.name}
+            </SelectValue>
+          </SelectTrigger>
+          <SelectContent>
+            {seasons.map((s) => (
+              <SelectItem value={s.id} key={s.id}>
+                {s.name}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      }
     >
-      <Select value={selectedId} onValueChange={onChange}>
-        <SelectTrigger>
-          <SelectValue>
-            {seasons.find((s) => s.id == selectedId)?.name}
-          </SelectValue>
-        </SelectTrigger>
-        <SelectContent>
-          {seasons.map((s) => (
-            <SelectItem value={s.id} key={s.id}>
-              {s.name}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
       <Season season={selectedSeason} />
     </Section>
   );

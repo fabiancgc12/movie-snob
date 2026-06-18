@@ -3,19 +3,18 @@
 import { ProvidersDto } from "@/models/dto/ProvidersDto";
 import { CompanyLogo } from "@/components/ExtraInfo/CompanyLogo";
 import { useTranslations } from "next-intl";
+import { DetailInfoItem } from "@/components/ExtraInfo/DetailInfo";
+import { Building2Icon, TvMinimalPlayIcon } from "lucide-react";
 
 type props = {
   providers: ProvidersDto;
 };
 
-export function Providers({ providers }: props) {
+export const MediaDetailsProviders = ({ providers }: props) => {
   const t = useTranslations("movieortv");
-  const availableLabel = t("availableOn");
-  const notAvailableMessage = t("notAvailableMessage");
   return (
-    <div className="text">
-      <p className="capitalize text-sm">{availableLabel}</p>
-      <div className="flex flex-row flex-wrap items-center gap-[5px_2.5%]">
+    <DetailInfoItem icon={TvMinimalPlayIcon} title={t("availableOn")}>
+      <div className="flex flex-row flex-wrap items-center gap-[5px_2.5%] mt-1">
         {providers.results.US?.flatrate &&
         providers.results.US.flatrate.length > 0 ? (
           providers.results.US.flatrate.map((st) => (
@@ -26,16 +25,14 @@ export function Providers({ providers }: props) {
             />
           ))
         ) : (
-          <div>
-            <small>{notAvailableMessage}</small>
-          </div>
+          <p className={"text-[13px]"}>{t("notAvailableMessage")}</p>
         )}
-        <small>
+        <p className={"text-sm text-muted-foreground"}>
           {t.rich("justWatchMessage", {
             a: (chunks) => <a href="https://www.justwatch.com/">{chunks}</a>,
           })}
-        </small>
+        </p>
       </div>
-    </div>
+    </DetailInfoItem>
   );
-}
+};

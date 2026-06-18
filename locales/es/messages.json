@@ -55,7 +55,7 @@
   "movieortv": {
     "castLabel": "Elenco",
     "overviewFallback": "Actualmente, no tenemos una descripción.",
-    "moreLabel": "Extra",
+    "moreLabel": "Detalles",
     "availableOn": "Disponible en",
     "budget": "Presupuesto",
     "language": "Idioma original",

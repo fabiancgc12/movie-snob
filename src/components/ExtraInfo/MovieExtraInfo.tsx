@@ -2,8 +2,8 @@
 
 import { formatCurrency } from "@/utils/functions/formatCurrency";
 import { MovieType } from "@/models/Movies/MovieType";
-import { ExtraInfo } from "./ExtraInfo";
-import { Providers } from "./Providers";
+import { DetailInfo } from "./DetailInfo";
+import { MediaDetailsProviders } from "./MediaDetailsProviders";
 import { ProvidersDto } from "@/models/dto/ProvidersDto";
 import { CompanyLogo } from "@/components/ExtraInfo/CompanyLogo";
 import { FullDate } from "@/components/common/FullDate";
@@ -23,7 +23,7 @@ export function MovieExtraInfo({ movie, providers }: props) {
   const budgetLabel = t("budget");
   const productionLabel = t("production");
   return (
-    <ExtraInfo>
+    <DetailInfo>
       <div className="text">
         <p className="capitalize text-sm">{releaseDateLabel}</p>
         <FullDate date={movie.release_date} lang={locale} />
@@ -54,7 +54,7 @@ export function MovieExtraInfo({ movie, providers }: props) {
           ))}
         </div>
       </div>
-      <Providers providers={providers} />
-    </ExtraInfo>
+      <MediaDetailsProviders providers={providers} />
+    </DetailInfo>
   );
 }
