@@ -37,7 +37,7 @@ export function TvExtraInfo({ show, providers }: props) {
           .map((sp) => sp.english_name)
           ?.join(", ")}
       </DetailInfoItem>
-      <DetailInfoItem title={t("networks")} icon={TvIcon}>
+      <DetailInfoItem title={t("networks")} icon={TvIcon} fullWidth={true}>
         <div className="flex flex-row flex-wrap items-center gap-[5px_2.5%] mt-1">
           {show.networks?.map((network) => (
             <CompanyLogo

@@ -69,8 +69,10 @@ export default async function MoviePage({ params }: Props) {
         <ProductHeadScript jsonLd={jsonLd} />
         <MediaBanner product={movie} trailer={trailer} mediaType={"movie"} />
         <div className="flex flex-col md:grid md:grid-cols-[75%_1fr] md:[&>*:nth-child(n+3)]:col-span-full">
-          <CrewSection crew={crew} />
-          <CastSection cast={cast} />
+          <div>
+            <CrewSection crew={crew} />
+            <CastSection cast={cast} />
+          </div>
           <MovieExtraInfo movie={movie} providers={providers} />
           <Media videos={videos} images={images} />
         </div>

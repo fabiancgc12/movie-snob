@@ -13,7 +13,11 @@ type props = {
 export const MediaDetailsProviders = ({ providers }: props) => {
   const t = useTranslations("movieortv");
   return (
-    <DetailInfoItem icon={TvMinimalPlayIcon} title={t("availableOn")}>
+    <DetailInfoItem
+      icon={TvMinimalPlayIcon}
+      title={t("availableOn")}
+      fullWidth={true}
+    >
       <div className="flex flex-row flex-wrap items-center gap-[5px_2.5%] mt-1">
         {providers.results.US?.flatrate &&
         providers.results.US.flatrate.length > 0 ? (

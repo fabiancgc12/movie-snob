@@ -2,13 +2,13 @@
 
 import { formatCurrency } from "@/utils/functions/formatCurrency";
 import { MovieType } from "@/models/Movies/MovieType";
-import { DetailInfo } from "./DetailInfo";
+import { DetailInfo, DetailInfoItem } from "./DetailInfo";
 import { MediaDetailsProviders } from "./MediaDetailsProviders";
 import { ProvidersDto } from "@/models/dto/ProvidersDto";
 import { CompanyLogo } from "@/components/ExtraInfo/CompanyLogo";
-import { FullDate } from "@/components/common/FullDate";
-import { Languages } from "lucide-react";
+import { Calendar, DollarSign, Languages, Building2 } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
+import { formatDate } from "@/utils/functions/formatDate";
 
 type props = {
   movie: MovieType;
@@ -18,33 +18,22 @@ type props = {
 export function MovieExtraInfo({ movie, providers }: props) {
   const t = useTranslations("movieortv");
   const locale = useLocale();
-  const releaseDateLabel = t("releaseDate");
-  const languageLabel = t("language");
-  const budgetLabel = t("budget");
-  const productionLabel = t("production");
   return (
     <DetailInfo>
-      <div className="text">
-        <p className="capitalize text-sm">{releaseDateLabel}</p>
-        <FullDate date={movie.release_date} lang={locale} />
-      </div>
-      <div className="text">
-        <p className="capitalize text-sm">{languageLabel}</p>
-        <small className="flex items-center gap-1.5">
-          <Languages />
-          {movie.spoken_languages
-            ?.slice(0, 4)
-            .map((sp) => sp.english_name)
-            ?.join(", ")}
-        </small>
-      </div>
-      <div className="text">
-        <p className="capitalize text-sm">{budgetLabel}</p>
-        <small>{formatCurrency.format(movie.budget)}</small>
-      </div>
-      <div className="text">
-        <p className="capitalize text-sm">{productionLabel}</p>
-        <div className="flex flex-row flex-wrap items-center gap-[5px_2.5%]">
+      <DetailInfoItem title={t("releaseDate")} icon={Calendar}>
+        {formatDate(movie.release_date, locale)}
+      </DetailInfoItem>
+      <DetailInfoItem title={t("language")} icon={Languages}>
+        {movie.spoken_languages
+          ?.slice(0, 4)
+          .map((sp) => sp.english_name)
+          ?.join(", ")}
+      </DetailInfoItem>
+      <DetailInfoItem title={t("budget")} icon={DollarSign}>
+        {formatCurrency.format(movie.budget)}
+      </DetailInfoItem>
+      <DetailInfoItem title={t("production")} icon={Building2} fullWidth={true}>
+        <div className="flex flex-row flex-wrap items-center gap-[5px_2.5%] mt-1">
           {movie.production_companies?.map((company) => (
             <CompanyLogo
               key={`${company.name} logo`}
@@ -53,7 +42,7 @@ export function MovieExtraInfo({ movie, providers }: props) {
             />
           ))}
         </div>
-      </div>
+      </DetailInfoItem>
       <MediaDetailsProviders providers={providers} />
     </DetailInfo>
   );
