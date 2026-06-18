@@ -31,7 +31,7 @@ export default function BookMarkPage() {
 
   return (
     <div className={"h-full"}>
-      <Section title={t("bookmarkTitle")}>
+      <Section title={t("bookmarkTitle")} className={"space-y-4"}>
         <Tabs defaultValue="movie">
           <TabsList>
             <TabsTrigger value="movie">{commonT("mediaMovie")}</TabsTrigger>

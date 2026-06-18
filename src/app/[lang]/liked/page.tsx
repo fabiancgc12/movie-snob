@@ -18,6 +18,7 @@ export default function LikedPage() {
   const [tv, setTv] = useState<StoreProductType[]>([]);
   const [ready, setReady] = useState(false);
   const t = useTranslations("likedorbookmark");
+  const commonT = useTranslations("common");
 
   useEffect(() => {
     const store = localStorage.getItem(likedStoreKey);
@@ -29,17 +30,13 @@ export default function LikedPage() {
     setReady(true);
   }, []);
 
-  const title = t("likedTitle");
-  const movieFallback = t("fallbackMovieMessage");
-  const tvFallback = t("fallbackTvMessage");
-
   return (
     <div className={"h-full"}>
-      <Section title={title}>
+      <Section title={t("likedTitle")} className={"space-y-4"}>
         <Tabs defaultValue="movie">
           <TabsList>
-            <TabsTrigger value="movie">Movie</TabsTrigger>
-            <TabsTrigger value="tv">Tv</TabsTrigger>
+            <TabsTrigger value="movie">{commonT("mediaMovie")}</TabsTrigger>
+            <TabsTrigger value="tv">{commonT("mediaTv")}</TabsTrigger>
           </TabsList>
           <TabsContent value="movie">
             {ready ? (
@@ -47,7 +44,7 @@ export default function LikedPage() {
                 <PosterList
                   media={movies}
                   mediaType={"movie"}
-                  fallbackMessage={movieFallback}
+                  fallbackMessage={t("fallbackMovieMessage")}
                 />
               </PosterGrid>
             ) : (
@@ -60,7 +57,7 @@ export default function LikedPage() {
                 <PosterList
                   media={tv}
                   mediaType={"tv"}
-                  fallbackMessage={tvFallback}
+                  fallbackMessage={t("fallbackTvMessage")}
                 />
               </PosterGrid>
             ) : (
