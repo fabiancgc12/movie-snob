@@ -2,7 +2,7 @@ import z from "zod";
 
 export const tvDiscoverSchema = z.object({
   backdrop_path: z.string(),
-  first_air_date: z.string(),
+  first_air_date: z.string().nullish(),
   genre_ids: z.number().array(),
   id: z.number(),
   name: z.string(),

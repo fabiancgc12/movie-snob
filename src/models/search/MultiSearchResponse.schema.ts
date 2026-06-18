@@ -13,7 +13,7 @@ export const searchResultSchema = z.object({
   media_type: mediaTypeSchema,
   genre_ids: z.array(z.number()),
   popularity: z.number(),
-  first_air_date: z.string().optional(),
+  first_air_date: z.string().nullish(),
   vote_average: z.number(),
   vote_count: z.number(),
   origin_country: z.array(z.string()).optional(),

@@ -15,7 +15,7 @@ export const createdByEntitySchema = z.object({
 export type CreatedByEntity = z.infer<typeof createdByEntitySchema>;
 
 export const lastEpisodeToAirOrNextEpisodeToAirSchema = z.object({
-  air_date: z.string(),
+  air_date: z.string().nullish(),
   episode_number: z.number(),
   id: z.number(),
   name: z.string(),
@@ -43,7 +43,7 @@ export const networksEntitySchema = z.object({
 export type NetworksEntity = z.infer<typeof networksEntitySchema>;
 
 export const seasonsEntitySchema = z.object({
-  air_date: z.string().optional(),
+  air_date: z.string().nullish(),
   episode_count: z.number().optional(),
   id: z.number(),
   name: z.string(),

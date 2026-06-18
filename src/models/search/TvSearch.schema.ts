@@ -3,7 +3,7 @@ import { z } from "zod";
 export const tvSearchResultSchema = z.object({
   adult: z.boolean(),
   backdrop_path: z.string().nullable().optional(),
-  first_air_date: z.string().optional(),
+  first_air_date: z.string().nullish(),
   genre_ids: z.array(z.number()),
   id: z.number(),
   name: z.string(),

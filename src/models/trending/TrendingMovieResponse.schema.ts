@@ -13,7 +13,7 @@ export const trendingSchema = z.object({
   media_type: mediaTypeSchema,
   genre_ids: z.number().array(),
   popularity: z.number(),
-  first_air_date: z.string().optional(),
+  first_air_date: z.string().nullish(),
   vote_average: z.number(),
   vote_count: z.number(),
   origin_country: z.string().array().optional(),
