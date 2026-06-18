@@ -16,6 +16,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import { useState } from "react";
 import Image from "next/image";
+import { cn } from "@/lib/utils";
 
 export const SearchMediaComboBox = () => {
   const t = useTranslations("common");
@@ -109,11 +110,16 @@ const RenderContent = ({
   if (results.length > 0) {
     return (
       <>
-        {results.map((item) => (
+        {results.map((item, index) => (
           <ComboboxItem key={item.id} value={item.id.toString()}>
-            <div className="flex items-center gap-3">
+            <div
+              className={cn(
+                "flex items-center gap-3 py-1 px-1 -mx-1 rounded-md transition-colors hover:bg-accent/10",
+                index !== results.length - 1 && "border-b border-border/30"
+              )}
+            >
               {item.poster_path && (
-                <div className="relative size-10 shrink-0 overflow-hidden rounded">
+                <div className="relative size-10 shrink-0 overflow-hidden rounded-md ring-1 ring-border/50">
                   <Image
                     src={generateImageUrl(item.poster_path)}
                     alt={getDisplayName(item)}
@@ -123,8 +129,8 @@ const RenderContent = ({
                 </div>
               )}
               <div className="flex items-center gap-2">
-                <span className="text-sm">{getDisplayName(item)}</span>
-                <span className="text-xs text-muted-foreground capitalize">
+                <span className="text-sm font-medium">{getDisplayName(item)}</span>
+                <span className="text-[10px] text-muted-foreground uppercase tracking-wider">
                   {item.media_type}
                 </span>
               </div>

@@ -20,7 +20,7 @@ export function Section({
 }: props) {
   const sizeStyle = size == "sm" ? "text-xl" : "";
   return (
-    <section className={`p-4 group/title ${className}`}>
+    <section className={`p-4 group/title border-b border-border/40 ${className}`}>
       <div className="flex items-center gap-4">
         <h3
           className={`relative pl-8 capitalize text-lg font-bold text-foreground tracking-tight ${sizeStyle}`}

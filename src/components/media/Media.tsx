@@ -39,7 +39,11 @@ export function Media({ videos, images }: props) {
           <p>{movieFallBackMessage}</p>
         )}
       </Section>
-      <SliderSection className="isolate border-t border-input pt-4" title={t("imagesLabel")} speed={450}>
+      <SliderSection
+        className="isolate pt-4"
+        title={t("imagesLabel")}
+        speed={450}
+      >
         {backdrops.length > 0 ? (
           backdrops.map((b, i) => (
             <div

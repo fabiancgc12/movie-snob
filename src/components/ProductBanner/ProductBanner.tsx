@@ -55,7 +55,7 @@ export function MediaBanner({ product, trailer, credits, mediaType }: props) {
   return (
     <section
       className={cn(
-        "relative grid grid-cols-[minmax(125px,1fr)_2fr] place-items-center bg-no-repeat max-md:bg-[position:top_right] max-md:bg-[length:82%] max-md:bg-[linear-gradient(to_right,var(--primaryDarker)_0%,transparent_50%),var(--bgImage)] md:p-4 md:place-items-stretch md:bg-[position:top_center] md:bg-[linear-gradient(to_right,var(--primaryDarker)_0%,transparent_50%),var(--bgImage)] md:bg-cover",
+        "relative grid grid-cols-[minmax(125px,1fr)_2fr] place-items-center bg-no-repeat max-md:bg-[position:top_right] max-md:bg-[length:82%] max-md:bg-[linear-gradient(to_right,var(--primaryDarker-90)_0%,var(--primaryDarker-90)_25%,var(--primaryDarker)_60%,transparent_100%),var(--bgImage)] md:p-4 md:place-items-stretch md:bg-[position:top_center] md:bg-[linear-gradient(to_right,var(--primaryDarker-90)_0%,var(--primaryDarker-90)_25%,var(--primaryDarker)_60%,transparent_100%),var(--bgImage)] md:bg-cover",
       )}
       style={bg}
     >
@@ -70,7 +70,7 @@ export function MediaBanner({ product, trailer, credits, mediaType }: props) {
           />
         </div>
       </div>
-      <div className="px-4 grid-column-1/-1 md:z-[1] md:flex md:flex-col md:p-4">
+      <div className="px-4 grid-column-1/-1 md:z-[1] md:flex md:flex-col md:p-4 max-md:bg-primaryDarker/40">
         <div className="flex items-center justify-between py-1 max-md:flex-row">
           <div className="flex gap-1.5">
             {product.genres?.slice(0, 3).map((g) => (

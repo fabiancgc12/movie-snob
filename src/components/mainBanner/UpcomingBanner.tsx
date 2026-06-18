@@ -31,7 +31,7 @@ export function UpcomingBanner({ data, trailer }: props) {
     <div
       className={cn(
         "flex items-end p-4 pr-8 relative bg-no-repeat bg-cover bg-center max-lg:h-[300px] max-lg:bg-top max-md:h-[300px] lg:h-screen lg:pb-16",
-        "bg-[linear-gradient(to_right,var(--primaryColor)_0%,transparent_50%),var(--bgImage)]",
+        "bg-[linear-gradient(to_right,var(--primaryDarker-90)_0%,var(--primaryDarker-90)_25%,var(--primaryDarker)_35%,transparent_100%),var(--bgImage)]",
         !data.backdrop_path && "placeholderImage",
       )}
       style={bg}

@@ -52,7 +52,8 @@ export function PosterCard({ data, mediaType, isBackdrop = false }: props) {
               </div>
             )}
           </div>
-          <div className="absolute inset-0 bg-linear-to-t from-background/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          <div className="absolute inset-0 bg-linear-to-t from-background/95 via-background/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          <div className="absolute inset-0 ring-2 ring-primary/0 group-hover:ring-primary/50 transition-all duration-300 rounded-[0.5em] pointer-events-none" />
         </Link>
         <div className="absolute opacity-0 group-hover:opacity-100 translate-y-0 group-hover:-translate-y-full z-4 px-2 pb-1 transition-all flex justify-between items-center w-full gap-1 duration-300">
           <RatingAverage rating={data.vote_average} size={36} />
