@@ -1,6 +1,7 @@
 import { PosterType } from "@/features/common/types/Poster.type";
 import { MediaType } from "@/models/MediaType";
 import { PosterCard } from "@/components/poster/posterCard";
+import { EmptyState } from "@/components/Layout/EmptyState";
 
 export type PosterListProps = {
   media: PosterType[];
@@ -15,7 +16,9 @@ export function PosterList({
   isBackdrop,
   fallbackMessage,
 }: PosterListProps) {
-  if (!media || media.length === 0) return <p>{fallbackMessage}</p>;
+  if (!media || media.length === 0) {
+    return <EmptyState title={fallbackMessage} />;
+  }
   return (
     <>
       {media.map((e, i) => (

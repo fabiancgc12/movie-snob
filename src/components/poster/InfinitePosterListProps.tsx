@@ -67,9 +67,6 @@ export const InfinitePosterList = ({
         ))}
       </>
     );
-  if (media && media.length === 0) {
-    return <EmptyState title={fallbackMessage} />;
-  }
   // by the time we hit this if, media is already defined
   return (
     <>
