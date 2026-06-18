@@ -4,7 +4,7 @@ import { CSSProperties, useMemo } from "react";
 import { MovieResumeSchema } from "@/models/Movies/MovieResume.schema";
 import { FullDate } from "@/components/common/FullDate";
 import { VideoTrailer } from "@/models/Movies/VideoMedia.schema";
-import { Video } from "@/components/Video/Video";
+import { VideoDialog } from "@/components/Video/VideoDialog";
 import { useTranslations, useLocale } from "next-intl";
 import { cn } from "@/lib/utils";
 import { RatingAverage } from "@/components/common/Average";
@@ -60,7 +60,7 @@ export function UpcomingBanner({ data, trailer }: props) {
         </p>
         <div className="flex items-start gap-1.5">
           {trailer && (
-            <Video video={trailer}>
+            <VideoDialog video={trailer}>
               {(props) => {
                 return (
                   <Button {...props} className={"rounded-md"}>
@@ -69,7 +69,7 @@ export function UpcomingBanner({ data, trailer }: props) {
                   </Button>
                 );
               }}
-            </Video>
+            </VideoDialog>
           )}
           <Button
             variant={"outline"}

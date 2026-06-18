@@ -1,14 +1,15 @@
 "use client";
 import { VideoTrailer } from "@/models/Movies/VideoMedia.schema";
 import { cn } from "@/lib/utils";
-import { ReactNode, useState } from "react";
+import { PropsWithChildren, ReactNode, useState } from "react";
 import { createPortal } from "react-dom";
+import { Button } from "@/components/ui/button";
 
 type props = {
   video: VideoTrailer;
   children: (props: { onClick: () => void }) => ReactNode;
 };
-export function Video({ video, children }: props) {
+export function VideoDialog({ video, children }: props) {
   const [show, setShow] = useState(false);
 
   return (
@@ -36,3 +37,19 @@ export function Video({ video, children }: props) {
     </div>
   );
 }
+
+type VideLinkButtonProps = PropsWithChildren & {
+  trailer: VideoTrailer;
+};
+
+export const VideLinkButton = ({ trailer, children }: VideLinkButtonProps) => {
+  return (
+    <VideoDialog video={trailer}>
+      {(props) => (
+        <Button variant={"link"} {...props}>
+          {children}
+        </Button>
+      )}
+    </VideoDialog>
+  );
+};

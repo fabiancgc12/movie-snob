@@ -1,5 +1,5 @@
 import { VideoTrailer } from "@/models/Movies/VideoMedia.schema";
-import { Video } from "./Video";
+import { VideoDialog } from "./VideoDialog";
 import Image from "next/image";
 
 type props = {
@@ -10,7 +10,7 @@ export function VideoThumbnail({ video }: props) {
   const videoThumbnail = `https://img.youtube.com/vi/${video.key}/hqdefault.jpg`;
 
   return (
-    <Video video={video}>
+    <VideoDialog video={video}>
       {(props) => (
         <>
           <button
@@ -50,6 +50,6 @@ export function VideoThumbnail({ video }: props) {
           </small>
         </>
       )}
-    </Video>
+    </VideoDialog>
   );
 }

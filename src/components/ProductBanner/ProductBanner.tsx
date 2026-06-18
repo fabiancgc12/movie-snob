@@ -1,7 +1,7 @@
 import { generateImageUrl } from "@/utils/functions/generateImageUrl";
 import Image from "next/image";
 import { calculateRunTime } from "@/utils/functions/calculateRunTime";
-import { Video } from "@/components/Video/Video";
+import { VideLinkButton } from "@/components/Video/VideoDialog";
 import { RatingAverage } from "@/components/common/Average";
 import { BookmarkButton } from "@/components/common/ActionButton/chechMarkButton";
 import { LikeButton } from "@/components/common/ActionButton/LikeButton";
@@ -13,7 +13,6 @@ import { generateUrlPage } from "@/utils/functions/generateUrlPage";
 import { CSSProperties } from "react";
 import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import { Badge } from "@/components/ui/badge";
 import { ClockIcon } from "lucide-react";
@@ -51,7 +50,7 @@ export function MediaBanner({ product, trailer, mediaType }: props) {
       )}
       style={bg}
     >
-      <div className="w-full p-4 md:p-4 bg-[linear-gradient(to_right,var(--primaryDarker-90)_0%,var(--primaryDarker-90)_15%,transparent_100%),var(--bgImage)] md:bg-none bg-cover">
+      <div className="w-full p-4 md:p-4 bg-[linear-gradient(to_right,var(--primaryDarker)_0,transparent_100%),var(--bgImage)] md:bg-none bg-cover">
         <div className="relative left-[10%] h-[25dvh] md:h-auto grid aspect-[1/1.5] max-w-[300px] max-md:left-[10%] md:left-0">
           <Image
             src={posterPath}
@@ -108,13 +107,7 @@ export function MediaBanner({ product, trailer, mediaType }: props) {
             )}
           </h1>
           {trailer && (
-            <Video video={trailer}>
-              {(props) => (
-                <Button variant={"link"} {...props}>
-                  {videoLabel}
-                </Button>
-              )}
-            </Video>
+            <VideLinkButton video={trailer}>{videoLabel}</VideLinkButton>
           )}
         </div>
         <div className="space-y-4">
