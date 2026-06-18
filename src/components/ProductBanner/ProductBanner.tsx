@@ -1,5 +1,3 @@
-"use client";
-
 import { generateImageUrl } from "@/utils/functions/generateImageUrl";
 import Image from "next/image";
 import { calculateRunTime } from "@/utils/functions/calculateRunTime";
@@ -8,13 +6,11 @@ import { RatingAverage } from "@/components/common/Average";
 import { BookmarkButton } from "@/components/common/ActionButton/chechMarkButton";
 import { LikeButton } from "@/components/common/ActionButton/LikeButton";
 import { ShareButton } from "@/components/common/ActionButton/ShareButton";
-import { MemberCard } from "@/components/CrewMember/CrewMemberCard";
 import { MovieType } from "@/models/Movies/MovieType";
 import { VideoTrailer } from "@/models/Movies/VideoMedia.schema";
 import { TvShowType } from "@/models/tv/TvShow.type";
-import { PeopleDto } from "@/models/dto/Credit.dto";
 import { generateUrlPage } from "@/utils/functions/generateUrlPage";
-import { CSSProperties, useMemo } from "react";
+import { CSSProperties } from "react";
 import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -24,7 +20,6 @@ import { ClockIcon } from "lucide-react";
 
 type props = {
   trailer?: VideoTrailer;
-  credits?: PeopleDto[] | null;
 } & (
   | {
       product: MovieType;
@@ -36,16 +31,12 @@ type props = {
     }
 );
 
-export function MediaBanner({ product, trailer, credits, mediaType }: props) {
+export function MediaBanner({ product, trailer, mediaType }: props) {
   const t = useTranslations("movieortv");
   const commonT = useTranslations("common");
-  const bg = useMemo(
-    () =>
-      ({
-        "--bgImage": `url(${generateImageUrl(product.backdrop_path, 1280)})`,
-      }) as CSSProperties,
-    [product],
-  );
+  const bg = {
+    "--bgImage": `url(${generateImageUrl(product.backdrop_path, 1280)})`,
+  } as CSSProperties;
 
   const posterPath = generateImageUrl(product.poster_path);
   const title = mediaType == "movie" ? product.title : product.name;
@@ -55,12 +46,13 @@ export function MediaBanner({ product, trailer, credits, mediaType }: props) {
   return (
     <section
       className={cn(
-        "relative grid grid-cols-[minmax(125px,1fr)_2fr] place-items-center bg-no-repeat max-md:bg-[position:top_right] max-md:bg-[length:82%] max-md:bg-[linear-gradient(to_right,var(--primaryDarker-90)_0%,var(--primaryDarker-90)_25%,var(--primaryDarker)_60%,transparent_100%),var(--bgImage)] md:p-4 md:place-items-stretch md:bg-[position:top_center] md:bg-[linear-gradient(to_right,var(--primaryDarker-90)_0%,var(--primaryDarker-90)_25%,var(--primaryDarker)_60%,transparent_100%),var(--bgImage)] md:bg-cover",
+        "relative grid gap-y-2 md:grid-cols-[minmax(125px,1fr)_2fr] place-items-center bg-no-repeat max-md:bg-[position:top_right] max-md:bg-[length:82%] md:bg-[linear-gradient(to_right,var(--primaryDarker)_0,transparent_100%),var(--bgImage)] " +
+          " md:p-4 md:place-items-stretch md:bg-[position:top_center] md:bg-cover",
       )}
       style={bg}
     >
-      <div className="w-full p-4 md:p-4">
-        <div className="relative left-[10%] grid aspect-[1/1.5] max-w-[300px] max-md:left-[10%] md:left-0">
+      <div className="w-full p-4 md:p-4 bg-[linear-gradient(to_right,var(--primaryDarker-90)_0%,var(--primaryDarker-90)_15%,transparent_100%),var(--bgImage)] md:bg-none bg-cover">
+        <div className="relative left-[10%] h-[25dvh] md:h-auto grid aspect-[1/1.5] max-w-[300px] max-md:left-[10%] md:left-0">
           <Image
             src={posterPath}
             alt={`${title} poster`}
@@ -110,6 +102,7 @@ export function MediaBanner({ product, trailer, credits, mediaType }: props) {
             {title}
             {mediaType === "movie" && product.release_date.length != 0 && (
               <span className="text-xl font-normal text-muted-foreground">
+                {" "}
                 ({product.release_date.slice(0, 4)})
               </span>
             )}
