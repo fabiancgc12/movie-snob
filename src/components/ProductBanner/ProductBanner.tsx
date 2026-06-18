@@ -20,6 +20,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import { Badge } from "@/components/ui/badge";
+import { ClockIcon } from "lucide-react";
 
 type props = {
   trailer?: VideoTrailer;
@@ -75,7 +76,7 @@ export function MediaBanner({ product, trailer, credits, mediaType }: props) {
             {product.genres?.slice(0, 3).map((g) => (
               <Badge
                 key={g.id}
-                variant={"secondary"}
+                variant={"outline"}
                 render={(props) => {
                   return (
                     <Link
@@ -88,10 +89,16 @@ export function MediaBanner({ product, trailer, credits, mediaType }: props) {
                 }}
               />
             ))}
+            {mediaType == "movie" && product.runtime != null && (
+              <Badge
+                variant={"secondary"}
+                className={"text-[10px] gap-1 flex items-center"}
+              >
+                <ClockIcon className="w-2.5 h-2.5" />
+                {calculateRunTime(product.runtime)}
+              </Badge>
+            )}
           </div>
-          {mediaType == "movie" && product.runtime != null && (
-            <div>{calculateRunTime(product.runtime)}</div>
-          )}
         </div>
         <div className="flex items-center justify-between py-1 max-md:flex-col max-md:items-start">
           <h1
