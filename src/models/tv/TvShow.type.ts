@@ -9,7 +9,7 @@ export const createdByEntitySchema = z.object({
   credit_id: z.string(),
   name: z.string(),
   gender: z.number(),
-  profile_path: z.string(),
+  profile_path: z.string().nullish(),
 });
 
 export type CreatedByEntity = z.infer<typeof createdByEntitySchema>;

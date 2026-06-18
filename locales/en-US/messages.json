@@ -31,7 +31,9 @@
     "notAvailable": "Not available.",
     "theme": "Theme",
     "addToBookmark": "Add to Bookmark",
-    "addToLiked": "Give a like!"
+    "addToLiked": "Give a like!",
+    "noResults": "No results found",
+    "searchError": "Something went wrong. Please try again."
   },
   "home": {
     "trendingLabel": "Trending right now",
