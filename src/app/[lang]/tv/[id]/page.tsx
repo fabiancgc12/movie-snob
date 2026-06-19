@@ -10,7 +10,7 @@ import { TMDBCodes } from "@/utils/TMDBCodes";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { generateImageUrl } from "@/utils/functions/generateImageUrl";
-import { PeopleDto } from "@/models/dto/Credit.dto";
+import { formatCreatedBy, PeopleDto } from "@/models/dto/Credit.dto";
 import { ProductHeadScript } from "@/components/Layout/ProductHeadScript";
 import { PosterList } from "@/components/poster/posterList";
 import { tvJsonLd } from "@/services/jsonLd";
@@ -56,7 +56,7 @@ export default async function TvPage({ params }: Props) {
       await getTvShow(Number(id), lang);
     const crew =
       show.created_by
-        ?.map((c) => serializePeople(PeopleDto.formatCreatedBy(c)))
+        ?.map((c) => serializePeople(formatCreatedBy(c)))
         .slice(0, 2) || [];
     const cast = credits.cast?.map(serializePeople);
     const openingSequence = videos.find((v) => v.type.includes("Opening"));

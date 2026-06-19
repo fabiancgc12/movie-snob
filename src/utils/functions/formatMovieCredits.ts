@@ -1,5 +1,9 @@
 import { CreditsResponseSchema } from "@/models/Movies/CreditsResponse.schema";
-import { CreditsDto, PeopleDto } from "@/models/dto/Credit.dto";
+import {
+  CreditsDto,
+  formatMovieCast,
+  formatMovieCrew,
+} from "@/models/dto/Credit.dto";
 
 export function formatMovieCredits(
   movieCredits: CreditsResponseSchema,
@@ -9,14 +13,14 @@ export function formatMovieCredits(
   //i use destructuring so next deserializes the object, if not it woulld throw an error
   const cast = movieCredits.cast
     ?.slice(0, 12)
-    .map((c) => ({ ...PeopleDto.formatMovieCast(c) }));
+    .map((c) => ({ ...formatMovieCast(c) }));
   const crew = movieCredits.crew
     ?.filter(
       (c) =>
         c.job.toLowerCase() == "director" ||
         c.job.toLowerCase() == "screenplay",
     )
-    .map((c) => ({ ...PeopleDto.formatMovieCrew(c) }));
+    .map((c) => formatMovieCrew(c));
 
   return {
     // id:movieCredits.id,
