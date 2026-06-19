@@ -12,8 +12,7 @@ import { generateImageUrl } from "@/utils/functions/generateImageUrl";
 import { PeopleDto } from "@/models/dto/Credit.dto";
 import { ProductHeadScript } from "@/components/Layout/ProductHeadScript";
 import { PosterList } from "@/components/poster/posterList";
-import { MemberCard } from "@/components/CrewMember/CrewMemberCard";
-import { CrewSection } from "@/components/CrewSection/CrewSection";
+import { movieJsonLd } from "@/services/jsonLd";
 
 type Props = {
   params: Promise<{ lang: string; id: string }>;
@@ -96,54 +95,6 @@ export default async function MoviePage({ params }: Props) {
 }
 
 export const revalidate = 900;
-
-function movieJsonLd(movie: any, cast: any[], crew: any[]) {
-  const directors = crew.filter(
-    (a: any) => a.role.toLowerCase() === "director",
-  );
-  const productions = movie.production_companies || [];
-  const castInfo = cast.map((a: any) => ({
-    "@type": "Person",
-    name: a.name,
-    jobTitle: a.role,
-    image: generateImageUrl(a.profile_path),
-  }));
-  const itemListElement = castInfo.map((cast: any, index: number) => ({
-    "@type": "ListItem",
-    position: (index + 1).toString(),
-    item: cast,
-  }));
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "Movie",
-    name: movie.title,
-    headline: movie.tagline,
-    description: movie.overview,
-    itemListElement,
-    actor: castInfo,
-    director: directors.map((d: any) => ({
-      "@type": "Person",
-      name: d.name,
-      jobTitle: d.role,
-      image: generateImageUrl(d.profile_path),
-    })),
-    author: directors.map((d: any) => ({
-      "@type": "Person",
-      name: d.name,
-      jobTitle: d.role,
-      image: generateImageUrl(d.profile_path),
-    })),
-    productionCompany: productions.map((p: any) => ({
-      "@type": "Organization",
-      legalName: p.name,
-      logo: generateImageUrl(p.logo_path),
-    })),
-    image: generateImageUrl(movie.poster_path, 1080),
-    duration: movie.runtime,
-    datePublished: movie.release_date,
-  };
-  return JSON.stringify(structuredData);
-}
 
 function serializePeople(p: PeopleDto) {
   return {

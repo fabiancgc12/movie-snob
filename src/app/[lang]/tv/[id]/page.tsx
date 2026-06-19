@@ -13,8 +13,7 @@ import { generateImageUrl } from "@/utils/functions/generateImageUrl";
 import { PeopleDto } from "@/models/dto/Credit.dto";
 import { ProductHeadScript } from "@/components/Layout/ProductHeadScript";
 import { PosterList } from "@/components/poster/posterList";
-import { MemberCard } from "@/components/CrewMember/CrewMemberCard";
-import { CrewSection } from "@/components/CrewSection/CrewSection";
+import { tvJsonLd } from "@/services/jsonLd";
 
 type Props = {
   params: Promise<{ lang: string; id: string }>;
@@ -98,45 +97,6 @@ export default async function TvPage({ params }: Props) {
 }
 
 export const revalidate = 900;
-
-function tvJsonLd(show: any, cast: any[], crew: any[]) {
-  const productions = show.production_companies || [];
-  const castInfo = cast.map((a: any) => ({
-    "@type": "Person",
-    name: a.name,
-    jobTitle: a.role,
-    image: generateImageUrl(a.profile_path),
-  }));
-  const itemListElement = castInfo.map((cast: any, index: number) => ({
-    "@type": "ListItem",
-    position: (index + 1).toString(),
-    item: cast,
-  }));
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "TVSeries",
-    name: show.name,
-    headline: show.tagline,
-    description: show.overview,
-    itemListElement,
-    actor: castInfo,
-    author: crew.map((a: any) => ({
-      "@type": "Person",
-      name: a.name,
-      jobTitle: a.role,
-      image: generateImageUrl(a.profile_path),
-    })),
-    productionCompany: productions.map((p: any) => ({
-      "@type": "Organization",
-      legalName: p.name,
-      logo: generateImageUrl(p.logo_path),
-    })),
-    image: generateImageUrl(show.poster_path, 1080),
-    timeRequired: show.episode_run_time?.at(0),
-    datePublished: show.first_air_date,
-  };
-  return JSON.stringify(structuredData);
-}
 
 function serializePeople(p: PeopleDto) {
   return {
