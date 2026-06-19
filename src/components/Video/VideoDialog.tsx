@@ -5,8 +5,10 @@ import { PropsWithChildren, ReactNode, useState } from "react";
 import { createPortal } from "react-dom";
 import { Button } from "@/components/ui/button";
 
+type VideoDto = Pick<VideoTrailer, "key" | "name">;
+
 type props = {
-  video: VideoTrailer;
+  video: VideoDto;
   children: (props: { onClick: () => void }) => ReactNode;
 };
 export function VideoDialog({ video, children }: props) {
@@ -39,7 +41,7 @@ export function VideoDialog({ video, children }: props) {
 }
 
 type VideLinkButtonProps = PropsWithChildren & {
-  trailer: VideoTrailer;
+  trailer: VideoDto;
 };
 
 export const VideLinkButton = ({ trailer, children }: VideLinkButtonProps) => {

@@ -55,27 +55,25 @@ export default async function TvPage({ params }: Props) {
   try {
     const { show, credits, videos, recommendations, images, providers } =
       await getTvShow(Number(id), lang);
-    const createdBy =
+    const crew =
       show.created_by
         ?.map((c) => serializePeople(PeopleDto.formatCreatedBy(c)))
         .slice(0, 2) || [];
     const cast = credits.cast?.map(serializePeople);
     const openingSequence = videos.find((v) => v.type.includes("Opening"));
-    const jsonLd = tvJsonLd(show, cast || [], createdBy);
+    const jsonLd = tvJsonLd(show, cast || [], crew);
 
     return (
       <>
         <ProductHeadScript jsonLd={jsonLd} />
         <MediaBanner
           product={show}
+          crew={crew}
           trailer={openingSequence}
           mediaType={"tv"}
         />
         <div className="flex flex-col md:grid md:grid-cols-[75%_1fr] md:[&>*:nth-child(n+4)]:col-span-full">
-          <div>
-            <CrewSection crew={createdBy} />
-            <CastSection cast={cast} />
-          </div>
+          <CastSection cast={cast} />
           <div className="order-10 md:order-none">
             <TvExtraInfo show={show} providers={providers} />
           </div>

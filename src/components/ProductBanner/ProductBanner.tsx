@@ -16,9 +16,12 @@ import { cn } from "@/lib/utils";
 import { Link } from "@/i18n/navigation";
 import { Badge } from "@/components/ui/badge";
 import { ClockIcon } from "lucide-react";
+import { PeopleDto } from "@/models/dto/Credit.dto";
+import { CrewSection } from "@/components/CrewSection/CrewSection";
 
 type props = {
   trailer?: VideoTrailer;
+  crew: PeopleDto[] | undefined;
 } & (
   | {
       product: MovieType;
@@ -30,7 +33,7 @@ type props = {
     }
 );
 
-export function MediaBanner({ product, trailer, mediaType }: props) {
+export function MediaBanner({ product, trailer, crew, mediaType }: props) {
   const t = useTranslations("movieortv");
   const commonT = useTranslations("common");
   const bg = {
@@ -45,7 +48,7 @@ export function MediaBanner({ product, trailer, mediaType }: props) {
   return (
     <section
       className={cn(
-        "relative grid gap-y-2 md:grid-cols-[minmax(125px,1fr)_2fr] place-items-center bg-no-repeat max-md:bg-[position:top_right] max-md:bg-[length:82%] md:bg-[linear-gradient(to_right,var(--primaryDarker)_0,transparent_100%),var(--bgImage)] " +
+        "relative grid gap-y-2 md:grid-cols-[minmax(125px,1fr)_2fr] place-items-center bg-no-repeat md:bg-[position:top_right] md:bg-[length:82%] md:bg-[linear-gradient(to_right,var(--primaryDarker)_0,transparent_100%),var(--bgImage)] md:bg-[linear-gradient(to_right,var(--primaryDarker)_0,transparent_100%),var(--bgImage)] " +
           " md:p-4 md:place-items-stretch md:bg-[position:top_center] md:bg-cover",
       )}
       style={bg}
@@ -61,7 +64,7 @@ export function MediaBanner({ product, trailer, mediaType }: props) {
           />
         </div>
       </div>
-      <div className="px-4 grid-column-1/-1 md:z-[1] md:flex md:flex-col md:p-4 max-md:bg-primaryDarker/40">
+      <div className="px-4 py-4 grid-column-1/-1 md:z-[1] md:flex md:flex-col md:p-4 md:backdrop-blur-xs md:backdrop-brightness-60 md:rounded-lg">
         <div className="flex items-center justify-between py-1 max-md:flex-row">
           <div className="flex gap-1.5">
             {product.genres?.slice(0, 3).map((g) => (
@@ -107,7 +110,7 @@ export function MediaBanner({ product, trailer, mediaType }: props) {
             )}
           </h1>
           {trailer && (
-            <VideLinkButton video={trailer}>{videoLabel}</VideLinkButton>
+            <VideLinkButton trailer={trailer}>{videoLabel}</VideLinkButton>
           )}
         </div>
         <div className="space-y-4">
@@ -143,6 +146,7 @@ export function MediaBanner({ product, trailer, mediaType }: props) {
             title={title}
           />
         </div>
+        <CrewSection crew={crew} />
       </div>
     </section>
   );
