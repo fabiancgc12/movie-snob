@@ -1,10 +1,10 @@
 "use client";
 
-import { ErrorPageComponent } from "@/components/notFound/ErrorPageComponent";
+import { EmptyState } from "@/components/Layout/EmptyState";
 import { useTranslations } from "next-intl";
 
 export default function Error() {
   const t = useTranslations("common");
   const title = t("serverErrorTitle");
-  return <ErrorPageComponent title={title} />;
+  return <EmptyState title={title} />;
 }
