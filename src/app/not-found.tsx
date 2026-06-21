@@ -1,5 +1,3 @@
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { FileQuestion, HomeIcon } from "lucide-react";
 import { EmptyState } from "@/components/Layout/EmptyState";
 import { LinkButton } from "@/components/Layout/LinkButton";
@@ -18,7 +16,6 @@ export default function NotFound() {
           <HomeIcon />
           Go home
         </LinkButton>
-        <Button render={(props) => <Link {...props} href="/en-US"></Link>} />
       </EmptyState>
     </div>
   );

@@ -1,22 +1,16 @@
-"use client";
-
 import { Link } from "@/i18n/navigation";
-import { Button } from "../ui/button";
-import { ButtonProps } from "@base-ui/react";
+import { buttonVariants } from "../ui/button";
+import { ComponentProps } from "react";
+import type { VariantProps } from "class-variance-authority";
+import { cn } from "@/lib/utils";
 
-type Props = ButtonProps & {
-  href: string;
-};
+type Props = VariantProps<typeof buttonVariants> & ComponentProps<typeof Link>;
 
-export const LinkButton = ({ href, children, ...props }: Props) => {
+export const LinkButton = ({ variant, size, className, ...props }: Props) => {
   return (
-    <Button
+    <Link
+      className={cn(buttonVariants({ variant, size, className }))}
       {...props}
-  render={(props) => (
-    <Link {...props} href={href}>
-      {children}
-    </Link>
-  )}
     />
   );
 };
