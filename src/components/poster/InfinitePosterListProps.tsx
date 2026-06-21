@@ -7,7 +7,6 @@ import { useTranslations } from "next-intl";
 import { PosterType } from "@/features/common/types/Poster.type";
 import { PosterList } from "@/components/poster/posterList";
 import { ErrorComponent } from "@/components/Layout/ErrorComponent";
-import { EmptyState } from "@/components/Layout/EmptyState";
 
 type InfinitePosterListProps = {
   media: PosterType[] | undefined;

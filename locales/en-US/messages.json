@@ -33,7 +33,13 @@
     "addToBookmark": "Add to Bookmark",
     "addToLiked": "Give a like!",
     "noResults": "No results found",
-    "searchError": "Something went wrong. Please try again."
+    "searchError": "Something went wrong. Please try again.",
+    "movieNotFound": "Movie not found",
+    "tvNotFound": "TV show not found",
+    "errorPageDescription": "The page you are looking for might have been removed or is temporarily unavailable.",
+    "serverErrorDescription": "Something went wrong on our end. Please try again later.",
+    "movieNotFoundDescription": "The movie you are looking for does not exist or is not available in our database.",
+    "tvNotFoundDescription": "The TV show you are looking for does not exist or is not available in our database."
   },
   "home": {
     "trendingLabel": "Trending right now",

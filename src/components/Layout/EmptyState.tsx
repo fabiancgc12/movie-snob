@@ -1,33 +1,35 @@
 import {
   Empty,
-  EmptyContent,
+  EmptyDescription,
   EmptyHeader,
   EmptyMedia,
   EmptyTitle,
 } from "@/components/ui/empty";
-import { HomeIcon, SearchX } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Link } from "@/i18n/navigation";
-import { useTranslations } from "next-intl";
-import { GoHomeButton } from "@/components/Layout/GoHomeButton";
+import { LucideIcon, SearchX } from "lucide-react";
+import { PropsWithChildren } from "react";
 
-type Props = {
+type Props = PropsWithChildren & {
   title: string;
-  showHomeButton?: boolean;
+  description?: string;
+  icon?: LucideIcon;
 };
 
-export const EmptyState = ({ title, showHomeButton }: Props) => {
+export const EmptyState = ({
+  title,
+  description,
+  icon: Icon = SearchX,
+  children,
+}: Props) => {
   return (
     <Empty>
       <EmptyHeader>
         <EmptyMedia variant="icon">
-          <SearchX className="text-muted-foreground/60" />
+          <Icon className="text-muted-foreground/60" />
         </EmptyMedia>
         <EmptyTitle>{title}</EmptyTitle>
+        <EmptyDescription>{description}</EmptyDescription>
       </EmptyHeader>
-      {showHomeButton && (
-        <EmptyContent>{showHomeButton && <GoHomeButton />}</EmptyContent>
-      )}
+      {children}
     </Empty>
   );
 };

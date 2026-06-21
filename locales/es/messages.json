@@ -33,7 +33,13 @@
     "addToBookmark": "Añadir a marcadores",
     "addToLiked": "Añadir a favoritos",
     "noResults": "No se encontraron resultados",
-    "searchError": "Algo salió mal. Por favor, intenta de nuevo."
+    "searchError": "Algo salió mal. Por favor, intenta de nuevo.",
+    "movieNotFound": "Película no encontrada",
+    "tvNotFound": "Programa de televisión no encontrado",
+    "errorPageDescription": "La página que buscas pudo haber sido eliminada o no está disponible temporalmente.",
+    "serverErrorDescription": "Algo salió mal en nuestro servidor. Por favor, inténtalo de nuevo más tarde.",
+    "movieNotFoundDescription": "La película que buscas no existe o no está disponible en nuestra base de datos.",
+    "tvNotFoundDescription": "El programa de televisión que buscas no existe o no está disponible en nuestra base de datos."
   },
   "home": {
     "trendingLabel": "En tendencias ahora mismo",
