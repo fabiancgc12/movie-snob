@@ -9,7 +9,7 @@ export type Dates = z.infer<typeof datesSchema>;
 
 export const upcomingMovieSchema = z.object({
   adult: z.boolean(),
-  backdrop_path: z.string(),
+  backdrop_path: z.string().nullish(),
   genre_ids: z.array(z.number()),
   id: z.number(),
   original_language: z.string(),

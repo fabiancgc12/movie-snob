@@ -24,8 +24,9 @@ import { extractLanguageFromLocale } from "@/utils/functions/extractLanguageFrom
 import { getImdbLocale } from "@/utils/functions/getLanguage";
 import { env } from "../../../env";
 import { z } from "zod";
+import { notFound } from "next/navigation";
 
-const apiResponseSchema = tvShowSchema.extend({
+const detailsTvShowSchema = tvShowSchema.extend({
   images: imageMediaResponseSchema,
   videos: videoMediaResponseSchema,
   aggregate_credits: aggregateCastResponseSchema,
@@ -33,7 +34,7 @@ const apiResponseSchema = tvShowSchema.extend({
   ["watch/providers"]: providersResponseSchema,
 });
 
-type ApiResponse = z.infer<typeof apiResponseSchema>;
+type DetailsTvShowType = z.infer<typeof detailsTvShowSchema>;
 
 export async function getTvShow(
   id: number,
@@ -59,8 +60,11 @@ export async function getTvShow(
   const response = await fetch(
     `https://api.themoviedb.org/3/tv/${id}?${params}`,
   );
+  if (response.status === 404) {
+    throw notFound();
+  }
   const raw = await response.json();
-  const data = apiResponseSchema.parse(raw);
+  const data = detailsTvShowSchema.parse(raw);
   try {
     // @ts-ignore
     if (data?.success == false) {

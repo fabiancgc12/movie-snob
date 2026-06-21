@@ -55,8 +55,8 @@ export const seasonsEntitySchema = z.object({
 export type SeasonsEntity = z.infer<typeof seasonsEntitySchema>;
 
 export const tvShowSchema = z.object({
-  adult: z.boolean(),
-  backdrop_path: z.string(),
+  adult: z.boolean().nullish(),
+  backdrop_path: z.string().nullish(),
   created_by: z.array(createdByEntitySchema).optional().nullable(),
   episode_run_time: z.array(z.number()).optional().nullable(),
   first_air_date: z.string(),

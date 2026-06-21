@@ -5,7 +5,7 @@ import { productionCountriesSchema } from "@/features/ProductionCountries/schema
 import { movieGenresSchema } from "@/features/movieGenres/schemas/MovieGenresSchema";
 
 export const movieSchema = z.object({
-  adult: z.boolean(),
+  adult: z.boolean().nullish(),
   backdrop_path: z.string().nullable(),
   belongs_to_collection: z
     .object({

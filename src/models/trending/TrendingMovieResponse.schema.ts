@@ -3,7 +3,7 @@ import { mediaTypeSchema } from "../MediaType";
 
 export const trendingSchema = z.object({
   adult: z.boolean(),
-  backdrop_path: z.string(),
+  backdrop_path: z.string().nullish(),
   id: z.number(),
   name: z.string().optional(),
   original_language: z.string(),

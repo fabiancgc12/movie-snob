@@ -34,8 +34,9 @@ import { getImdbLocale } from "@/utils/functions/getLanguage";
 import { extractLanguageFromLocale } from "@/utils/functions/extractLanguageFromLocale";
 import { env } from "../../../env";
 import { z } from "zod";
+import { notFound } from "next/navigation";
 
-const apiResponseSchema = movieSchema.extend({
+const detailsMovieSchema = movieSchema.extend({
   videos: videoMediaResponseSchema,
   images: imageMediaResponseSchema,
   credits: creditsResponseTypeSchema,
@@ -43,7 +44,7 @@ const apiResponseSchema = movieSchema.extend({
   ["watch/providers"]: providersResponseSchema,
 });
 
-type ApiResponse = z.infer<typeof apiResponseSchema>;
+type DetailsMovieType = z.infer<typeof detailsMovieSchema>;
 
 export async function getMovie(
   id: number,
@@ -68,8 +69,11 @@ export async function getMovie(
   const response = await fetch(
     `https://api.themoviedb.org/3/movie/${id}?${params}`,
   );
+  if (response.status === 404) {
+    throw notFound();
+  }
   const responseData = await response.json();
-  const data = apiResponseSchema.parse(responseData);
+  const data = detailsMovieSchema.parse(responseData);
   try {
     // @ts-ignore
     if (data?.success == false) {
