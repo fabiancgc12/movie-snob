@@ -1,28 +1,7 @@
-import {
-  CreditsResponseSchema,
-  creditsResponseTypeSchema,
-} from "@/models/Movies/CreditsResponse.schema";
-import { MovieType, movieSchema } from "@/models/Movies/MovieType";
-import {
-  VideoMedia,
-  videoMediaResponseSchema,
-  VideoTrailer,
-  videoTrailerSchema,
-} from "@/models/Movies/VideoMedia.schema";
-import {
-  ImageMedia,
-  imageMediaResponseSchema,
-  imagePosterSchema,
-} from "@/models/Movies/ImageMedia.schema";
-import {
-  ProvidersResponseInterface,
-  providersResponseSchema,
-} from "@/models/Movies/Providers.type";
-import {
-  RecommendationInterface,
-  RecommendationResponseInterface,
-  recommendationResponseSchema,
-} from "@/models/Movies/RecomendationResponse.schema";
+import { MovieType } from "@/models/Movies/MovieType";
+import { VideoTrailer } from "@/models/Movies/VideoMedia.schema";
+import { ImageMedia } from "@/models/Movies/ImageMedia.schema";
+import { RecommendationInterface } from "@/models/Movies/RecomendationResponse.schema";
 import { formatVideoResponse } from "@/utils/functions/formatVideoResponse";
 import { formatImagesResponse } from "@/utils/functions/formatImagesResponse";
 import { formatProvidersResponse } from "@/utils/functions/formatProvidersResponse";
@@ -33,18 +12,8 @@ import { CreditsDto } from "@/models/dto/Credit.dto";
 import { getImdbLocale } from "@/utils/functions/getLanguage";
 import { extractLanguageFromLocale } from "@/utils/functions/extractLanguageFromLocale";
 import { env } from "../../../env";
-import { z } from "zod";
 import { notFound } from "next/navigation";
-
-const detailsMovieSchema = movieSchema.extend({
-  videos: videoMediaResponseSchema,
-  images: imageMediaResponseSchema,
-  credits: creditsResponseTypeSchema,
-  recommendations: recommendationResponseSchema,
-  ["watch/providers"]: providersResponseSchema,
-});
-
-type DetailsMovieType = z.infer<typeof detailsMovieSchema>;
+import { detailsMovieSchema } from "@/features/movies/schemas/detailsMovie.schema";
 
 export async function getMovie(
   id: number,

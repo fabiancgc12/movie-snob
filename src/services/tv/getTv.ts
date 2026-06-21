@@ -11,7 +11,7 @@ import {
   RecommendationInterface,
   recommendationResponseSchema,
 } from "@/models/Movies/RecomendationResponse.schema";
-import { providersResponseSchema } from "@/models/Movies/Providers.type";
+import { providersResponseSchema } from "@/models/Movies/Providers.schema";
 import { aggregateCastResponseSchema } from "@/models/tv/TvCast.type";
 import { formatVideoResponse } from "@/utils/functions/formatVideoResponse";
 import { formatImagesResponse } from "@/utils/functions/formatImagesResponse";
@@ -25,16 +25,7 @@ import { getImdbLocale } from "@/utils/functions/getLanguage";
 import { env } from "../../../env";
 import { z } from "zod";
 import { notFound } from "next/navigation";
-
-const detailsTvShowSchema = tvShowSchema.extend({
-  images: imageMediaResponseSchema,
-  videos: videoMediaResponseSchema,
-  aggregate_credits: aggregateCastResponseSchema,
-  recommendations: recommendationResponseSchema,
-  ["watch/providers"]: providersResponseSchema,
-});
-
-type DetailsTvShowType = z.infer<typeof detailsTvShowSchema>;
+import { detailsTvShowSchema } from "@/features/tv/schemas/detailsTvShow.schema";
 
 export async function getTvShow(
   id: number,

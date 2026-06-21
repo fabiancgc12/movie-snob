@@ -1,4 +1,4 @@
-import { ProvidersResponseInterface } from "@/models/Movies/Providers.type";
+import { ProvidersResponseInterface } from "@/models/Movies/Providers.schema";
 import { ProvidersDto } from "@/models/dto/ProvidersDto";
 
 export function formatProvidersResponse(
