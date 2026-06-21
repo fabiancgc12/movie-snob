@@ -124,7 +124,7 @@ const AppSidebarContent = ({ icon: Icon, text }: AppSidebarContentProps) => {
 const SwitchLanguage = () => {
   const t = useTranslations("common");
   const locale = useLocale();
-  const nextLocale = locale == "es" ? "en-US" : "es";
+  const nextLocale = locale == "es" ? "en" : "es";
   const pathname = usePathname();
   const params = useSearchParams();
   return (

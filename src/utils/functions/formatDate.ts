@@ -1,4 +1,4 @@
-export function formatDate(date: string, lang: string = "en-US"): string {
+export function formatDate(date: string, lang: string = "en"): string {
   const formatter = Intl.DateTimeFormat(lang, {
     day: "numeric",
     month: "long",

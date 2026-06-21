@@ -12,7 +12,7 @@ export default function NotFound() {
         }
         icon={FileQuestion}
       >
-        <LinkButton href={"/en-US"}>
+        <LinkButton href={"/"}>
           <HomeIcon />
           Go home
         </LinkButton>
