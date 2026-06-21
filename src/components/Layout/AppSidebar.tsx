@@ -1,6 +1,14 @@
 "use client";
 
-import { Bookmark, Compass, Heart, Sun, Globe, Moon, Monitor } from "lucide-react";
+import {
+  Bookmark,
+  Compass,
+  Heart,
+  Sun,
+  Globe,
+  Moon,
+  Monitor,
+} from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -76,9 +84,9 @@ export const AppSidebar = () => {
         <SidebarMenuItem>
           <SwitchLanguage />
         </SidebarMenuItem>
-        <SidebarMenuItem>
-          <SwitchThemeButton />
-        </SidebarMenuItem>
+        {/*<SidebarMenuItem>*/}
+        {/*  <SwitchThemeButton />*/}
+        {/*</SidebarMenuItem>*/}
       </SidebarFooter>
     </Sidebar>
   );
