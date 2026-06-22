@@ -88,10 +88,10 @@ export default async function HomePage() {
             ))}
           </CarouselContent>
           <CarouselPrevious
-            className={"left-4 z-50 -translate-y-20 hidden md:flex"}
+            className={"left-4 z-50 translate-y-0 hidden md:flex"}
           />
           <CarouselNext
-            className={"right-4 z-50 -translate-y-20 hidden md:flex"}
+            className={"right-4 z-50 translate-y-0 hidden md:flex"}
           />
         </HomePageCarousel>
         <InfiniteTrendingPosterListSection />

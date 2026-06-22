@@ -48,13 +48,13 @@ export function MediaBanner({ product, trailer, crew, mediaType }: props) {
   return (
     <section
       className={cn(
-        "relative grid gap-y-2 md:grid-cols-[minmax(125px,1fr)_2fr] place-items-center bg-no-repeat md:bg-[position:top_right] md:bg-[length:82%] md:bg-[linear-gradient(to_right,var(--primaryDarker)_0,transparent_100%),var(--bgImage)] md:bg-[linear-gradient(to_right,var(--primaryDarker)_0,transparent_100%),var(--bgImage)] " +
+        "relative grid gap-y-2 md:grid-cols-[minmax(125px,1fr)_2fr] place-items-center bg-no-repeat md:bg-[position:top_right] md:bg-[length:82%] md:bg-[linear-gradient(to_top,var(--background)_0%,transparent_100%),var(--bgImage)]" +
           " md:p-4 md:place-items-stretch md:bg-[position:top_center] md:bg-cover",
       )}
       style={bg}
     >
-      <div className="w-full p-4 md:p-4 bg-[linear-gradient(to_right,var(--primaryDarker)_0,transparent_100%),var(--bgImage)] md:bg-none bg-cover">
-        <div className="relative left-[10%] h-[25dvh] md:h-auto grid aspect-[1/1.5] max-w-[300px] max-md:left-[10%] md:left-0">
+      <div className="w-full p-4 bg-[linear-gradient(to_top,var(--background)_0%,transparent_100%),var(--bgImage)] md:bg-none bg-cover">
+        <div className="relative left-[10%] h-[25dvh] md:h-[40dvh] lg:h-auto grid aspect-[1/1.5] max-w-75 max-md:left-[10%] md:left-0">
           <Image
             src={posterPath}
             alt={`${title} poster`}
@@ -114,7 +114,11 @@ export function MediaBanner({ product, trailer, crew, mediaType }: props) {
           )}
         </div>
         <div className="space-y-4">
-          <h4 className={"text-muted-foreground text-base font-medium mb-4"}>
+          <h4
+            className={
+              "text-muted-foreground text-sm md:text-base font-medium mb-1"
+            }
+          >
             {t("overview")}
           </h4>
           <p className="text-sm text-foreground/80 leading-relaxed max-w-2xl">
