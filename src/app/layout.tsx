@@ -15,7 +15,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html className={cn("dark font-sans", figtree.variable)} lang="en">
+    <html className={cn("dark font-sans", figtree.variable)}>
       <body>{children}</body>
     </html>
   );

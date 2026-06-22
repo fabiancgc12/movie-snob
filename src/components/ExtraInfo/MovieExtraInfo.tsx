@@ -1,6 +1,5 @@
 "use client";
 
-import { formatCurrency } from "@/utils/functions/formatCurrency";
 import { MovieType } from "@/models/Movies/MovieType";
 import { DetailInfo, DetailInfoItem } from "./DetailInfo";
 import { MediaDetailsProviders } from "./MediaDetailsProviders";
@@ -33,7 +32,7 @@ export function MovieExtraInfo({ movie, providers }: props) {
           ?.join(", ")}
       </DetailInfoItem>
       <DetailInfoItem title={t("budget")} icon={DollarSign}>
-        {formatCurrency.format(movie.budget)}
+        {format.number(movie.budget, { style: "currency", currency: "USD" })}
       </DetailInfoItem>
       <DetailInfoItem title={t("production")} icon={Building2} fullWidth={true}>
         <div className="flex flex-row flex-wrap items-center gap-[5px_2.5%] mt-1">

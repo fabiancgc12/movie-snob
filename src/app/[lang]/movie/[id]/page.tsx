@@ -38,7 +38,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         ],
         siteName: "Movie Snob",
         type: "video.other" as const,
-        locale: "en_US",
+        locale: lang === "es" ? "es_ES" : "en_US",
       },
       twitter: {
         card: "summary_large_image",

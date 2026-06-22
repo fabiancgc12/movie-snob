@@ -5,7 +5,7 @@ import { MovieResumeSchema } from "@/models/Movies/MovieResume.schema";
 import { FullDate } from "@/components/common/FullDate";
 import { VideoTrailer } from "@/models/Movies/VideoMedia.schema";
 import { VideoDialog } from "@/components/Video/VideoDialog";
-import { useTranslations, useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import { RatingAverage } from "@/components/common/Average";
 import { Button } from "@/components/ui/button";
@@ -19,7 +19,6 @@ type props = {
 
 export function UpcomingBanner({ data, trailer }: props) {
   const t = useTranslations("common");
-  const locale = useLocale();
   const bg = useMemo(
     () =>
       ({
