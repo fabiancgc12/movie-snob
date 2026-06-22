@@ -21,11 +21,16 @@ import { getLocale, getTranslations } from "next-intl/server";
 import { PosterList } from "@/components/poster/posterList";
 import { InfinitePopularMoviesPosterListSection } from "@/features/popular/components/InfinitePopularMoviesPosterListSection";
 import { InfinitePopularTvShowPosterListSection } from "@/features/popular/components/InfinitePopularTvShowsPosterListSection";
+import { MovieGenres, MovieGenresSpanish } from "@/utils/movieGenres";
+import { getDiscoverMoviesInfiniteQuery } from "@/features/discover/queries/getDiscoverMoviesInfiniteQuery";
+import { getMovieDiscover } from "@/services/discover/getMovieDiscover";
 import { cacheLife } from "next/cache";
 
 type Props = {
   params: Promise<{ lang: string }>;
 };
+
+const genresLimit = 9;
 
 async function getHomePageCachedData(locale: string) {
   "use cache";
@@ -45,6 +50,24 @@ async function getHomePageCachedData(locale: string) {
     ...getInfinitePopularTvShowsQueryOptions(locale),
     queryFn: () => data.popular.tv,
   });
+
+  const genres = (locale === "es" ? MovieGenresSpanish : MovieGenres).slice(
+    0,
+    genresLimit,
+  );
+  await Promise.all(
+    genres.map((genre) =>
+      queryClient.prefetchInfiniteQuery({
+        ...getDiscoverMoviesInfiniteQuery({ locale, genre: genre.id }),
+        queryFn: ({ pageParam }) =>
+          getMovieDiscover({
+            genre: genre.id.toString(),
+            locale,
+            page: pageParam,
+          }),
+      }),
+    ),
+  );
 
   return {
     dehydratedState: dehydrate(queryClient),
