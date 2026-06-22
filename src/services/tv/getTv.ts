@@ -51,6 +51,7 @@ export async function getTvShow(
   });
   const response = await fetch(
     `https://api.themoviedb.org/3/tv/${id}?${params}`,
+    { next: { revalidate: 3600 * 24 } },
   );
   if (response.status === 404) {
     throw notFound();

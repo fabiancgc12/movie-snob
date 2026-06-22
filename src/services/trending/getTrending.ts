@@ -16,6 +16,7 @@ export async function getTrending(
   });
   const response = await fetch(
     `https://api.themoviedb.org/3/trending/${media}/week?${params}`,
+    { next: { revalidate: 3600 * 24 } },
   );
   const data = await response.json();
   return trendingResponseInterfaceSchema.parse(data);

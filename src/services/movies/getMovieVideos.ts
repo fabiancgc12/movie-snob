@@ -17,6 +17,7 @@ export async function getMovieVideos(
   });
   const response = await fetch(
     `https://api.themoviedb.org/3/movie/${id}/videos?${params}`,
+    { next: { revalidate: 86400 } },
   );
   const data = await response.json();
   return videoMediaResponseSchema.parse(data);

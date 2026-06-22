@@ -38,6 +38,7 @@ export async function getMovie(
   });
   const response = await fetch(
     `https://api.themoviedb.org/3/movie/${id}?${params}`,
+    { next: { revalidate: 3600 * 24 } },
   );
   if (response.status === 404) {
     throw notFound();

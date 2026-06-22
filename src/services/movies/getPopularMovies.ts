@@ -12,6 +12,7 @@ export async function getPopularMovies(page: number = 1, locale: string) {
   });
   const response = await fetch(
     `https://api.themoviedb.org/3/movie/popular?${params}`,
+    { next: { revalidate: 3600 * 24 } },
   );
   const data = await response.json();
   return popularMovieResponseSchema.parse(data);

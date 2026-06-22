@@ -22,6 +22,7 @@ export async function getTvDiscover({ genre, page = 1, locale }: options) {
 
   const response = await fetch(
     `https://api.themoviedb.org/3/discover/tv?${params.toString()}`,
+    { next: { revalidate: 3600 } },
   );
   const data = await response.json();
   return discoverTvResponseInterfaceSchema.parse(data);

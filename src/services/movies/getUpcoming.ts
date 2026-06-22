@@ -16,6 +16,7 @@ export async function getUpcoming(
   });
   const response = await fetch(
     `https://api.themoviedb.org/3/movie/upcoming?${params}`,
+    { next: { revalidate: 3600 * 24 } },
   );
   const data = await response.json();
   return upcomingMoviesResponseTypeSchema.parse(data);

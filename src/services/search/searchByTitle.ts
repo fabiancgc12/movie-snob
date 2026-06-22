@@ -28,6 +28,7 @@ const searchMovies = async (title: string, page: number, language: string) => {
   }).toString();
   const response = await fetch(
     `https://api.themoviedb.org/3/search/movie?api_key=${env.TMDB_KEY}&${params}`,
+    { next: { revalidate: 300 } }, //5 min
   );
   const raw = await response.json();
   return movieSearchResponseSchema.parse(raw);
@@ -41,6 +42,7 @@ const searchTv = async (title: string, page: number, language: string) => {
   }).toString();
   const response = await fetch(
     `https://api.themoviedb.org/3/search/tv?api_key=${env.TMDB_KEY}&${params}`,
+    { cache: "no-store" },
   );
   const raw = await response.json();
   return tvSearchResponseSchema.parse(raw);

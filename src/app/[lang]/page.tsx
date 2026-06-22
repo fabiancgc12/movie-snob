@@ -24,9 +24,6 @@ import { InfinitePopularTvShowPosterListSection } from "@/features/popular/compo
 import { MovieGenres, MovieGenresSpanish } from "@/utils/movieGenres";
 import { getDiscoverMoviesInfiniteQuery } from "@/features/discover/queries/getDiscoverMoviesInfiniteQuery";
 import { getMovieDiscover } from "@/services/discover/getMovieDiscover";
-type Props = {
-  params: Promise<{ lang: string }>;
-};
 
 const genresLimit = 9;
 
@@ -71,7 +68,9 @@ async function getHomePageCachedData(locale: string) {
   };
 }
 
-export default async function HomePage({ params }: Props) {
+export const revalidate = 86400;
+
+export default async function HomePage() {
   const locale = await getLocale();
   const t = await getTranslations("home");
   const { dehydratedState, upcoming, upcomingTrailers } =

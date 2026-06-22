@@ -19,6 +19,7 @@ export async function getMovieDiscover({ genre, page = 1, locale }: options) {
   }
   const response = await fetch(
     `https://api.themoviedb.org/3/discover/movie?${params.toString()}`,
+    { next: { revalidate: 3600 } },
   );
   const data = await response.json();
   return discoverMovieResponseSchema.parse(data);
