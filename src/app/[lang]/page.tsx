@@ -21,14 +21,16 @@ import { getLocale, getTranslations } from "next-intl/server";
 import { PosterList } from "@/components/poster/posterList";
 import { InfinitePopularMoviesPosterListSection } from "@/features/popular/components/InfinitePopularMoviesPosterListSection";
 import { InfinitePopularTvShowPosterListSection } from "@/features/popular/components/InfinitePopularTvShowsPosterListSection";
+import { cacheLife } from "next/cache";
 
 type Props = {
   params: Promise<{ lang: string }>;
 };
 
-export default async function HomePage({ params }: Props) {
-  const locale = await getLocale();
-  const t = await getTranslations("home");
+async function getHomePageCachedData(locale: string) {
+  "use cache";
+  cacheLife("hours");
+
   const queryClient = new QueryClient();
   const data = await getHomePage(locale);
   await queryClient.prefetchInfiniteQuery({
@@ -44,14 +46,27 @@ export default async function HomePage({ params }: Props) {
     queryFn: () => data.popular.tv,
   });
 
+  return {
+    dehydratedState: dehydrate(queryClient),
+    upcoming: data.upcoming,
+    upcomingTrailers: data.upcomingTrailers,
+  };
+}
+
+export default async function HomePage({ params }: Props) {
+  const locale = await getLocale();
+  const t = await getTranslations("home");
+  const { dehydratedState, upcoming, upcomingTrailers } =
+    await getHomePageCachedData(locale);
+
   return (
-    <HydrationBoundary state={dehydrate(queryClient)}>
+    <HydrationBoundary state={dehydratedState}>
       <div className={"w-full"}>
         <HomePageCarousel>
           <CarouselContent className={"z-10"}>
-            {data.upcoming.slice(0, 8).map((u, i) => (
+            {upcoming.slice(0, 8).map((u, i) => (
               <CarouselItem key={u.id}>
-                <UpcomingBanner data={u} trailer={data.upcomingTrailers[i]} />
+                <UpcomingBanner data={u} trailer={upcomingTrailers[i]} />
               </CarouselItem>
             ))}
           </CarouselContent>
@@ -66,7 +81,7 @@ export default async function HomePage({ params }: Props) {
         <SliderSection title={t("upcomingLabel")} speed={450}>
           <PosterList
             isBackdrop={true}
-            media={data.upcoming}
+            media={upcoming}
             mediaType={"movie"}
             fallbackMessage={"There are not upcoming movies."}
           />

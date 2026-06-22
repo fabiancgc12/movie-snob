@@ -16,6 +16,8 @@ Compact instructions for working on the `movie-snob` repository.
 ## Architecture & Conventions
 
 - **Framework:** Next.js (App Router) with `next-intl` for i18n.
+- implementing nextjs CacheComponents
+- implementing experimental rootParams so that next-intl does not affect cache components
 - **Styling:** Tailwind CSS v4 (`@tailwindcss/postcss`) + shadcn/ui components. CSS modules are NOT used.
 - **Data Fetching:** TanStack Query (`@tanstack/react-query`).
 - **Components:** Organized in `src/components`. UI primitives in `src/components/ui/`.
