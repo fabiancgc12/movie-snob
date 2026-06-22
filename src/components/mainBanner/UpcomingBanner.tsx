@@ -29,7 +29,7 @@ export function UpcomingBanner({ data, trailer }: props) {
   return (
     <div
       className={cn(
-        "flex items-end p-4 pr-8 relative bg-no-repeat bg-cover bg-center max-lg:h-[300px] max-lg:bg-top max-md:h-[300px] lg:h-screen lg:pb-16",
+        "flex items-end p-4 pr-8 relative bg-no-repeat bg-cover bg-center max-lg:h-[300px] max-lg:bg-top max-md:h-[300px] lg:h-[500px] lg:pb-8",
         "bg-[linear-gradient(to_right,var(--primaryDarker-90)_0%,var(--primaryDarker-90)_25%,var(--primaryDarker)_35%,transparent_100%),var(--bgImage)]",
         !data.backdrop_path && "placeholderImage",
       )}
@@ -46,7 +46,7 @@ export function UpcomingBanner({ data, trailer }: props) {
         </h2>
         <div
           className={
-            "flex flex-wrap items-center gap-1.5 sm:gap-3 mb-2 sm:mb-4 text-[12px] sm:text-base"
+            "flex flex-wrap items-center gap-1.5 sm:gap-3 mb-2 sm:mb-2 text-[12px] sm:text-base"
           }
         >
           <RatingAverage rating={data.vote_average} size={40} />
@@ -54,7 +54,7 @@ export function UpcomingBanner({ data, trailer }: props) {
             <FullDate date={data.release_date} />
           </p>
         </div>
-        <p className="text-muted-foreground text-[12px] sm:text-sm leading-snug mb-3 sm:mb-6 line-clamp-2 sm:line-clamp-3">
+        <p className="text-muted-foreground text-[12px] sm:text-sm leading-snug mb-3 sm:mb-3 line-clamp-2 sm:line-clamp-3">
           {data.overview}
         </p>
         <div className="flex items-start gap-1.5">
