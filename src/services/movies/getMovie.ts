@@ -16,8 +16,6 @@ import { extractLanguageFromLocale } from "@/utils/functions/extractLanguageFrom
 import { env } from "../../../env";
 import { notFound } from "next/navigation";
 import { detailsMovieSchema } from "@/features/movies/schemas/detailsMovie.schema";
-import { cacheLife, cacheTag } from "next/cache";
-
 export async function getMovie(
   id: number,
   locale: string,
@@ -29,9 +27,6 @@ export async function getMovie(
   providers: ProvidersDto;
   recommendations: RecommendationInterface[];
 }> {
-  "use cache";
-  cacheLife({ stale: 3600, revalidate: 900, expire: 86400 });
-  cacheTag(`movie-${id}`);
   locale = getImdbLocale(locale);
   const languageWithoutCountry = extractLanguageFromLocale(locale);
   const params = new URLSearchParams({

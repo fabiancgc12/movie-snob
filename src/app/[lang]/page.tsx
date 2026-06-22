@@ -24,8 +24,6 @@ import { InfinitePopularTvShowPosterListSection } from "@/features/popular/compo
 import { MovieGenres, MovieGenresSpanish } from "@/utils/movieGenres";
 import { getDiscoverMoviesInfiniteQuery } from "@/features/discover/queries/getDiscoverMoviesInfiniteQuery";
 import { getMovieDiscover } from "@/services/discover/getMovieDiscover";
-import { cacheLife } from "next/cache";
-
 type Props = {
   params: Promise<{ lang: string }>;
 };
@@ -33,9 +31,6 @@ type Props = {
 const genresLimit = 9;
 
 async function getHomePageCachedData(locale: string) {
-  "use cache";
-  cacheLife("hours");
-
   const queryClient = new QueryClient();
   const data = await getHomePage(locale);
   await queryClient.prefetchInfiniteQuery({

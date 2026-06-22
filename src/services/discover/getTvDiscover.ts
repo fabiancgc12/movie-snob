@@ -3,17 +3,12 @@ import "server-only";
 import { discoverTvResponseInterfaceSchema } from "@/models/discover/discoverTvResponse.schema";
 import { getImdbLocale } from "@/utils/functions/getLanguage";
 import { env } from "../../../env";
-import { cacheLife, cacheTag } from "next/cache";
-
 type options = {
   genre?: string | string[];
   page?: number;
   locale: string;
 };
 export async function getTvDiscover({ genre, page = 1, locale }: options) {
-  "use cache";
-  cacheLife("minutes");
-  cacheTag("discover-tv");
 
   const params = new URLSearchParams({
     page: page.toString(),

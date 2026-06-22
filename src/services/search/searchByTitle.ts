@@ -14,8 +14,6 @@ import {
 } from "@/models/search/TvSearch.schema";
 import { getImdbLocale } from "@/utils/functions/getLanguage";
 import { env } from "../../../env";
-import { cacheLife, cacheTag } from "next/cache";
-
 type Options = {
   title?: string;
   page?: number;
@@ -114,9 +112,6 @@ export const searchByTitle = async ({
   title,
   locale,
 }: Options): Promise<MultiSearchResponseSchema> => {
-  "use cache";
-  cacheLife({ revalidate: 300 });
-  cacheTag("search");
   if (!title) {
     return { page: 1, results: [], total_pages: 0, total_results: 0 };
   }

@@ -30,7 +30,7 @@ export const HomePageCarousel = ({ children }: HomePageCarouselProps) => {
   );
 };
 
-const genresLimit = 9;
+export const genresLimit = 9;
 
 export const HomePageGenreSection = () => {
   const locale = useLocale();

@@ -2,17 +2,12 @@ import "server-only";
 
 import { discoverMovieResponseSchema } from "@/models/discover/discoverMovieResponse.schema";
 import { env } from "../../../env";
-import { cacheLife, cacheTag } from "next/cache";
-
 type options = {
   genre?: string | string[];
   page?: number;
   locale: string;
 };
 export async function getMovieDiscover({ genre, page = 1, locale }: options) {
-  "use cache";
-  cacheLife("minutes");
-  cacheTag("discover-movies");
   const params = new URLSearchParams({
     page: page.toString(),
     api_key: env.TMDB_KEY,
