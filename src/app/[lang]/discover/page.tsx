@@ -15,6 +15,7 @@ import {
   TvGenres,
   TvGenresSpanish,
 } from "@/utils/movieGenres";
+import { useLocale } from "next-intl";
 
 type Props = {
   params: Promise<{ lang: string }>;
@@ -27,26 +28,26 @@ const validateMedia = (media: string | undefined | null): MediaType => {
 };
 
 export default async function DiscoverPage({ params, searchParams }: Props) {
-  const { lang } = await params;
+  const locale = useLocale();
   const { media: originalMedia, genre = "" } = await searchParams;
   const media = validateMedia(originalMedia);
   const queryClient = new QueryClient();
 
   if (media === "tv") {
-    const data = await getTvDiscover({ locale: lang, genre, page: 1 });
+    const data = await getTvDiscover({ locale: locale, genre, page: 1 });
     await queryClient.prefetchInfiniteQuery({
-      ...getDiscoverTvShowsInfiniteQuery({ locale: lang, genre }),
+      ...getDiscoverTvShowsInfiniteQuery({ locale: locale, genre }),
       queryFn: () => data,
     });
   } else {
-    const data = await getMovieDiscover({ locale: lang, genre, page: 1 });
+    const data = await getMovieDiscover({ locale: locale, genre, page: 1 });
     await queryClient.prefetchInfiniteQuery({
-      ...getDiscoverMoviesInfiniteQuery({ locale: lang, genre }),
+      ...getDiscoverMoviesInfiniteQuery({ locale: locale, genre }),
       queryFn: () => data,
     });
   }
-  const movieGenres = lang == "es" ? MovieGenresSpanish : MovieGenres;
-  const tvGenres = lang == "es" ? TvGenresSpanish : TvGenres;
+  const movieGenres = locale == "es" ? MovieGenresSpanish : MovieGenres;
+  const tvGenres = locale == "es" ? TvGenresSpanish : TvGenres;
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <div className={"p-4"}>

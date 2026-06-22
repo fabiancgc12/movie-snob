@@ -13,15 +13,17 @@ import { PeopleDto } from "@/models/dto/Credit.dto";
 import { ProductHeadScript } from "@/components/Layout/ProductHeadScript";
 import { PosterList } from "@/components/poster/posterList";
 import { movieJsonLd } from "@/services/jsonLd";
+import { getLocale } from "next-intl/server";
 
 type Props = {
-  params: Promise<{ lang: string; id: string }>;
+  params: Promise<{ id: string }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { id, lang } = await params;
+  const { id } = await params;
+  const locale = await getLocale();
   try {
-    const { movie } = await getMovie(Number(id), lang);
+    const { movie } = await getMovie(Number(id), locale);
     const title = `${movie.title} - Movie Snob`;
 
     return {
@@ -38,7 +40,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         ],
         siteName: "Movie Snob",
         type: "video.other" as const,
-        locale: lang === "es" ? "es_ES" : "en_US",
+        locale: locale === "es" ? "es_ES" : "en_US",
       },
       twitter: {
         card: "summary_large_image",
@@ -50,10 +52,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function MoviePage({ params }: Props) {
-  const { id, lang } = await params;
+  const { id } = await params;
+  const locale = await getLocale();
   try {
     const { movie, credits, videos, images, providers, recommendations } =
-      await getMovie(Number(id), lang);
+      await getMovie(Number(id), locale);
     const crew = credits.crew
       ?.sort((a) => (a.role.toLowerCase() === "screenplay" ? 1 : -1))
       .map(serializePeople);

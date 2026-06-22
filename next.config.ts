@@ -6,6 +6,9 @@ const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   cacheComponents: true,
+  experimental: {
+    rootParams: true,
+  },
   images: {
     unoptimized: true,
     remotePatterns: [

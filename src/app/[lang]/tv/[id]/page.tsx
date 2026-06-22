@@ -14,15 +14,17 @@ import { formatCreatedBy, PeopleDto } from "@/models/dto/Credit.dto";
 import { ProductHeadScript } from "@/components/Layout/ProductHeadScript";
 import { PosterList } from "@/components/poster/posterList";
 import { tvJsonLd } from "@/services/jsonLd";
+import { useLocale } from "next-intl";
 
 type Props = {
-  params: Promise<{ lang: string; id: string }>;
+  params: Promise<{ id: string }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { id, lang } = await params;
+  const { id } = await params;
+  const locale = useLocale();
   try {
-    const { show } = await getTvShow(Number(id), lang);
+    const { show } = await getTvShow(Number(id), locale);
     const title = `${show.name} - Movie Snob`;
 
     return {
@@ -38,7 +40,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         ],
         siteName: "Movie Snob",
         type: "video.other" as const,
-        locale: lang === "es" ? "es_ES" : "en_US",
+        locale: locale === "es" ? "es_ES" : "en_US",
       },
       twitter: {
         card: "summary_large_image",
@@ -50,10 +52,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function TvPage({ params }: Props) {
-  const { id, lang } = await params;
+  const { id } = await params;
+  const locale = useLocale();
   try {
     const { show, credits, videos, recommendations, images, providers } =
-      await getTvShow(Number(id), lang);
+      await getTvShow(Number(id), locale);
     const crew =
       show.created_by
         ?.map((c) => serializePeople(formatCreatedBy(c)))

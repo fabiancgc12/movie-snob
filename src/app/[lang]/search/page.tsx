@@ -6,22 +6,22 @@ import {
 import { getSearchInfiniteQuery } from "@/features/search/queries/getSearchInfiniteQuery";
 import { searchByTitle } from "@/services/search/searchByTitle";
 import { SearchContent } from "./SearchContent";
+import { getLocale } from "next-intl/server";
 
 type Props = {
-  params: Promise<{ lang: string }>;
   searchParams: Promise<{ title?: string }>;
 };
 
-export default async function SearchPage({ params, searchParams }: Props) {
-  const { lang } = await params;
+export default async function SearchPage({ searchParams }: Props) {
+  const locale = await getLocale();
   const { title = "" } = await searchParams;
 
   const queryClient = new QueryClient();
 
   if (title) {
-    const data = await searchByTitle({ title, locale: lang, page: 1 });
+    const data = await searchByTitle({ title, locale: locale, page: 1 });
     await queryClient.prefetchInfiniteQuery({
-      ...getSearchInfiniteQuery({ locale: lang, title }),
+      ...getSearchInfiniteQuery({ locale: locale, title }),
       queryFn: () => data,
     });
   }

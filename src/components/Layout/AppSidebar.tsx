@@ -9,11 +9,12 @@ import {
   Moon,
   Monitor,
 } from "lucide-react";
+import { Suspense } from "react";
 import type { LucideIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { Link, usePathname } from "@/i18n/navigation";
-import { useLocale, useTranslations } from "next-intl";
+import { Locale, useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import logo from "@public/logo.png";
 import {
@@ -82,7 +83,15 @@ export const AppSidebar = () => {
       </SidebarContent>
       <SidebarFooter>
         <SidebarMenuItem>
-          <SwitchLanguage />
+          <Suspense
+            fallback={
+              <AppSidebarMenuButton disabled={true}>
+                <AppSidebarContent icon={Globe} text={t("language")} />
+              </AppSidebarMenuButton>
+            }
+          >
+            <SwitchLanguage />
+          </Suspense>
         </SidebarMenuItem>
         {/*<SidebarMenuItem>*/}
         {/*  <SwitchThemeButton />*/}

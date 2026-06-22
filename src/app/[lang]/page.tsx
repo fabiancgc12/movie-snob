@@ -17,8 +17,7 @@ import {
 import { UpcomingBanner } from "@/components/mainBanner/UpcomingBanner";
 import { InfiniteTrendingPosterListSection } from "@/features/trending/components/InfiniteTrendingPosterListSection";
 import { SliderSection } from "@/components/Slider/SliderSection";
-import { useTranslations } from "next-intl";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { PosterList } from "@/components/poster/posterList";
 import { InfinitePopularMoviesPosterListSection } from "@/features/popular/components/InfinitePopularMoviesPosterListSection";
 import { InfinitePopularTvShowPosterListSection } from "@/features/popular/components/InfinitePopularTvShowsPosterListSection";
@@ -28,20 +27,20 @@ type Props = {
 };
 
 export default async function HomePage({ params }: Props) {
-  const { lang } = await params;
+  const locale = await getLocale();
   const t = await getTranslations("home");
   const queryClient = new QueryClient();
-  const data = await getHomePage(lang);
+  const data = await getHomePage(locale);
   await queryClient.prefetchInfiniteQuery({
-    ...getTrendingMediaQueryOptions(lang),
+    ...getTrendingMediaQueryOptions(locale),
     queryFn: () => data.trending,
   });
   await queryClient.prefetchInfiniteQuery({
-    ...getInfinitePopularMoviesQueryOptions(lang),
+    ...getInfinitePopularMoviesQueryOptions(locale),
     queryFn: () => data.popular.movie,
   });
   await queryClient.prefetchInfiniteQuery({
-    ...getInfinitePopularTvShowsQueryOptions(lang),
+    ...getInfinitePopularTvShowsQueryOptions(locale),
     queryFn: () => data.popular.tv,
   });
 
