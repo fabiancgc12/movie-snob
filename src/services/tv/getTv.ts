@@ -1,3 +1,5 @@
+import "server-only";
+
 import {
   videoMediaResponseSchema,
   VideoTrailer,
@@ -26,6 +28,7 @@ import { env } from "../../../env";
 import { z } from "zod";
 import { notFound } from "next/navigation";
 import { detailsTvShowSchema } from "@/features/tv/schemas/detailsTvShow.schema";
+import { cacheLife, cacheTag } from "next/cache";
 
 export async function getTvShow(
   id: number,
@@ -38,6 +41,9 @@ export async function getTvShow(
   recommendations: RecommendationInterface[];
   providers: ProvidersDto;
 }> {
+  "use cache";
+  cacheLife({ stale: 3600, revalidate: 900, expire: 86400 });
+  cacheTag(`tv-${id}`);
   locale = getImdbLocale(locale);
   const languageWithoutCountry = extractLanguageFromLocale(locale);
   const params = new URLSearchParams({

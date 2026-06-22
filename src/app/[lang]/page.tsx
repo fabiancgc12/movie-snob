@@ -81,5 +81,3 @@ export default async function HomePage({ params }: Props) {
     </HydrationBoundary>
   );
 }
-
-export const revalidate = 1200;

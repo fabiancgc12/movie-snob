@@ -7,5 +7,7 @@ export async function GET(request: NextRequest) {
   const page = Number(searchParams.get("page") ?? 1);
   const locale = searchParams.get("locale") ?? routing.defaultLocale;
   const data = await getTrending("all", page, locale);
-  return NextResponse.json(data);
+  return NextResponse.json(data, {
+    headers: { "Cache-Control": "public, max-age=60, stale-while-revalidate=300" },
+  });
 }

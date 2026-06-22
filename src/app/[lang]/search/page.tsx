@@ -32,5 +32,3 @@ export default async function SearchPage({ params, searchParams }: Props) {
     </HydrationBoundary>
   );
 }
-
-export const revalidate = 1200;

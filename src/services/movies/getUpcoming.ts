@@ -1,13 +1,19 @@
+import "server-only";
+
 import {
   UpcomingMoviesResponseType,
   upcomingMoviesResponseTypeSchema,
 } from "@/models/Movies/UpcomingMoviesResponse.type";
 import { getImdbLocale } from "@/utils/functions/getLanguage";
 import { env } from "../../../env";
+import { cacheLife, cacheTag } from "next/cache";
 
 export async function getUpcoming(
   locale: string,
 ): Promise<UpcomingMoviesResponseType> {
+  "use cache";
+  cacheLife("hours");
+  cacheTag("upcoming");
   locale = getImdbLocale(locale);
   const params = new URLSearchParams({
     api_key: env.TMDB_KEY,

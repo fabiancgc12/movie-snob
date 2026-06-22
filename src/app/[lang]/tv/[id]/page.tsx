@@ -96,8 +96,6 @@ export default async function TvPage({ params }: Props) {
   }
 }
 
-export const revalidate = 900;
-
 function serializePeople(p: PeopleDto) {
   return {
     id: p.id,

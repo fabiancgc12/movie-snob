@@ -1,11 +1,14 @@
-import {
-  PopularTvShowResponse,
-  popularTvShowResponseSchema,
-} from "@/models/popular/popularTv.schema";
+import "server-only";
+
+import { popularTvShowResponseSchema } from "@/models/popular/popularTv.schema";
 import { getImdbLocale } from "@/utils/functions/getLanguage";
 import { env } from "../../../env";
+import { cacheLife, cacheTag } from "next/cache";
 
 export async function getPopularTv(page: number = 1, locale: string) {
+  "use cache";
+  cacheLife("hours");
+  cacheTag("popular-tv");
   locale = getImdbLocale(locale);
   const params = new URLSearchParams({
     api_key: env.TMDB_KEY,

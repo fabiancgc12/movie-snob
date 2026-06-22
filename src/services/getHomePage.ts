@@ -1,3 +1,5 @@
+import "server-only";
+
 import { getPopularMovies } from "@/services/movies/getPopularMovies";
 import { getPopularTv } from "@/services/tv/getPopularTv";
 import { getTrending } from "@/services/trending/getTrending";

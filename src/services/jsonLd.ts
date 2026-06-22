@@ -1,3 +1,5 @@
+import "server-only";
+
 import { generateImageUrl } from "@/utils/functions/generateImageUrl";
 import { MovieType } from "@/models/Movies/MovieType";
 import { TvShowType } from "@/models/tv/TvShow.type";

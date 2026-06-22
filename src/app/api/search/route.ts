@@ -10,5 +10,7 @@ export async function GET(request: NextRequest) {
     locale: searchParams.get("locale") ?? routing.defaultLocale,
   };
   const data = await searchByTitle(parameters);
-  return NextResponse.json(data);
+  return NextResponse.json(data, {
+    headers: { "Cache-Control": "public, max-age=60, stale-while-revalidate=300" },
+  });
 }
