@@ -14,7 +14,7 @@ import { formatCreatedBy, PeopleDto } from "@/models/dto/Credit.dto";
 import { ProductHeadScript } from "@/components/Layout/ProductHeadScript";
 import { PosterList } from "@/components/poster/posterList";
 import { tvJsonLd } from "@/services/jsonLd";
-import { useLocale } from "next-intl";
+import { getLocale } from "next-intl/server";
 
 type Props = {
   params: Promise<{ id: string }>;
@@ -22,7 +22,7 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;
-  const locale = useLocale();
+  const locale = await getLocale();
   try {
     const { show } = await getTvShow(Number(id), locale);
     const title = `${show.name} - Movie Snob`;
@@ -53,7 +53,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function TvPage({ params }: Props) {
   const { id } = await params;
-  const locale = useLocale();
+  const locale = await getLocale();
   try {
     const { show, credits, videos, recommendations, images, providers } =
       await getTvShow(Number(id), locale);

@@ -15,10 +15,9 @@ import {
   TvGenres,
   TvGenresSpanish,
 } from "@/utils/movieGenres";
-import { useLocale } from "next-intl";
+import { getLocale } from "next-intl/server";
 
 type Props = {
-  params: Promise<{ lang: string }>;
   searchParams: Promise<{ media?: string; genre?: string }>;
 };
 
@@ -27,8 +26,8 @@ const validateMedia = (media: string | undefined | null): MediaType => {
   return "movie";
 };
 
-export default async function DiscoverPage({ params, searchParams }: Props) {
-  const locale = useLocale();
+export default async function DiscoverPage({ searchParams }: Props) {
+  const locale = await getLocale();
   const { media: originalMedia, genre = "" } = await searchParams;
   const media = validateMedia(originalMedia);
   const queryClient = new QueryClient();
