@@ -44,7 +44,7 @@ export const InfiniteTrendingPosterListSection = () => {
     <SliderSection title={trendingLabel} speed={450}>
       <InfinitePosterList
         mediaType={"movie"}
-        fallbackMessage={"There are not trending movies."}
+        fallbackMessage={t("noTrending")}
         refetch={refetch}
         isError={isError}
         isLoadingError={isLoadingError}

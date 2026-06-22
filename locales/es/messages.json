@@ -7,20 +7,14 @@
     "discover": "Descubrir",
     "watchlist": "Por ver",
     "favorites": "favoritos",
-    "liked": "Favoritos",
     "madeusing": "Creado usando la api de:",
-    "marked": "marcado",
-    "user": "usuario",
     "searchPlaceHolder": "Buscar...",
     "mediaMovie": "Películas",
     "mediaTv": "Televisión",
     "errorConnectingToServer": "Hubo un error al conectarse al servidor.",
     "retry": "Reintentar",
     "imagesLabel": "Imágenes",
-    "recommendationLabel": "Recomendaciones",
     "videosLabel": "Videos",
-    "director": "Director",
-    "screenPlay": "Guion",
     "watchTrailer": "Ver tráiler",
     "watchOpening": "Ver intro",
     "readMore": "Leer más",
@@ -30,7 +24,6 @@
     "language": "English",
     "notAvailable": "No disponible.",
     "theme": "Tema",
-    "addToBookmark": "Añadir a marcadores",
     "addToLiked": "Añadir a favoritos",
     "noResults": "No se encontraron resultados",
     "searchError": "Algo salió mal. Por favor, intenta de nuevo.",
@@ -46,7 +39,11 @@
     "upcomingLabel": "Próximas películas",
     "popularMoviesLabel": "películas populares",
     "popularTvLabel": "Series populares",
-    "noMovies": "No se encontraron películas."
+    "noMovies": "No se encontraron películas.",
+    "noPopularMovies": "No hay películas populares.",
+    "noPopularTv": "No hay series populares.",
+    "noTrending": "No hay películas en tendencia.",
+    "noUpcomingMovies": "No hay próximas películas."
   },
   "discover": {
     "discoverPageTitle": "Descubre que ver",
@@ -72,7 +69,6 @@
     "networks": "Cadenas",
     "releaseDate": "Fecha de lanzamiento",
     "lastAirDate": "Última fecha de emisión",
-    "recommendationFallbackMessage": "Actualmente no hay recomendaciones.",
     "castFallbackMessage": "Actualmente no tenemos disponible una lista del elenco para esta película o serie.",
     "notAvailableMessage": "Actualmente, no está disponible en streaming.",
     "justWatchMessage": "Puedes visitar <a>JustWatch</a> para más información.",
@@ -82,8 +78,6 @@
     "airedOnLabel": "Emitido en",
     "notAnnounced": "No anunciada",
     "episodes": "Episodios",
-    "movieNotFoundErrorMessage": "Película no encontrada",
-    "tvNotFoundErrorMessage": "Programa de televisión no encontrado",
     "noMediaFallbackMessage": "Actualmente, no hay {media} relacionados con esta serie o película en nuestra base de datos."
   }
 }

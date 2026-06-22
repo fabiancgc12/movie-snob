@@ -42,7 +42,7 @@ export const InfinitePopularMoviesPosterListSection = () => {
     <SliderSection title={t("popularMoviesLabel")} speed={450}>
       <InfinitePosterList
         mediaType={"movie"}
-        fallbackMessage={"There are not popular movies."}
+        fallbackMessage={t("noPopularMovies")}
         refetch={refetch}
         isError={isError}
         isLoadingError={isLoadingError}

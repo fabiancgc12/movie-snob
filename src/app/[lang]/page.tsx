@@ -106,7 +106,7 @@ export default async function HomePage({ params }: Props) {
             isBackdrop={true}
             media={upcoming}
             mediaType={"movie"}
-            fallbackMessage={"There are not upcoming movies."}
+            fallbackMessage={t("noUpcomingMovies")}
           />
         </SliderSection>
         <div>
