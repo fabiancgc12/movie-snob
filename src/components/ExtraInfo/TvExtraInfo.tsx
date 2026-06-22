@@ -8,9 +8,8 @@ import { CompanyLogo } from "@/components/ExtraInfo/CompanyLogo";
 import { FullDate } from "@/components/common/FullDate";
 import React from "react";
 import { Calendar, Info, Languages, TvIcon } from "lucide-react";
-import { useLocale, useTranslations } from "next-intl";
+import { useFormatter, useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
-import { formatDate } from "@/utils/functions/formatDate";
 
 type props = {
   show: TvShowType;
@@ -19,14 +18,22 @@ type props = {
 
 export function TvExtraInfo({ show, providers }: props) {
   const t = useTranslations("movieortv");
-  const locale = useLocale();
+  const format = useFormatter();
   return (
     <DetailInfo>
       <DetailInfoItem title={t("releaseDate")} icon={Calendar}>
-        {formatDate(show.first_air_date, locale)}
+        {format.dateTime(new Date(show.first_air_date), {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        })}
       </DetailInfoItem>
       <DetailInfoItem title={t("lastAirDate")} icon={Calendar}>
-        {formatDate(show.last_air_date, locale)}
+        {format.dateTime(new Date(show.last_air_date), {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        })}
       </DetailInfoItem>
       <DetailInfoItem title={t("status")} icon={Info}>
         {show.status}

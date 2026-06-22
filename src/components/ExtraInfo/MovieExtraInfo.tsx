@@ -7,8 +7,7 @@ import { MediaDetailsProviders } from "./MediaDetailsProviders";
 import { ProvidersDto } from "@/models/dto/ProvidersDto";
 import { CompanyLogo } from "@/components/ExtraInfo/CompanyLogo";
 import { Calendar, DollarSign, Languages, Building2 } from "lucide-react";
-import { useTranslations, useLocale } from "next-intl";
-import { formatDate } from "@/utils/functions/formatDate";
+import { useTranslations, useFormatter } from "next-intl";
 
 type props = {
   movie: MovieType;
@@ -17,11 +16,15 @@ type props = {
 
 export function MovieExtraInfo({ movie, providers }: props) {
   const t = useTranslations("movieortv");
-  const locale = useLocale();
+  const format = useFormatter();
   return (
     <DetailInfo>
       <DetailInfoItem title={t("releaseDate")} icon={Calendar}>
-        {formatDate(movie.release_date, locale)}
+        {format.dateTime(new Date(movie.release_date), {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        })}
       </DetailInfoItem>
       <DetailInfoItem title={t("language")} icon={Languages}>
         {movie.spoken_languages
